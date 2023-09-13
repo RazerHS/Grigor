@@ -799,7 +799,20 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;AMPLIFY_SHADER_EDITOR;CC_DI
+    Android: UNITY_VISUAL_SCRIPTING
+    EmbeddedLinux: UNITY_VISUAL_SCRIPTING
+    LinuxHeadlessSimulation: UNITY_VISUAL_SCRIPTING
+    Nintendo Switch: UNITY_VISUAL_SCRIPTING
+    PS4: UNITY_VISUAL_SCRIPTING
+    PS5: UNITY_VISUAL_SCRIPTING
+    QNX: UNITY_VISUAL_SCRIPTING
+    Server: UNITY_VISUAL_SCRIPTING
+    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;AMPLIFY_SHADER_EDITOR;CC_DI;UNITY_VISUAL_SCRIPTING
+    WebGL: UNITY_VISUAL_SCRIPTING
+    Windows Store Apps: UNITY_VISUAL_SCRIPTING
+    XboxOne: UNITY_VISUAL_SCRIPTING
+    iPhone: UNITY_VISUAL_SCRIPTING
+    tvOS: UNITY_VISUAL_SCRIPTING
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -907,7 +920,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
