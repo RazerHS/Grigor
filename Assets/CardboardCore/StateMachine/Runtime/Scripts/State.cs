@@ -31,7 +31,7 @@ namespace CardboardCore.StateMachines
             if (owningStateMachine.EnableDebugging)
             {
 #if CC_DI
-                Log.Write(GetType().Name);
+                Log.Write($"{owningStateMachine.GetType().Name}: <b>{GetType().Name}</b>");
 #else
                 UnityEngine.Debug.Log($"State Enter: {GetType().Name}");
 #endif
@@ -50,7 +50,7 @@ namespace CardboardCore.StateMachines
             if (owningStateMachine.EnableDebugging)
             {
 #if CC_DI
-                Log.Write(GetType().Name);
+                Log.Write($"{owningStateMachine.GetType().Name}: <b>{GetType().Name}</b>");
 #else
                 UnityEngine.Debug.Log($"State Exit: {GetType().Name}");
 #endif

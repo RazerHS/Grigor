@@ -47,8 +47,8 @@ namespace CardboardCore.DI
 
 						if(((MonoBehaviour)injectedInstance).gameObject.GetComponentsInChildren(typeof(MonoBehaviour), true).Length > 1)
 						{
-							Log.Warn($"Found multiple MonoBehaviours on {fieldInfo.FieldType}. " +
-								"Check the hierarchy as some components may be moved unintentionally");
+							// Log.Warn($"Found multiple MonoBehaviours on {fieldInfo.FieldType}. " +
+							// 	"Check the hierarchy as some components may be moved unintentionally");
 						}
 
 						if(Application.isPlaying)
@@ -142,9 +142,9 @@ namespace CardboardCore.DI
 
 			if(injectableAttribute.Singleton)
 			{
-				Log.Write($"Injected <i>Singleton</i> instance <b>{injectedInstance.GetType().Name}</b> " +
-					$"into <b>{@object.GetType().Name}</b> -- " +
-					$"Has <b>{singletonReferences[injectedInstance].Count}</b> reference(s)");
+				// Log.Write($"Injected <i>Singleton</i> instance <b>{injectedInstance.GetType().Name}</b> " +
+				// 	$"into <b>{@object.GetType().Name}</b> -- " +
+				// 	$"Has <b>{singletonReferences[injectedInstance].Count}</b> reference(s)");
 			}
 			else
 			{
@@ -178,9 +178,9 @@ namespace CardboardCore.DI
 
 						objects.RemoveAt(i);
 
-						Log.Write($"<i>Singleton</i> instance <b>{injectedInstance.GetType().Name}</b> -- " +
-							$"Released by <b>{@object.GetType().Name}</b> -- " +
-							$"Has <b>{singletonReferences[injectedInstance].Count}</b> reference(s)");
+						// Log.Write($"<i>Singleton</i> instance <b>{injectedInstance.GetType().Name}</b> -- " +
+						// 	$"Released by <b>{@object.GetType().Name}</b> -- " +
+						// 	$"Has <b>{singletonReferences[injectedInstance].Count}</b> reference(s)");
 
 						break;
 					}
