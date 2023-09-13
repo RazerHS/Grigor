@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 772478971, guid: a4865f1ab4504ed8a368670db22f409c, type: 3}
+  m_Name: ColorPaletteManager
+  m_EditorClassIdentifier: 
+  colorPalettes:
+  - name: Country
+    showAlpha: 0
+    colors:
+    - {r: 0.776, g: 0.651, b: 0.349, a: 1}
+    - {r: 0.863, g: 0.761, b: 0.631, a: 1}
+    - {r: 0.91, g: 0.831, b: 0.686, a: 1}
+    - {r: 0.961, g: 0.902, b: 0.788, a: 1}
+    - {r: 0.753, g: 0.714, b: 0.667, a: 1}
+    - {r: 0.478, g: 0.573, b: 0.431, a: 1}
+    - {r: 0.314, g: 0.427, b: 0.31, a: 1}
+    - {r: 0.596, g: 0.345, b: 0.235, a: 1}
+    - {r: 0.545, g: 0.329, b: 0.318, a: 1}
+    - {r: 0.647, g: 0.204, b: 0.227, a: 1}
+    - {r: 0.435, g: 0.161, b: 0.063, a: 1}
+    - {r: 0.357, g: 0.333, b: 0.278, a: 1}
+    - {r: 0.976, g: 0.98, b: 0.961, a: 1}
+    - {r: 0.165, g: 0.271, b: 0.11, a: 1}
+  - name: Tropical
+    showAlpha: 0
+    colors:
+    - {r: 0.953, g: 0.647, b: 0.804, a: 1}
+    - {r: 0.965, g: 0.741, b: 0.871, a: 1}
+    - {r: 0.949, g: 0.549, b: 0.643, a: 1}
+    - {r: 0.992, g: 0.659, b: 0.498, a: 1}
+    - {r: 0.976, g: 0.792, b: 0.729, a: 1}
+    - {r: 0.984, g: 0.855, b: 0.725, a: 1}
+    - {r: 0.259, g: 0.882, b: 0.663, a: 1}
+    - {r: 0.349, g: 0.753, b: 0.78, a: 1}
+    - {r: 0.725, g: 0.976, b: 0.91, a: 1}
+    - {r: 0.647, g: 0.745, b: 0.957, a: 1}
+    - {r: 0.725, g: 0.863, b: 0.973, a: 1}
+    - {r: 0.89, g: 0.945, b: 0.996, a: 1}
