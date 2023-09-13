@@ -1,0 +1,19 @@
+{
+  "name": "com.cardboardcore.pooling",
+  "version": "0.0.1",
+  "displayName": "CardboardCore - Pooling",
+  "description": "A very straight forward Pooling system. Can be applied on all GameObjects as long as there's a MonoBehaviour attached to it!",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "keywords": [
+    "Pooling"
+  ],
+  "author": {
+    "name": "Nils Rietveld",
+    "email": "its.just.nils@gmail.com",
+    "url": "https://www.unity3d.com"
+  },
+  "dependencies": {
+    "com.unity.addressables": "1.16.19"
+  }
+}

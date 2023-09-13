@@ -1,0 +1,17 @@
+{
+  "name": "com.cardboardcore.di",
+  "version": "0.0.1",
+  "displayName": "CardboardCore - Dependency Injection",
+  "description": "A very straight forward DI. Write both pure C# code or inject your MonoBehaviours anywhere as singletons without the need for creating static instances!",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+ "keywords": [
+    "Dependency Injection",
+    "DI"
+  ],
+  "author": {
+    "name": "Nils Rietveld",
+    "email": "its.just.nils@gmail.com",
+    "url": "https://www.unity3d.com"
+  }
+}

@@ -1,0 +1,51 @@
+Shortcuts Suite - Copyright Tech Gorillas Ltd 2017-2021
+support@tech-gorillas.com
+
+This tool package provides two Editor Windows and new shortcut key combos to help you navigate around your project.
+
+Scene History - Use menu "Window\Shortcuts Suite\Scene History""
+This window tracks the history of the objects selected in the scene or project.  You can click to highlight the object, or double click or click "focus" to select the object 
+and center it in the scene view.  
+
+Scene Bookmarks - Use menu "Window\Shortcuts Suite\Scene Bookmarks"
+This window allows you to bookmark your most frequent game objects or prefab and reselect or reselect and centre them without having to find them 
+in the Hierarchy window.
+
+Drag Items into the Bookmark window or press Alt-Shift-B on an item to bookmark.
+
+Grab Path - Ctrl-G Grabs the game object path to the clipboard
+
+Jump To - Ctrl-J Selects the previously grabbed gameobject
+
+Select Prefab Root - Alt-SHift-P Steps out of to the nearest prefab root in the hierarchy
+
+Easy Editing
+When editing the property of a game object it is common to want to drag in a game object you have recently used. You can drag directly out of the 
+Scene History window or the Scene bookmark window to the property field of the currently selected game object.
+
+Version History
+1.8.0 Remove local Newtonsoft library now Unity provide a package
+
+1.7.3 Improvement for when Hierarchy paths contain non unique names.  Remove space from package path.
+
+1.7.2 Minor Fix for Project File focus
+
+1.7.1 Improved shortcut Key mappings.  Work around for Unity find bug with GameObject names containing "/". Ability to move bookmark file.
+
+1.6.1 Improved handover from Edit to Run mode
+
+1.6.0 Make the Scene tagging optional and add a comments box for annotating the reason for holding a bookmark.  Support double click for change focus
+
+1.5.0 Allows you to create bookmarks in play mode - note that runtime loaded scenes will be unloaded when you exit play mode.  All prefab history features are now incorporated into the scene history window and the prefab history window has been deprecated. You can now step out to the nearest prefab in the hierarchy view
+
+1.4.0 Improved Linking to Prefabs.  You can now select the prefab asset from the Bookmarks or history. 
+
+1.3.0 Bug fixes. New Grab / Jump to tools allow you to create temporary bookmarks that work across projects
+
+1.2.0 Bug fixes. You can now track your history of selecting in the animator window as well as the hierarchy and the project.
+
+1.1.0 Scene History and colour coding for project items as well as hierarchy items
+
+1.0.9 Updated for Unity 2019 compatibility
+
+1.0.8 Initial Release
