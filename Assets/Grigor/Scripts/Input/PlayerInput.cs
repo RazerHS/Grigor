@@ -10,8 +10,10 @@ namespace Grigor.Input
     {
         private PlayerInputActions playerInputActions;
 
-        public event Action SoapInputStartedEvent;
-        public event Action SoapInputCanceledEvent;
+        public event Action<Vector2> MoveInputStartedEvent;
+        public event Action MoveInputCanceledEvent;
+        public event Action InteractInputStartedEvent;
+        public event Action InteractInputCanceledEvent;
 
         private void Awake()
         {
@@ -22,18 +24,32 @@ namespace Grigor.Input
 
         private void OnEnable()
         {
-            playerInputActions.Player.Soap.started += OnSoapInputStarted;
-            playerInputActions.Player.Soap.canceled += OnSoapInputCanceled;
+            playerInputActions.Player.Move.started += OnMoveInputStarted;
+            playerInputActions.Player.Move.canceled += OnMoveInputCanceled;
+
+            playerInputActions.Player.Interact.started += OnInteractInputStarted;
+            playerInputActions.Player.Interact.canceled += OnInteractInputCanceled;
         }
 
-        private void OnSoapInputStarted(InputAction.CallbackContext context)
+        private void OnMoveInputStarted(InputAction.CallbackContext context)
         {
-            SoapInputStartedEvent?.Invoke();
+            MoveInputStartedEvent?.Invoke(context.ReadValue<Vector2>());
         }
 
-        private void OnSoapInputCanceled(InputAction.CallbackContext context)
+        private void OnMoveInputCanceled(InputAction.CallbackContext context)
         {
-            SoapInputCanceledEvent?.Invoke();
+            MoveInputCanceledEvent?.Invoke();
         }
+
+        private void OnInteractInputStarted(InputAction.CallbackContext context)
+        {
+            InteractInputCanceledEvent?.Invoke();
+        }
+
+        private void OnInteractInputCanceled(InputAction.CallbackContext context)
+        {
+            InteractInputStartedEvent?.Invoke();
+        }
+
     }
 }

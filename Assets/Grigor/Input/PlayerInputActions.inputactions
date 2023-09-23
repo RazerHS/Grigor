@@ -15,9 +15,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Soap",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "7c2e9724-898a-46c2-8c1d-421e69f48e39",
+                    "id": "db234a92-bcaa-4883-9641-c14c85c52c83",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -158,37 +158,15 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "One Modifier",
-                    "id": "7b404730-609c-4cb6-a6eb-c6706558ae6a",
-                    "path": "OneModifier",
+                    "name": "",
+                    "id": "44b90aec-aa3c-4bdc-95f7-2debd09162af",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Soap",
-                    "isComposite": true,
+                    "action": "Interact",
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "binding",
-                    "id": "679b8659-d9d3-4253-993d-b5fd95454b49",
-                    "path": "<Keyboard>/leftAlt",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Soap",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "modifier",
-                    "id": "985712d7-48c2-4246-a2c1-761a977903bd",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Soap",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         },
