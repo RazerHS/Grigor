@@ -11,7 +11,8 @@ namespace Grigor.StateMachines.Application
             SetInitialState<BootState>();
 
             AddStaticTransition<BootState, LoadUIState>();
-            AddStaticTransition<LoadUIState, MainMenuState>();
+            AddStaticTransition<LoadUIState, SetupGameState>();
+            AddStaticTransition<SetupGameState, MainMenuState>();
 
             AddFreeFlowTransition<MainMenuState, GameplayState>();
         }

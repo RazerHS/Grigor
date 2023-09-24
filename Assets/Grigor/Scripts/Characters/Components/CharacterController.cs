@@ -9,6 +9,8 @@ namespace Grigor.Characters.Components
     {
         private readonly List<CharacterComponent> characterComponents = new();
 
+        protected string CharacterGuid;
+
         protected override void OnInjected()
         {
             GetComponents(characterComponents);
@@ -17,12 +19,18 @@ namespace Grigor.Characters.Components
             {
                 component.Initialize(this);
             }
+
+            CharacterGuid = System.Guid.NewGuid().ToString();
+
+            OnInitialized();
         }
 
         protected override void OnReleased()
         {
 
         }
+
+        protected virtual void OnInitialized() { }
 
         protected T GetCharacterComponent<T>() where T : CharacterComponent
         {

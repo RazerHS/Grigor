@@ -1,6 +1,7 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using CardboardCore.Utilities;
+using Grigor.Addressables;
 using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Screens;
@@ -10,6 +11,7 @@ namespace Grigor.StateMachines.Application.States
     public class MainMenuState : State
     {
         [Inject] private UIManager uiManager;
+        [Inject] private AddressablesLoader addressablesLoader;
 
         private MainMenuScreen mainMenuScreen;
 
@@ -25,16 +27,6 @@ namespace Grigor.StateMachines.Application.States
             mainMenuScreen.PlayButtonPressedEvent -= OnPlayButtonPressed;
 
             mainMenuScreen.Hide();
-        }
-
-        private void OnSoapInputCanceled()
-        {
-            Log.Write("alt tab released!");
-        }
-
-        private void OnSoapInputStarted()
-        {
-            Log.Write("alt tab pressed!");
         }
 
         private void OnPlayButtonPressed()

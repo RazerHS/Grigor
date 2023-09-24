@@ -22,6 +22,8 @@ namespace Grigor.Characters.Components.Player.Components
 
         protected override void OnInjected()
         {
+            rigidbody = GetComponent<Rigidbody>();
+
             playerInput.MoveInputStartedEvent += OnMoveInputStarted;
             playerInput.MoveInputCanceledEvent += OnInputDirectionCanceled;
         }
@@ -34,7 +36,7 @@ namespace Grigor.Characters.Components.Player.Components
 
         private void FixedUpdate()
         {
-            if (!isMovementEnabled)
+            if (!isMovementEnabled && !IsPaused)
             {
                 return;
             }
