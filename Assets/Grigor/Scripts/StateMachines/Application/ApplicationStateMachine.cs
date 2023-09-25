@@ -1,6 +1,5 @@
 ﻿using CardboardCore.StateMachines;
 using Grigor.StateMachines.Application.States;
-using Grigor.UI.Screens;
 
 namespace Grigor.StateMachines.Application
 {
@@ -11,7 +10,8 @@ namespace Grigor.StateMachines.Application
             SetInitialState<BootState>();
 
             AddStaticTransition<BootState, LoadUIState>();
-            AddStaticTransition<LoadUIState, MainMenuState>();
+            AddStaticTransition<LoadUIState, SetupGameState>();
+            AddStaticTransition<SetupGameState, MainMenuState>();
 
             AddFreeFlowTransition<MainMenuState, GameplayState>();
         }
