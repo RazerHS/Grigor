@@ -11,6 +11,8 @@ namespace Grigor.Overworld.Cameras
 
         private CinemachineVirtualCamera activeVirtualCamera;
 
+        public CinemachineVirtualCamera ActiveVirtualCamera => activeVirtualCamera;
+
         private void Awake()
         {
             DontDestroyOnLoad(this);

@@ -1,6 +1,6 @@
-﻿using System;
-using CardboardCore.DI;
+﻿using CardboardCore.DI;
 using Grigor.Input;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Grigor.Characters.Components.Player.Components
@@ -10,32 +10,46 @@ namespace Grigor.Characters.Components.Player.Components
         [Inject] private PlayerInput playerInput;
 
         [SerializeField] private float movementSpeed;
-        [SerializeField] private float movementSmoothTime;
+        [SerializeField] private float gravityStrength = -9.81f;
+        [SerializeField] private float jumpHeight;
+        [SerializeField] private Transform groundCheckTransform;
+        [SerializeField] private LayerMask groundMask;
+        [SerializeField] private Transform moveTransform;
 
-        private Vector3 moveDirection;
-        private Vector3 targetTranslationVector;
-        private Vector3 currentTranslationVector;
-        private Vector3 translationVectorVelocity;
+        [ShowInInspector, ReadOnly] private bool isGrounded;
+        private bool jump;
         private bool isMovementEnabled = true;
 
-        private new Rigidbody rigidbody;
+        private Vector3 moveDirection;
+        private Vector3 verticalVelocity;
+
+        private UnityEngine.CharacterController characterController;
 
         protected override void OnInjected()
         {
-            rigidbody = GetComponent<Rigidbody>();
+            characterController = GetComponentInChildren<UnityEngine.CharacterController>();
 
             playerInput.MoveInputStartedEvent += OnMoveInputStarted;
-            playerInput.MoveInputCanceledEvent += OnInputDirectionCanceled;
+            playerInput.MoveInputCanceledEvent += OnMoveInputCanceled;
+
+            playerInput.JumpInputStartedEvent += OnJumpInputStarted;
+            playerInput.JumpInputCanceledEvent += OnJumpInputCanceled;
+
+            DisableMovement();
         }
 
         protected override void OnReleased()
         {
             playerInput.MoveInputStartedEvent -= OnMoveInputStarted;
-            playerInput.MoveInputCanceledEvent -= OnInputDirectionCanceled;
+            playerInput.MoveInputCanceledEvent -= OnMoveInputCanceled;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
+            ReadInput();
+
+            GroundCheck();
+
             if (!isMovementEnabled && !IsPaused)
             {
                 return;
@@ -44,24 +58,70 @@ namespace Grigor.Characters.Components.Player.Components
             MovePlayer();
         }
 
-        private void OnInputDirectionCanceled()
+        private void ReadInput()
+        {
+            moveDirection.x = playerInput.MoveInputDirection.x;
+            moveDirection.z = playerInput.MoveInputDirection.y;
+        }
+
+        private void GroundCheck()
+        {
+            isGrounded = Physics.CheckSphere(groundCheckTransform.position, 0.1f, groundMask);
+
+            if (isGrounded)
+            {
+                verticalVelocity.y = 0;
+            }
+        }
+
+        private void OnMoveInputStarted()
         {
 
         }
 
-        private void OnMoveInputStarted(Vector2 inputDirection)
+        private void OnMoveInputCanceled()
         {
-            moveDirection.x = inputDirection.x;
-            moveDirection.z = inputDirection.y;
+
+        }
+
+        private void OnJumpInputStarted()
+        {
+            jump = true;
+        }
+
+        private void OnJumpInputCanceled()
+        {
+            jump = false;
         }
 
         private void MovePlayer()
         {
-            targetTranslationVector = moveDirection * (movementSpeed * Time.fixedDeltaTime);
+            Vector3 horizontalVelocity = (moveTransform.right * moveDirection.x + moveTransform.forward * moveDirection.z) * movementSpeed;
 
-            currentTranslationVector = Vector3.SmoothDamp(currentTranslationVector, targetTranslationVector, ref translationVectorVelocity, movementSmoothTime);
+            characterController.Move(horizontalVelocity * Time.deltaTime);
 
-            rigidbody.velocity = currentTranslationVector;
+            HandleJump();
+
+            verticalVelocity.y += gravityStrength * Time.deltaTime;
+
+            characterController.Move(verticalVelocity * Time.deltaTime);
+        }
+
+        private void HandleJump()
+        {
+            if (!jump)
+            {
+                return;
+            }
+
+            jump = false;
+
+            if (!isGrounded)
+            {
+                return;
+            }
+
+            verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravityStrength);
         }
 
         public void EnableMovement()
@@ -72,10 +132,6 @@ namespace Grigor.Characters.Components.Player.Components
         public void DisableMovement()
         {
             isMovementEnabled = false;
-
-            rigidbody.velocity = Vector3.zero;
-
-            OnInputDirectionCanceled();
         }
 
         public void MovePlayerTo(Vector3 position)
