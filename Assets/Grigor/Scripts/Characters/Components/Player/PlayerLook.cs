@@ -1,5 +1,4 @@
-﻿using System;
-using CardboardCore.DI;
+﻿using CardboardCore.DI;
 using Grigor.Input;
 using UnityEngine;
 
