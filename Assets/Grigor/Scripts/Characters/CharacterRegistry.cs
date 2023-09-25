@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CardboardCore.DI;
 using Grigor.Characters.Components;
-using Grigor.Characters.Components.Player.Components;
+using Grigor.Characters.Components.Player;
 
 namespace Grigor.Characters
 {

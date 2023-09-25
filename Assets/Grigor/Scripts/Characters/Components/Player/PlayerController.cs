@@ -1,6 +1,6 @@
 ﻿using CardboardCore.DI;
 
-namespace Grigor.Characters.Components.Player.Components
+namespace Grigor.Characters.Components.Player
 {
     public class PlayerController : CharacterController
     {

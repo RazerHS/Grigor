@@ -3,7 +3,7 @@ using Grigor.Input;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Characters.Components.Player.Components
+namespace Grigor.Characters.Components.Player
 {
     public class PlayerMovement : CharacterComponent
     {

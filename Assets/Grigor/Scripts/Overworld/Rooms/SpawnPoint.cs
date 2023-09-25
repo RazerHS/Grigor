@@ -8,15 +8,12 @@ namespace Grigor.Overworld.Rooms
         [Inject] private SpawnPointManager spawnPointManager;
 
         [SerializeField] private SpawnPointLocation spawnPointLocation;
-
-        private Transform spawnPointTransform;
+        [SerializeField] private Transform spawnPointTransform;
 
         public Vector3 SpawnPosition => spawnPointTransform.position;
 
         protected override void OnInjected()
         {
-            spawnPointTransform = transform;
-
             spawnPointManager.RegisterSpawnPoint(spawnPointLocation, this);
         }
 

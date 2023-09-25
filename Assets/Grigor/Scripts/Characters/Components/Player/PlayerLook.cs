@@ -3,7 +3,7 @@ using CardboardCore.DI;
 using Grigor.Input;
 using UnityEngine;
 
-namespace Grigor.Characters.Components.Player.Components
+namespace Grigor.Characters.Components.Player
 {
     public class PlayerLook : CharacterComponent
     {
