@@ -1,5 +1,4 @@
 ﻿using CardboardCore.DI;
-using Grigor.Characters.Components.Player;
 using UnityEngine;
 
 namespace Grigor.Characters.Components

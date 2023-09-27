@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
-using Grigor.Characters.Components.Player;
 using Grigor.Overworld.Interacting.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;

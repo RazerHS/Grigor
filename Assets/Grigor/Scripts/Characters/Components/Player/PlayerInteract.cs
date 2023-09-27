@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using CardboardCore.DI;
+using Codice.Client.ChangeTrackerService;
 using Grigor.Input;
 using Grigor.Overworld.Interacting;
 using Grigor.Overworld.Interacting.Components;
@@ -19,7 +19,9 @@ namespace Grigor.Characters.Components.Player
 
         [ShowInInspector, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debugging", true, 0.5f, 0.5f, 0.2f)] private bool canInteract;
         [ShowInInspector, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debugging")] private Interactable currentNearestInteractable;
-        [ShowInInspector, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debugging")] private InteractableComponent lastInteraction;
+        [ShowInInspector, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debugging")] private InteractableComponent previousInteraction;
+
+        public InteractableComponent PreviousInteraction => previousInteraction;
 
         public event Action InteractEvent;
 
@@ -86,7 +88,9 @@ namespace Grigor.Characters.Components.Player
                 }
             }
 
-           currentNearestInteractable = interactable;
+            currentNearestInteractable = interactable;
+
+            TryInteractInRange(currentNearestInteractable.GetPrimaryInteractable());
         }
 
         private void OnInteractInput()
@@ -101,23 +105,50 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
-            lastInteraction = currentNearestInteractable.GetPrimaryInteractable();
+            previousInteraction = currentNearestInteractable.GetPrimaryInteractable();
 
-            if (lastInteraction == null)
+            if (previousInteraction == null)
             {
                 return;
             }
 
-            if (!lastInteraction.InteractingEnabled)
+            if (!previousInteraction.InteractingEnabled)
             {
-                lastInteraction = null;
+                previousInteraction = null;
                 return;
             }
 
+            Interact();
+        }
+
+        private void Interact()
+        {
             //first go into BeginInteraction state, then trigger the interaction
             InteractEvent?.Invoke();
 
             currentNearestInteractable.Interact(Owner);
+        }
+
+        private void TryInteractInRange(InteractableComponent interactableComponent)
+        {
+            if (interactableComponent == null)
+            {
+                return;
+            }
+
+            if (!interactableComponent.InteractInRange)
+            {
+                return;
+            }
+
+            if (interactableComponent.CurrentlyInteracting)
+            {
+                return;
+            }
+
+            previousInteraction = currentNearestInteractable.GetPrimaryInteractable();
+
+            Interact();
         }
 
         public void EnableInteract()

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
-using Grigor.Characters;
-using Grigor.Characters.Components;
-using Grigor.Characters.Components.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using CharacterController = Grigor.Characters.Components.CharacterController;
@@ -19,8 +15,11 @@ namespace Grigor.Overworld.Interacting.Components
         protected Interactable interactable;
         protected bool wentInRange;
         protected bool interactedWith;
+        protected bool currentlyInteracting;
 
         public bool InteractingEnabled => interactingEnabled;
+        public bool InteractInRange => interactInRange;
+        public bool CurrentlyInteracting => currentlyInteracting;
         public Interactable Interactable => interactable;
 
         public event Action BeginInteractionEvent;
@@ -122,6 +121,7 @@ namespace Grigor.Overworld.Interacting.Components
         {
             BeginInteractionEvent?.Invoke();
 
+            currentlyInteracting = true;
             interactedWith = true;
 
             Log.Write($"Interacted with: {name} in interactable {interactable.name}!");
@@ -131,7 +131,7 @@ namespace Grigor.Overworld.Interacting.Components
 
         protected virtual void OnInteractEffect()
         {
-
+            currentlyInteracting = false;
         }
 
         protected virtual void EndInteract()

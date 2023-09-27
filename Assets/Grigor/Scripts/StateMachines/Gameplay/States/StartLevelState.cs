@@ -17,7 +17,7 @@ namespace Grigor.StateMachines.Gameplay.States
 
             characterRegistry.Player.Movement.MovePlayerTo(spawnPosition);
 
-            characterRegistry.Player.Movement.EnableMovement();
+            characterRegistry.Player.StartStateMachine();
 
             owningStateMachine.ToNextState();
         }
