@@ -12,19 +12,18 @@ namespace Grigor.Characters.Components.Player
         [SerializeField] private Transform lookCameraTransform;
         [SerializeField] private float lookClampX = 85f;
 
-        private float lookRotationX;
-
         [Inject] private PlayerInput playerInput;
 
+        private float lookRotationX;
         private Vector2 lookDirection;
 
-        protected override void OnInjected()
+        protected override void OnInitialized()
         {
             playerInput.LookInputStartedEvent += OnLookInputStarted;
             playerInput.LookInputCanceledEvent += OnLookInputCanceled;
         }
 
-        protected override void OnReleased()
+        protected override void OnDisposed()
         {
             playerInput.LookInputStartedEvent -= OnLookInputStarted;
             playerInput.LookInputCanceledEvent -= OnLookInputCanceled;

@@ -1,6 +1,6 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
-using Grigor.Addressables;
+using RazerCore.Utils.Addressables;
 using Grigor.UI;
 using Grigor.UI.Screens;
 
