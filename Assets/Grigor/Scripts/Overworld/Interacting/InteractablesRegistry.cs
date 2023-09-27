@@ -49,5 +49,13 @@ namespace Grigor.Overworld.Interacting
 
             return nearest != null;
         }
+
+        public void EnableInteractables()
+        {
+            foreach (Interactable interactable in interactables)
+            {
+                interactable.EnableInteractable();
+            }
+        }
     }
 }

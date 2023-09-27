@@ -17,9 +17,9 @@ namespace Grigor.Characters.Components.Player
         [Inject] private InteractablesRegistry interactablesRegistry;
         [Inject] private PlayerInput playerInput;
 
-        [ShowInInspector, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debugging", true, 0.5f, 0.5f, 0.2f)] private bool canInteract;
-        [ShowInInspector, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debugging")] private Interactable currentNearestInteractable;
-        [ShowInInspector, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debugging")] private InteractableComponent previousInteraction;
+        [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging", true, 0.5f, 0.5f, 0.2f)] private bool canInteract;
+        [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private Interactable currentNearestInteractable;
+        [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private InteractableComponent previousInteraction;
 
         public InteractableComponent PreviousInteraction => previousInteraction;
 
@@ -27,10 +27,6 @@ namespace Grigor.Characters.Components.Player
 
         protected override void OnInitialized()
         {
-            base.OnInitialized();
-
-            Injector.Inject(this);
-
             playerInput.InteractInputStartedEvent += OnInteractInput;
 
             // DisableInteract();
@@ -39,11 +35,7 @@ namespace Grigor.Characters.Components.Player
 
         protected override void OnDisposed()
         {
-            base.OnDisposed();
-
             playerInput.InteractInputStartedEvent -= OnInteractInput;
-
-            Injector.Release(this);
         }
 
         private void Update()
@@ -65,7 +57,7 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
-            if (interactable.IsPaused)
+            if (!interactable.InteractingEnabled)
             {
                 interactable.DisableProximityEffect(Owner);
 
@@ -109,12 +101,6 @@ namespace Grigor.Characters.Components.Player
 
             if (previousInteraction == null)
             {
-                return;
-            }
-
-            if (!previousInteraction.InteractingEnabled)
-            {
-                previousInteraction = null;
                 return;
             }
 

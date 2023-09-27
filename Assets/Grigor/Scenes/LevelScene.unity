@@ -696,7 +696,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh42212
+  m_Name: pb_Mesh36346
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -951,7 +951,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh42182
+  m_Name: pb_Mesh36314
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -1165,7 +1165,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh42226
+  m_Name: pb_Mesh36360
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -1351,7 +1351,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'interactableComponents.Array.data[0]'
       value: 
-      objectReference: {fileID: 1160503351}
+      objectReference: {fileID: 1160503354}
     - target: {fileID: 1730134351270936290, guid: 0e8a63af6ed8fe94a97bfbc567fcc49f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1414,7 +1414,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5139526557977889550, guid: 0e8a63af6ed8fe94a97bfbc567fcc49f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1160503351}
+      addedObject: {fileID: 1160503354}
   m_SourcePrefab: {fileID: 100100000, guid: 0e8a63af6ed8fe94a97bfbc567fcc49f, type: 3}
 --- !u!1 &1016272907
 GameObject:
@@ -2128,7 +2128,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 908658216}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1160503351
+--- !u!114 &1160503354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2137,10 +2137,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1160503348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 548f4bbf69bc4d1884ac801408f92ca9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactInRange: 1
+  interactInRange: 0
   interactingEnabled: 0
 --- !u!1 &2143947389
 GameObject:

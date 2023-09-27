@@ -27,7 +27,7 @@ namespace Grigor.Characters.Components.Player
 
         protected override void OnInitialized()
         {
-            characterController = GetComponentInChildren<UnityEngine.CharacterController>();
+            characterController = GetComponent<UnityEngine.CharacterController>();
 
             playerInput.MoveInputStartedEvent += OnMoveInputStarted;
             playerInput.MoveInputCanceledEvent += OnMoveInputCanceled;

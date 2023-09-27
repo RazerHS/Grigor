@@ -7,6 +7,7 @@ namespace Grigor.StateMachines.Player.States
         protected override void OnEnter()
         {
             owningStateMachine.Owner.Movement.EnableMovement();
+            owningStateMachine.Owner.Look.EnableLook();
             owningStateMachine.Owner.Interact.EnableInteract();
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
@@ -15,6 +16,7 @@ namespace Grigor.StateMachines.Player.States
         protected override void OnExit()
         {
             owningStateMachine.Owner.Movement.DisableMovement();
+            owningStateMachine.Owner.Look.DisableLook();
             owningStateMachine.Owner.Interact.DisableInteract();
 
             owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;

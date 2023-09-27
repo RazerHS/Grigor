@@ -17,7 +17,7 @@ namespace Grigor.StateMachines.Player.States
                 throw Log.Exception("Entered interact state before interactable loaded!");
             }
 
-            Log.Write($"Interacted with: <b>{currentInteractable.GetType().Name} in {currentInteractable.gameObject.name}</b>");
+            Log.Write($"Started interaction with: <b>{currentInteractable.GetType().Name}</b> in <b>{currentInteractable.gameObject.name}</b>");
 
             currentInteractable.BeginInteractionEvent += OnBeginInteraction;
             currentInteractable.EndInteractionEvent += OnEndInteraction;
@@ -35,7 +35,7 @@ namespace Grigor.StateMachines.Player.States
 
         private void OnEndInteraction()
         {
-            Log.Write($"Ended interaction with: <b>{currentInteractable.GetType().Name} in {currentInteractable.gameObject.name}</b>");
+            Log.Write($"Ended interaction with: <b>{currentInteractable.GetType().Name}</b> in <b>{currentInteractable.gameObject.name}</b>");
 
             owningStateMachine.ToState<EndInteractionState>();
         }

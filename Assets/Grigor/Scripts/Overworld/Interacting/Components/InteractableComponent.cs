@@ -1,6 +1,5 @@
 ﻿using System;
 using CardboardCore.DI;
-using CardboardCore.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using CharacterController = Grigor.Characters.Components.CharacterController;
@@ -10,14 +9,13 @@ namespace Grigor.Overworld.Interacting.Components
     public class InteractableComponent : MonoBehaviour
     {
         [SerializeField] protected bool interactInRange;
-        [SerializeField, Sirenix.OdinInspector.ReadOnly] private bool interactingEnabled;
+        [SerializeField] protected bool singleUse;
 
         protected Interactable interactable;
         protected bool wentInRange;
         protected bool interactedWith;
         protected bool currentlyInteracting;
 
-        public bool InteractingEnabled => interactingEnabled;
         public bool InteractInRange => interactInRange;
         public bool CurrentlyInteracting => currentlyInteracting;
         public Interactable Interactable => interactable;
@@ -40,6 +38,7 @@ namespace Grigor.Overworld.Interacting.Components
                 interactable = GetComponent<Interactable>();
             }
 
+            // TO-DO: enable only the next interactable in the chain
             EnableInteraction();
 
             OnInitialized();
@@ -77,40 +76,17 @@ namespace Grigor.Overworld.Interacting.Components
         {
             wentInRange = true;
 
-            if (!interactingEnabled)
-            {
-                return;
-            }
-
-            if (interactInRange)
-            {
-                Interact();
-            }
-            else
-            {
-                InRangeEffect();
-            }
+            InRangeEffect();
         }
 
         private void OnOutOfRange(CharacterController character)
         {
-            if (!interactingEnabled)
-            {
-                return;
-            }
-
             OutOfRangeEffect();
         }
 
-        protected virtual void InRangeEffect()
-        {
+        protected virtual void InRangeEffect() { }
 
-        }
-
-        protected virtual void OutOfRangeEffect()
-        {
-
-        }
+        protected virtual void OutOfRangeEffect() { }
 
         private void OnInteract()
         {
@@ -124,30 +100,37 @@ namespace Grigor.Overworld.Interacting.Components
             currentlyInteracting = true;
             interactedWith = true;
 
-            Log.Write($"Interacted with: {name} in interactable {interactable.name}!");
-
             OnInteractEffect();
         }
 
-        protected virtual void OnInteractEffect()
+        protected virtual void OnInteractEffect() { }
+
+        protected void EndInteract()
         {
+            if (singleUse)
+            {
+                DisableInteraction();
+
+                // TO-DO: remove this when adding chain
+                interactable.DisableInteractable();
+            }
+
             currentlyInteracting = false;
+
+            EndInteractionEvent?.Invoke();
+
+            EndInteractEffect();
         }
 
-        protected virtual void EndInteract()
-        {
-            EndInteractionEvent?.Invoke();
-        }
+        protected virtual void EndInteractEffect() { }
 
         protected void EnableInteraction()
         {
             interactable.InteractEvent += OnInteract;
-            interactingEnabled = true;
         }
 
         protected void DisableInteraction()
         {
-            interactingEnabled = false;
             interactable.InteractEvent -= OnInteract;
         }
     }

@@ -6,6 +6,7 @@ using CardboardCore.Utilities;
 using Grigor.Overworld.Interacting.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Grigor.Overworld.Interacting
 {
@@ -15,7 +16,7 @@ namespace Grigor.Overworld.Interacting
         [SerializeField] private float interactDistance = 3f;
         [SerializeField] private bool isBox;
 
-        [SerializeField, HideInInspector] private bool isPaused;
+        [SerializeField, HideInInspector] private bool interactingEnabled;
 
         [SerializeField] private List<InteractableComponent> interactableComponents;
 
@@ -26,7 +27,7 @@ namespace Grigor.Overworld.Interacting
         public Transform InteractPoint => interactPoint;
         public float InteractDistance => interactDistance;
         public List<InteractableComponent> InteractableComponents => interactableComponents;
-        public bool IsPaused => isPaused;
+        public bool InteractingEnabled => interactingEnabled;
 
         public event Action InteractEvent;
         public event Action<Characters.Components.CharacterController> InRangeEvent;
@@ -147,6 +148,16 @@ namespace Grigor.Overworld.Interacting
         {
             // TO-DO: create flexible chains
             return interactableComponents[0];
+        }
+
+        public void EnableInteractable()
+        {
+            interactingEnabled = true;
+        }
+
+        public void DisableInteractable()
+        {
+            interactingEnabled = false;
         }
     }
 }

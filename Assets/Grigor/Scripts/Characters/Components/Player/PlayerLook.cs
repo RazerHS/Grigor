@@ -16,6 +16,7 @@ namespace Grigor.Characters.Components.Player
 
         private float lookRotationX;
         private Vector2 lookDirection;
+        private bool lookEnabled;
 
         protected override void OnInitialized()
         {
@@ -41,6 +42,11 @@ namespace Grigor.Characters.Components.Player
 
         private void MouseLook()
         {
+            if (!lookEnabled)
+            {
+                return;
+            }
+
             lookTransform.Rotate(Vector3.up, lookDirection.x * mouseSensitivityX * Time.deltaTime);
 
             lookRotationX -= lookDirection.y * mouseSensitivityY;
@@ -62,6 +68,16 @@ namespace Grigor.Characters.Components.Player
         private void OnLookInputCanceled()
         {
             lookDirection = Vector2.zero;
+        }
+
+        public void EnableLook()
+        {
+            lookEnabled = true;
+        }
+
+        public void DisableLook()
+        {
+            lookEnabled = false;
         }
     }
 }

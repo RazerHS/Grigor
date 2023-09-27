@@ -1,11 +1,21 @@
-﻿using CardboardCore.Utilities;
+﻿using System;
+using System.Collections.Generic;
+using CardboardCore.Utilities;
+using MEC;
 using UnityEditor;
 using UnityEngine;
 
 namespace Grigor.Utils
 {
-    public static class AssetLoader
+    public static class Helper
     {
+        private static IEnumerator<float> DelayCoroutine(float delay, Action callback)
+        {
+            yield return Timing.WaitForSeconds(delay);
+
+            callback?.Invoke();
+        }
+
         public static T LoadAsset<T>(string assetName, T asset) where T : ScriptableObject
         {
             if (asset != null)
@@ -23,6 +33,11 @@ namespace Grigor.Utils
             }
 
             return newAsset;
+        }
+
+        public static void Delay(float delay, Action callback)
+        {
+            Timing.RunCoroutine(DelayCoroutine(delay, callback));
         }
     }
 }
