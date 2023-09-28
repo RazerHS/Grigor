@@ -6,7 +6,6 @@ namespace Grigor.StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
     {
-
         public readonly PlayerController Owner;
 
         public PlayerStateMachine(PlayerController owner, bool enableDebugging) : base(enableDebugging)

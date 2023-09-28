@@ -68,14 +68,10 @@ namespace Grigor.Overworld.Interacting
             {
                 GetAllInteractableComponents();
             }
-
-            interactableComponents.ForEach(interactableComponent => interactableComponent.Initialize());
         }
 
         protected override void OnReleased()
         {
-            interactableComponents.ForEach(interactableComponent => interactableComponent.Dispose());
-
             interactablesRegistry.Unregister(this);
         }
 
@@ -86,7 +82,6 @@ namespace Grigor.Overworld.Interacting
             return distance <= interactDistance;
         }
 
-        // TO-DO: iterate on this for 3D
         private bool IsInteractableInRangeOfBox(Vector3 point)
         {
             if (!(point.x > interactPoint.position.x - interactDistance / 2 &&
@@ -153,11 +148,15 @@ namespace Grigor.Overworld.Interacting
         public void EnableInteractable()
         {
             interactingEnabled = true;
+
+            interactableComponents.ForEach(interactableComponent => interactableComponent.Initialize());
         }
 
         public void DisableInteractable()
         {
             interactingEnabled = false;
+
+            interactableComponents.ForEach(interactableComponent => interactableComponent.Dispose());
         }
     }
 }

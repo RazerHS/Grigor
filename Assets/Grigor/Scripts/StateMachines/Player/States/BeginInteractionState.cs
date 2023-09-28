@@ -39,6 +39,5 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.ToState<EndInteractionState>();
         }
-
     }
 }

@@ -38,6 +38,9 @@ namespace Grigor.Overworld.Interacting.Components
                 interactable = GetComponent<Interactable>();
             }
 
+            interactable.InRangeEvent += OnInRange;
+            interactable.OutOfRangeEvent += OnOutOfRange;
+
             // TO-DO: enable only the next interactable in the chain
             EnableInteraction();
 
@@ -46,23 +49,18 @@ namespace Grigor.Overworld.Interacting.Components
 
         public void Dispose()
         {
-            OnDisposed();
-        }
-
-        protected virtual void OnInitialized()
-        {
-            interactable.InRangeEvent += OnInRange;
-            interactable.OutOfRangeEvent += OnOutOfRange;
-        }
-
-        protected virtual void OnDisposed()
-        {
             interactable.InRangeEvent -= OnInRange;
             interactable.OutOfRangeEvent -= OnOutOfRange;
             interactable.InteractEvent -= OnInteract;
 
+            OnDisposed();
+
             Injector.Release(this);
         }
+
+        protected virtual void OnInitialized() {}
+
+        protected virtual void OnDisposed() {}
 
         protected void FindInteractable()
         {
