@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 9162100161012268452}
   - component: {fileID: 3092657542140700278}
   - component: {fileID: 7988595901454164871}
-  - component: {fileID: 7692183191524117156}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -128,7 +127,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8530204460322296006}
-  - {fileID: 2413764797932447992}
   - {fileID: 5070912519291321125}
   m_Father: {fileID: 4110331004519168368}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -205,32 +203,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &7692183191524117156
-CharacterController:
+--- !u!1 &4519366710326248240
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171723295240358061}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6099701543659581979}
+  m_Layer: 0
+  m_Name: InteractPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6099701543659581979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519366710326248240}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2746598782939802503}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5789133539289605922
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +265,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6062762320370469607}
-  m_Father: {fileID: 1567608177147314341}
+  m_Father: {fileID: 2746598782939802503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7005101630655931618
 MonoBehaviour:
@@ -366,6 +369,8 @@ GameObject:
   - component: {fileID: 2363174061832897519}
   - component: {fileID: 7579649275720259785}
   - component: {fileID: 7286588798967407776}
+  - component: {fileID: -2332966997252259316}
+  - component: {fileID: 5594782136043219340}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -386,6 +391,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6099701543659581979}
+  - {fileID: 2413764797932447992}
   - {fileID: 4110331004519168368}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -420,7 +427,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  moveTransform: {fileID: 4110331004519168368}
+  moveTransform: {fileID: 2746598782939802503}
 --- !u!114 &7286588798967407776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +442,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivityX: 50
   mouseSensitivityY: 0.2
-  lookTransform: {fileID: 4110331004519168368}
+  lookTransform: {fileID: 2746598782939802503}
   lookCameraTransform: {fileID: 2413764797932447992}
   lookClampX: 85
+--- !u!114 &-2332966997252259316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8471755642477808781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0315ff619ad74534b8e21ac18a3ba40b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactPoint: {fileID: 6099701543659581979}
+--- !u!143 &5594782136043219340
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8471755642477808781}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}

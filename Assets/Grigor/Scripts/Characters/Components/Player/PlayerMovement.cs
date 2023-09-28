@@ -25,9 +25,9 @@ namespace Grigor.Characters.Components.Player
 
         private UnityEngine.CharacterController characterController;
 
-        protected override void OnInjected()
+        protected override void OnInitialized()
         {
-            characterController = GetComponentInChildren<UnityEngine.CharacterController>();
+            characterController = GetComponent<UnityEngine.CharacterController>();
 
             playerInput.MoveInputStartedEvent += OnMoveInputStarted;
             playerInput.MoveInputCanceledEvent += OnMoveInputCanceled;
@@ -38,7 +38,7 @@ namespace Grigor.Characters.Components.Player
             DisableMovement();
         }
 
-        protected override void OnReleased()
+        protected override void OnDisposed()
         {
             playerInput.MoveInputStartedEvent -= OnMoveInputStarted;
             playerInput.MoveInputCanceledEvent -= OnMoveInputCanceled;
