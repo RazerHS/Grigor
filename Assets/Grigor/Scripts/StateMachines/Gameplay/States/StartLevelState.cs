@@ -1,6 +1,7 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Characters;
+using Grigor.Overworld.Interacting;
 using Grigor.Overworld.Rooms;
 using UnityEngine;
 
@@ -10,14 +11,17 @@ namespace Grigor.StateMachines.Gameplay.States
     {
         [Inject] private SpawnPointManager spawnPointManager;
         [Inject] private CharacterRegistry characterRegistry;
+        [Inject] private InteractablesRegistry interactablesRegistry;
 
         protected override void OnEnter()
         {
+            interactablesRegistry.EnableInteractables();
+
             Vector3 spawnPosition = spawnPointManager.GetSpawnPoint(SpawnPointLocation.Start).SpawnPosition;
 
             characterRegistry.Player.Movement.MovePlayerTo(spawnPosition);
 
-            characterRegistry.Player.Movement.EnableMovement();
+            characterRegistry.Player.StartStateMachine();
 
             owningStateMachine.ToNextState();
         }

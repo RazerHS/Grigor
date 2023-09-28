@@ -27,10 +27,17 @@ namespace Grigor.Characters.Components
 
         protected override void OnReleased()
         {
+            foreach (CharacterComponent component in characterComponents)
+            {
+                component.Dispose();
+            }
 
+            OnDisposed();
         }
 
         protected virtual void OnInitialized() { }
+
+        protected virtual void OnDisposed() { }
 
         protected T GetCharacterComponent<T>() where T : CharacterComponent
         {

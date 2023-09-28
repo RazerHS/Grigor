@@ -12,19 +12,19 @@ namespace Grigor.Characters.Components.Player
         [SerializeField] private Transform lookCameraTransform;
         [SerializeField] private float lookClampX = 85f;
 
-        private float lookRotationX;
-
         [Inject] private PlayerInput playerInput;
 
+        private float lookRotationX;
         private Vector2 lookDirection;
+        private bool lookEnabled;
 
-        protected override void OnInjected()
+        protected override void OnInitialized()
         {
             playerInput.LookInputStartedEvent += OnLookInputStarted;
             playerInput.LookInputCanceledEvent += OnLookInputCanceled;
         }
 
-        protected override void OnReleased()
+        protected override void OnDisposed()
         {
             playerInput.LookInputStartedEvent -= OnLookInputStarted;
             playerInput.LookInputCanceledEvent -= OnLookInputCanceled;
@@ -42,6 +42,11 @@ namespace Grigor.Characters.Components.Player
 
         private void MouseLook()
         {
+            if (!lookEnabled)
+            {
+                return;
+            }
+
             lookTransform.Rotate(Vector3.up, lookDirection.x * mouseSensitivityX * Time.deltaTime);
 
             lookRotationX -= lookDirection.y * mouseSensitivityY;
@@ -63,6 +68,16 @@ namespace Grigor.Characters.Components.Player
         private void OnLookInputCanceled()
         {
             lookDirection = Vector2.zero;
+        }
+
+        public void EnableLook()
+        {
+            lookEnabled = true;
+        }
+
+        public void DisableLook()
+        {
+            lookEnabled = false;
         }
     }
 }
