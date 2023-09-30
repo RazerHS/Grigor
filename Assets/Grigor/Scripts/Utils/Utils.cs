@@ -23,7 +23,7 @@ namespace Grigor.Utils
                 return asset;
             }
 
-            string path = $"Assets/Resources/{assetName}.asset";
+            string path = $"Assets/Grigor/Resources/{assetName}.asset";
 
             T newAsset = AssetDatabase.LoadAssetAtPath<T>(path);
 

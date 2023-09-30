@@ -1,8 +1,8 @@
 ﻿using System;
 using CardboardCore.DI;
+using Grigor.Characters.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using CharacterController = Grigor.Characters.Components.CharacterController;
 
 namespace Grigor.Overworld.Interacting.Components
 {
@@ -70,14 +70,14 @@ namespace Grigor.Overworld.Interacting.Components
             }
         }
 
-        private void OnInRange(CharacterController character)
+        private void OnInRange(Character character)
         {
             wentInRange = true;
 
             InRangeEffect();
         }
 
-        private void OnOutOfRange(CharacterController character)
+        private void OnOutOfRange(Character character)
         {
             OutOfRangeEffect();
         }

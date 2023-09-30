@@ -30,8 +30,8 @@ namespace Grigor.Overworld.Interacting
         public bool InteractingEnabled => interactingEnabled;
 
         public event Action InteractEvent;
-        public event Action<Characters.Components.CharacterController> InRangeEvent;
-        public event Action<Characters.Components.CharacterController> OutOfRangeEvent;
+        public event Action<Characters.Components.Character> InRangeEvent;
+        public event Action<Characters.Components.Character> OutOfRangeEvent;
 
         private void OnDrawGizmos()
         {
@@ -106,7 +106,7 @@ namespace Grigor.Overworld.Interacting
             return inRange;
         }
 
-        public void EnableProximityEffect(Characters.Components.CharacterController interactingCharacter)
+        public void EnableProximityEffect(Characters.Components.Character interactingCharacter)
         {
             if (inRange)
             {
@@ -120,7 +120,7 @@ namespace Grigor.Overworld.Interacting
             InRangeEvent?.Invoke(interactingCharacter);
         }
 
-        public void DisableProximityEffect(Characters.Components.CharacterController interactingCharacter)
+        public void DisableProximityEffect(Characters.Components.Character interactingCharacter)
         {
             if (!inRange)
             {
@@ -134,7 +134,7 @@ namespace Grigor.Overworld.Interacting
             OutOfRangeEvent?.Invoke(interactingCharacter);
         }
 
-        public void Interact(Characters.Components.CharacterController interactingCharacter)
+        public void Interact(Characters.Components.Character interactingCharacter)
         {
             InteractEvent?.Invoke();
         }

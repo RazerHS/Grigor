@@ -2,14 +2,21 @@
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
+using Grigor.Data.Characters;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Grigor.Characters.Components
 {
-    public class CharacterController : CardboardCoreBehaviour
+    public class Character : CardboardCoreBehaviour
     {
+        [SerializeField] private CharacterData characterData;
+
         private readonly List<CharacterComponent> characterComponents = new();
 
         protected string CharacterGuid;
+
+        public CharacterData Data => characterData;
 
         protected override void OnInjected()
         {
@@ -45,7 +52,7 @@ namespace Grigor.Characters.Components
 
             if (component == null)
             {
-                throw Log.Exception($"Could not find component of type {typeof(T)} in character {name}!");
+                throw Log.Exception($"Could not find component of type {typeof(T)} in characterData {name}!");
             }
 
             return component;

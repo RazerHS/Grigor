@@ -8,17 +8,17 @@ namespace Grigor.Characters
     [Injectable]
     public class CharacterRegistry
     {
-        private readonly Dictionary<string, CharacterController> characters = new();
+        private readonly Dictionary<string, Character> characters = new();
 
-        private PlayerController player;
+        private Player player;
 
-        public PlayerController Player => player;
+        public Player Player => player;
 
-        public void RegisterCharacter(string guid, CharacterController character)
+        public void RegisterCharacter(string guid, Character character)
         {
             characters.TryAdd(guid, character);
 
-            if (character is PlayerController playerController)
+            if (character is Player playerController)
             {
                 player = playerController;
             }

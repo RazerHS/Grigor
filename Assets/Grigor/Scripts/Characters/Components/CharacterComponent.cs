@@ -6,11 +6,11 @@ namespace Grigor.Characters.Components
     public abstract class CharacterComponent : MonoBehaviour
     {
         protected bool IsPaused;
-        protected CharacterController CharacterController;
+        protected Character Character;
 
-        public CharacterController Owner { get; private set; }
+        public Character Owner { get; private set; }
 
-        public void Initialize(CharacterController character)
+        public void Initialize(Character character)
         {
             Injector.Inject(this);
 

@@ -6,9 +6,9 @@ namespace Grigor.StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
     {
-        public readonly PlayerController Owner;
+        public readonly Characters.Components.Player.Player Owner;
 
-        public PlayerStateMachine(PlayerController owner, bool enableDebugging) : base(enableDebugging)
+        public PlayerStateMachine(Characters.Components.Player.Player owner, bool enableDebugging) : base(enableDebugging)
         {
             Owner = owner;
 
