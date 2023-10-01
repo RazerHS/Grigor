@@ -9,5 +9,8 @@ namespace Grigor.Data.Credentials
     {
          [SerializeField, HorizontalGroup("credential", Width = 0.5f), HideLabel] private CredentialType credentialType;
          [SerializeField, HorizontalGroup("credential", Width = 0.5f), HideLabel] private string credentialValue;
+
+        public CredentialType CredentialType => credentialType;
+        public string CredentialValue => credentialValue;
     }
 }
