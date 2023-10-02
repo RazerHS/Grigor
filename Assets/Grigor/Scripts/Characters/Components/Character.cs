@@ -2,6 +2,8 @@
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
+using Grigor.Data;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Grigor.Characters.Components
@@ -9,6 +11,8 @@ namespace Grigor.Characters.Components
     public class Character : CardboardCoreBehaviour
     {
         [SerializeField] private CharacterData characterData;
+
+        [Inject] private DataRegistry dataRegistry;
 
         private readonly List<CharacterComponent> characterComponents = new();
 
@@ -18,6 +22,11 @@ namespace Grigor.Characters.Components
 
         protected override void OnInjected()
         {
+            if (characterData == null)
+            {
+                throw Log.Exception($"Character data for character {name} is null!");
+            }
+
             GetComponents(characterComponents);
 
             foreach (CharacterComponent component in characterComponents)

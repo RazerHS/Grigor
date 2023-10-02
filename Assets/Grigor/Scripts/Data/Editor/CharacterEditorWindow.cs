@@ -6,6 +6,7 @@ namespace RazerCore.Utils.Editor
 {
     public class CharacterEditorWindow : AssetCreatorWindow<CharacterData>
     {
+        protected override string dataName => "Character";
         protected override string dataAssetsPath => "Assets/Grigor/Data/Characters";
 
         [MenuItem("Grigor/Characters")]

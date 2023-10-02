@@ -44,7 +44,7 @@ namespace Grigor.Data.Editor
             newData.NewDataCreatedEvent += OnNewDataCreated;
 
             tree.Add($"New {dataName}", newData);
-            tree.AddAllAssetsAtPath(dataName, dataAssetsPath, typeof(T), true, true);
+            tree.AddAllAssetsAtPath($"{dataName}s", dataAssetsPath, typeof(T), true, true);
 
             tree.Config.DrawSearchToolbar = true;
 
@@ -92,14 +92,14 @@ namespace Grigor.Data.Editor
             AssetDatabase.DeleteAsset(dataAssetPath);
             AssetDatabase.SaveAssets();
 
-            dataStorage.UpdateData();
+            UpdateDataStorage();
         }
 
         private void RefreshAllAssetsButton()
         {
             if (SirenixEditorGUI.ToolbarButton("Refresh All Data"))
             {
-                dataStorage.UpdateData();
+                UpdateDataStorage();
             }
         }
 
@@ -126,15 +126,20 @@ namespace Grigor.Data.Editor
 
         private void OnDataUpdated(T instance)
         {
+            UpdateDataStorage();
+
+            EditorUtility.SetDirty(dataStorage);
+            AssetDatabase.SaveAssets();
+        }
+
+        private void UpdateDataStorage()
+        {
             if (dataStorage == null)
             {
                 dataStorage = Helper.LoadAsset("DataStorage", dataStorage);
             }
 
             dataStorage.UpdateData();
-
-            EditorUtility.SetDirty(dataStorage);
-            AssetDatabase.SaveAssets();
         }
 
         protected void AddDragHandles(OdinMenuItem menuItem)

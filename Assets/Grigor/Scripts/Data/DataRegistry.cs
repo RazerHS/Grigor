@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
@@ -31,6 +32,18 @@ namespace Grigor.Data
             }
 
             throw Log.Exception("No criminal character with credentials exists!");
+        }
+
+        public CharacterData GetDataByCharacterType(CharacterType characterType)
+        {
+            CharacterData characterData = CharacterData.FirstOrDefault(characterData => characterData.CharacterType == characterType);
+
+            if (characterData == null)
+            {
+                throw Log.Exception($"No character data with type {characterType} exists!");
+            }
+
+            return characterData;
         }
     }
 }

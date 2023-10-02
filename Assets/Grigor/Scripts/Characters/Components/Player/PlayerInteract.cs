@@ -11,12 +11,12 @@ namespace Grigor.Characters.Components.Player
 {
     public class PlayerInteract : CharacterComponent
     {
-        [SerializeField] private Transform interactPoint;
+        [SerializeField, ColoredBoxGroup("References", false, 0.5f, 0.2f, 0,2f)] private Transform interactPoint;
 
         [Inject] private InteractablesRegistry interactablesRegistry;
         [Inject] private PlayerInput playerInput;
 
-        [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging", true, 0.5f, 0.5f, 0.2f)] private bool canInteract;
+        [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging", true, 0.1f, 0.1f, 0.9f)] private bool canInteract;
         [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private Interactable currentNearestInteractable;
         [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private InteractableComponent previousInteraction;
 
@@ -28,8 +28,7 @@ namespace Grigor.Characters.Components.Player
         {
             playerInput.InteractInputStartedEvent += OnInteractInput;
 
-            // DisableInteract();
-            EnableInteract();
+            DisableInteract();
         }
 
         protected override void OnDisposed()
