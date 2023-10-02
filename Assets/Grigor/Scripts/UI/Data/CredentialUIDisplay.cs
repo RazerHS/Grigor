@@ -1,4 +1,5 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
@@ -9,9 +10,20 @@ namespace Grigor.UI.Data
     {
         [SerializeField] private TextMeshProUGUI credentialText;
 
-        public void SetCredentialDisplay(string name, string value)
+        [ShowInInspector, ReadOnly] private string storedValue;
+
+        public string StoredValue => storedValue;
+
+        public void StoreValue(string value)
         {
-            credentialText.text = $"{name}: {value}";
+            storedValue = value;
+        }
+
+        public void SetCredentialDisplay(string name, bool revealValue)
+        {
+            string valueToDisplay = revealValue ? storedValue : "???";
+
+            credentialText.text = $"{name}: {valueToDisplay}";
         }
     }
 }

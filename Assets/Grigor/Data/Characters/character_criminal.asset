@@ -10,9 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 352aaa2b8e4e4f9aab7594f461fbb441, type: 3}
-  m_Name: ww
+  m_Name: character_criminal
   m_EditorClassIdentifier: 
-  assetName: 
-  characterType: 0
+  assetName: character_criminal
+  characterType: 1
   credentialWallet:
-    credentialEntries: []
+    credentialEntries:
+    - credentialType: 0
+      credentialValue: Bob
+    - credentialType: 2
+      credentialValue: 242424
+    - credentialType: 5
+      credentialValue: wrwr

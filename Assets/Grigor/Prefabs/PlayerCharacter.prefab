@@ -371,7 +371,6 @@ GameObject:
   - component: {fileID: 7286588798967407776}
   - component: {fileID: -2332966997252259316}
   - component: {fileID: 5594782136043219340}
-  - component: {fileID: 2314329518808071427}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -409,11 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3258a40832b74353972dab114f743277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData:
-    characterName: Player
-    characterType: 0
-    character: qeqeqw
-    characterList: {fileID: 11400000, guid: 16b108459df27b246a9f96fb36144a55, type: 2}
+  characterData: {fileID: 0}
 --- !u!114 &7579649275720259785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,15 +485,3 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2314329518808071427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8471755642477808781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68cb2bd45c4541a49e2ddafef5ab4b91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

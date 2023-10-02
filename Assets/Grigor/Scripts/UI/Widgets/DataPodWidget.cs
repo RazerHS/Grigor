@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
-using Grigor.Characters;
+using Grigor.Data;
 using Grigor.Data.Credentials;
 using Grigor.Overworld.Clues;
 using Grigor.UI;
@@ -17,17 +17,17 @@ public class DataPodWidget : UIWidget, IClueListener
     [SerializeField] private Button toggleDataPodButton;
 
     [Inject] private ClueRegistry clueRegistry;
-    [Inject] private CredentialRegistry credentialRegistry;
-    [Inject] private CharacterRegistry characterRegistry;
+    [Inject] private DataRegistry dataRegistry;
 
-    private List<CredentialEntry> criminalCredentials;
+    private CredentialWallet criminalCredentialWallet;
     private readonly Dictionary<CredentialType, CredentialUIDisplay> displayedCredentials = new();
 
     protected override void OnShow()
     {
         Injector.Inject(this);
 
-        // criminalCredentials = credentialRegistry.GetCredentials(criminalData);
+        InsertCredentials();
+        RegisterClueListener();
 
         toggleDataPodButton.onClick.AddListener(OnToggleDataPodButtonClicked);
     }
@@ -39,9 +39,32 @@ public class DataPodWidget : UIWidget, IClueListener
         Injector.Release(this);
     }
 
+    private void InsertCredentials()
+    {
+        criminalCredentialWallet = dataRegistry.GetCriminalCredentials();
+
+        foreach (CredentialEntry credential in criminalCredentialWallet.CredentialEntries)
+        {
+            AddNewCredential(credential.CredentialType, credential.CredentialValue);
+        }
+    }
+
     private void OnToggleDataPodButtonClicked()
     {
         dataPodView.SetActive(!dataPodView.activeSelf);
+    }
+
+    private void RevealCredentialValue(CredentialType credentialType)
+    {
+        if (!displayedCredentials.ContainsKey(credentialType))
+        {
+            Log.Error($"Credential <b>{credentialType}</b> does not exist in data pod. Maybe adding it was intended instead?");
+            return;
+        }
+
+        Log.Write($"<b>{credentialType}</b> value revealed: <b>{displayedCredentials[credentialType].StoredValue}</b>!");
+
+        displayedCredentials[credentialType].SetCredentialDisplay(credentialType.ToString(), true);
     }
 
     public void AddNewCredential(CredentialType credentialType, string value)
@@ -53,20 +76,10 @@ public class DataPodWidget : UIWidget, IClueListener
         }
 
         CredentialUIDisplay credential = Instantiate(credentialDisplayPrefab, credentialDisplayParent);
-        credential.SetCredentialDisplay(credentialType.ToString(), value);
+        credential.StoreValue(value);
+        credential.SetCredentialDisplay(credentialType.ToString(), false);
 
         displayedCredentials.Add(credentialType, credential);
-    }
-
-    public void UpdateCredential(CredentialType credentialType, string value)
-    {
-        if (!displayedCredentials.ContainsKey(credentialType))
-        {
-            Log.Error($"Credential <b>{credentialType}</b> does not exist in data pod. Maybe adding it was intended instead?");
-            return;
-        }
-
-        displayedCredentials[credentialType].SetCredentialDisplay(credentialType.ToString(), value);
     }
 
     public void OnClueFound(CredentialType credentialType)
@@ -78,6 +91,11 @@ public class DataPodWidget : UIWidget, IClueListener
             throw Log.Exception($"Found clue <b>{credentialType}</b> doesn't exist in data pod!");
         }
 
-        credential.SetCredentialDisplay(credentialType.ToString(), credentialType.ToString());
+        RevealCredentialValue(credentialType);
+    }
+
+    public void RegisterClueListener()
+    {
+        clueRegistry.RegisterListener(this);
     }
 }

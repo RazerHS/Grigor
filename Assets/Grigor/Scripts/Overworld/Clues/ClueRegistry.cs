@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using CardboardCore.DI;
-using Grigor.Data.Credentials;
 using UnityEngine;
 
 namespace Grigor.Overworld.Clues
@@ -9,7 +8,7 @@ namespace Grigor.Overworld.Clues
     public class ClueRegistry : MonoBehaviour
     {
         private readonly List<Clue> clues = new();
-        private Dictionary<IClueListener, CredentialType> clueListeners = new();
+        private readonly List<IClueListener> clueListeners = new();
 
         private void OnDisable()
         {
@@ -20,20 +19,15 @@ namespace Grigor.Overworld.Clues
         {
             clue.ClueFoundEvent -= OnClueFound;
 
-            foreach (KeyValuePair<IClueListener, CredentialType> listener in clueListeners)
+            foreach (IClueListener listener in clueListeners)
             {
-                if (listener.Value != clue.CredentialToFind)
-                {
-                    return;
-                }
-
-                listener.Key.OnClueFound(clue.CredentialToFind);
+                listener.OnClueFound(clue.CredentialToFind);
             }
         }
 
         public void RegisterClue(Clue clue)
         {
-            if (!clues.Contains(clue))
+            if (clues.Contains(clue))
             {
                 return;
             }
@@ -45,7 +39,7 @@ namespace Grigor.Overworld.Clues
 
         public void UnregisterClue(Clue clue)
         {
-            if (clues.Contains(clue))
+            if (!clues.Contains(clue))
             {
                 return;
             }
@@ -55,14 +49,19 @@ namespace Grigor.Overworld.Clues
             clues.Remove(clue);
         }
 
-        public void RegisterListener(IClueListener listener, CredentialType credentialType)
+        public void RegisterListener(IClueListener listener)
         {
-            clueListeners.TryAdd(listener, credentialType);
+            if (clueListeners.Contains(listener))
+            {
+                return;
+            }
+
+            clueListeners.Add(listener);
         }
 
         public void UnregisterListener(IClueListener listener)
         {
-            if (!clueListeners.ContainsKey(listener))
+            if (!clueListeners.Contains(listener))
             {
                 return;
             }
