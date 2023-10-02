@@ -1,16 +1,17 @@
 ﻿using CardboardCore.DI;
 using Grigor.Input;
+using RazerCore.Utils.Attributes;
 using UnityEngine;
 
 namespace Grigor.Characters.Components.Player
 {
     public class PlayerLook : CharacterComponent
     {
-        [SerializeField] private float mouseSensitivityX;
-        [SerializeField] private float mouseSensitivityY;
-        [SerializeField] private Transform lookTransform;
-        [SerializeField] private Transform lookCameraTransform;
-        [SerializeField] private float lookClampX = 85f;
+        [SerializeField, ColoredBoxGroup("Values", false, 0.5f, 0.1f, 0.1f)] private float mouseSensitivityX;
+        [SerializeField, ColoredBoxGroup("Values")] private float mouseSensitivityY;
+        [SerializeField, ColoredBoxGroup("Values")] private float lookClampX = 85f;
+        [SerializeField, ColoredBoxGroup("References", false, 0.1f, 0.1f, 0.9f)] private Transform lookTransform;
+        [SerializeField, ColoredBoxGroup("References")] private Transform lookCameraTransform;
 
         [Inject] private PlayerInput playerInput;
 

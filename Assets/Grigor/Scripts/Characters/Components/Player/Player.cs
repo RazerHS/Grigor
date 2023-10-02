@@ -3,7 +3,7 @@ using Grigor.StateMachines.Player;
 
 namespace Grigor.Characters.Components.Player
 {
-    public class PlayerController : CharacterController
+    public class Player : Character
     {
         [Inject] private CharacterRegistry characterRegistry;
 

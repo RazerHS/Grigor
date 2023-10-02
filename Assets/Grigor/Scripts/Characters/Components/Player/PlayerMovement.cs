@@ -1,5 +1,6 @@
 ﻿using CardboardCore.DI;
 using Grigor.Input;
+using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -9,14 +10,14 @@ namespace Grigor.Characters.Components.Player
     {
         [Inject] private PlayerInput playerInput;
 
-        [SerializeField] private float movementSpeed;
-        [SerializeField] private float gravityStrength = -9.81f;
-        [SerializeField] private float jumpHeight;
-        [SerializeField] private Transform groundCheckTransform;
-        [SerializeField] private LayerMask groundMask;
-        [SerializeField] private Transform moveTransform;
+        [SerializeField, ColoredBoxGroup("Values", false, 0.7f, 0.5f, 0.9f)] private float movementSpeed;
+        [SerializeField, ColoredBoxGroup("Values")] private float gravityStrength = -9.81f;
+        [SerializeField, ColoredBoxGroup("Values")] private float jumpHeight;
+        [SerializeField, ColoredBoxGroup("Values")] private LayerMask groundMask;
+        [SerializeField, ColoredBoxGroup("References", false, 0.1f, 0.1f, 0.9f)] private Transform groundCheckTransform;
+        [SerializeField, ColoredBoxGroup("References")] private Transform moveTransform;
 
-        [ShowInInspector, ReadOnly] private bool isGrounded;
+        [ColoredBoxGroup("Debugging", true, 0.5f, 0.1f, 0.9f), ShowInInspector, ReadOnly] private bool isGrounded;
         private bool jump;
         private bool isMovementEnabled = true;
 

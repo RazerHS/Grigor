@@ -1,5 +1,4 @@
 using CardboardCore.StateMachines;
-using CardboardCore.Utilities;
 
 namespace Grigor.StateMachines.Player.States
 {
