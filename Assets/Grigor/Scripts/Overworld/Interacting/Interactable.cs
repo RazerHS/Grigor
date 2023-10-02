@@ -6,7 +6,6 @@ using CardboardCore.Utilities;
 using Grigor.Overworld.Interacting.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Overworld.Interacting
 {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Grigor.Characters.Components;
-using Grigor.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

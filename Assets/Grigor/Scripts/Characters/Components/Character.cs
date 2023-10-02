@@ -3,7 +3,6 @@ using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Data;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Grigor.Characters.Components

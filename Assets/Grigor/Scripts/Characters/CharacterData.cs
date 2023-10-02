@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.Design.Serialization;
 using Grigor.Data.Credentials;
 using Grigor.Data.Editor;
 using RazerCore.Utils.Attributes;
