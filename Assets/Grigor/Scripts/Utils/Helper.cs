@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using CardboardCore.Utilities;
+using Grigor.Data.Editor;
+using JetBrains.Annotations;
 using MEC;
 using UnityEditor;
 using UnityEngine;
@@ -39,5 +41,37 @@ namespace Grigor.Utils
         {
             Timing.RunCoroutine(DelayCoroutine(delay, callback));
         }
+
+#if UNITY_EDITOR
+        public static void UpdateData<T>([NotNull] List<T> list, string dataPath) where T : ScriptableObjectData
+        {
+            float startTime = Time.time;
+
+            if (list == null)
+            {
+                throw new ArgumentNullException(nameof(list));
+            }
+
+            list.Clear();
+
+            string[] assetGuids = AssetDatabase.FindAssets($"t:{typeof(T).Name}", new string[]
+            {
+                dataPath
+            });
+
+            foreach (string guid in assetGuids)
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                T data = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+
+                if (data != null)
+                {
+                    list.Add(data);
+                }
+            }
+
+            Log.Write($"Data updated in {Time.time - startTime} seconds!");
+        }
+#endif
     }
 }

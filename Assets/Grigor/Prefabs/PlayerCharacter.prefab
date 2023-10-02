@@ -410,7 +410,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData:
-    characterName: Hi
+    characterName: Player
+    characterType: 0
+    character: qeqeqw
     characterList: {fileID: 11400000, guid: 16b108459df27b246a9f96fb36144a55, type: 2}
 --- !u!114 &7579649275720259785
 MonoBehaviour:

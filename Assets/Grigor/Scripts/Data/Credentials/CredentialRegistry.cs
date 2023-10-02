@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using CardboardCore.Utilities;
-using Grigor.Data.Characters;
+using Grigor.Characters;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -19,6 +19,19 @@ namespace Grigor.Data.Credentials
             }
 
             return credentials[characterData].CredentialEntries;
+        }
+
+        public List<CredentialEntry> GetCredentialsByType(CharacterType characterType)
+        {
+            foreach (KeyValuePair<CharacterData, CredentialWallet> entry in credentials)
+            {
+                if (entry.Key.CharacterType == characterType)
+                {
+                    return entry.Value.CredentialEntries;
+                }
+            }
+
+            throw Log.Exception("There are no credentials for the criminal character!");
         }
     }
 }

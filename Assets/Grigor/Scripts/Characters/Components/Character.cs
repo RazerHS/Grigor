@@ -2,9 +2,7 @@
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
-using Grigor.Data.Characters;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Characters.Components
 {

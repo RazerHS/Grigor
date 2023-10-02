@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 514716f6a8a3412a844741267ff5c1a2, type: 3}
-  m_Name: AllCharacters
+  m_Script: {fileID: 11500000, guid: 352aaa2b8e4e4f9aab7594f461fbb441, type: 3}
+  m_Name: ww
   m_EditorClassIdentifier: 
-  allCharacters:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  name: ww
+  characterType: 0
+  credentialWallet:
+    credentialEntries: []

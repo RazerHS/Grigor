@@ -18,9 +18,9 @@ namespace Grigor.Characters
         {
             characters.TryAdd(guid, character);
 
-            if (character is Player playerController)
+            if (character is Player player)
             {
-                player = playerController;
+                this.player = player;
             }
         }
 
