@@ -10,6 +10,8 @@ namespace Grigor.Overworld.Lighting
         [SerializeField] private bool changeTimeAutomatically;
         [SerializeField, Range(0, 24), OnValueChanged("UpdateLighting")] private float timeOfDay;
 
+        public float TimeOfDay => timeOfDay;
+
         private void Update()
         {
             UpdateLighting();
@@ -44,10 +46,12 @@ namespace Grigor.Overworld.Lighting
             directionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0f));
         }
 
-        public void SetTimeOfDay(float timeOfDay)
+        public float SetTimeOfDay(float timeOfDay)
         {
             this.timeOfDay = timeOfDay;
             this.timeOfDay %= 24;
+
+            return timeOfDay;
         }
     }
 }

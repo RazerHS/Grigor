@@ -24,8 +24,6 @@ public class DataPodWidget : UIWidget, IClueListener
 
     protected override void OnShow()
     {
-        Injector.Inject(this);
-
         InsertCredentials();
         RegisterClueListener();
 
@@ -35,8 +33,6 @@ public class DataPodWidget : UIWidget, IClueListener
     protected override void OnHide()
     {
         toggleDataPodButton.onClick.RemoveListener(OnToggleDataPodButtonClicked);
-
-        Injector.Release(this);
     }
 
     private void InsertCredentials()

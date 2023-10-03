@@ -4,6 +4,7 @@ using Grigor.Characters;
 using Grigor.Overworld.Interacting;
 using Grigor.Overworld.Rooms;
 using Grigor.UI;
+using Grigor.UI.Widgets;
 using UnityEngine;
 
 namespace Grigor.StateMachines.Gameplay.States
@@ -16,10 +17,15 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private UIManager uiManager;
 
         private DataPodWidget dataPodWidget;
+        private TimeOfDayToggleWidget timeOfDayToggleWidget;
 
         protected override void OnEnter()
         {
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
+
+            timeOfDayToggleWidget = uiManager.GetWidget<TimeOfDayToggleWidget>();
+            timeOfDayToggleWidget.SetCurrentRoomType(RoomNames.Start);
+            timeOfDayToggleWidget.Show();
 
             interactablesRegistry.EnableInteractables();
 

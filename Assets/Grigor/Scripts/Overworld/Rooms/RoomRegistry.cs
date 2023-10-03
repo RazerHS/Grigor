@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using CardboardCore.DI;
+using CardboardCore.Utilities;
 
 namespace Grigor.Overworld.Rooms
 {
     [Injectable]
     public class RoomRegistry
     {
-        private Dictionary<RoomNames, Room> rooms;
+        private Dictionary<RoomNames, Room> rooms = new();
 
         public void Register(RoomNames roomName, Room room)
         {
@@ -21,6 +22,16 @@ namespace Grigor.Overworld.Rooms
             }
 
             rooms.Remove(roomName);
+        }
+
+        public Room GetRoom(RoomNames roomName)
+        {
+            if (!rooms.ContainsKey(roomName))
+            {
+                throw Log.Exception($"Room {roomName} not found!");
+            }
+
+            return rooms[roomName];
         }
     }
 }
