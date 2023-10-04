@@ -15,12 +15,12 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.7008232, g: 0.828873, b: 0.93685126, a: 1}
+  m_FogColor: {r: 0.66240364, g: 0.7042524, b: 0.69331, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.8824288, g: 0.8824288, b: 0.8824288, a: 1}
+  m_AmbientSkyColor: {r: 0.85889614, g: 0.85889614, b: 0.85889614, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 365.111, g: 262.89017, b: 246.8135, a: 1}
+  m_IndirectSpecularColor: {r: 243.0845, g: 180.77223, b: 173.29567, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -127,7 +127,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44436
+  m_Name: pb_Mesh-1330
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -292,7 +292,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44406
+  m_Name: pb_Mesh-1358
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -457,7 +457,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44450
+  m_Name: pb_Mesh-1344
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -675,27 +675,27 @@ PrefabInstance:
     - target: {fileID: 1135229915212627998, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: timeOfDay
-      value: 12.9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1267794974305483722, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.05395764
+      value: 0.07547914
       objectReference: {fileID: 0}
     - target: {fileID: 1267794974305483722, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.06844492
+      value: 0.0435779
       objectReference: {fileID: 0}
     - target: {fileID: 1267794974305483722, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.61673826
+      value: 0.86272997
       objectReference: {fileID: 0}
     - target: {fileID: 1267794974305483722, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.7823285
+      value: -0.49809733
       objectReference: {fileID: 0}
     - target: {fileID: 1786442063812945456, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
@@ -710,7 +710,7 @@ PrefabInstance:
     - target: {fileID: 1858021925697423746, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1579
+      value: 1591
       objectReference: {fileID: 0}
     - target: {fileID: 2228528272097156766, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
@@ -730,7 +730,7 @@ PrefabInstance:
     - target: {fileID: 4245947749610199475, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 707
+      value: 719
       objectReference: {fileID: 0}
     - target: {fileID: 4392809583359786776, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
@@ -790,7 +790,7 @@ PrefabInstance:
     - target: {fileID: 4498917401849263076, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 866
+      value: 878
       objectReference: {fileID: 0}
     - target: {fileID: 4564571495428670090, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
@@ -815,17 +815,17 @@ PrefabInstance:
     - target: {fileID: 8442800850169746996, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.94730407
+      value: 0.8141641
       objectReference: {fileID: 0}
     - target: {fileID: 8442800850169746996, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.94730407
+      value: 0.8141641
       objectReference: {fileID: 0}
     - target: {fileID: 8442800850169746996, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.94730407
+      value: 0.8141641
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

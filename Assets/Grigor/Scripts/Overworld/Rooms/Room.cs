@@ -10,12 +10,12 @@ namespace Grigor.Overworld.Rooms
 
         [Inject] private RoomRegistry roomRegistry;
 
-        public LightingManager Lighting { get; private set; }
+        public LightingController Lighting { get; private set; }
         public SpawnPoint SpawnPoint { get; private set; }
 
         protected override void OnInjected()
         {
-            Lighting = GetComponent<LightingManager>();
+            Lighting = GetComponent<LightingController>();
             SpawnPoint = GetComponent<SpawnPoint>();
 
             roomRegistry.Register(roomName, this);

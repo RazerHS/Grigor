@@ -22,10 +22,7 @@ namespace Grigor.StateMachines.Gameplay.States
         protected override void OnEnter()
         {
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
-
-            timeOfDayToggleWidget = uiManager.GetWidget<TimeOfDayToggleWidget>();
-            timeOfDayToggleWidget.SetCurrentRoomType(RoomNames.Start);
-            timeOfDayToggleWidget.Show();
+            timeOfDayToggleWidget = uiManager.ShowWidget<TimeOfDayToggleWidget>();
 
             interactablesRegistry.EnableInteractables();
 
