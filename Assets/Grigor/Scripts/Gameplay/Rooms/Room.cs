@@ -1,8 +1,8 @@
 ﻿using CardboardCore.DI;
-using Grigor.Overworld.Lighting;
+using Grigor.Gameplay.Lighting;
 using UnityEngine;
 
-namespace Grigor.Overworld.Rooms
+namespace Grigor.Gameplay.Rooms
 {
     public class Room : CardboardCoreBehaviour
     {

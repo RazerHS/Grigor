@@ -1,8 +1,8 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Characters;
-using Grigor.Overworld.Interacting;
-using Grigor.Overworld.Rooms;
+using Grigor.Gameplay.Interacting;
+using Grigor.Gameplay.Rooms;
 using Grigor.UI;
 using Grigor.UI.Widgets;
 using UnityEngine;

@@ -2,7 +2,7 @@
 using CardboardCore.DI;
 using UnityEngine;
 
-namespace Grigor.Overworld.Clues
+namespace Grigor.Gameplay.Clues
 {
     [Injectable]
     public class ClueRegistry : MonoBehaviour

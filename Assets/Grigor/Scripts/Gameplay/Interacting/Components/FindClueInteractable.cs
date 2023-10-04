@@ -1,8 +1,8 @@
 ﻿using CardboardCore.Utilities;
-using Grigor.Overworld.Clues;
+using Grigor.Gameplay.Clues;
 using UnityEngine;
 
-namespace Grigor.Overworld.Interacting.Components
+namespace Grigor.Gameplay.Interacting.Components
 {
     public class FindClueInteractable : InteractableComponent
     {

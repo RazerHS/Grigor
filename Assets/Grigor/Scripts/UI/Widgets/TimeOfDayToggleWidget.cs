@@ -1,5 +1,5 @@
 ﻿using CardboardCore.DI;
-using Grigor.Overworld.Time;
+using Grigor.Gameplay.Time;
 using UnityEngine;
 using UnityEngine.UI;
 

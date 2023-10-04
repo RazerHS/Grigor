@@ -1,7 +1,7 @@
 ﻿using CardboardCore.Utilities;
 using Grigor.Utils;
 
-namespace Grigor.Overworld.Interacting.Components
+namespace Grigor.Gameplay.Interacting.Components
 {
     public class DialogueInteractable : InteractableComponent
     {

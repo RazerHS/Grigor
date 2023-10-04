@@ -3,7 +3,7 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Data;
 using Grigor.Data.Credentials;
-using Grigor.Overworld.Clues;
+using Grigor.Gameplay.Clues;
 using Grigor.UI;
 using Grigor.UI.Data;
 using UnityEngine;

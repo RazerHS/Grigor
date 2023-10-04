@@ -4,7 +4,7 @@ using CardboardCore.DI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Overworld.Interacting
+namespace Grigor.Gameplay.Interacting
 {
     [Injectable]
     public class InteractablesRegistry : MonoBehaviour

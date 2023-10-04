@@ -4,7 +4,7 @@ using Grigor.Characters.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Overworld.Interacting.Components
+namespace Grigor.Gameplay.Interacting.Components
 {
     public class InteractableComponent : MonoBehaviour
     {

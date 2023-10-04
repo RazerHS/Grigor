@@ -1,6 +1,6 @@
 ﻿using Grigor.Data.Credentials;
 
-namespace Grigor.Overworld.Clues
+namespace Grigor.Gameplay.Clues
 {
     public interface IClueListener
     {

@@ -3,7 +3,7 @@ using CardboardCore.DI;
 using Grigor.Data.Credentials;
 using UnityEngine;
 
-namespace Grigor.Overworld.Clues
+namespace Grigor.Gameplay.Clues
 {
     public class Clue : CardboardCoreBehaviour
     {

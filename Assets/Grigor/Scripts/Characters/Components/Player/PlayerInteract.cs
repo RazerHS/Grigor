@@ -1,8 +1,8 @@
 ﻿using System;
 using CardboardCore.DI;
+using Grigor.Gameplay.Interacting;
+using Grigor.Gameplay.Interacting.Components;
 using Grigor.Input;
-using Grigor.Overworld.Interacting;
-using Grigor.Overworld.Interacting.Components;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;

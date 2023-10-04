@@ -1,6 +1,6 @@
 using CardboardCore.StateMachines;
 using CardboardCore.Utilities;
-using Grigor.Overworld.Interacting.Components;
+using Grigor.Gameplay.Interacting.Components;
 
 namespace Grigor.StateMachines.Player.States
 {

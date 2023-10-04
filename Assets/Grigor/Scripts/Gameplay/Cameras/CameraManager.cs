@@ -2,7 +2,7 @@
 using Cinemachine;
 using UnityEngine;
 
-namespace Grigor.Overworld.Cameras
+namespace Grigor.Gameplay.Cameras
 {
     [Injectable]
     public class CameraManager : MonoBehaviour

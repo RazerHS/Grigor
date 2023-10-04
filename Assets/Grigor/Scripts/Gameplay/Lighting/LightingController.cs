@@ -1,9 +1,9 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.Utilities;
-using Grigor.Overworld.Time;
+using Grigor.Gameplay.Time;
 using UnityEngine;
 
-namespace Grigor.Overworld.Lighting
+namespace Grigor.Gameplay.Lighting
 {
     public class LightingController : CardboardCoreBehaviour
     {

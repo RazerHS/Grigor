@@ -1,7 +1,7 @@
 ﻿using CardboardCore.DI;
 using UnityEngine;
 
-namespace Grigor.Overworld.Rooms
+namespace Grigor.Gameplay.Rooms
 {
     public class SpawnPoint : CardboardCoreBehaviour
     {

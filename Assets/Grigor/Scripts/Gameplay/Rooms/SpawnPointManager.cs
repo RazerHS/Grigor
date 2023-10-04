@@ -2,7 +2,7 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 
-namespace Grigor.Overworld.Rooms
+namespace Grigor.Gameplay.Rooms
 {
     [Injectable]
     public class SpawnPointManager

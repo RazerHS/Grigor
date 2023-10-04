@@ -1,4 +1,4 @@
-﻿namespace Grigor.Overworld.Rooms
+﻿namespace Grigor.Gameplay.Rooms
 {
     public enum SpawnPointLocation
     {

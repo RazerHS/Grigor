@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
-using Grigor.Overworld.Interacting.Components;
+using Grigor.Gameplay.Interacting.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Overworld.Interacting
+namespace Grigor.Gameplay.Interacting
 {
     public class Interactable : CardboardCoreBehaviour
     {

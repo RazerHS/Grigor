@@ -1,7 +1,7 @@
 ﻿using Sirenix.Utilities;
 using UnityEngine;
 
-namespace Grigor.Overworld.Lighting
+namespace Grigor.Gameplay.Lighting
 {
     [GlobalConfig, CreateAssetMenu(fileName = "LightingConfig", menuName = "Grigor/LightingConfig")]
     public class LightingConfig : GlobalConfig<LightingConfig>

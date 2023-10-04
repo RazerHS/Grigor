@@ -4,7 +4,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Overworld.Time
+namespace Grigor.Gameplay.Time
 {
     [Injectable]
     public class TimeManager : MonoBehaviour
