@@ -14,11 +14,11 @@ namespace Grigor.Gameplay.Time
         [SerializeField] private float nightStartTime = 22f;
         [SerializeField] private bool changeTimeAutomatically;
 
-        private bool isDayTime;
+        private TimeOfDay currentTimeOfDay;
 
         public event Action<float> TimeChangedEvent;
-        public event Action ChangedToDayTimeEvent;
-        public event Action ChangedToNightTimeEvent;
+        public event Action ChangedToDayEvent;
+        public event Action ChangedToNightEvent;
 
         private void Awake()
         {
@@ -58,21 +58,31 @@ namespace Grigor.Gameplay.Time
         {
             if (timeOfDay >= dayStartTime && timeOfDay < nightStartTime)
             {
-                isDayTime = true;
+                if (currentTimeOfDay == TimeOfDay.Day)
+                {
+                    return;
+                }
 
-                ChangedToDayTimeEvent?.Invoke();
+                currentTimeOfDay = TimeOfDay.Day;
+
+                ChangedToDayEvent?.Invoke();
             }
             else
             {
-                isDayTime = false;
+                if (currentTimeOfDay == TimeOfDay.Night)
+                {
+                    return;
+                }
 
-                ChangedToNightTimeEvent?.Invoke();
+                currentTimeOfDay = TimeOfDay.Night;
+
+                ChangedToNightEvent?.Invoke();
             }
         }
 
         public void ToggleTimeOfDay(float duration, Action callback)
         {
-            float targetTimeOfDay = isDayTime ? nightStartTime : dayStartTime;
+            float targetTimeOfDay = currentTimeOfDay == TimeOfDay.Day ? nightStartTime : dayStartTime;
 
             DOVirtual.Float(timeOfDay, targetTimeOfDay, duration, SetTime).OnComplete(() =>
             {

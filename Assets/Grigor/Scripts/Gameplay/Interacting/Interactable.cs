@@ -141,6 +141,11 @@ namespace Grigor.Gameplay.Interacting
         public InteractableComponent GetPrimaryInteractable()
         {
             // TO-DO: create flexible chains
+            if (interactableComponents.Count == 0)
+            {
+                throw Log.Exception($"There are no interactable components on this {name}!");
+            }
+
             return interactableComponents[0];
         }
 
