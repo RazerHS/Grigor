@@ -1,9 +1,10 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Characters;
-using Grigor.Overworld.Interacting;
-using Grigor.Overworld.Rooms;
+using Grigor.Gameplay.Interacting;
+using Grigor.Gameplay.Rooms;
 using Grigor.UI;
+using Grigor.UI.Widgets;
 using UnityEngine;
 
 namespace Grigor.StateMachines.Gameplay.States
@@ -16,10 +17,12 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private UIManager uiManager;
 
         private DataPodWidget dataPodWidget;
+        private TimeOfDayToggleWidget timeOfDayToggleWidget;
 
         protected override void OnEnter()
         {
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
+            timeOfDayToggleWidget = uiManager.ShowWidget<TimeOfDayToggleWidget>();
 
             interactablesRegistry.EnableInteractables();
 

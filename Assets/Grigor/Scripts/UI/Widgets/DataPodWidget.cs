@@ -3,7 +3,7 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Data;
 using Grigor.Data.Credentials;
-using Grigor.Overworld.Clues;
+using Grigor.Gameplay.Clues;
 using Grigor.UI;
 using Grigor.UI.Data;
 using UnityEngine;
@@ -24,8 +24,6 @@ public class DataPodWidget : UIWidget, IClueListener
 
     protected override void OnShow()
     {
-        Injector.Inject(this);
-
         InsertCredentials();
         RegisterClueListener();
 
@@ -35,8 +33,6 @@ public class DataPodWidget : UIWidget, IClueListener
     protected override void OnHide()
     {
         toggleDataPodButton.onClick.RemoveListener(OnToggleDataPodButtonClicked);
-
-        Injector.Release(this);
     }
 
     private void InsertCredentials()

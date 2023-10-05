@@ -3,15 +3,18 @@ using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Data;
+using Grigor.Gameplay.Rooms;
+using Grigor.Gameplay.Time;
 using UnityEngine;
 
 namespace Grigor.Characters.Components
 {
-    public class Character : CardboardCoreBehaviour
+    public class Character : CardboardCoreBehaviour, ITimeEffect
     {
         [SerializeField] private CharacterData characterData;
 
         [Inject] private DataRegistry dataRegistry;
+        [Inject] private TimeEffectRegistry timeEffectRegistry;
 
         private readonly List<CharacterComponent> characterComponents = new();
 
@@ -34,6 +37,8 @@ namespace Grigor.Characters.Components
             }
 
             CharacterGuid = System.Guid.NewGuid().ToString();
+
+            RegisterTimeEffect();
 
             OnInitialized();
         }
@@ -62,6 +67,21 @@ namespace Grigor.Characters.Components
             }
 
             return component;
+        }
+
+        public void OnChangedToDay()
+        {
+            Log.Write( $"Character {name} changed to day!");
+        }
+
+        public void OnChangedToNight()
+        {
+            Log.Write( $"Character {name} changed to night!");
+        }
+
+        public void RegisterTimeEffect()
+        {
+            timeEffectRegistry.Register(this);
         }
     }
 }

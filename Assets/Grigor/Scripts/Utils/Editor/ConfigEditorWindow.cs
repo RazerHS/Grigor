@@ -6,7 +6,7 @@ namespace RazerCore.Utils.Editor
 {
     public class ConfigEditorWindow : OdinMenuEditorWindow
     {
-        private static string dataAssetsPath => "Grigor/Resources";
+        private static string dataAssetsPath => "Grigor/Resources/Config";
 
         [MenuItem("Grigor/Config")]
         protected static void OpenWindow()
