@@ -3,5 +3,6 @@
     public enum RoomNames
     {
         Start,
+        MindPalace
     }
 }
