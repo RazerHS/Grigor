@@ -217,7 +217,7 @@
         <member name="P:Sirenix.OdinInspector.Editor.ColorPaletteManager.ColorPalettes">
             <summary>
             Gives you the list of all custom color palettes.
-            Remember to call UnityEditor.EditorUtility.SetDirty(ColorPaletteManager.Instance) after modifying the list. 
+            Remember to call UnityEditor.EditorUtility.SetDirty(ColorPaletteManager.Instance) after modifying the list.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.EditorOnlyModeConfig">
@@ -3282,7 +3282,7 @@
              That is, the property from which this value
              entry will fetch its parentvalues from in order
              to extract its own values.</para>
-            
+
              <para>If <see cref="P:Sirenix.OdinInspector.Editor.PropertyValueEntry.ParentValueProperty"/> is null, this is a root property.</para>
              </summary>
         </member>
@@ -6324,23 +6324,23 @@
              Base class for attribute drawers. Use this class to create your own custom attribute drawers that will work for all types.
              Alternatively you can derive from <see cref="T:Sirenix.OdinInspector.Editor.OdinAttributeDrawer`2"/> if you want to only support specific types.
              </para>
-            
+
              <para>
              Odin supports the use of GUILayout and takes care of undo for you. It also takes care of multi-selection
              in many simple cases. Check the manual for more information on handling multi-selection.
              </para>
-            
+
              <para>
              Also note that Odin does not require that your custom attribute inherits from Unity's PropertyAttribute.
              </para>
              </summary>
-             
+
              <typeparam name="TAttribute">The attribute that this drawer should be applied to.</typeparam>
-            
+
              <remarks>
              Checkout the manual for more information.
              </remarks>
-            
+
              <example>
              <para>Example using the <see cref="T:Sirenix.OdinInspector.Editor.OdinAttributeDrawer`2"/>.</para>
              <code>
@@ -6349,16 +6349,16 @@
              {
                  public float Min;
                  public float Max;
-            
+
                  public CustomRangeAttribute(float min, float max)
                  {
                      this.Min = min;
                      this.Max = max;
                  }
              }
-            
+
              // Remember to wrap your custom attribute drawer within a #if UNITY_EDITOR condition, or locate the file inside an Editor folder.
-            
+
              public sealed class CustomRangeAttributeDrawer : OdinAttributeDrawer&lt;CustomRangeAttribute, float&gt;
              {
                  protected override void DrawPropertyLayout(GUIContent label)
@@ -6366,7 +6366,7 @@
                      this.ValueEntry.SmartValue = EditorGUILayout.Slider(label, this.ValueEntry.SmartValue, this.Attribute.Min, this.Attribute.Max);
                  }
              }
-            
+
              // Usage:
              public class MyComponent : MonoBehaviour
              {
@@ -6375,7 +6375,7 @@
              }
              </code>
              </example>
-            
+
              <example>
              <para>Example using the <see cref="T:Sirenix.OdinInspector.Editor.OdinAttributeDrawer`1"/>.</para>
              <code>
@@ -6383,15 +6383,15 @@
              public class GUITintColorAttribute : System.Attribute
              {
                  public Color Color;
-            
+
                  public GUITintColorAttribute(float r, float g, float b, float a = 1)
                  {
                      this.Color = new Color(r, g, b, a);
                  }
              }
-            
+
              // Remember to wrap your custom attribute drawer within a #if UNITY_EDITOR condition, or locate the file inside an Editor folder.
-            
+
              public sealed class GUITintColorAttributeDrawer : OdinAttributeDrawer&lt;GUITintColorAttribute&gt;
              {
                  protected override void DrawPropertyLayout(GUIContent label)
@@ -6402,7 +6402,7 @@
                     GUI.color = prevColor;
                  }
              }
-            
+
              // Usage:
              public class MyComponent : MonoBehaviour
              {
@@ -6411,7 +6411,7 @@
              }
              </code>
              </example>
-            
+
              <example>
              <para>
              Odin uses multiple drawers to draw any given property, and the order in which these drawers are
@@ -6421,22 +6421,22 @@
              Each drawer can ether choose to draw the property or not, or pass on the responsibility to the
              next drawer by calling CallNextDrawer(), as the f attribute does in the example above.
              </para>
-            
+
              <para>
              This means that there is no guarantee that your drawer will be called, sins other drawers
              could have a higher priority than yours and choose not to call CallNextDrawer().
              </para>
-            
+
              <para>
              Note that Odin's <see cref="T:Sirenix.OdinInspector.Editor.DefaultDrawerChainResolver" /> has full support for generic class constraints,
              and if that is not enough, you can also add additional type constraints by overriding CanDrawTypeFilter
              </para>
-            
+
              <para>
              Also note that all custom property drawers needs to handle cases where the label provided by the DrawPropertyLayout is null,
              otherwise exceptions will be thrown when in cases where the label is hidden. For instance when [HideLabel] is used, or the property is drawn within a list where labels are also not shown.
              </para>
-            
+
              <code>
              [DrawerPriority(DrawerPriorityLevel.AttributePriority)]
              public sealed class MyCustomAttributeDrawer&lt;T&gt; : OdinAttributeDrawer&lt;MyCustomAttribute, T&gt; where T : class
@@ -6445,7 +6445,7 @@
                  {
                      return type != typeof(string);
                  }
-            
+
                  protected override void DrawPropertyLayout(GUIContent label)
                  {
                      // Draw property here.
@@ -6502,24 +6502,24 @@
              <para>
              Base class for all type specific attribute drawers. For non-type specific attribute drawers see <see cref="T:Sirenix.OdinInspector.Editor.OdinAttributeDrawer`2"/>.
              </para>
-            
+
              <para>
              Odin supports the use of GUILayout and takes care of undo for you. It also takes care of multi-selection
              in many simple cases. Checkout the manual for more information on handling multi-selection.
              </para>
-            
+
              <para>
              Also note that Odin does not require that your custom attribute inherits from Unity's PropertyAttribute.
              </para>
              </summary>
-             
+
              <typeparam name="TAttribute">The attribute that this drawer should be applied to.</typeparam>
              <typeparam name="TValue">The type of the value the drawer should be drawing. Note that Odin's <see cref="T:Sirenix.OdinInspector.Editor.DefaultDrawerChainResolver"/> has full support for generic constraints.</typeparam>
-            
+
              <remarks>
              Checkout the manual for more information.
              </remarks>
-            
+
              <example>
              <para>Example using the <see cref="T:Sirenix.OdinInspector.Editor.OdinAttributeDrawer`2"/>.</para>
              <code>
@@ -6528,16 +6528,16 @@
              {
                  public float Min;
                  public float Max;
-            
+
                  public CustomRangeAttribute(float min, float max)
                  {
                      this.Min = min;
                      this.Max = max;
                  }
              }
-            
+
              // Remember to wrap your custom attribute drawer within a #if UNITY_EDITOR condition, or locate the file inside an Editor folder.
-            
+
              public sealed class CustomRangeAttributeDrawer : OdinAttributeDrawer&lt;CustomRangeAttribute, float&gt;
              {
                  protected override void DrawPropertyLayout(GUIContent label)
@@ -6545,7 +6545,7 @@
                      this.ValueEntry.SmartValue = EditorGUILayout.Slider(label, this.ValueEntry.SmartValue, this.Attribute.Min, this.Attribute.Max);
                  }
              }
-            
+
              // Usage:
              public class MyComponent : MonoBehaviour
              {
@@ -6554,7 +6554,7 @@
              }
              </code>
              </example>
-            
+
              <example>
              <para>Example using the <see cref="T:Sirenix.OdinInspector.Editor.OdinAttributeDrawer`1"/>.</para>
              <code>
@@ -6562,15 +6562,15 @@
              public class GUITintColorAttribute : System.Attribute
              {
                  public Color Color;
-            
+
                  public GUITintColorAttribute(float r, float g, float b, float a = 1)
                  {
                      this.Color = new Color(r, g, b, a);
                  }
              }
-            
+
              // Remember to wrap your custom attribute drawer within a #if UNITY_EDITOR condition, or locate the file inside an Editor folder.
-            
+
              public sealed class GUITintColorAttributeDrawer : OdinAttributeDrawer&lt;GUITintColorAttribute&gt;
              {
                  protected override void DrawPropertyLayout(GUIContent label)
@@ -6581,7 +6581,7 @@
                     GUI.color = prevColor;
                  }
              }
-            
+
              // Usage:
              public class MyComponent : MonoBehaviour
              {
@@ -6590,7 +6590,7 @@
              }
              </code>
              </example>
-            
+
              <example>
              <para>
              Odin uses multiple drawers to draw any given property, and the order in which these drawers are
@@ -6600,22 +6600,22 @@
              Each drawer can ether choose to draw the property or not, or pass on the responsibility to the
              next drawer by calling CallNextDrawer(), as the GUITintColor attribute does in the example above.
              </para>
-            
+
              <para>
              This means that there is no guarantee that your drawer will be called, since other drawers
              could have a higher priority than yours and choose not to call CallNextDrawer().
              </para>
-            
+
              <para>
              Note that Odin's <see cref="T:Sirenix.OdinInspector.Editor.DefaultDrawerChainResolver" /> has full support for generic class constraints,
              and if that is not enough, you can also add additional type constraints by overriding CanDrawTypeFilter
              </para>
-            
+
              <para>
              Also note that all custom property drawers needs to handle cases where the label provided by the DrawPropertyLayout is null,
              otherwise exceptions will be thrown when in cases where the label is hidden. For instance when [HideLabel] is used, or the property is drawn within a list where labels are also not shown.
              </para>
-            
+
              <code>
              [DrawerPriority(DrawerPriorityLevel.AttributePriority)]
              public class MyCustomAttributeDrawer&lt;T&gt; : OdinAttributeDrawer&lt;MyCustomAttribute, T&gt; where T : class
@@ -6624,7 +6624,7 @@
                  {
                      return type != typeof(string);
                  }
-            
+
                  protected override void DrawPropertyLayout(GUIContent label)
                  {
                      // Draw property here.
@@ -6768,7 +6768,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.OdinDrawerExtensions.GetPersistentValue``1(Sirenix.OdinInspector.Editor.OdinDrawer,System.String,``0)">
             <summary>
-            Gets a persistent value that will survive past multiple Unity Editor Application sessions. 
+            Gets a persistent value that will survive past multiple Unity Editor Application sessions.
             The value is stored in the PersistentContextCache, which has a customizable max cache size.
             </summary>
         </member>
@@ -6793,7 +6793,7 @@
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.OdinEditor.OnDisable">
-            <summary>        
+            <summary>
             Called by Unity.
             </summary>
         </member>
@@ -6807,22 +6807,22 @@
              <para>
              Base class for all group drawers. Use this class to create your own custom group drawers. OdinGroupDrawer are used to group multiple properties together using an attribute.
              </para>
-            
+
              <para>
              Note that all box group attributes needs to inherit from the <see cref="T:Sirenix.OdinInspector.PropertyGroupAttribute"/>
              </para>
-            
+
              <para>
              Remember to provide your custom drawer with an <see cref="T:Sirenix.OdinInspector.Editor.OdinDrawerAttribute"/>
              in order for it to be located by the <see cref="!:DrawerLocator"/>.
              </para>
-            
+
              </summary>
-            
+
              <remarks>
              Checkout the manual for more information.
              </remarks>
-            
+
              <example>
              <code>
              [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
@@ -6832,9 +6832,9 @@
                  {
                  }
              }
-            
+
              // Remember to wrap your custom group drawer within a #if UNITY_EDITOR condition, or locate the file inside an Editor folder.
-            
+
              public class BoxGroupAttributeDrawer : OdinGroupDrawer&lt;MyBoxGroupAttribute&gt;
              {
                  protected override void DrawPropertyGroupLayout(InspectorProperty property, MyBoxGroupAttribute attribute, GUIContent label)
@@ -6847,16 +6847,16 @@
                      GUILayout.EndVertical();
                  }
              }
-            
+
              // Usage:
              public class MyComponent : MonoBehaviour
              {
                  [MyBoxGroup("MyGroup")]
                  public int A;
-            
+
                  [MyBoxGroup("MyGroup")]
                  public int B;
-            
+
                  [MyBoxGroup("MyGroup")]
                  public int C;
              }
@@ -6886,36 +6886,36 @@
              <para>
              Base class for all value drawers. Use this class to create your own custom drawers for any specific type.
              </para>
-            
+
              <para>
              Remember to provide your custom drawer with an <see cref="T:Sirenix.OdinInspector.Editor.OdinDrawerAttribute"/>
              in order for it to be located by the <see cref="!:DrawerLocator"/>.
              </para>
-            
+
              <para>
              Odin supports the use of GUILayout and takes care of undo for you. It also takes care of multi-selection
              in many simple cases. Checkout the manual for more information on handling multi-selection.
              </para>
              </summary>
-            
+
              <remarks>
              Checkout the manual for more information.
              </remarks>
-            
+
              <example>
              <code>
              public class MyCustomBaseType
              {
-            
+
              }
-            
+
              public class MyCustomType : MyCustomBaseType
              {
-            
+
              }
-            
+
              // Remember to wrap your custom attribute drawer within a #if UNITY_EDITOR condition, or locate the file inside an Editor folder.
-            
+
              public sealed class MyCustomBaseTypeDrawer&lt;T&gt; : OdinValueDrawer&lt;T&gt; where T : MyCustomBaseType
              {
                  protected override void DrawPropertyLayout(IPropertyValueEntry&lt;T&gt; entry, GUIContent label)
@@ -6924,18 +6924,18 @@
                      // Draw your custom drawer here using GUILayout and EditorGUILAyout.
                  }
              }
-            
+
              // Usage:
              // Both values will be drawn using the MyCustomBaseTypeDrawer
              public class MyComponent : SerializedMonoBehaviour
              {
                  public MyCustomBaseType A;
-            
+
                  public MyCustomType B;
              }
              </code>
              </example>
-            
+
              <example>
              <para>
              Odin uses multiple drawers to draw any given property, and the order in which these drawers are
@@ -6945,27 +6945,27 @@
              Each drawer can ether choose to draw the property or not, or pass on the responsibility to the
              next drawer by calling CallNextDrawer(). An example of this is provided in the documentation for <see cref="T:Sirenix.OdinInspector.Editor.OdinAttributeDrawer`2"/>.
              </para>
-            
+
              <para>
              This means that there is no guarantee that your drawer will be called, sins other drawers
              could have a higher priority than yours and choose not to call CallNextDrawer().
              </para>
-            
+
              <para>
              To avoid this, you can tell Odin, that your drawer is a PrependDecorator or an AppendDecorator drawer (see <see cref="!:OdinDrawerBehaviour"/>) as shown in the example shows below.
              Prepend and append decorators are always drawn and are also ordered by the <see cref="!:OdinDrawerBehaviour"/>.
              </para>
-            
+
              <para>
              Note that Odin's <see cref="!:DrawerLocator" /> have full support for generic class constraints,
              and if that is not enough, you can also add additional type constraints by overriding CanDrawTypeFilter(Type type).
              </para>
-            
+
              <para>
              Also note that all custom property drawers needs to handle cases where the label provided by the DrawPropertyLayout is null,
              otherwise exceptions will be thrown when in cases where the label is hidden. For instance when [HideLabel] is used, or the property is drawn within a list where labels are also not shown.
              </para>
-            
+
              <code>
              // [OdinDrawer(OdinDrawerBehaviour.DrawProperty)] // default
              // [OdinDrawer(OdinDrawerBehaviour.AppendDecorator)]
@@ -6977,7 +6977,7 @@
                  {
                      return type != typeof(SomeType);
                  }
-            
+
                  protected override void DrawPropertyLayout(IPropertyValueEntry&lt;T&gt; entry, GUIContent label)
                  {
                      T value = entry.SmartValue;
@@ -7133,7 +7133,7 @@
              </summary>
              <example>
              <code>
-            
+
              [AllowGUIEnabledForReadonly]
              public sealed class SomeDrawerDrawer&lt;T&gt; : OdinValueDrawer&lt;T&gt; where T : class
              {
@@ -7401,7 +7401,7 @@
              <para>The following example shows how DrawerPriority could be apply to a value drawer.</para>
              <code>
              [DrawerPriority(DrawerPriorityLevel.ValuePriority)]
-            
+
             	public sealed class MyIntDrawer : InspectorValuePropertyDrawer&lt;int&gt;
             	{
             		// ...
@@ -7412,7 +7412,7 @@
              <para>The following example shows how DrawerPriority is used to mark a custom int drawer as a high priority drawer.</para>
              <code>
              [DrawerPriority(1, 0, 0)]
-            
+
             	public sealed class MySpecialIntDrawer : InspectorValuePropertyDrawer&lt;int&gt;
             	{
             		// ...
@@ -7815,7 +7815,7 @@
                  {
                      T value = entry.SmartValue;
                      // Draw property here.
-            
+
                      // Optionally, call the next drawer in line.
                      this.CallNextDrawer(entry, label);
                  }
@@ -7902,7 +7902,7 @@
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.StringMemberHelper">
             <summary>
-            This class has been made fully obsolete, and has been replaced by <see cref="T:Sirenix.OdinInspector.Editor.ValueResolvers.ValueResolver" />. 
+            This class has been made fully obsolete, and has been replaced by <see cref="T:Sirenix.OdinInspector.Editor.ValueResolvers.ValueResolver" />.
             It was a helper class to handle strings for labels and other similar purposes.
             </summary>
         </member>
@@ -7937,7 +7937,7 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.StringMemberHelper.IsDynamicString">
             <summary>
-            Gets a value indicating whether or not the string is retrived from a from a member. 
+            Gets a value indicating whether or not the string is retrived from a from a member.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.StringMemberHelper.ObjectType">
@@ -8001,7 +8001,7 @@
              </summary>
              <example>
              <code>
-            
+
              public class MyCustomTypeDrawer&lt;T&gt; : OdinValueDrawer&lt;T&gt; where T : MyCustomBaseType
              {
                  protected override void DrawPropertyLayout(IPropertyValueEntry&lt;T&gt; entry, GUIContent label)
@@ -8129,10 +8129,10 @@
                  {
                      GetWindow&lt;SomeWindow&gt;().Show();
                  }
-            
+
                  [Button(ButtonSizes.Large)]
                  public void SomeButton() { }
-            
+
                  [TableList]
                  public SomeType[] SomeTableData;
              }
@@ -8147,7 +8147,7 @@
                  {
                      GetWindow&lt;DrawSomeSingletonInAnEditorWindow&gt;().Show();
                  }
-            
+
                  protected override object GetTarget()
                  {
                      return MySingleton.Instance;
@@ -8161,29 +8161,29 @@
              {
                  OdinEditorWindow.InspectObject(someObject);
              }
-            
+
              private void InspectObjectInDropDownWithAutoHeight()
              {
                  var btnRect = GUIHelper.GetCurrentLayoutRect();
                  OdinEditorWindow.InspectObjectInDropDown(someObject, btnRect, btnRect.width);
              }
-            
+
              private void InspectObjectInDropDown()
              {
                  var btnRect = GUIHelper.GetCurrentLayoutRect();
                  OdinEditorWindow.InspectObjectInDropDown(someObject, btnRect, new Vector2(btnRect.width, 100));
              }
-            
+
              private void InspectObjectInACenteredWindow()
              {
                  var window = OdinEditorWindow.InspectObject(someObject);
                  window.position = GUIHelper.GetEditorWindowRect().AlignCenter(270, 200);
              }
-            
+
              private void OtherStuffYouCanDo()
              {
                  var window = OdinEditorWindow.InspectObject(this.someObject);
-            
+
                  window.position = GUIHelper.GetEditorWindowRect().AlignCenter(270, 200);
                  window.titleContent = new GUIContent("Custom title", EditorIcons.RulerRect.Active);
                  window.OnClose += () => Debug.Log("Window Closed");
@@ -8406,7 +8406,7 @@
              {
                  [SerializeField, HideLabel]
                  private SomeData someData = new SomeData();
-            
+
                  protected override OdinMenuTree BuildMenuTree()
                  {
                      OdinMenuTree tree = new OdinMenuTree(supportsMultiSelect: true)
@@ -8418,22 +8418,22 @@
                          { "Camera current",                 Camera.current                                          },
                          { "Some Class",                     this.someData                                           }
                      };
-            
+
                      tree.AddAllAssetsAtPath("More Odin Settings", SirenixAssetPaths.OdinEditorConfigsPath, typeof(ScriptableObject), true)
                          .AddThumbnailIcons();
-            
+
                      tree.AddAssetAtPath("Odin Getting Started", SirenixAssetPaths.SirenixPluginPath + "Getting Started With Odin.asset");
-            
+
                      var customMenuItem = new OdinMenuItem(tree, "Menu Style", tree.DefaultMenuStyle);
                      tree.MenuItems.Insert(2, customMenuItem);
-            
+
                      tree.Add("Menu/Items/Are/Created/As/Needed", new GUIContent());
                      tree.Add("Menu/Items/Are/Created", new GUIContent("And can be overridden"));
-            
+
                      // As you can see, Odin provides a few ways to quickly add editors / objects to your menu tree.
                      // The API also gives you full control over the selection, etc..
                      // Make sure to check out the API Documentation for OdinMenuEditorWindow, OdinMenuTree and OdinMenuItem for more information on what you can do!
-            
+
                      return tree;
                  }
              }
@@ -8943,15 +8943,15 @@
                 { "Camera current",                 Camera.current                                          },
                 { "Some Class",                     this.someData                                           }
             };
-            
+
             tree.AddAllAssetsAtPath("Some Menu Item", "Some Asset Path", typeof(ScriptableObject), true)
                 .AddThumbnailIcons();
-            
+
             tree.AddAssetAtPath("Some Second Menu Item", "SomeAssetPath/SomeAssetFile.asset");
-            
+
             var customMenuItem = new OdinMenuItem(tree, "Menu Style", tree.DefaultMenuStyle);
             tree.MenuItems.Insert(2, customMenuItem);
-            
+
             tree.Add("Menu/Items/Are/Created/As/Needed", new GUIContent());
             tree.Add("Menu/Items/Are/Created", new GUIContent("And can be overridden"));
             </code>
@@ -9185,13 +9185,13 @@
         </member>
         <member name="F:Sirenix.OdinInspector.Editor.OdinMenuTreeDrawingConfig.ConfirmSlecectionOnDoubleClick">
             <summary>
-            By default, the MenuTree.Selection is confirmed when menu items are double clicked, 
+            By default, the MenuTree.Selection is confirmed when menu items are double clicked,
             Set this to false if you don't want that behaviour.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.OdinMenuTreeDrawingConfig.ConfirmSelectionOnDoubleClick">
             <summary>
-            By default, the MenuTree.Selection is confirmed when menu items are double clicked, 
+            By default, the MenuTree.Selection is confirmed when menu items are double clicked,
             Set this to false if you don't want that behaviour.
             </summary>
         </member>
@@ -9239,7 +9239,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.OdinMenuTreeExtensions.AddAllAssetsAtPathCombined(Sirenix.OdinInspector.Editor.OdinMenuTree,System.String,System.String,System.Type,System.Boolean)">
             <summary>
-            Adds all asset instances from the specified path and type into a single <see cref="T:Sirenix.OdinInspector.Editor.OdinMenuItem"/> at the specified menu item path, and returns all menu items created in order to add the menuItem at the specified path.. 
+            Adds all asset instances from the specified path and type into a single <see cref="T:Sirenix.OdinInspector.Editor.OdinMenuItem"/> at the specified menu item path, and returns all menu items created in order to add the menuItem at the specified path..
             </summary>
             <param name="tree">The tree.</param>
             <param name="menuPath">The menu item path.</param>
@@ -9517,7 +9517,7 @@
              <example>
              <code>
              KeyCode someEnumValue;
-            
+
              [OnInspectorGUI]
              void OnInspectorGUI()
              {
@@ -9529,14 +9529,14 @@
                      selector.SelectionConfirmed += selection =&gt; this.someEnumValue = selection.FirstOrDefault();
                      selector.ShowInPopup(); // Returns the Odin Editor Window instance, in case you want to mess around with that as well.
                  }
-            
+
                  // Draw an enum dropdown field which uses the EnumSelector popup:
                  this.someEnumValue = EnumSelector&lt;KeyCode&gt;.DrawEnumField(new GUIContent("My Label"), this.someEnumValue);
              }
-            
+
              // All Odin Selectors can be rendered anywhere with Odin. This includes the EnumSelector.
              EnumSelector&lt;KeyCode&gt; inlineSelector;
-            
+
              [ShowInInspector]
              EnumSelector&lt;KeyCode&gt; InlineSelector
              {
@@ -9610,13 +9610,13 @@
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.GenericSelector`1">
             <summary>
-            In simple one-off use cases, making a custom OdinSelector might not be needed, as the GenericSelecor 
+            In simple one-off use cases, making a custom OdinSelector might not be needed, as the GenericSelecor
             can be populated with anything and customized a great deal.
             </summary>
             <example>
             <code>
             SomeType someValue;
-            
+
             [OnInspectorGUI]
             void OnInspectorGUI()
             {
@@ -9747,30 +9747,30 @@
             {
                 private readonly List&lt;SomeType&gt; source;
                 private readonly bool supportsMultiSelect;
-            
+
                 public MySelector(List&lt;SomeType&gt; source, bool supportsMultiSelect)
                 {
                     this.source = source;
                     this.supportsMultiSelect = supportsMultiSelect;
                 }
-            
+
                 protected override void BuildSelectionTree(OdinMenuTree tree)
                 {
                     tree.Config.DrawSearchToolbar = true;
                     tree.Selection.SupportsMultiSelect = this.supportsMultiSelect;
-                    
+
                     tree.Add("Defaults/None", null);
                     tree.Add("Defaults/A", new SomeType());
                     tree.Add("Defaults/B", new SomeType());
-            
+
                     tree.AddRange(this.source, x =&gt; x.Path, x =&gt; x.SomeTexture);
                 }
-            
+
                 [OnInspectorGUI]
                 private void DrawInfoAboutSelectedItem()
                 {
                     SomeType selected = this.GetCurrentSelection().FirstOrDefault();
-            
+
                     if (selected != null)
                     {
                         GUILayout.Label("Name: " + selected.Name);
@@ -9787,17 +9787,17 @@
                 {
                     List&lt;SomeType&gt; source = this.GetListOfThingsToSelectFrom();
                     MySelector selector = new MySelector(source, false);
-            
+
                     selector.SetSelection(this.someValue);
-            
+
                     selector.SelectionCancelled += () =&gt; { };  // Occurs when the popup window is closed, and no slection was confirmed.
                     selector.SelectionChanged += col =&gt; { };
                     selector.SelectionConfirmed += col =&gt; this.someValue = col.FirstOrDefault();
-            
+
                     selector.ShowInPopup(); // Returns the Odin Editor Window instance, in case you want to mess around with that as well.
                 }
             }
-            
+
             // All Odin Selectors can be rendered anywhere with Odin.
             [ShowInInspector]
             MySelector inlineSelector;
@@ -9918,7 +9918,7 @@
         <member name="M:Sirenix.OdinInspector.Editor.OdinSelector`1.DefaultWindowWidth">
             <summary>
             When ShowInPopup is called, without a specifed window width, this methods gets called.
-            Here you can calculate and give a good default width for the popup. 
+            Here you can calculate and give a good default width for the popup.
             The default implementation returns 0, which will let the popup window determain the width itself. This is usually a fixed value.
             </summary>
         </member>
@@ -9984,7 +9984,7 @@
              <example>
              <code>
              Type[] selectedTypes;
-            
+
              void OnGUI()
              {
                  // Use the selector manually. See the documentation for OdinSelector for more information.
@@ -10010,12 +10010,12 @@
                  selector.ShowInPopup(rect);
                  return selector;
              };
-             
+
              public static Type DrawTypeSelectorDropdown(GUIContent label, Type selectedType, IEnumerable&lt;Type&gt; source)
              {
                  currentSource = source;
                  currentSelectedType = selectedType;
-             
+
                  var dropdownText = selectedType == null ? "None" : selectedType.GetNiceName();
                  var selected = TypeSelector.DrawSelectorDropdown(label, dropdownText, createTypeSelector);
                  if (selected != null &amp;&amp; selected.Any())
@@ -10432,7 +10432,7 @@
             <summary>
             Put this attribute on a validator class to prevent the ValidatorDrawer from running that validator in the inspector.
             Typically you would use this for a validation-related attribute that has its own, complex custom drawer that should
-            handle the validation and error/warning drawing while the inspector is being drawn, but still needs a validator to 
+            handle the validation and error/warning drawing while the inspector is being drawn, but still needs a validator to
             run for the project validation scans.
             </summary>
         </member>
@@ -10445,7 +10445,7 @@
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.Validation.ValidationSetup">
             <summary>
-            Use <see cref="M:Sirenix.OdinInspector.Editor.Validation.Validator.InitializeResult(Sirenix.OdinInspector.Editor.Validation.ValidationResult@)"/> to initialize an empty <see cref="T:Sirenix.OdinInspector.Editor.Validation.ValidationResult"/>. 
+            Use <see cref="M:Sirenix.OdinInspector.Editor.Validation.Validator.InitializeResult(Sirenix.OdinInspector.Editor.Validation.ValidationResult@)"/> to initialize an empty <see cref="T:Sirenix.OdinInspector.Editor.Validation.ValidationResult"/>.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.ValueResolvers.RegisterDefaultValueResolverCreatorAttribute">
@@ -10501,7 +10501,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.ValueResolvers.ValueResolver.GetFromContextWeak(Sirenix.OdinInspector.Editor.ValueResolvers.ValueResolverContext@)">
             <summary>
-            Creates a new value resolver instance from a pre-built context struct, in a weakly typed fashion, though the result 
+            Creates a new value resolver instance from a pre-built context struct, in a weakly typed fashion, though the result
             is the same as using a strongly typed generic overload. This is a more advanced use that requires you to
             know how the context needs to be set up before value resolution happens. However, this allows you to do more advanced
             things like adjust various context values before string resolution happens.

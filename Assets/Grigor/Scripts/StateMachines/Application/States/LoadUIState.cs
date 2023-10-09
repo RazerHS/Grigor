@@ -1,7 +1,7 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using UnityEngine;
-using Grigor.Addressables;
+using RazerCore.Utils.Addressables;
 
 namespace Grigor.StateMachines.Application.States
 {

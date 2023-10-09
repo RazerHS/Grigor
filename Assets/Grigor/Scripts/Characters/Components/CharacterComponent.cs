@@ -1,17 +1,29 @@
 ﻿using CardboardCore.DI;
+using UnityEngine;
 
 namespace Grigor.Characters.Components
 {
-    public abstract class CharacterComponent : CardboardCoreBehaviour
+    public abstract class CharacterComponent : MonoBehaviour
     {
-        protected override InjectTiming MyInjectTiming => InjectTiming.Start;
+        protected bool IsPaused;
+        protected Character Character;
 
-        public CharacterController Owner { get; private set; }
-        public bool IsPaused { get; private set; }
+        public Character Owner { get; private set; }
 
-        public void Initialize(CharacterController character)
+        public void Initialize(Character character)
         {
+            Injector.Inject(this);
+
             Owner = character;
+
+            OnInitialized();
+        }
+
+        public void Dispose()
+        {
+            OnDisposed();
+
+            Injector.Release(this);
         }
 
         public void Pause()
@@ -23,5 +35,13 @@ namespace Grigor.Characters.Components
         {
             IsPaused = false;
         }
+
+        protected virtual void OnInitialized() { }
+
+        protected virtual void OnDisposed() { }
+    }
+
+    public class PlayerCharacter
+    {
     }
 }
