@@ -8,18 +8,18 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: New Lighting Settings
   serializedVersion: 7
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_EnableBakedLightmaps: 1
-  m_EnableRealtimeLightmaps: 1
+  m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
   m_BounceScale: 1
   m_AlbedoBoost: 1
   m_IndirectOutputScale: 1
   m_UsingShadowmask: 1
   m_BakeBackend: 2
-  m_LightmapMaxSize: 32
-  m_LightmapSizeFixed: 0
-  m_BakeResolution: 1
+  m_LightmapMaxSize: 512
+  m_LightmapSizeFixed: 1
+  m_BakeResolution: 40
   m_Padding: 2
   m_LightmapCompression: 3
   m_AO: 1
