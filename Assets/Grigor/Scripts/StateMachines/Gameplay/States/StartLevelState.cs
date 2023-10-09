@@ -11,24 +11,24 @@ namespace Grigor.StateMachines.Gameplay.States
 {
     public class StartLevelState : State
     {
-        [Inject] private SpawnPointManager spawnPointManager;
+        [Inject] private RoomRegistry roomRegistry;
         [Inject] private CharacterRegistry characterRegistry;
         [Inject] private InteractablesRegistry interactablesRegistry;
         [Inject] private UIManager uiManager;
 
         private DataPodWidget dataPodWidget;
         private TimeOfDayToggleWidget timeOfDayToggleWidget;
+        private ToggleMindPalaceWidget toggleMindPalaceWidget;
 
         protected override void OnEnter()
         {
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
             timeOfDayToggleWidget = uiManager.ShowWidget<TimeOfDayToggleWidget>();
+            toggleMindPalaceWidget = uiManager.ShowWidget<ToggleMindPalaceWidget>();
 
             interactablesRegistry.EnableInteractables();
 
-            Vector3 spawnPosition = spawnPointManager.GetSpawnPoint(SpawnPointLocation.Start).SpawnPosition;
-
-            characterRegistry.Player.Movement.MovePlayerTo(spawnPosition);
+            roomRegistry.MovePlayerToRoom(RoomName.Start, characterRegistry.Player);
 
             characterRegistry.Player.StartStateMachine();
 

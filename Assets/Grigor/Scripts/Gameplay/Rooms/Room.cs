@@ -6,24 +6,39 @@ namespace Grigor.Gameplay.Rooms
 {
     public class Room : CardboardCoreBehaviour
     {
-        [SerializeField] private RoomNames roomName;
+        [SerializeField] private RoomName roomName;
+        [SerializeField] private Transform spawnPoint;
+        [SerializeField] private GameObject roomView;
 
         [Inject] private RoomRegistry roomRegistry;
 
+        public Transform SpawnPoint => spawnPoint;
+        public RoomName RoomName => roomName;
+
         public LightingController Lighting { get; private set; }
-        public SpawnPoint SpawnPoint { get; private set; }
 
         protected override void OnInjected()
         {
             Lighting = GetComponent<LightingController>();
-            SpawnPoint = GetComponent<SpawnPoint>();
 
             roomRegistry.Register(roomName, this);
+
+            roomView.SetActive(false);
         }
 
         protected override void OnReleased()
         {
             roomRegistry.Unregister(roomName);
+        }
+
+        public void EnterRoom()
+        {
+            roomView.SetActive(true);
+        }
+
+        public void ExitRoom()
+        {
+            roomView.SetActive(false);
         }
     }
 }

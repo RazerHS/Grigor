@@ -1,7 +1,7 @@
 ﻿using CardboardCore.DI;
 using Grigor.Characters;
-using Grigor.Characters.Components;
-using Grigor.Characters.Components.Player;
+using Grigor.UI;
+using Grigor.UI.Widgets;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Rooms
@@ -11,17 +11,22 @@ namespace Grigor.Gameplay.Rooms
     {
         [Inject] private RoomRegistry roomRegistry;
         [Inject] private CharacterRegistry characterRegistry;
+        [Inject] private UIManager uiManager;
 
-        private Vector3 previousPositionInMindPalace;
-        private Vector3 previousPositionInOverworld;
+        private bool insideMindPalace;
+        private TransitionScreenWidget transitionScreenWidget;
+        private RoomName previousRoom;
 
-        private Player player;
+        private Vector3 previousMindPalacePosition;
+        private Vector3 previousOverworldPosition;
         private Room mindPalaceRoom;
+
+        public bool InsideMindPalace => insideMindPalace;
 
         protected override void OnInjected()
         {
-            player = characterRegistry.Player;
-            mindPalaceRoom = roomRegistry.GetRoom(RoomNames.MindPalace);
+            transitionScreenWidget = uiManager.GetWidget<TransitionScreenWidget>();
+            mindPalaceRoom = roomRegistry.GetRoom(RoomName.MindPalace);
         }
 
         protected override void OnReleased()
@@ -29,16 +34,28 @@ namespace Grigor.Gameplay.Rooms
 
         }
 
-        public void EnterMindPalace(Vector3 overworldPosition)
+        public void EnterMindPalace()
         {
-            if (previousPositionInMindPalace == Vector3.zero)
-            {
-                previousPositionInMindPalace = mindPalaceRoom.SpawnPoint.SpawnPosition;
-            }
+            insideMindPalace = true;
 
+            // transitionScreenWidget.Show();
 
+            previousOverworldPosition = characterRegistry.Player.Movement.transform.position;
 
-            previousPositionInOverworld = overworldPosition;
+            previousRoom = roomRegistry.GetCurrentRoomName();
+
+            Vector3 spawnPosition = previousMindPalacePosition == Vector3.zero ? mindPalaceRoom.SpawnPoint.position : previousMindPalacePosition;
+
+            roomRegistry.MovePlayerToRoom(RoomName.MindPalace, characterRegistry.Player, spawnPosition);
+        }
+
+        public void ExitMindPalace()
+        {
+            insideMindPalace = false;
+
+            transitionScreenWidget.Show();
+
+            roomRegistry.MovePlayerToRoom(previousRoom, characterRegistry.Player, previousOverworldPosition);
         }
     }
 }
