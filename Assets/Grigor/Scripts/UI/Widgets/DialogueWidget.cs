@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using Articy.Unity;
-using Articy.Unity.Interfaces;
-using CardboardCore.Utilities;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Grigor.UI.Widgets
