@@ -31,6 +31,8 @@ namespace Grigor.Input
         public event Action JumpInputStartedEvent;
         public event Action JumpInputCanceledEvent;
 
+        public event Action SkipInputStartedEvent;
+        public event Action SkipInputCanceledEvent;
 
         private void Awake()
         {
@@ -52,6 +54,27 @@ namespace Grigor.Input
 
             playerInputActions.Player.Jump.started += OnJumpInputStarted;
             playerInputActions.Player.Jump.canceled += OnJumpInputCanceled;
+
+            playerInputActions.Player.Skip.started += OnSkipInputStarted;
+            playerInputActions.Player.Skip.canceled += OnSkipInputCanceled;
+        }
+
+        private void OnDisable()
+        {
+            playerInputActions.Player.Move.started -= OnMoveInputStarted;
+            playerInputActions.Player.Move.canceled -= OnMoveInputCanceled;
+
+            playerInputActions.Player.Interact.started -= OnInteractInputStarted;
+            playerInputActions.Player.Interact.canceled -= OnInteractInputCanceled;
+
+            playerInputActions.Player.Look.started -= OnLookInputStarted;
+            playerInputActions.Player.Look.canceled -= OnLookInputCanceled;
+
+            playerInputActions.Player.Jump.started -= OnJumpInputStarted;
+            playerInputActions.Player.Jump.canceled -= OnJumpInputCanceled;
+
+            playerInputActions.Player.Skip.started -= OnSkipInputStarted;
+            playerInputActions.Player.Skip.canceled -= OnSkipInputCanceled;
         }
 
         private void Update()
@@ -115,6 +138,16 @@ namespace Grigor.Input
         private void OnJumpInputCanceled(InputAction.CallbackContext context)
         {
             JumpInputCanceledEvent?.Invoke();
+        }
+
+        private void OnSkipInputStarted(InputAction.CallbackContext context)
+        {
+            SkipInputStartedEvent?.Invoke();
+        }
+
+        private void OnSkipInputCanceled(InputAction.CallbackContext context)
+        {
+            SkipInputCanceledEvent?.Invoke();
         }
     }
 }
