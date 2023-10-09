@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Articy.ManiacManfred;
+using Articy.GrigorArticy;
 using Articy.Unity;
 using Articy.Unity.Interfaces;
 using CardboardCore.DI;
