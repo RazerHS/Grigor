@@ -48,13 +48,13 @@ namespace Grigor.Gameplay.Rooms
             {
                 previousRoom = currentRoom;
 
-                previousRoom.ExitRoom();
+                previousRoom.DisableRoom();
                 previousRoomPosition = player.Movement.transform.position;
             }
 
             currentRoom = room;
 
-            currentRoom.EnterRoom();
+            currentRoom.EnableRoom();
 
             Vector3 spawnPosition = position == Vector3.zero ? currentRoom.SpawnPoint.position : position;
             player.Movement.MovePlayerTo(spawnPosition);
@@ -63,6 +63,14 @@ namespace Grigor.Gameplay.Rooms
         public RoomName GetCurrentRoomName()
         {
             return currentRoom.RoomName;
+        }
+
+        public void DisableAllRooms()
+        {
+            foreach (Room room in rooms.Values)
+            {
+                room.DisableRoom();
+            }
         }
     }
 }

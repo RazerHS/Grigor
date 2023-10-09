@@ -23,13 +23,15 @@ namespace Grigor.Gameplay.Interacting.Components
             {
                 throw Log.Exception($"Clue object is not set in interactable {name}!");
             }
+
+            RegisterClueListener();
         }
 
         protected override void OnInteractEffect()
         {
             if (clueFound)
             {
-                clueObject.DOMoveY(moveObjectByY, 1f).SetEase(Ease.OutBounce);
+                clueObject.DOLocalMoveY(moveObjectByY, 1f).SetEase(Ease.Linear);
             }
 
             EndInteract();
@@ -43,6 +45,8 @@ namespace Grigor.Gameplay.Interacting.Components
             }
 
             clueFound = true;
+
+            Log.Write($"Clue object enabled for interactable <b>{name}</b> in mind palace!");
         }
 
         public void RegisterClueListener()

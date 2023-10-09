@@ -27,6 +27,7 @@ namespace Grigor.StateMachines.Gameplay.States
             toggleMindPalaceWidget = uiManager.ShowWidget<ToggleMindPalaceWidget>();
 
             interactablesRegistry.EnableInteractables();
+            roomRegistry.DisableAllRooms();
 
             roomRegistry.MovePlayerToRoom(RoomName.Start, characterRegistry.Player);
 

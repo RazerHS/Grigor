@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 243.14078, g: 180.81837, b: 173.32619, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1493,6 +1493,40 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1062225780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8695627752259887005, guid: 93b60069e569283459cfc9ab93ae73f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2256716801469895614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1062225785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062225780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  credentialToFind: 0
+--- !u!114 &1062225786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062225780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  singleUse: 0
+  clue: {fileID: 1062225785}
 --- !u!1 &1081654094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,6 +2368,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 625646793177069183, guid: 93b60069e569283459cfc9ab93ae73f8,
+        type: 3}
+      propertyPath: interactableComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 625646793177069183, guid: 93b60069e569283459cfc9ab93ae73f8,
+        type: 3}
+      propertyPath: 'interactableComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1062225786}
+    - target: {fileID: 625646793177069183, guid: 93b60069e569283459cfc9ab93ae73f8,
+        type: 3}
+      propertyPath: 'interactableComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1062225786}
     - target: {fileID: 1135229915212627998, guid: 93b60069e569283459cfc9ab93ae73f8,
         type: 3}
       propertyPath: timeOfDay
@@ -2494,10 +2543,19 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.8141641
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3327773643807586088, guid: 93b60069e569283459cfc9ab93ae73f8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8695627752259887005, guid: 93b60069e569283459cfc9ab93ae73f8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1062225786}
+    - targetCorrespondingSourceObject: {fileID: 8695627752259887005, guid: 93b60069e569283459cfc9ab93ae73f8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1062225785}
   m_SourcePrefab: {fileID: 100100000, guid: 93b60069e569283459cfc9ab93ae73f8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

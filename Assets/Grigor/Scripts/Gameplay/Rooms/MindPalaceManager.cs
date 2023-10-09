@@ -17,7 +17,6 @@ namespace Grigor.Gameplay.Rooms
         private TransitionScreenWidget transitionScreenWidget;
         private RoomName previousRoom;
 
-        private Vector3 previousMindPalacePosition;
         private Vector3 previousOverworldPosition;
         private Room mindPalaceRoom;
 
@@ -44,9 +43,7 @@ namespace Grigor.Gameplay.Rooms
 
             previousRoom = roomRegistry.GetCurrentRoomName();
 
-            Vector3 spawnPosition = previousMindPalacePosition == Vector3.zero ? mindPalaceRoom.SpawnPoint.position : previousMindPalacePosition;
-
-            roomRegistry.MovePlayerToRoom(RoomName.MindPalace, characterRegistry.Player, spawnPosition);
+            roomRegistry.MovePlayerToRoom(RoomName.MindPalace, characterRegistry.Player);
         }
 
         public void ExitMindPalace()

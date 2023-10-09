@@ -22,8 +22,6 @@ namespace Grigor.Gameplay.Rooms
             Lighting = GetComponent<LightingController>();
 
             roomRegistry.Register(roomName, this);
-
-            roomView.SetActive(false);
         }
 
         protected override void OnReleased()
@@ -31,12 +29,12 @@ namespace Grigor.Gameplay.Rooms
             roomRegistry.Unregister(roomName);
         }
 
-        public void EnterRoom()
+        public void EnableRoom()
         {
             roomView.SetActive(true);
         }
 
-        public void ExitRoom()
+        public void DisableRoom()
         {
             roomView.SetActive(false);
         }
