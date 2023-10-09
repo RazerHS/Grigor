@@ -1,19 +1,27 @@
-﻿using CardboardCore.Utilities;
-using Grigor.Utils;
+﻿using Articy.Unity;
+using CardboardCore.DI;
+using Grigor.Gameplay.Dialogue;
+using UnityEngine;
 
 namespace Grigor.Gameplay.Interacting.Components
 {
     public class DialogueInteractable : InteractableComponent
     {
+        [SerializeField] private ArticyReference dialogueNode;
+
+        [Inject] private DialogueController dialogueController;
+
         protected override void OnInteractEffect()
         {
-            Log.Write("dialogue");
+            dialogueController.StartDialogue(dialogueNode.reference.GetObject());
 
-            Helper.Delay(2f, OnEndDelay);
+            dialogueController.DialogueEndedEvent += OnDialogueEnded;
         }
 
-        private void OnEndDelay()
+        private void OnDialogueEnded()
         {
+            dialogueController.DialogueEndedEvent -= OnDialogueEnded;
+
             EndInteract();
         }
     }
