@@ -2,6 +2,7 @@
 using Grigor.Characters;
 using Grigor.UI;
 using Grigor.UI.Widgets;
+using Grigor.Utils;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Rooms
@@ -14,7 +15,7 @@ namespace Grigor.Gameplay.Rooms
         [Inject] private UIManager uiManager;
 
         private bool insideMindPalace;
-        private TransitionScreenWidget transitionScreenWidget;
+        private TransitionWidget transitionWidget;
         private RoomName previousRoom;
 
         private Vector3 previousOverworldPosition;
@@ -24,7 +25,7 @@ namespace Grigor.Gameplay.Rooms
 
         protected override void OnInjected()
         {
-            transitionScreenWidget = uiManager.GetWidget<TransitionScreenWidget>();
+            transitionWidget = uiManager.GetWidget<TransitionWidget>();
             mindPalaceRoom = roomRegistry.GetRoom(RoomName.MindPalace);
         }
 
@@ -37,20 +38,31 @@ namespace Grigor.Gameplay.Rooms
         {
             insideMindPalace = true;
 
-            // transitionScreenWidget.Show();
+            transitionWidget.Show();
+
+            characterRegistry.Player.Movement.DisableMovement();
+            characterRegistry.Player.Interact.DisableInteract();
 
             previousOverworldPosition = characterRegistry.Player.Movement.transform.position;
 
             previousRoom = roomRegistry.GetCurrentRoomName();
 
+            Helper.Delay(transitionWidget.TransitionDuration, OnTransitionFinished);
+        }
+
+        private void OnTransitionFinished()
+        {
             roomRegistry.MovePlayerToRoom(RoomName.MindPalace, characterRegistry.Player);
+
+            characterRegistry.Player.Movement.EnableMovement();
+            characterRegistry.Player.Interact.EnableInteract();
         }
 
         public void ExitMindPalace()
         {
             insideMindPalace = false;
 
-            transitionScreenWidget.Show();
+            transitionWidget.Show();
 
             roomRegistry.MovePlayerToRoom(previousRoom, characterRegistry.Player, previousOverworldPosition);
         }

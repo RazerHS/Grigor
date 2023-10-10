@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 458.17023, g: 330.3787, b: 317.82083, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2018,7 +2018,7 @@ PrefabInstance:
     - target: {fileID: 2646302247201241316, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3798
+      value: 3804
       objectReference: {fileID: 0}
     - target: {fileID: 2822024902797715728, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
@@ -2028,7 +2028,7 @@ PrefabInstance:
     - target: {fileID: 2822024902797715728, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3804
+      value: 3810
       objectReference: {fileID: 0}
     - target: {fileID: 3251383362486448858, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
@@ -2048,7 +2048,7 @@ PrefabInstance:
     - target: {fileID: 4662820053418596183, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3801
+      value: 3807
       objectReference: {fileID: 0}
     - target: {fileID: 5309412569074331465, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
@@ -2123,7 +2123,7 @@ PrefabInstance:
     - target: {fileID: 6126038454853479115, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3807
+      value: 3813
       objectReference: {fileID: 0}
     - target: {fileID: 6226609773750019813, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
@@ -2143,7 +2143,7 @@ PrefabInstance:
     - target: {fileID: 7332594666152080231, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3804
+      value: 3810
       objectReference: {fileID: 0}
     - target: {fileID: 7460720824721729479, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
@@ -2168,7 +2168,7 @@ PrefabInstance:
     - target: {fileID: 9013883349019084589, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3807
+      value: 3813
       objectReference: {fileID: 0}
     - target: {fileID: 9032222567693249268, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
@@ -2188,7 +2188,7 @@ PrefabInstance:
     - target: {fileID: 9195833852775810543, guid: b82cb8827678b1443943e452b05d44a0,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3804
+      value: 3810
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

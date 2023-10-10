@@ -131,5 +131,11 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             interactable.InteractEvent -= OnInteract;
         }
+
+        protected void ResetInteraction()
+        {
+            EnableInteraction();
+            interactable.ResetInteractable();
+        }
     }
 }

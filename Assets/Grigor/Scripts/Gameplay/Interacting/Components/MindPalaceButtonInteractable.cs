@@ -29,12 +29,16 @@ namespace Grigor.Gameplay.Interacting.Components
 
         protected override void OnInteractEffect()
         {
+            EndInteract();
+
             if (clueFound)
             {
                 clueObject.DOLocalMoveY(moveObjectByY, 1f).SetEase(Ease.Linear);
+
+                return;
             }
 
-            EndInteract();
+            ResetInteraction();
         }
 
         public void OnClueFound(CredentialType credentialType)

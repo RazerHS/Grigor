@@ -163,5 +163,10 @@ namespace Grigor.Gameplay.Interacting
 
             interactableComponents.ForEach(interactableComponent => interactableComponent.Dispose());
         }
+
+        public void ResetInteractable()
+        {
+            interactingEnabled = true;
+        }
     }
 }
