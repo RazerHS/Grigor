@@ -1,4 +1,5 @@
 ﻿using CardboardCore.DI;
+using DG.Tweening;
 using Grigor.Input;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -23,12 +24,11 @@ namespace Grigor.Characters.Components.Player
 
         private Vector3 moveDirection;
         private Vector3 verticalVelocity;
-
-        private UnityEngine.CharacterController characterController;
+        private CharacterController characterController;
 
         protected override void OnInitialized()
         {
-            characterController = GetComponent<UnityEngine.CharacterController>();
+            characterController = GetComponent<CharacterController>();
 
             playerInput.MoveInputStartedEvent += OnMoveInputStarted;
             playerInput.MoveInputCanceledEvent += OnMoveInputCanceled;
@@ -137,7 +137,7 @@ namespace Grigor.Characters.Components.Player
 
         public void MovePlayerTo(Vector3 position)
         {
-            transform.position = position;
+            transform.DOMove(position, 0f);
         }
     }
 }

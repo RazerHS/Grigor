@@ -78,7 +78,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -107,7 +107,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4684646805869797167}
   - component: {fileID: 9098895124421595720}
-  - component: {fileID: 6265168711999025995}
   - component: {fileID: 8229332086301630505}
   m_Layer: 0
   m_Name: Room
@@ -146,20 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: 0
---- !u!114 &6265168711999025995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4804722803535815357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0bd8105ce3e452ab7152131aa94562a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPointLocation: 0
-  spawnPointTransform: {fileID: 7582629385001014957}
+  spawnPoint: {fileID: 7582629385001014957}
+  roomView: {fileID: 2326387235009276771}
 --- !u!114 &8229332086301630505
 MonoBehaviour:
   m_ObjectHideFlags: 0

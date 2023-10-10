@@ -4,6 +4,7 @@ using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting.Components;
+using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace Grigor.Gameplay.Interacting
         [SerializeField] private float interactDistance = 3f;
         [SerializeField] private bool isBox;
 
-        [SerializeField, HideInInspector] private bool interactingEnabled;
+        [SerializeField, ColoredBoxGroup("Debugging", false, 0.5f, 0.1f, 0.2f)] private bool interactingEnabled;
 
         [SerializeField] private List<InteractableComponent> interactableComponents;
 
@@ -161,6 +162,11 @@ namespace Grigor.Gameplay.Interacting
             interactingEnabled = false;
 
             interactableComponents.ForEach(interactableComponent => interactableComponent.Dispose());
+        }
+
+        public void ResetInteractable()
+        {
+            interactingEnabled = true;
         }
     }
 }

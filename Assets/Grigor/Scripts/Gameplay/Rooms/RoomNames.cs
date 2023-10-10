@@ -1,7 +1,8 @@
 ﻿namespace Grigor.Gameplay.Rooms
 {
-    public enum RoomNames
+    public enum RoomName
     {
         Start,
+        MindPalace
     }
 }
