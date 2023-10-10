@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Articy.GrigorArticy;
+// using Articy.GrigorArticy;
 using Articy.Unity;
 using Articy.Unity.Interfaces;
 using CardboardCore.DI;
@@ -49,22 +49,22 @@ namespace Grigor.Gameplay.Dialogue
             return text.Text;
         }
 
-        private string GetSpeaker(IFlowObject flowObject)
-        {
-            if (flowObject is not IObjectWithSpeaker speaker)
-            {
-                throw Log.Exception($"Flow object {flowObject} does not have a speaker!");
-            }
-
-            Entity speakerEntity = speaker.Speaker as Entity;
-
-            if (speakerEntity == null)
-            {
-                throw Log.Exception($"Speaker {speaker.Speaker} is not an entity!");
-            }
-
-            return speakerEntity.DisplayName;
-        }
+        // private string GetSpeaker(IFlowObject flowObject)
+        // {
+        //     if (flowObject is not IObjectWithSpeaker speaker)
+        //     {
+        //         throw Log.Exception($"Flow object {flowObject} does not have a speaker!");
+        //     }
+        //
+        //     Entity speakerEntity = speaker.Speaker as Entity;
+        //
+        //     if (speakerEntity == null)
+        //     {
+        //         throw Log.Exception($"Speaker {speaker.Speaker} is not an entity!");
+        //     }
+        //
+        //     return speakerEntity.DisplayName;
+        // }
 
         private void OnSkipInput()
         {
@@ -102,7 +102,7 @@ namespace Grigor.Gameplay.Dialogue
         public void OnFlowPlayerPaused(IFlowObject flowObject)
         {
             dialogueWidget.SetDialogueText(GetDialogue(flowObject));
-            dialogueWidget.SetSpeakerText(GetSpeaker(flowObject));
+            // dialogueWidget.SetSpeakerText(GetSpeaker(flowObject));
         }
 
         public void OnBranchesUpdated(IList<Branch> branches)
