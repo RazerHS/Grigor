@@ -1,6 +1,9 @@
 ﻿using Articy.Unity;
 using CardboardCore.DI;
+using CardboardCore.Utilities;
+using Grigor.Gameplay.Clues;
 using Grigor.Gameplay.Dialogue;
+using Grigor.Gameplay.Time;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Interacting.Components
@@ -8,6 +11,7 @@ namespace Grigor.Gameplay.Interacting.Components
     public class DialogueInteractable : InteractableComponent
     {
         [SerializeField] private ArticyReference dialogueNode;
+        [SerializeField] private Clue clue;
 
         [Inject] private DialogueController dialogueController;
 
@@ -21,6 +25,10 @@ namespace Grigor.Gameplay.Interacting.Components
         private void OnDialogueEnded()
         {
             dialogueController.DialogueEndedEvent -= OnDialogueEnded;
+
+            Log.Write($"Found clue: <b>{clue.CredentialToFind}</b>");
+
+            clue.FindClue();
 
             EndInteract();
         }

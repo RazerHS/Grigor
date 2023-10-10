@@ -1,6 +1,8 @@
 ﻿using System;
 using CardboardCore.DI;
+using CardboardCore.Utilities;
 using Grigor.Characters.Components;
+using Grigor.Gameplay.Time;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,6 +12,9 @@ namespace Grigor.Gameplay.Interacting.Components
     {
         [SerializeField] protected bool interactInRange;
         [SerializeField] protected bool singleUse;
+        [SerializeField] protected bool useTime;
+
+        [Inject] private TimeManager timeManager;
 
         protected Interactable interactable;
         protected bool wentInRange;
@@ -44,14 +49,32 @@ namespace Grigor.Gameplay.Interacting.Components
             // TO-DO: enable only the next interactable in the chain
             EnableInteraction();
 
+            if (useTime)
+            {
+                timeManager.ChangedToDayEvent += OnChangedToDay;
+                timeManager.ChangedToNightEvent += OnChangedToNight;
+
+                Log.Write($"Registering to time manager: {name}");
+            }
+
             OnInitialized();
         }
+
+        protected virtual void OnChangedToNight() { }
+
+        protected virtual void OnChangedToDay() { }
 
         public void Dispose()
         {
             interactable.InRangeEvent -= OnInRange;
             interactable.OutOfRangeEvent -= OnOutOfRange;
             interactable.InteractEvent -= OnInteract;
+
+            if (useTime)
+            {
+                timeManager.ChangedToDayEvent -= OnChangedToDay;
+                timeManager.ChangedToNightEvent -= OnChangedToNight;
+            }
 
             OnDisposed();
 

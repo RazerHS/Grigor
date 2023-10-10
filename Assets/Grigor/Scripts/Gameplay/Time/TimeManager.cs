@@ -1,5 +1,6 @@
 ﻿using System;
 using CardboardCore.DI;
+using CardboardCore.Utilities;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,8 +24,6 @@ namespace Grigor.Gameplay.Time
         private void Awake()
         {
             DontDestroyOnLoad(this);
-
-            CheckTimeOfDay();
         }
 
         private void Update()
@@ -65,6 +64,8 @@ namespace Grigor.Gameplay.Time
 
                 currentTimeOfDay = TimeOfDay.Day;
 
+                Log.Write("Day started!");
+
                 ChangedToDayEvent?.Invoke();
             }
             else
@@ -75,6 +76,8 @@ namespace Grigor.Gameplay.Time
                 }
 
                 currentTimeOfDay = TimeOfDay.Night;
+
+                Log.Write("Night started!");
 
                 ChangedToNightEvent?.Invoke();
             }
@@ -88,6 +91,11 @@ namespace Grigor.Gameplay.Time
             {
                 callback?.Invoke();
             });
+        }
+
+        public void StartTime()
+        {
+            ChangedToDayEvent?.Invoke();
         }
     }
 }
