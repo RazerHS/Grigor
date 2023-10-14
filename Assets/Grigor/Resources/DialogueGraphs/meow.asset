@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26848f4dfb3e4f4181bff31a31b840a3, type: 3}
+  m_Name: meow
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: 84bc61bf-6c90-4a03-a44d-6662ac4743da
+    PortName: Next
+    TargetNodeGUID: 33f3cee8-5d65-4de1-8146-14080db7fb5c
+  DialogueNodeData:
+  - NodeGUID: f58ada18-0da1-418c-8090-1e6508607df3
+    DialogueText: Dialogue Node
+    Position: {x: 720, y: 258}
+  - NodeGUID: 33f3cee8-5d65-4de1-8146-14080db7fb5c
+    DialogueText: Dialogue Node
+    Position: {x: 345, y: 241}
