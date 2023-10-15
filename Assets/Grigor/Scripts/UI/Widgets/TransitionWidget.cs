@@ -14,6 +14,8 @@ namespace Grigor.UI.Widgets
 
         public float TransitionDuration => transitionDuration;
 
+        public event Action TransitionEndedEvent;
+
         private void Awake()
         {
             transitionImage.DOFade(0f, 0f);
@@ -25,7 +27,7 @@ namespace Grigor.UI.Widgets
 
             sequence = DOTween.Sequence();
 
-            sequence.Append(transitionImage.DOFade(1f, transitionDuration).SetEase(Ease.OutQuad));
+            sequence.Append(transitionImage.DOFade(1f, transitionDuration).SetEase(Ease.OutQuad).OnComplete(() => { TransitionEndedEvent?.Invoke(); }));
             sequence.Append(transitionImage.DOFade(0f, transitionDuration).SetEase(Ease.OutQuad));
 
             sequence.OnComplete(Hide);

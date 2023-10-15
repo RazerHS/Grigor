@@ -34,15 +34,15 @@ namespace Grigor.Gameplay.Lighting
                 throw Log.Exception("No directional light set!");
             }
 
-            RenderSettings.ambientLight = LightingConfig.Instance.AmbientColor.Evaluate(timePercent);
-            RenderSettings.fogColor = LightingConfig.Instance.FogColor.Evaluate(timePercent);
+            RenderSettings.ambientLight = GameConfig.Instance.AmbientColor.Evaluate(timePercent);
+            RenderSettings.fogColor = GameConfig.Instance.FogColor.Evaluate(timePercent);
 
             if (directionalLight == null)
             {
                 return;
             }
 
-            directionalLight.color = LightingConfig.Instance.DirectionalColor.Evaluate(timePercent);
+            directionalLight.color = GameConfig.Instance.DirectionalColor.Evaluate(timePercent);
             directionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0f));
         }
     }

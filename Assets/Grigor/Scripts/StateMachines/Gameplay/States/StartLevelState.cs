@@ -23,6 +23,8 @@ namespace Grigor.StateMachines.Gameplay.States
 
         protected override void OnEnter()
         {
+            characterRegistry.Player.StartStateMachine();
+
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
             timeOfDayToggleWidget = uiManager.ShowWidget<TimeOfDayToggleWidget>();
             toggleMindPalaceWidget = uiManager.ShowWidget<ToggleMindPalaceWidget>();
@@ -31,9 +33,10 @@ namespace Grigor.StateMachines.Gameplay.States
             roomRegistry.DisableAllRooms();
             timeManager.StartTime();
 
-            roomRegistry.MovePlayerToRoom(RoomName.Start, characterRegistry.Player);
+            Room startRoom = roomRegistry.GetRoom(RoomName.Start);
+            startRoom.EnableRoom();
 
-            characterRegistry.Player.StartStateMachine();
+            characterRegistry.Player.Movement.MovePlayerToPosition(startRoom.SpawnPoint.position);
 
             owningStateMachine.ToNextState();
         }

@@ -1,5 +1,4 @@
-﻿using CardboardCore.DI;
-using Grigor.Gameplay.Rooms;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +8,7 @@ namespace Grigor.UI.Widgets
     {
         [SerializeField] private Button button;
 
-        [Inject] private MindPalaceManager mindPalaceManager;
+        public event Action ToggleMindPalaceEvent;
 
         protected override void OnShow()
         {
@@ -23,13 +22,7 @@ namespace Grigor.UI.Widgets
 
         private void OnToggleMindPalaceClicked()
         {
-            if (mindPalaceManager.InsideMindPalace)
-            {
-                mindPalaceManager.ExitMindPalace();
-                return;
-            }
-
-            mindPalaceManager.EnterMindPalace();
+            ToggleMindPalaceEvent?.Invoke();
         }
     }
 }

@@ -24254,6 +24254,11 @@ PrefabInstance:
       propertyPath: roomName
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9098895124421595720, guid: 032a20575c31e1243ae0b6499eb6f22a,
+        type: 3}
+      propertyPath: savePlayerPosition
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7688971968285854849, guid: 032a20575c31e1243ae0b6499eb6f22a, type: 3}

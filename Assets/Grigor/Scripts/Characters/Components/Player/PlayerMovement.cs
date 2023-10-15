@@ -1,5 +1,8 @@
-﻿using CardboardCore.DI;
+﻿using System;
+using CardboardCore.DI;
+using CardboardCore.Utilities;
 using DG.Tweening;
+using Grigor.Gameplay.Rooms;
 using Grigor.Input;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -21,10 +24,19 @@ namespace Grigor.Characters.Components.Player
         [ColoredBoxGroup("Debugging", true, 0.5f, 0.1f, 0.9f), ShowInInspector, ReadOnly] private bool isGrounded;
         private bool jump;
         private bool isMovementEnabled = true;
-
         private Vector3 moveDirection;
         private Vector3 verticalVelocity;
         private CharacterController characterController;
+
+        private RoomName currentRoomName;
+        private RoomName previousRoomName;
+        private bool inMindPalace;
+
+        public RoomName CurrentRoomName => currentRoomName;
+        public RoomName PreviousRoomName => previousRoomName;
+        public bool InMindPalace => inMindPalace;
+
+        public event Action<RoomName, RoomName> MovePlayerToRoomEvent;
 
         protected override void OnInitialized()
         {
@@ -135,9 +147,19 @@ namespace Grigor.Characters.Components.Player
             isMovementEnabled = false;
         }
 
-        public void MovePlayerTo(Vector3 position)
+        public void MovePlayerToRoom(RoomName roomName)
         {
-            transform.DOMove(position, 0f);
+            previousRoomName = currentRoomName;
+            currentRoomName = roomName;
+
+            inMindPalace = currentRoomName == RoomName.MindPalace;
+
+            MovePlayerToRoomEvent?.Invoke(previousRoomName, currentRoomName);
+        }
+
+        public void MovePlayerToPosition(Vector3 position)
+        {
+            transform.DOMove(position, 0.1f);
         }
     }
 }

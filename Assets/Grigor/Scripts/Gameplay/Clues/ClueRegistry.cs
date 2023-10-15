@@ -12,7 +12,10 @@ namespace Grigor.Gameplay.Clues
 
         private void OnDisable()
         {
-            clues.ForEach(UnregisterClue);
+            for (int i = clues.Count - 1; i >= 0; i--)
+            {
+                UnregisterClue(clues[i]);
+            }
         }
 
         private void OnClueFound(Clue clue)

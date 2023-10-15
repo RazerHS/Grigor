@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 9209180824638134512, guid: 88dea0b62e5b82147b4d0c6b1460907a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.25
+      value: 10.154
       objectReference: {fileID: 0}
     - target: {fileID: 9209180824638134512, guid: 88dea0b62e5b82147b4d0c6b1460907a,
         type: 3}
@@ -290,7 +290,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2033682917}
-  - component: {fileID: 2033682916}
   - component: {fileID: 2033682915}
   m_Layer: 0
   m_Name: DialogueController
@@ -311,31 +310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a8c77c450949418c4a9721043a6692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2033682916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033682914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 149237616, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useDefaultGlobalVariables: 1
-  globalVariables: {fileID: 0}
-  overwriteMethodProvider: 0
-  overwrittenMethodProvider: {fileID: 0}
-  startOn:
-    instanceId: 0
-    referencingMode: 0
-    lowId: 0
-    highId: 0
-  pauseOn: 7
-  ignoreInvalidBranches: 1
-  continuouslyRecalculateBranches: 0
-  continouslyRecalculateInterval: 1
 --- !u!4 &2033682917
 Transform:
   m_ObjectHideFlags: 0
@@ -359,6 +333,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2413764797932447992, guid: 5ca7fc0604a85cc45a066d4e7e21e0cd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9040003
+      objectReference: {fileID: 0}
     - target: {fileID: 2746598782939802503, guid: 5ca7fc0604a85cc45a066d4e7e21e0cd,
         type: 3}
       propertyPath: m_LocalPosition.x
