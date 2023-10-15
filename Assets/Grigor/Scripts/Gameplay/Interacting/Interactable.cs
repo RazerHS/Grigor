@@ -115,8 +115,6 @@ namespace Grigor.Gameplay.Interacting
 
             inRange = true;
 
-            Log.Write($"In range of interactable <b>{name}</b>");
-
             InRangeEvent?.Invoke(interactingCharacter);
         }
 
@@ -126,8 +124,6 @@ namespace Grigor.Gameplay.Interacting
             {
                 return;
             }
-
-            Log.Write($"Out of range of interactable <b>{name}</b>");
 
             inRange = false;
 

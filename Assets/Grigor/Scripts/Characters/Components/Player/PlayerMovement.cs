@@ -1,6 +1,5 @@
 ﻿using System;
 using CardboardCore.DI;
-using CardboardCore.Utilities;
 using DG.Tweening;
 using Grigor.Gameplay.Rooms;
 using Grigor.Input;
@@ -27,16 +26,6 @@ namespace Grigor.Characters.Components.Player
         private Vector3 moveDirection;
         private Vector3 verticalVelocity;
         private CharacterController characterController;
-
-        private RoomName currentRoomName;
-        private RoomName previousRoomName;
-        private bool inMindPalace;
-
-        public RoomName CurrentRoomName => currentRoomName;
-        public RoomName PreviousRoomName => previousRoomName;
-        public bool InMindPalace => inMindPalace;
-
-        public event Action<RoomName, RoomName> MovePlayerToRoomEvent;
 
         protected override void OnInitialized()
         {
@@ -145,16 +134,6 @@ namespace Grigor.Characters.Components.Player
         public void DisableMovement()
         {
             isMovementEnabled = false;
-        }
-
-        public void MovePlayerToRoom(RoomName roomName)
-        {
-            previousRoomName = currentRoomName;
-            currentRoomName = roomName;
-
-            inMindPalace = currentRoomName == RoomName.MindPalace;
-
-            MovePlayerToRoomEvent?.Invoke(previousRoomName, currentRoomName);
         }
 
         public void MovePlayerToPosition(Vector3 position)

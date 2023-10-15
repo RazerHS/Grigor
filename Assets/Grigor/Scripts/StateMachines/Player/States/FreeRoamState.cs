@@ -10,6 +10,7 @@ namespace Grigor.StateMachines.Player.States
     {
         [Inject] private UIManager uiManager;
         [Inject] private RoomRegistry roomRegistry;
+        [Inject] private RoomManager roomManager;
 
         private ToggleMindPalaceWidget toggleMindPalaceWidget;
 
@@ -23,14 +24,14 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
-            owningStateMachine.Owner.Movement.MovePlayerToRoomEvent += OnMovePlayerToRoom;
+            roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
 
             toggleMindPalaceWidget.ToggleMindPalaceEvent += OnToggleMindPalace;
         }
 
         private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
         {
-            if (owningStateMachine.Owner.Movement.CurrentRoomName == previousRoomName)
+            if (roomManager.CurrentRoomName == previousRoomName)
             {
                 return;
             }
@@ -40,8 +41,8 @@ namespace Grigor.StateMachines.Player.States
 
         private void OnToggleMindPalace()
         {
-            RoomName nextRoom = owningStateMachine.Owner.Movement.InMindPalace ? RoomName.Start : RoomName.MindPalace;
-            owningStateMachine.Owner.Movement.MovePlayerToRoom(nextRoom);
+            RoomName nextRoom = roomManager.PlayerInMindPalace ? RoomName.Start : RoomName.MindPalace;
+            roomManager.MovePlayerToRoom(nextRoom, owningStateMachine.Owner.transform.position);
         }
 
         protected override void OnExit()
@@ -52,7 +53,7 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
 
-            owningStateMachine.Owner.Movement.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
+            roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
 
             toggleMindPalaceWidget.ToggleMindPalaceEvent -= OnToggleMindPalace;
         }

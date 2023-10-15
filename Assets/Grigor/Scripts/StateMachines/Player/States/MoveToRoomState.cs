@@ -14,6 +14,7 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private RoomRegistry roomRegistry;
         [Inject] private CharacterRegistry characterRegistry;
         [Inject] private UIManager uiManager;
+        [Inject] private RoomManager roomManager;
 
         private TransitionWidget transitionWidget;
 
@@ -29,17 +30,17 @@ namespace Grigor.StateMachines.Player.States
 
         private void OnTransitionEnded()
         {
-            Room previousRoom = roomRegistry.GetRoom(owningStateMachine.Owner.Movement.PreviousRoomName);
-            Room currentRoom = roomRegistry.GetRoom(owningStateMachine.Owner.Movement.CurrentRoomName);
+            Room previousRoom = roomRegistry.GetRoom(roomManager.PreviousRoomName);
+            Room currentRoom = roomRegistry.GetRoom(roomManager.CurrentRoomName);
 
             previousRoom.DisableRoom(characterRegistry.Player.Movement.transform.position, true);
             currentRoom.EnableRoom();
 
-            Vector3 position = currentRoom.GetSpawnPosition();
+            Vector3 position = GetSpawnPosition(previousRoom, currentRoom);
 
             characterRegistry.Player.Movement.MovePlayerToPosition(position);
 
-            Log.Write($"Moving to room: <b>{currentRoom}</b>");
+            Log.Write($"Moving to room: <b>{currentRoom.RoomName}</b>");
 
             owningStateMachine.ToState<FreeRoamState>();
         }
@@ -47,6 +48,18 @@ namespace Grigor.StateMachines.Player.States
         protected override void OnExit()
         {
             transitionWidget.TransitionEndedEvent -= OnTransitionEnded;
+        }
+
+        private Vector3 GetSpawnPosition(Room previousRoom, Room currentRoom)
+        {
+            Vector3 position = currentRoom.GetSpawnPosition();
+
+            if (previousRoom.RoomName == RoomName.MindPalace)
+            {
+                position = roomManager.PreviousStartRoomPlayerPosition;
+            }
+
+            return position;
         }
     }
 }
