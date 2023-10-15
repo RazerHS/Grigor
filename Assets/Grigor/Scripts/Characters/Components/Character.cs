@@ -71,12 +71,12 @@ namespace Grigor.Characters.Components
 
         public void OnChangedToDay()
         {
-            Log.Write( $"Character {name} changed to day!");
+
         }
 
         public void OnChangedToNight()
         {
-            Log.Write( $"Character {name} changed to night!");
+
         }
 
         public void RegisterTimeEffect()

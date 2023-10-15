@@ -40,26 +40,6 @@ namespace Grigor.Gameplay.Rooms
             return rooms[roomName];
         }
 
-        public void MovePlayerToRoom(RoomName roomName, Player player, Vector3 position = default)
-        {
-            Room room = GetRoom(roomName);
-
-            if (currentRoom != null)
-            {
-                previousRoom = currentRoom;
-
-                previousRoom.DisableRoom();
-                previousRoomPosition = player.Movement.transform.position;
-            }
-
-            currentRoom = room;
-
-            currentRoom.EnableRoom();
-
-            Vector3 spawnPosition = position == Vector3.zero ? currentRoom.SpawnPoint.position : position;
-            player.Movement.MovePlayerTo(spawnPosition);
-        }
-
         public RoomName GetCurrentRoomName()
         {
             return currentRoom.RoomName;
@@ -69,7 +49,7 @@ namespace Grigor.Gameplay.Rooms
         {
             foreach (Room room in rooms.Values)
             {
-                room.DisableRoom();
+                room.DisableRoom(room.SpawnPoint.position, false);
             }
         }
     }

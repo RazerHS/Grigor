@@ -3,9 +3,9 @@ using CardboardCore.StateMachines;
 using Grigor.Characters;
 using Grigor.Gameplay.Interacting;
 using Grigor.Gameplay.Rooms;
+using Grigor.Gameplay.Time;
 using Grigor.UI;
 using Grigor.UI.Widgets;
-using UnityEngine;
 
 namespace Grigor.StateMachines.Gameplay.States
 {
@@ -15,6 +15,7 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private CharacterRegistry characterRegistry;
         [Inject] private InteractablesRegistry interactablesRegistry;
         [Inject] private UIManager uiManager;
+        [Inject] private TimeManager timeManager;
 
         private DataPodWidget dataPodWidget;
         private TimeOfDayToggleWidget timeOfDayToggleWidget;
@@ -22,16 +23,20 @@ namespace Grigor.StateMachines.Gameplay.States
 
         protected override void OnEnter()
         {
+            characterRegistry.Player.StartStateMachine();
+
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
             timeOfDayToggleWidget = uiManager.ShowWidget<TimeOfDayToggleWidget>();
             toggleMindPalaceWidget = uiManager.ShowWidget<ToggleMindPalaceWidget>();
 
             interactablesRegistry.EnableInteractables();
             roomRegistry.DisableAllRooms();
+            timeManager.StartTime();
 
-            roomRegistry.MovePlayerToRoom(RoomName.Start, characterRegistry.Player);
+            Room startRoom = roomRegistry.GetRoom(RoomName.Start);
+            startRoom.EnableRoom();
 
-            characterRegistry.Player.StartStateMachine();
+            characterRegistry.Player.Movement.MovePlayerToPosition(startRoom.SpawnPoint.position);
 
             owningStateMachine.ToNextState();
         }
