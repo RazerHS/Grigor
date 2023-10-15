@@ -24,5 +24,15 @@ namespace Grigor.UI.Widgets
         {
             ToggleMindPalaceEvent?.Invoke();
         }
+
+        public void EnableButton()
+        {
+            button.interactable = true;
+        }
+
+        public void DisableButton()
+        {
+            button.interactable = false;
+        }
     }
 }
