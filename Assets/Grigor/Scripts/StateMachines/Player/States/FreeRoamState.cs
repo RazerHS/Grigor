@@ -13,6 +13,7 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private RoomManager roomManager;
 
         private EndDayWidget endDayWidget;
+        private TimeOfDayWidget timeOfDayWidget;
 
         protected override void OnEnter()
         {
@@ -21,6 +22,7 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.Owner.Interact.EnableInteract();
 
             endDayWidget = uiManager.GetWidget<EndDayWidget>();
+            timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
@@ -41,6 +43,9 @@ namespace Grigor.StateMachines.Player.States
 
         private void OnEndDay()
         {
+            endDayWidget.DisableButton();
+            timeOfDayWidget.DisableButton();
+
             RoomName nextRoom = roomManager.PlayerInMindPalace ? RoomName.Start : RoomName.MindPalace;
             roomManager.MovePlayerToRoom(nextRoom, owningStateMachine.Owner.transform.position);
         }

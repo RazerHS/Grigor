@@ -26,12 +26,17 @@ namespace Grigor.UI.Widgets
         {
             timeOfDayToggleButton.interactable = false;
 
-            timeManager.ToggleTimeOfDay(transitionDuration, EnableToggleButton);
+            timeManager.ToggleTimeOfDay(transitionDuration, EnableButton);
         }
 
-        private void EnableToggleButton()
+        private void EnableButton()
         {
             timeOfDayToggleButton.interactable = true;
+        }
+
+        public void DisableButton()
+        {
+            timeOfDayToggleButton.interactable = false;
         }
     }
 }

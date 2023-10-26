@@ -46,7 +46,10 @@ namespace Grigor.StateMachines.Player.States
 
             Log.Write($"Moving to room: <b>{currentRoom.RoomName}</b>");
 
-            endDayWidget.EnableButton();
+            if (currentRoom.RoomName != RoomName.MindPalace)
+            {
+                endDayWidget.EnableButton();
+            }
 
             owningStateMachine.ToState<FreeRoamState>();
         }

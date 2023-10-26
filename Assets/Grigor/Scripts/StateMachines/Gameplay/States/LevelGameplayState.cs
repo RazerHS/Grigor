@@ -13,6 +13,7 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private UIManager uiManager;
         [Inject] private TimeEffectRegistry timeEffectRegistry;
         [Inject] private TimeManager timeManager;
+        [Inject] private RoomManager roomManager;
 
         private GameplayScreen gameplayScreen;
         private EndDayWidget endDayWidget;
