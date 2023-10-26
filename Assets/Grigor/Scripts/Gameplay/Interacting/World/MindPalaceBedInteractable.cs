@@ -2,7 +2,6 @@
 using Grigor.Characters;
 using Grigor.Gameplay.Interacting.Components;
 using Grigor.Gameplay.Rooms;
-using Grigor.Gameplay.Time;
 
 namespace Grigor.Gameplay.World.Components
 {

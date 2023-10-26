@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using CardboardCore.DI;
-using CardboardCore.Utilities;
 using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Widgets;
-using UnityEngine;
 
 namespace Grigor.Gameplay.Dialogue
 {

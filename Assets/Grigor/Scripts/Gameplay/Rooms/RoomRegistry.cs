@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
-using Grigor.Characters.Components.Player;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Rooms
