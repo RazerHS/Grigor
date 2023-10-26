@@ -31,7 +31,6 @@ namespace Grigor.StateMachines.Gameplay.States
 
             interactablesRegistry.EnableInteractables();
             roomRegistry.DisableAllRooms();
-            timeManager.StartTime();
 
             Room startRoom = roomRegistry.GetRoom(RoomName.Start);
             startRoom.EnableRoom();
