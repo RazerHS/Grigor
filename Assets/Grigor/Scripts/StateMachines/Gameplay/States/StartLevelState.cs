@@ -18,16 +18,16 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private TimeManager timeManager;
 
         private DataPodWidget dataPodWidget;
-        private TimeOfDayToggleWidget timeOfDayToggleWidget;
-        private ToggleMindPalaceWidget toggleMindPalaceWidget;
+        private TimeOfDayWidget timeOfDayWidget;
+        private EndDayWidget endDayWidget;
 
         protected override void OnEnter()
         {
             characterRegistry.Player.StartStateMachine();
 
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
-            timeOfDayToggleWidget = uiManager.ShowWidget<TimeOfDayToggleWidget>();
-            toggleMindPalaceWidget = uiManager.ShowWidget<ToggleMindPalaceWidget>();
+            timeOfDayWidget = uiManager.ShowWidget<TimeOfDayWidget>();
+            endDayWidget = uiManager.ShowWidget<EndDayWidget>();
 
             interactablesRegistry.EnableInteractables();
             roomRegistry.DisableAllRooms();

@@ -15,12 +15,12 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private TimeManager timeManager;
 
         private GameplayScreen gameplayScreen;
-        private ToggleMindPalaceWidget toggleMindPalaceWidget;
+        private EndDayWidget endDayWidget;
 
         protected override void OnEnter()
         {
             gameplayScreen = uiManager.ShowScreen<GameplayScreen>();
-            toggleMindPalaceWidget = uiManager.GetWidget<ToggleMindPalaceWidget>();
+            endDayWidget = uiManager.GetWidget<EndDayWidget>();
 
             RegisterTimeEffect();
 
@@ -39,12 +39,12 @@ namespace Grigor.StateMachines.Gameplay.States
 
         public void OnChangedToDay()
         {
-            toggleMindPalaceWidget.DisableButton();
+            endDayWidget.DisableButton();
         }
 
         public void OnChangedToNight()
         {
-            toggleMindPalaceWidget.EnableButton();
+            endDayWidget.EnableButton();
         }
     }
 }

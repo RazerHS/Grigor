@@ -12,7 +12,7 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private RoomRegistry roomRegistry;
         [Inject] private RoomManager roomManager;
 
-        private ToggleMindPalaceWidget toggleMindPalaceWidget;
+        private EndDayWidget endDayWidget;
 
         protected override void OnEnter()
         {
@@ -20,13 +20,13 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.Owner.Look.EnableLook();
             owningStateMachine.Owner.Interact.EnableInteract();
 
-            toggleMindPalaceWidget = uiManager.GetWidget<ToggleMindPalaceWidget>();
+            endDayWidget = uiManager.GetWidget<EndDayWidget>();
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
             roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
 
-            toggleMindPalaceWidget.ToggleMindPalaceEvent += OnToggleMindPalace;
+            endDayWidget.DayEndedEvent += OnEndDay;
         }
 
         private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
@@ -39,7 +39,7 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.ToState<MoveToRoomState>();
         }
 
-        private void OnToggleMindPalace()
+        private void OnEndDay()
         {
             RoomName nextRoom = roomManager.PlayerInMindPalace ? RoomName.Start : RoomName.MindPalace;
             roomManager.MovePlayerToRoom(nextRoom, owningStateMachine.Owner.transform.position);
@@ -55,7 +55,7 @@ namespace Grigor.StateMachines.Player.States
 
             roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
 
-            toggleMindPalaceWidget.ToggleMindPalaceEvent -= OnToggleMindPalace;
+            endDayWidget.DayEndedEvent -= OnEndDay;
         }
 
         private void OnInteract()

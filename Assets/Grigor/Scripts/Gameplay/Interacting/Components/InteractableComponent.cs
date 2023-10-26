@@ -14,7 +14,7 @@ namespace Grigor.Gameplay.Interacting.Components
         [SerializeField] protected bool singleUse;
         [SerializeField] protected bool useTime;
 
-        [Inject] private TimeManager timeManager;
+        [Inject] protected TimeManager timeManager;
 
         protected Interactable interactable;
         protected bool wentInRange;

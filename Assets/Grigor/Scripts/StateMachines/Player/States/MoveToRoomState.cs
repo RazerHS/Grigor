@@ -17,15 +17,15 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private RoomManager roomManager;
 
         private TransitionWidget transitionWidget;
-        private ToggleMindPalaceWidget toggleMindPalaceWidget;
+        private EndDayWidget endDayWidget;
 
         protected override void OnEnter()
         {
             owningStateMachine.Owner.Movement.DisableMovement();
             owningStateMachine.Owner.Interact.DisableInteract();
 
-            toggleMindPalaceWidget = uiManager.GetWidget<ToggleMindPalaceWidget>();
-            toggleMindPalaceWidget.DisableButton();
+            endDayWidget = uiManager.GetWidget<EndDayWidget>();
+            endDayWidget.DisableButton();
 
             transitionWidget = uiManager.ShowWidget<TransitionWidget>();
 
@@ -46,7 +46,7 @@ namespace Grigor.StateMachines.Player.States
 
             Log.Write($"Moving to room: <b>{currentRoom.RoomName}</b>");
 
-            toggleMindPalaceWidget.EnableButton();
+            endDayWidget.EnableButton();
 
             owningStateMachine.ToState<FreeRoamState>();
         }
