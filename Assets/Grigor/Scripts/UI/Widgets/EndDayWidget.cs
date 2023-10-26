@@ -4,25 +4,25 @@ using UnityEngine.UI;
 
 namespace Grigor.UI.Widgets
 {
-    public class ToggleMindPalaceWidget : UIWidget
+    public class EndDayWidget : UIWidget
     {
         [SerializeField] private Button button;
 
-        public event Action ToggleMindPalaceEvent;
+        public event Action DayEndedEvent;
 
         protected override void OnShow()
         {
-            button.onClick.AddListener(OnToggleMindPalaceClicked);
+            button.onClick.AddListener(OnEndDayClicked);
         }
 
         protected override void OnHide()
         {
-            button.onClick.RemoveListener(OnToggleMindPalaceClicked);
+            button.onClick.RemoveListener(OnEndDayClicked);
         }
 
-        private void OnToggleMindPalaceClicked()
+        private void OnEndDayClicked()
         {
-            ToggleMindPalaceEvent?.Invoke();
+            DayEndedEvent?.Invoke();
         }
 
         public void EnableButton()

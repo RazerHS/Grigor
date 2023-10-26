@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Grigor.UI.Widgets
 {
-    public class TimeOfDayToggleWidget : UIWidget
+    public class TimeOfDayWidget : UIWidget
     {
         [SerializeField] private Button timeOfDayToggleButton;
         [SerializeField] private float transitionDuration = 3f;
@@ -26,12 +26,17 @@ namespace Grigor.UI.Widgets
         {
             timeOfDayToggleButton.interactable = false;
 
-            timeManager.ToggleTimeOfDay(transitionDuration, EnableToggleButton);
+            timeManager.ToggleTimeOfDay(transitionDuration, EnableButton);
         }
 
-        private void EnableToggleButton()
+        public void EnableButton()
         {
             timeOfDayToggleButton.interactable = true;
+        }
+
+        public void DisableButton()
+        {
+            timeOfDayToggleButton.interactable = false;
         }
     }
 }

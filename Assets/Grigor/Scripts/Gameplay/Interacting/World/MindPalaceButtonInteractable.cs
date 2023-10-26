@@ -3,9 +3,10 @@ using CardboardCore.Utilities;
 using DG.Tweening;
 using Grigor.Data.Credentials;
 using Grigor.Gameplay.Clues;
+using Grigor.Gameplay.Interacting.Components;
 using UnityEngine;
 
-namespace Grigor.Gameplay.Interacting.Components
+namespace Grigor.Gameplay.World.Components
 {
     public class MindPalaceButtonInteractable : InteractableComponent, IClueListener
     {

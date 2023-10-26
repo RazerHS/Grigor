@@ -3070,7 +3070,7 @@ GameObject:
   - component: {fileID: 6652246046887634205}
   - component: {fileID: 1831684680697355959}
   m_Layer: 0
-  m_Name: Door (3)
+  m_Name: Bed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3084,13 +3084,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3358766076214609151}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.005, y: -0.022000313, z: -12.969997}
+  m_LocalRotation: {x: 0.50942886, y: 0.49038985, z: 0.49039, w: 0.5094289}
+  m_LocalPosition: {x: 17.893013, y: 0.00999999, z: -11.549999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4765199848080045556}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 4585452893526991789}
+  m_LocalEulerAnglesHint: {x: 2.182, y: 90, z: 90}
 --- !u!114 &3219301264252303463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3548,7 +3548,6 @@ Transform:
   - {fileID: 3044808219292715537}
   - {fileID: 378932822229571455}
   - {fileID: 7189540187329180588}
-  - {fileID: 5080702923544280389}
   m_Father: {fileID: 7401086493137905795}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3902039026575693943
@@ -24291,6 +24290,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5173543511675442752}
+    - targetCorrespondingSourceObject: {fileID: 3967437034386379723, guid: 032a20575c31e1243ae0b6499eb6f22a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5080702923544280389}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 032a20575c31e1243ae0b6499eb6f22a, type: 3}
 --- !u!4 &866203771176991037 stripped
