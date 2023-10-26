@@ -28,7 +28,12 @@ namespace Grigor.StateMachines.Player.States
 
             roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
 
-            endDayWidget.DayEndedEvent += OnEndDay;
+            endDayWidget.DayEndedEvent += OnDayEnded;
+
+            if (roomManager.CurrentRoomName == RoomName.Start)
+            {
+                OnDayStarted();
+            }
         }
 
         private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
@@ -41,13 +46,23 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.ToState<MoveToRoomState>();
         }
 
-        private void OnEndDay()
+        private void OnDayEnded()
         {
             endDayWidget.DisableButton();
             timeOfDayWidget.DisableButton();
 
             RoomName nextRoom = roomManager.PlayerInMindPalace ? RoomName.Start : RoomName.MindPalace;
             roomManager.MovePlayerToRoom(nextRoom, owningStateMachine.Owner.transform.position);
+        }
+
+        private void OnDayStarted()
+        {
+            if (roomManager.CurrentRoomName != RoomName.MindPalace)
+            {
+                endDayWidget.EnableButton();
+            }
+
+            timeOfDayWidget.EnableButton();
         }
 
         protected override void OnExit()
@@ -60,7 +75,7 @@ namespace Grigor.StateMachines.Player.States
 
             roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
 
-            endDayWidget.DayEndedEvent -= OnEndDay;
+            endDayWidget.DayEndedEvent -= OnDayEnded;
         }
 
         private void OnInteract()
