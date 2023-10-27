@@ -3,6 +3,7 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters.Components;
 using Grigor.Gameplay.Time;
+using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,9 +11,12 @@ namespace Grigor.Gameplay.Interacting.Components
 {
     public class InteractableComponent : MonoBehaviour
     {
-        [SerializeField] protected bool interactInRange;
-        [SerializeField] protected bool singleUse;
-        [SerializeField] protected bool useTime;
+        [SerializeField, ColoredBoxGroup("Config", false, true)] protected bool interactInRange;
+        [SerializeField, ColoredBoxGroup("Config")] protected bool singleUse;
+        [SerializeField, ColoredBoxGroup("Time", false, true)] protected bool hasTimeEffect;
+        [SerializeField, ColoredBoxGroup("Time")] protected bool timePassesOnInteract;
+        [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 60)] protected int minutesToPass = 1;
+        [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 24)] protected int hoursToPass = 1;
 
         [Inject] protected TimeManager timeManager;
 
@@ -49,7 +53,7 @@ namespace Grigor.Gameplay.Interacting.Components
             // TO-DO: enable only the next interactable in the chain
             EnableInteraction();
 
-            if (useTime)
+            if (hasTimeEffect)
             {
                 timeManager.ChangedToDayEvent += OnChangedToDay;
                 timeManager.ChangedToNightEvent += OnChangedToNight;
@@ -70,7 +74,7 @@ namespace Grigor.Gameplay.Interacting.Components
             interactable.OutOfRangeEvent -= OnOutOfRange;
             interactable.InteractEvent -= OnInteract;
 
-            if (useTime)
+            if (hasTimeEffect)
             {
                 timeManager.ChangedToDayEvent -= OnChangedToDay;
                 timeManager.ChangedToNightEvent -= OnChangedToNight;
@@ -134,6 +138,11 @@ namespace Grigor.Gameplay.Interacting.Components
 
                 // TO-DO: remove this when adding chain
                 interactable.DisableInteractable();
+            }
+
+            if (timePassesOnInteract)
+            {
+                timeManager.PassTime(minutesToPass, hoursToPass);
             }
 
             currentlyInteracting = false;

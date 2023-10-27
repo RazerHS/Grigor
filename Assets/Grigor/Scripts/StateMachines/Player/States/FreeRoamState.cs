@@ -49,7 +49,6 @@ namespace Grigor.StateMachines.Player.States
         private void OnDayEnded()
         {
             endDayWidget.DisableButton();
-            timeOfDayWidget.DisableButton();
 
             RoomName nextRoom = roomManager.PlayerInMindPalace ? RoomName.Start : RoomName.MindPalace;
             roomManager.MovePlayerToRoom(nextRoom, owningStateMachine.Owner.transform.position);
@@ -61,8 +60,6 @@ namespace Grigor.StateMachines.Player.States
             {
                 endDayWidget.EnableButton();
             }
-
-            timeOfDayWidget.EnableButton();
         }
 
         protected override void OnExit()

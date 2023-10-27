@@ -21,9 +21,14 @@ namespace Grigor.Gameplay.Lighting
             timeManager.TimeChangedEvent -= OnTimeChanged;
         }
 
-        private void OnTimeChanged(float time)
+        private void OnTimeChanged(int minutes, int hours)
         {
-            UpdateLighting(time / 24f);
+            int totalDayMinutes = 60 * 24;
+            float currentPassedMinutes = hours * 60 + minutes;
+
+            Log.Write(currentPassedMinutes / totalDayMinutes);
+
+            UpdateLighting(currentPassedMinutes / totalDayMinutes);
         }
 
         // TO-DO: make sun rotate all 360 degrees instead of back and forth

@@ -1,5 +1,7 @@
 ﻿using CardboardCore.DI;
 using Grigor.Gameplay.Time;
+using Microsoft.Win32.SafeHandles;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,36 +9,34 @@ namespace Grigor.UI.Widgets
 {
     public class TimeOfDayWidget : UIWidget
     {
-        [SerializeField] private Button timeOfDayToggleButton;
-        [SerializeField] private float transitionDuration = 3f;
+        [SerializeField] private TextMeshProUGUI timeText;
 
         [Inject] private TimeManager timeManager;
 
         protected override void OnShow()
         {
-            timeOfDayToggleButton.onClick.AddListener(OnTimeOfDayToggleButtonClicked);
         }
 
         protected override void OnHide()
         {
-            timeOfDayToggleButton.onClick.RemoveListener(OnTimeOfDayToggleButtonClicked);
         }
 
-        private void OnTimeOfDayToggleButtonClicked()
+        public void UpdateTimeText(int minutes, int hours)
         {
-            timeOfDayToggleButton.interactable = false;
+            string minutesString = minutes.ToString();
+            string hoursString = hours.ToString();
 
-            timeManager.ToggleTimeOfDay(transitionDuration, EnableButton);
-        }
+            if (minutes < 10)
+            {
+                minutesString = $"0{minutes}";
+            }
 
-        public void EnableButton()
-        {
-            timeOfDayToggleButton.interactable = true;
-        }
+            if (hours < 10)
+            {
+                hoursString = $"0{hours}";
+            }
 
-        public void DisableButton()
-        {
-            timeOfDayToggleButton.interactable = false;
+            timeText.text = $"{hoursString}:{minutesString}";
         }
     }
 }
