@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
 using Grigor.Utils.StoryGraph.Runtime;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 
@@ -186,7 +188,10 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
             generatedPort.contentContainer.Remove(portLabel);
 
-            int outputPortCount = nodeCache.outputContainer.Query("connector").ToList().Count();
+            VisualElement connector = generatedPort.contentContainer.Q<VisualElement>("connector");
+            connector.pickingMode = PickingMode.Position;
+
+            int outputPortCount = nodeCache.outputContainer.Query("connector").ToList().Count;
             string outputPortName = string.IsNullOrEmpty(overriddenPortName) ? $"Option {outputPortCount + 1}" : overriddenPortName;
 
             generatedPort.portName = outputPortName;
@@ -198,8 +203,12 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             };
 
             textField.RegisterValueChangedCallback(@event => generatedPort.portName = @event.newValue);
+            textField.AddToClassList("DialogueChoiceTextField");
 
-            generatedPort.contentContainer.Add(new Label("  "));
+            textField.style.minWidth = 60;
+            textField.style.maxWidth = 100;
+
+            generatedPort.contentContainer.Add(new Label(" "));
             generatedPort.contentContainer.Add(textField);
 
             Button deleteButton = new Button(() => RemovePort(nodeCache, generatedPort))

@@ -20,7 +20,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
             //transparent 1px indentation icon as a hack
             indentationIcon = new Texture2D(1, 1);
-            indentationIcon.SetPixel(0,0,new Color(0, 0, 0, 0));
+            indentationIcon.SetPixel(0, 0, new Color(0, 0, 0, 0));
             indentationIcon.Apply();
         }
 
@@ -34,7 +34,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 {
                     level = 2, userData = new DialogueNode()
                 },
-                new SearchTreeEntry(new GUIContent("Comment Block",indentationIcon))
+                new SearchTreeEntry(new GUIContent("Comment Block", indentationIcon))
                 {
                     level = 1,
                     userData = new Group()
