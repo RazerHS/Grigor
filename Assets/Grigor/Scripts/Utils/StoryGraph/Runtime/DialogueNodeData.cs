@@ -1,12 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace RazerCore.Utils.DialogueGraph.Runtime
+namespace Grigor.Utils.StoryGraph.Runtime
 {
     [Serializable]
     public class DialogueNodeData
     {
-        public string NodeGUID;
+        public string NodeGuid;
         public string DialogueText;
         public Vector2 Position;
     }
