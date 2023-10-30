@@ -682,7 +682,7 @@ PrefabInstance:
     - target: {fileID: 3567804445158587551, guid: 44d0fa7aed2c3074b863d7452df4accf,
         type: 3}
       propertyPath: m_Name
-      value: TimeOfDayToggleWidget
+      value: TimeOfDayWidget
       objectReference: {fileID: 0}
     - target: {fileID: 5817648470577757144, guid: 44d0fa7aed2c3074b863d7452df4accf,
         type: 3}
@@ -914,6 +914,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127313959805145027, guid: 53cb0f5f519a458468e32d7e48d01a08,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -185.16998
       objectReference: {fileID: 0}
     - target: {fileID: 7569379694499006224, guid: 53cb0f5f519a458468e32d7e48d01a08,
         type: 3}
@@ -1191,7 +1196,7 @@ PrefabInstance:
     - target: {fileID: 7627329119139464900, guid: 6a1b4d7bbe41a654d89188fa68a1690b,
         type: 3}
       propertyPath: m_Name
-      value: ToggleMindPalaceWidget
+      value: EndDayWidget
       objectReference: {fileID: 0}
     - target: {fileID: 9131538287994316569, guid: 6a1b4d7bbe41a654d89188fa68a1690b,
         type: 3}
@@ -1230,6 +1235,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2891698483086911659}
     m_Modifications:
+    - target: {fileID: 1099106828978692736, guid: 5e4825af8d6e5904ebf36a793c8a5d08,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1612703389074597537, guid: 5e4825af8d6e5904ebf36a793c8a5d08,
         type: 3}
       propertyPath: m_Name

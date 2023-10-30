@@ -19,6 +19,9 @@ namespace Grigor.StateMachines.Player
             AddFreeFlowTransition<BeginInteractionState, EndInteractionState>();
 
             AddStaticTransition<EndInteractionState, FreeRoamState>();
+
+            AddFreeFlowTransition<FreeRoamState, MoveToRoomState>();
+            AddFreeFlowTransition<MoveToRoomState, FreeRoamState>();
         }
     }
 }

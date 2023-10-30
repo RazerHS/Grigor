@@ -21,7 +21,6 @@ namespace Grigor.Characters.Components.Player
         [ColoredBoxGroup("Debugging", true, 0.5f, 0.1f, 0.9f), ShowInInspector, ReadOnly] private bool isGrounded;
         private bool jump;
         private bool isMovementEnabled = true;
-
         private Vector3 moveDirection;
         private Vector3 verticalVelocity;
         private CharacterController characterController;
@@ -135,9 +134,9 @@ namespace Grigor.Characters.Components.Player
             isMovementEnabled = false;
         }
 
-        public void MovePlayerTo(Vector3 position)
+        public void MovePlayerToPosition(Vector3 position)
         {
-            transform.DOMove(position, 0f);
+            transform.DOMove(position, 0.1f);
         }
     }
 }
