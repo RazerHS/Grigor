@@ -124,9 +124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  removeFromChainAfterEffect: 1
-  indexInChain: 2
+  removeFromChainAfterEffect: 0
   stopsChain: 1
+  indexInChain: 0
   hasTimeEffect: 0
   timePassesOnInteract: 0
   minutesToPass: 1
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactInRange: 0
   removeFromChainAfterEffect: 1
-  indexInChain: 1
   stopsChain: 0
+  indexInChain: 1
   hasTimeEffect: 0
   timePassesOnInteract: 0
   minutesToPass: 1

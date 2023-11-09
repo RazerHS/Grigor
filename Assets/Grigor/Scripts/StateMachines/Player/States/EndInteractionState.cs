@@ -1,5 +1,4 @@
 using CardboardCore.StateMachines;
-using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting;
 using Grigor.Gameplay.Interacting.Components;
 
@@ -16,21 +15,29 @@ namespace Grigor.StateMachines.Player.States
             currentInteractable = owningStateMachine.Owner.Interact.PreviousInteraction;
             InteractablesChain chain = currentInteractable.ParentInteractable.InteractablesChain;
 
-            if (!chain.TryRemoveFromChain(currentInteractable))
-            {
-                if (currentInteractable.StopsChain)
-                {
-                    throw Log.Exception($"Interactable {currentInteractable.name} stayed in chain but also stopped it!");
-                }
+            bool removedFromChain = chain.TryRemoveFromChain(currentInteractable);
 
-                if (!chain.TryGetNextInChainAfter(currentInteractable, out nextInChain))
+            if (!removedFromChain)
+            {
+                bool nextInChainExists = chain.TryGetNextInChainAfter(currentInteractable, out nextInChain);
+
+                if (currentInteractable.StopsChain)
                 {
                     owningStateMachine.ToState<FreeRoamState>();
 
                     return;
                 }
 
-                InteractWithNextInChain(nextInChain);
+                if (!nextInChainExists)
+                {
+                    owningStateMachine.ToState<FreeRoamState>();
+
+                    return;
+                }
+
+                nextInChain.EnableInteraction();
+
+                ForceSetNextInteract(nextInChain);
 
                 return;
             }
@@ -55,7 +62,7 @@ namespace Grigor.StateMachines.Player.States
                 return;
             }
 
-            InteractWithNextInChain(nextInChain);
+            ForceSetNextInteract(nextInChain);
         }
 
         protected override void OnExit()
@@ -63,11 +70,11 @@ namespace Grigor.StateMachines.Player.States
 
         }
 
-        private void InteractWithNextInChain(InteractableComponent nextInChain)
+        private void ForceSetNextInteract(InteractableComponent nextInChain)
         {
-            owningStateMachine.ToState<BeginInteractionState>();
+            owningStateMachine.Owner.Interact.ForceSetNextInteraction(nextInChain);
 
-            owningStateMachine.Owner.Interact.InteractWithNextInChain(nextInChain);
+            owningStateMachine.ToState<BeginInteractionState>();
         }
     }
 }

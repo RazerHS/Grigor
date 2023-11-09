@@ -35,7 +35,7 @@ namespace Grigor.Gameplay.Interacting
         [Button]
         private void ResetChain()
         {
-            interactablesChain.ResetChain(GetComponents<InteractableComponent>().ToList());
+            interactablesChain.ResetInitialChain(GetComponents<InteractableComponent>().ToList());
         }
 
         private void OnDrawGizmos()
@@ -63,7 +63,7 @@ namespace Grigor.Gameplay.Interacting
         {
             interactablesRegistry.Register(this);
 
-            interactablesChain.ResetChain(GetComponents<InteractableComponent>().ToList());
+            interactablesChain.ResetInitialChain(GetComponents<InteractableComponent>().ToList());
 
             interactablesChain.OrderChain();
         }

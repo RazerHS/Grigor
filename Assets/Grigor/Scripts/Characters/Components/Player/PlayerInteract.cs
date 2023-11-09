@@ -20,7 +20,10 @@ namespace Grigor.Characters.Components.Player
         [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private Interactable currentNearestParentInteractable;
         [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private InteractableComponent previousInteraction;
 
+        private bool forcingNextInteraction;
+
         public InteractableComponent PreviousInteraction => previousInteraction;
+        public bool ForcingNextInteraction => forcingNextInteraction;
 
         public event Action InteractEvent;
 
@@ -82,6 +85,12 @@ namespace Grigor.Characters.Components.Player
 
             if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out InteractableComponent interactableComponent, false))
             {
+                if (interactableComponent.InteractionEnabled)
+                {
+                    //edge-case when the interactable is still in the chain but already has been interacted with in the current chain
+                    return;
+                }
+
                 currentNearestParentInteractable.DisableInteractable();
 
                 return;
@@ -148,11 +157,18 @@ namespace Grigor.Characters.Components.Player
             canInteract = false;
         }
 
-        public void InteractWithNextInChain(InteractableComponent interactableComponent)
+        public void ForceSetNextInteraction(InteractableComponent interactableComponent)
         {
             previousInteraction = interactableComponent;
 
+            forcingNextInteraction = true;
+        }
+
+        public void ForceInteractWithNextInteraction()
+        {
             Interact();
+
+            forcingNextInteraction = false;
         }
     }
 }

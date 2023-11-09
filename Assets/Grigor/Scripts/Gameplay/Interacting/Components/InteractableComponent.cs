@@ -6,16 +6,16 @@ using Grigor.Gameplay.Time;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Gameplay.Interacting.Components
 {
     public class InteractableComponent : MonoBehaviour
     {
         [SerializeField, ColoredBoxGroup("Config", false, true)] protected bool interactInRange;
-        [SerializeField, ColoredBoxGroup("Config")] protected bool removeFromChainAfterEffect;
-        [SerializeField, ColoredBoxGroup("Config")] protected int indexInChain;
-        [SerializeField, ColoredBoxGroup("Config")] protected bool stopsChain;
+
+        [SerializeField, ColoredBoxGroup("Chain", false, true), InfoBox("Stays in chain and also stops the chain!", InfoMessageType.Warning, nameof(CheckConfig))] protected bool removeFromChainAfterEffect;
+        [SerializeField, ColoredBoxGroup("Chain")] protected bool stopsChain;
+        [SerializeField, ColoredBoxGroup("Chain")] protected int indexInChain;
 
         [SerializeField, ColoredBoxGroup("Time", false, true)] protected bool hasTimeEffect;
         [SerializeField, ColoredBoxGroup("Time")] protected bool timePassesOnInteract;
@@ -23,6 +23,7 @@ namespace Grigor.Gameplay.Interacting.Components
         [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 24)] protected int hoursToPass = 1;
 
         [SerializeField, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactionEnabled;
+        [ShowInInspector, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactedWithInCurrentChain;
 
         [Inject] protected TimeManager timeManager;
 
@@ -37,9 +38,16 @@ namespace Grigor.Gameplay.Interacting.Components
         public bool RemoveFromChainAfterEffect => removeFromChainAfterEffect;
         public int IndexInChain => indexInChain;
         public Interactable ParentInteractable => parentInteractable;
+        public bool InteractionEnabled => interactionEnabled;
+        public bool InteractedWithInCurrentChain => interactedWithInCurrentChain;
 
         public event Action BeginInteractionEvent;
         public event Action EndInteractionEvent;
+
+        private bool CheckConfig()
+        {
+            return stopsChain && !removeFromChainAfterEffect;
+        }
 
         [OnInspectorInit]
         protected virtual void OnInspectorInit()
@@ -145,6 +153,8 @@ namespace Grigor.Gameplay.Interacting.Components
 
             currentlyInteracting = false;
 
+            interactedWithInCurrentChain = true;
+
             EndInteractionEvent?.Invoke();
 
             EndInteractEffect();
@@ -164,6 +174,11 @@ namespace Grigor.Gameplay.Interacting.Components
             parentInteractable.InteractEvent -= OnInteract;
 
             interactionEnabled = false;
+        }
+
+        public void OnCurrentChainEnded()
+        {
+            interactedWithInCurrentChain = false;
         }
 
         protected void ResetInteraction()

@@ -11,10 +11,9 @@ namespace Grigor.Gameplay.Interacting
     [Serializable]
     public class InteractablesChain
     {
-        [SerializeField, LabelText("Chain")]
-        private List<InteractableComponent> interactableComponents = new();
+        [SerializeField, LabelText("Chain")] private List<InteractableComponent> interactableComponents = new();
 
-        public int InteractablesInChain => interactableComponents.Count;
+        public int InteractablesInChainCount => interactableComponents.Count;
 
         public void OrderChain()
         {
@@ -52,11 +51,32 @@ namespace Grigor.Gameplay.Interacting
             return true;
         }
 
-        public void ResetChain(List<InteractableComponent> interactableComponents)
+        public void ResetInitialChain(List<InteractableComponent> interactableComponents)
         {
             this.interactableComponents = interactableComponents;
 
             OrderChain();
+        }
+
+        private void ResetChain()
+        {
+            OrderChain();
+
+            interactableComponents.ForEach(interactableComponent => interactableComponent.OnCurrentChainEnded());
+        }
+
+        private bool ContinueCurrentChain(InteractableComponent nextInChain)
+        {
+            if (!nextInChain.InteractedWithInCurrentChain)
+            {
+                return true;
+            }
+
+            Log.Write("Current chain ended!");
+
+            ResetChain();
+
+            return false;
         }
 
         public bool TryGetNextInChainAfter(InteractableComponent interactableComponent, out InteractableComponent nextInChain)
@@ -72,22 +92,24 @@ namespace Grigor.Gameplay.Interacting
 
             if (index >= interactableComponents.Count - 1)
             {
-                Log.Write("No next in chain!");
+                Log.Write("Current chain ended!");
+
                 return false;
             }
 
             nextInChain = interactableComponents[index + 1];
 
-            return true;
+            return ContinueCurrentChain(nextInChain);
         }
 
         public void Initialize(Interactable interactable)
         {
             interactableComponents.ForEach(interactableComponent => interactableComponent.Initialize());
 
-            if (InteractablesInChain == 0)
+            if (InteractablesInChainCount == 0)
             {
                 Log.Write($"No interactables in chain in {interactable.name}!");
+
                 return;
             }
 
@@ -99,15 +121,15 @@ namespace Grigor.Gameplay.Interacting
             interactableComponents.ForEach(interactableComponent => interactableComponent.Dispose());
         }
 
-        public bool TryGetNextInChain(out InteractableComponent nextInChain, bool disableIfChainEnded = true)
+        public bool TryGetNextInChain(out InteractableComponent nextInChain, bool allowLogs = true)
         {
             nextInChain = null;
 
-            if (InteractablesInChain == 0)
+            if (InteractablesInChainCount == 0)
             {
-                if (disableIfChainEnded)
+                if (allowLogs)
                 {
-                    Log.Write("Chain ended!");
+                    Log.Write("Chain has no more interactables!");
                 }
 
                 return false;
@@ -115,7 +137,7 @@ namespace Grigor.Gameplay.Interacting
 
             nextInChain = interactableComponents[0];
 
-            return true;
+            return ContinueCurrentChain(nextInChain);
         }
     }
 }
