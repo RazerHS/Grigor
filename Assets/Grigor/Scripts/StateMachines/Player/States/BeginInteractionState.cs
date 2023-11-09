@@ -37,7 +37,7 @@ namespace Grigor.StateMachines.Player.States
         {
             Log.Write($"Ended interaction with: <b>{currentInteractable.GetType().Name}</b> in <b>{currentInteractable.gameObject.name}</b>");
 
-            owningStateMachine.ToState<EndInteractionState>();
+            owningStateMachine.ToNextState();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Grigor.Characters.Components.Player
         [Inject] private PlayerInput playerInput;
 
         [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging", true, 0.1f, 0.1f, 0.9f)] private bool canInteract;
-        [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private Interactable currentNearestInteractable;
+        [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private Interactable currentNearestParentInteractable;
         [ShowInInspector, ReadOnly, ColoredBoxGroup("Debugging")] private InteractableComponent previousInteraction;
 
         public InteractableComponent PreviousInteraction => previousInteraction;
@@ -45,12 +45,12 @@ namespace Grigor.Characters.Components.Player
 
             if (!interactablesRegistry.TryGetNearestInRange(interactPoint.position, out Interactable interactable))
             {
-                if (currentNearestInteractable != null)
+                if (currentNearestParentInteractable != null)
                 {
-                    currentNearestInteractable.DisableProximityEffect(Owner);
+                    currentNearestParentInteractable.DisableProximityEffect(Owner);
                 }
 
-                currentNearestInteractable = null;
+                currentNearestParentInteractable = null;
 
                 return;
             }
@@ -59,28 +59,35 @@ namespace Grigor.Characters.Components.Player
             {
                 interactable.DisableProximityEffect(Owner);
 
-                currentNearestInteractable = null;
+                currentNearestParentInteractable = null;
 
                 return;
             }
 
-            if (currentNearestInteractable == null)
+            if (currentNearestParentInteractable == null)
             {
                 interactable.EnableProximityEffect(Owner);
             }
 
-            if (currentNearestInteractable != null)
+            if (currentNearestParentInteractable != null)
             {
-                if (interactable != currentNearestInteractable)
+                if (interactable != currentNearestParentInteractable)
                 {
                     interactable.EnableProximityEffect(Owner);
-                    currentNearestInteractable.DisableProximityEffect(Owner);
+                    currentNearestParentInteractable.DisableProximityEffect(Owner);
                 }
             }
 
-            currentNearestInteractable = interactable;
+            currentNearestParentInteractable = interactable;
 
-            TryInteractInRange(currentNearestInteractable.GetPrimaryInteractable());
+            if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out InteractableComponent interactableComponent, false))
+            {
+                currentNearestParentInteractable.DisableInteractable();
+
+                return;
+            }
+
+            TryInteractInRange(interactableComponent);
         }
 
         private void OnInteractInput()
@@ -90,14 +97,12 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
-            if (currentNearestInteractable == null)
+            if (currentNearestParentInteractable == null)
             {
                 return;
             }
 
-            previousInteraction = currentNearestInteractable.GetPrimaryInteractable();
-
-            if (previousInteraction == null)
+            if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out previousInteraction))
             {
                 return;
             }
@@ -110,16 +115,11 @@ namespace Grigor.Characters.Components.Player
             //first go into BeginInteraction state, then trigger the interaction
             InteractEvent?.Invoke();
 
-            currentNearestInteractable.Interact(Owner);
+            currentNearestParentInteractable.Interact(Owner);
         }
 
         private void TryInteractInRange(InteractableComponent interactableComponent)
         {
-            if (interactableComponent == null)
-            {
-                return;
-            }
-
             if (!interactableComponent.InteractInRange)
             {
                 return;
@@ -130,7 +130,10 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
-            previousInteraction = currentNearestInteractable.GetPrimaryInteractable();
+            if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out previousInteraction))
+            {
+                return;
+            }
 
             Interact();
         }
@@ -143,6 +146,13 @@ namespace Grigor.Characters.Components.Player
         public void DisableInteract()
         {
             canInteract = false;
+        }
+
+        public void InteractWithNextInChain(InteractableComponent interactableComponent)
+        {
+            previousInteraction = interactableComponent;
+
+            Interact();
         }
     }
 }

@@ -26,8 +26,6 @@ namespace Grigor.Gameplay.Lighting
             int totalDayMinutes = 60 * 24;
             float currentPassedMinutes = hours * 60 + minutes;
 
-            Log.Write(currentPassedMinutes / totalDayMinutes);
-
             UpdateLighting(currentPassedMinutes / totalDayMinutes);
         }
 

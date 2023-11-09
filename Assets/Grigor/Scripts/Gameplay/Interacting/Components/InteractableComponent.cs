@@ -6,28 +6,37 @@ using Grigor.Gameplay.Time;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Grigor.Gameplay.Interacting.Components
 {
     public class InteractableComponent : MonoBehaviour
     {
         [SerializeField, ColoredBoxGroup("Config", false, true)] protected bool interactInRange;
-        [SerializeField, ColoredBoxGroup("Config")] protected bool singleUse;
+        [SerializeField, ColoredBoxGroup("Config")] protected bool removeFromChainAfterEffect;
+        [SerializeField, ColoredBoxGroup("Config")] protected int indexInChain;
+        [SerializeField, ColoredBoxGroup("Config")] protected bool stopsChain;
+
         [SerializeField, ColoredBoxGroup("Time", false, true)] protected bool hasTimeEffect;
         [SerializeField, ColoredBoxGroup("Time")] protected bool timePassesOnInteract;
         [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 60)] protected int minutesToPass = 1;
         [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 24)] protected int hoursToPass = 1;
 
+        [SerializeField, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactionEnabled;
+
         [Inject] protected TimeManager timeManager;
 
-        protected Interactable interactable;
+        protected Interactable parentInteractable;
         protected bool wentInRange;
         protected bool interactedWith;
         protected bool currentlyInteracting;
 
         public bool InteractInRange => interactInRange;
         public bool CurrentlyInteracting => currentlyInteracting;
-        public Interactable Interactable => interactable;
+        public bool StopsChain => stopsChain;
+        public bool RemoveFromChainAfterEffect => removeFromChainAfterEffect;
+        public int IndexInChain => indexInChain;
+        public Interactable ParentInteractable => parentInteractable;
 
         public event Action BeginInteractionEvent;
         public event Action EndInteractionEvent;
@@ -42,16 +51,13 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             Injector.Inject(this);
 
-            if (interactable == null)
+            if (parentInteractable == null)
             {
-                interactable = GetComponent<Interactable>();
+                parentInteractable = GetComponent<Interactable>();
             }
 
-            interactable.InRangeEvent += OnInRange;
-            interactable.OutOfRangeEvent += OnOutOfRange;
-
-            // TO-DO: enable only the next interactable in the chain
-            EnableInteraction();
+            parentInteractable.InRangeEvent += OnInRange;
+            parentInteractable.OutOfRangeEvent += OnOutOfRange;
 
             if (hasTimeEffect)
             {
@@ -70,9 +76,9 @@ namespace Grigor.Gameplay.Interacting.Components
 
         public void Dispose()
         {
-            interactable.InRangeEvent -= OnInRange;
-            interactable.OutOfRangeEvent -= OnOutOfRange;
-            interactable.InteractEvent -= OnInteract;
+            parentInteractable.InRangeEvent -= OnInRange;
+            parentInteractable.OutOfRangeEvent -= OnOutOfRange;
+            parentInteractable.InteractEvent -= OnInteract;
 
             if (hasTimeEffect)
             {
@@ -91,9 +97,9 @@ namespace Grigor.Gameplay.Interacting.Components
 
         protected void FindInteractable()
         {
-            if (interactable == null)
+            if (parentInteractable == null)
             {
-                interactable = GetComponent<Interactable>();
+                parentInteractable = GetComponent<Interactable>();
             }
         }
 
@@ -132,14 +138,6 @@ namespace Grigor.Gameplay.Interacting.Components
 
         protected void EndInteract()
         {
-            if (singleUse)
-            {
-                DisableInteraction();
-
-                // TO-DO: remove this when adding chain
-                interactable.DisableInteractable();
-            }
-
             if (timePassesOnInteract)
             {
                 timeManager.PassTime(minutesToPass, hoursToPass);
@@ -154,20 +152,24 @@ namespace Grigor.Gameplay.Interacting.Components
 
         protected virtual void EndInteractEffect() { }
 
-        protected void EnableInteraction()
+        public void EnableInteraction()
         {
-            interactable.InteractEvent += OnInteract;
+            parentInteractable.InteractEvent += OnInteract;
+
+            interactionEnabled = true;
         }
 
-        protected void DisableInteraction()
+        public void DisableInteraction()
         {
-            interactable.InteractEvent -= OnInteract;
+            parentInteractable.InteractEvent -= OnInteract;
+
+            interactionEnabled = false;
         }
 
         protected void ResetInteraction()
         {
             EnableInteraction();
-            interactable.ResetInteractable();
+            parentInteractable.ResetInteractable();
         }
     }
 }
