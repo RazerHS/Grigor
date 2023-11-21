@@ -3,6 +3,8 @@ using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting.Components;
+using Grigor.UI;
+using Grigor.UI.Widgets;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -20,8 +22,10 @@ namespace Grigor.Gameplay.Interacting
         [SerializeField, HideLabel, ReadOnly] private InteractablesChain interactablesChain;
 
         [Inject] private InteractablesRegistry interactablesRegistry;
+        [Inject] private UIManager uiManager;
 
         private bool inRange;
+        private InteractWidget interactWidget;
 
         public Transform InteractPoint => interactPoint;
         public float InteractDistance => interactDistance;
@@ -66,6 +70,8 @@ namespace Grigor.Gameplay.Interacting
             interactablesChain.ResetInitialChain(GetComponents<InteractableComponent>().ToList());
 
             interactablesChain.OrderChain();
+
+            interactWidget = uiManager.GetWidget<InteractWidget>();
         }
 
         protected override void OnReleased()
@@ -113,6 +119,8 @@ namespace Grigor.Gameplay.Interacting
 
             inRange = true;
 
+            interactWidget.Show();
+
             InRangeEvent?.Invoke(interactingCharacter);
         }
 
@@ -124,6 +132,8 @@ namespace Grigor.Gameplay.Interacting
             }
 
             inRange = false;
+
+            interactWidget.Hide();
 
             OutOfRangeEvent?.Invoke(interactingCharacter);
         }
