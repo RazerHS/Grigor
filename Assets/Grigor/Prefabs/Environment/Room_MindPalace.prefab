@@ -24385,7 +24385,7 @@ PrefabInstance:
     - target: {fileID: 9103947308031618065, guid: d4fab5b1a2ac0e242805004fb3aefb99,
         type: 3}
       propertyPath: moveObjectByY
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24466,6 +24466,11 @@ PrefabInstance:
       propertyPath: clueObject
       value: 
       objectReference: {fileID: 5310314442274763985}
+    - target: {fileID: 9103947308031618065, guid: d4fab5b1a2ac0e242805004fb3aefb99,
+        type: 3}
+      propertyPath: moveObjectByY
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9103947308031618065, guid: d4fab5b1a2ac0e242805004fb3aefb99,
         type: 3}
       propertyPath: clueCredentialType

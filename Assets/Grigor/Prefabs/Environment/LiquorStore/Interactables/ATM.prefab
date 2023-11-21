@@ -128,9 +128,9 @@ MonoBehaviour:
   stopsChain: 1
   indexInChain: 0
   hasTimeEffect: 0
-  timePassesOnInteract: 0
-  minutesToPass: 1
-  hoursToPass: 1
+  timePassesOnInteract: 1
+  minutesToPass: 30
+  hoursToPass: 0
   interactionEnabled: 0
   clue: {fileID: 2622548634776932733}
   duringNightOnly: 0

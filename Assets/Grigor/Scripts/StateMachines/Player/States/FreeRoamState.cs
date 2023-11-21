@@ -1,6 +1,7 @@
 using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Rooms;
+using Grigor.Gameplay.Time;
 using Grigor.UI;
 using Grigor.UI.Widgets;
 
@@ -11,6 +12,7 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private UIManager uiManager;
         [Inject] private RoomRegistry roomRegistry;
         [Inject] private RoomManager roomManager;
+        [Inject] private TimeManager timeManager;
 
         private EndDayWidget endDayWidget;
         private TimeOfDayWidget timeOfDayWidget;
@@ -50,6 +52,8 @@ namespace Grigor.StateMachines.Player.States
         {
             endDayWidget.DisableButton();
 
+            timeManager.SetTimeToNight();
+
             RoomName nextRoom = roomManager.PlayerInMindPalace ? RoomName.Start : RoomName.MindPalace;
             roomManager.MovePlayerToRoom(nextRoom, owningStateMachine.Owner.transform.position);
         }
@@ -60,6 +64,8 @@ namespace Grigor.StateMachines.Player.States
             {
                 endDayWidget.EnableButton();
             }
+
+            timeManager.SetTimeToDay();
         }
 
         protected override void OnExit()

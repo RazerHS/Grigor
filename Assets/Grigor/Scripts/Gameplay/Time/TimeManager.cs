@@ -2,6 +2,7 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using DG.Tweening;
+using Grigor.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -198,6 +199,16 @@ namespace Grigor.Gameplay.Time
             Log.Write($"Time passed! New time: <b>{this.hours}:{this.minutes}</b>");
 
             OnTimeChanged();
+        }
+
+        public void SetTimeToNight()
+        {
+            SetTimeToHour(nightStartHour);
+        }
+
+        public void SetTimeToDay()
+        {
+            SetTimeToHour(dayStartHour);
         }
     }
 }

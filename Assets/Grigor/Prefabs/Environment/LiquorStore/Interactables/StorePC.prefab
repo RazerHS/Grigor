@@ -129,12 +129,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactInRange: 0
   removeFromChainAfterEffect: 0
-  indexInChain: 0
   stopsChain: 0
+  indexInChain: 0
   hasTimeEffect: 0
-  timePassesOnInteract: 0
-  minutesToPass: 1
-  hoursToPass: 1
+  timePassesOnInteract: 1
+  minutesToPass: 20
+  hoursToPass: 0
   interactionEnabled: 0
   clue: {fileID: 1002045655942574350}
   duringNightOnly: 1
