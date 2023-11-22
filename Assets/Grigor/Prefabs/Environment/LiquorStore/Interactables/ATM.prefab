@@ -106,7 +106,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactInRange: 0
   singleUse: 1
+  useTime: 0
   clue: {fileID: 2622548634776932733}
+  duringNightOnly: 0
 --- !u!114 &2622548634776932733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credentialToFind: 2
+  clueData: {fileID: 11400000, guid: c4898d746d5ad4c42bf0f917ad25ac71, type: 2}
