@@ -1,6 +1,7 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.Utilities;
 using DG.Tweening;
+using Grigor.Data.Clues;
 using Grigor.Data.Credentials;
 using Grigor.Gameplay.Clues;
 using Grigor.Gameplay.Interacting.Components;
@@ -42,9 +43,9 @@ namespace Grigor.Gameplay.World.Components
             ResetInteraction();
         }
 
-        public void OnClueFound(CredentialType credentialType)
+        public void OnClueFound(ClueData clueData)
         {
-            if (credentialType != clueCredentialType)
+            if (clueData.CredentialType != clueCredentialType)
             {
                 return;
             }

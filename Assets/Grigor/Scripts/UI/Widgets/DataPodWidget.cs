@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Data;
+using Grigor.Data.Clues;
 using Grigor.Data.Credentials;
 using Grigor.Gameplay.Clues;
 using Grigor.UI;
@@ -78,16 +79,16 @@ public class DataPodWidget : UIWidget, IClueListener
         displayedCredentials.Add(credentialType, credential);
     }
 
-    public void OnClueFound(CredentialType credentialType)
+    public void OnClueFound(ClueData clueData)
     {
-        CredentialUIDisplay credential = displayedCredentials[credentialType];
+        CredentialUIDisplay credential = displayedCredentials[clueData.CredentialType];
 
         if (credential == null)
         {
-            throw Log.Exception($"Found clue <b>{credentialType}</b> doesn't exist in data pod!");
+            throw Log.Exception($"Found clue <b>{clueData.CredentialType}</b> doesn't exist in data pod!");
         }
 
-        RevealCredentialValue(credentialType);
+        RevealCredentialValue(clueData.CredentialType);
     }
 
     public void RegisterClueListener()

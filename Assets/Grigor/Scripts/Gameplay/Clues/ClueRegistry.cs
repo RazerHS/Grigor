@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CardboardCore.DI;
+using Grigor.Data.Clues;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Clues
@@ -24,7 +25,7 @@ namespace Grigor.Gameplay.Clues
 
             foreach (IClueListener listener in clueListeners)
             {
-                listener.OnClueFound(clue.CredentialToFind);
+                listener.OnClueFound(clue.ClueData);
             }
         }
 

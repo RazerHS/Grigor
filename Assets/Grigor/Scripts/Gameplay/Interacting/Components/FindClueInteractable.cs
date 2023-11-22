@@ -11,7 +11,7 @@ namespace Grigor.Gameplay.Interacting.Components
 
         protected override void OnInteractEffect()
         {
-            Log.Write($"Found clue: <b>{clue.CredentialToFind}</b>");
+            Log.Write($"Found clue: <b>{clue.ClueData.CredentialType}</b>");
 
             clue.FindClue();
 
