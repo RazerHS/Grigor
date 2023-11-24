@@ -2,7 +2,6 @@
 using Grigor.Data.Clues;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 {
@@ -11,6 +10,8 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         [SerializeField] private EvidenceBoardNoteType noteType;
         [SerializeField] private Transform pinTransform;
         [SerializeField] private Transform contentsParent;
+        [SerializeField] private Transform anchorToTopParent;
+        [SerializeField] private GameObject redHighlight;
         [SerializeField] private TMP_Text clueHeadingText;
         [SerializeField] private EvidenceNote evidenceNote;
 
@@ -25,12 +26,13 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         {
             contentsParent.localScale = scale;
 
-            Vector3 pinLocalScale = pinTransform.localScale;
-
             //undoing the scaling done by the aspect ratio of the texture
-            Vector3 newLocalScale = new Vector3(pinLocalScale.x / scale.x, pinLocalScale.y / scale.y, pinLocalScale.z / scale.z / aspect);
+            Vector3 anchorToTopLocalScale = anchorToTopParent.localScale;
+            Vector3 newLocalScale = new Vector3(anchorToTopLocalScale.x / scale.x, anchorToTopLocalScale.y / scale.y, anchorToTopLocalScale.z / scale.z);
 
-            pinTransform.localScale = newLocalScale;
+            anchorToTopParent.localScale = newLocalScale;
+
+            clueHeadingText.fontSize *= upscaleFactor;
         }
 
         public void SetHeadingText(string text)
@@ -48,6 +50,18 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             }
 
             evidenceNote.InitializeContents(this);
+
+            UnhighlightNote();
+        }
+
+        public void HighlightNote()
+        {
+            redHighlight.SetActive(true);
+        }
+
+        public void UnhighlightNote()
+        {
+            redHighlight.SetActive(false);
         }
     }
 }

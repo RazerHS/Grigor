@@ -908,7 +908,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e57d89277714035872d194c351f9a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clues: []
+  clues:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   contentsParent: {fileID: 2448347828930755859}
   evidenceStickyNotePrefab: {fileID: 1530012730792288703, guid: ac66bf50b91d7f04a83e359a3e9e5f21,
     type: 3}
