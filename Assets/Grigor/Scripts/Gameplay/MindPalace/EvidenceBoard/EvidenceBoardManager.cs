@@ -3,22 +3,22 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Data.Clues;
 using Grigor.Gameplay.Clues;
+using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 {
     public class EvidenceBoardManager : CardboardCoreBehaviour, IClueListener
     {
-        [SerializeField] private List<EvidenceBoardClue> clues;
+        [SerializeField] private List<EvidenceBoardNote> clues;
         [SerializeField] private Transform contentsParent;
-        [SerializeField] private StickyNoteClue stickyNoteCluePrefab;
-        [SerializeField] private ImageClue imageCluePrefab;
+        [SerializeField, ColoredBoxGroup("References", false, 0.5f, 0.5f, 0.1f)] private EvidenceBoardNote evidenceStickyNotePrefab;
+        [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidencePicturePrefab;
         [SerializeField] private LineRenderer connectionLinePrefab;
-        [SerializeField] private float connectionLineYOffset;
         [SerializeField] private Vector2 boardFrameSize;
         [SerializeField] private Transform boardCenter;
+        [SerializeField] private ClueData testClue;
 
         [Inject] ClueRegistry clueRegistry;
 
@@ -37,42 +37,41 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
         }
 
-        private void AddClue(EvidenceBoardClue clue)
+        private void AddClue(EvidenceBoardNote note)
         {
-            clues.Add(clue);
+            clues.Add(note);
         }
 
-        private void RemoveClue(EvidenceBoardClue clue)
+        private void RemoveClue(EvidenceBoardNote note)
         {
-            clues.Remove(clue);
+            clues.Remove(note);
         }
 
         public void OnClueFound(ClueData clueData)
         {
             Vector3 position = GetNewCluePosition();
 
-            EvidenceBoardClue clue = SpawnClue(clueData.EvidenceBoardClueType, position);
+            EvidenceBoardNote note = SpawnClue(clueData.EvidenceBoardNoteType, position);
 
-            AddClue(clue);
+            note.Initialize(clueData);
+            note.SetHeadingText(clueData.ClueHeading);
+
+            AddClue(note);
         }
 
         [Button]
         private void TestSpawnClue()
         {
-            Vector3 position = GetNewCluePosition();
-            ;
-            EvidenceBoardClue clue = SpawnClue(EvidenceBoardClueType.StickyNote, position);
-
-            AddClue(clue);
+            OnClueFound(testClue);
         }
 
         [Button]
         private void TestConnectToRandomClues()
         {
-            EvidenceBoardClue firstClue = clues[UnityEngine.Random.Range(0, clues.Count)];
-            EvidenceBoardClue secondClue = clues[UnityEngine.Random.Range(0, clues.Count)];
+            EvidenceBoardNote firstNote = clues[Random.Range(0, clues.Count)];
+            EvidenceBoardNote secondNote = clues[Random.Range(0, clues.Count)];
 
-            ConnectClues(firstClue, secondClue);
+            ConnectClues(firstNote, secondNote);
         }
 
         [Button]
@@ -83,7 +82,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
         private Vector3 GetNewCluePosition()
         {
-            return new Vector3(0, UnityEngine.Random.Range(-boardFrameSize.x / 2, boardFrameSize.x / 2), UnityEngine.Random.Range(-boardFrameSize.y / 2, boardFrameSize.y / 2));
+            return new Vector3(0, Random.Range(-boardFrameSize.x / 2, boardFrameSize.x / 2), Random.Range(-boardFrameSize.y / 2, boardFrameSize.y / 2));
         }
 
         public void RegisterClueListener()
@@ -91,48 +90,40 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             clueRegistry.RegisterListener(this);
         }
 
-        private EvidenceBoardClue SpawnClue(EvidenceBoardClueType clueType, Vector3 spawnPosition)
+        private EvidenceBoardNote SpawnClue(EvidenceBoardNoteType noteType, Vector3 spawnPosition)
         {
-            EvidenceBoardClue clue = null;
+            EvidenceBoardNote note = null;
 
-            switch (clueType)
+            switch (noteType)
             {
-                case EvidenceBoardClueType.StickyNote:
-                    clue = Instantiate(stickyNoteCluePrefab, contentsParent);
+                case EvidenceBoardNoteType.StickyNote:
+                    note = Instantiate(evidenceStickyNotePrefab, contentsParent);
                     break;
 
-                case EvidenceBoardClueType.Image:
-                    clue = Instantiate(imageCluePrefab, contentsParent);
+                case EvidenceBoardNoteType.Picture:
+                    note = Instantiate(evidencePicturePrefab, contentsParent);
                     break;
 
                 default:
-                    throw Log.Exception($"Clue prefab for type {clueType} is not set!");
+                    throw Log.Exception($"Clue prefab for type {noteType} is not set!");
             }
 
-            clue.transform.localPosition = spawnPosition;
+            note.transform.localPosition = spawnPosition;
 
-            return clue;
+            return note;
         }
 
-        private void SpawnConnectionLine(EvidenceBoardClue firstClue, EvidenceBoardClue secondClue)
+        private void SpawnConnectionLine(EvidenceBoardNote firstNote, EvidenceBoardNote secondNote)
         {
             LineRenderer line = Instantiate(connectionLinePrefab, contentsParent);
 
-            //getting the position of the pin in the local space of the sticky note
-            Vector3 lineStartPosition = contentsParent.InverseTransformPoint(firstClue.transform.TransformPoint(firstClue.PinPosition));
-            Vector3 lineEndPosition = contentsParent.InverseTransformPoint(secondClue.transform.TransformPoint(secondClue.PinPosition));
-
-            //offset is required because the y-position is affected by the pin's local position
-            lineStartPosition = new Vector3(0, lineStartPosition.y + connectionLineYOffset, lineStartPosition.z);
-            lineEndPosition = new Vector3(0, lineEndPosition.y + connectionLineYOffset, lineEndPosition.z);
-
-            line.SetPosition(0, lineStartPosition);
-            line.SetPosition(1, lineEndPosition);
+            line.SetPosition(0, firstNote.PinTransform.position);
+            line.SetPosition(1, secondNote.PinTransform.position);
         }
 
-        private void ConnectClues(EvidenceBoardClue firstClue, EvidenceBoardClue secondClue)
+        private void ConnectClues(EvidenceBoardNote firstNote, EvidenceBoardNote secondNote)
         {
-            SpawnConnectionLine(firstClue, secondClue);
+            SpawnConnectionLine(firstNote, secondNote);
         }
     }
 }

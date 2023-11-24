@@ -24407,9 +24407,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 70244044662672854, guid: 36782ffc295d9194ca6ce715cc44c1a3,
         type: 3}
-      propertyPath: 'interactableComponents.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1827271584757205497}
+      propertyPath: interactableComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8140858554570531892, guid: 36782ffc295d9194ca6ce715cc44c1a3,
         type: 3}
       propertyPath: m_Name
@@ -24469,50 +24469,8 @@ PrefabInstance:
     - {fileID: 2772406031413939329, guid: 36782ffc295d9194ca6ce715cc44c1a3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8140858554570531892, guid: 36782ffc295d9194ca6ce715cc44c1a3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1827271584757205497}
-    - targetCorrespondingSourceObject: {fileID: 8140858554570531892, guid: 36782ffc295d9194ca6ce715cc44c1a3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4197744715311713139}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36782ffc295d9194ca6ce715cc44c1a3, type: 3}
---- !u!1 &8695627752259887005 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8140858554570531892, guid: 36782ffc295d9194ca6ce715cc44c1a3,
-    type: 3}
-  m_PrefabInstance: {fileID: 601002846918998953}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1827271584757205497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8695627752259887005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactInRange: 0
-  singleUse: 0
-  clue: {fileID: 4197744715311713139}
---- !u!114 &4197744715311713139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8695627752259887005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  credentialToFind: 0
 --- !u!4 &9197673852596927978 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8643396440492262979, guid: 36782ffc295d9194ca6ce715cc44c1a3,
@@ -27427,57 +27385,8 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2141380752263671168}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5665700348633263755, guid: 032a20575c31e1243ae0b6499eb6f22a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5147994107405608285}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 032a20575c31e1243ae0b6499eb6f22a, type: 3}
---- !u!1 &3699087017780006588 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5665700348633263755, guid: 032a20575c31e1243ae0b6499eb6f22a,
-    type: 3}
-  m_PrefabInstance: {fileID: 9076249107409854519}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5147994107405608285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3699087017780006588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d6499a6bd256e47b859377446493a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  fadeRadius: 0
-  priority: 0
-  customPasses:
-  - rid: 7945976134734185349
-  injectionPoint: 1
-  m_TargetCamera: {fileID: 0}
-  useTargetCamera: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 7945976134734185349
-      type: {class: FullScreenCustomPass, ns: UnityEngine.Rendering.HighDefinition,
-        asm: Unity.RenderPipelines.HighDefinition.Runtime}
-      data:
-        m_Name: Custom Pass
-        enabled: 1
-        targetColorBuffer: 0
-        targetDepthBuffer: 0
-        clearFlags: 0
-        passFoldout: 0
-        m_Version: 0
-        fullscreenPassMaterial: {fileID: 2100000, guid: 8b907645cba963d45b9c1575d5ccc127,
-          type: 2}
-        materialPassIndex: 0
-        materialPassName: DrawProcedural
-        fetchColorBuffer: 0
 --- !u!4 &4430354974199928040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4651822702121497823, guid: 032a20575c31e1243ae0b6499eb6f22a,

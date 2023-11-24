@@ -73,5 +73,12 @@ namespace Grigor.Utils
             Log.Write($"Data updated in {Time.time - startTime} seconds!");
         }
 #endif
+
+        public static Vector3 GetScaleBasedOnTextureSize(float width, float height, float upscaleFactor = 1f)
+        {
+            float aspect = width / height;
+
+            return new Vector3(aspect, 1, 1) * upscaleFactor;
+        }
     }
 }

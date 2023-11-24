@@ -1,8 +1,8 @@
 ﻿namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 {
-    public enum EvidenceBoardClueType
+    public enum EvidenceBoardNoteType
     {
         StickyNote,
-        Image
+        Picture
     }
 }
