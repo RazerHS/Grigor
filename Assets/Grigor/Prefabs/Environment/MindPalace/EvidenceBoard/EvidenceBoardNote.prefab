@@ -144,12 +144,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a049592fb64a39877469e3e29df343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteType: 0
   pinTransform: {fileID: 3918854754118693124}
   contentsParent: {fileID: 1106539148640184534}
   anchorToTopParent: {fileID: 554264767582530868}
   redHighlight: {fileID: 6913725314105014076}
   clueHeadingText: {fileID: 6032642468860734315}
+  noteType: 0
   evidenceNote: {fileID: 0}
 --- !u!1 &6913725314105014076
 GameObject:
@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8144344793515822178
 Transform:
   m_ObjectHideFlags: 0
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: clue title
+  m_text: clue heading
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5611f399b6f443148ae3fd59a7d0594b, type: 2}
   m_sharedMaterial: {fileID: 8230533503425778180, guid: 5611f399b6f443148ae3fd59a7d0594b,

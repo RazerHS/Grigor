@@ -4,6 +4,7 @@ using CardboardCore.Utilities;
 using Grigor.Data.Editor;
 using JetBrains.Annotations;
 using MEC;
+using PlasticPipe.PlasticProtocol.Messages;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Grigor.Utils
 {
     public static class Helper
     {
+        private static KeyCode lastKeyPressed;
+
         private static IEnumerator<float> DelayCoroutine(float delay, Action callback)
         {
             yield return Timing.WaitForSeconds(delay);
@@ -80,5 +83,33 @@ namespace Grigor.Utils
 
             return new Vector3(aspect, 1, 1) * upscaleFactor;
         }
+
+#if UNITY_EDITOR
+        public static bool GetKeyPressed(out KeyCode keyCode)
+        {
+            keyCode = KeyCode.None;
+            var @event = Event.current;
+
+            if (!@event.isKey)
+            {
+                return false;
+            }
+
+            if (@event.type != EventType.KeyDown)
+            {
+                return false;
+            }
+
+            if (@event.keyCode == lastKeyPressed)
+            {
+                return false;
+            }
+
+            keyCode = @event.keyCode;
+            lastKeyPressed = keyCode;
+
+            return true;
+        }
+#endif
     }
 }

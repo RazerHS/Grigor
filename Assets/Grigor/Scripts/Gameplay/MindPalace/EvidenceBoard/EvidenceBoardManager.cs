@@ -1,30 +1,61 @@
 ﻿using System.Collections.Generic;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
+using Grigor.Data;
 using Grigor.Data.Clues;
 using Grigor.Gameplay.Clues;
+using Grigor.Utils;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 {
     public class EvidenceBoardManager : CardboardCoreBehaviour, IClueListener
     {
-        [SerializeField] private List<EvidenceBoardNote> clues;
-        [SerializeField] private Transform contentsParent;
-        [SerializeField, ColoredBoxGroup("References", false, 0.5f, 0.5f, 0.1f)] private EvidenceBoardNote evidenceStickyNotePrefab;
+        [SerializeField, ColoredBoxGroup("Board", false, true)] private List<EvidenceBoardNote> notes;
+        [SerializeField, ColoredBoxGroup("Board", false, true)] private List<ConnectionLine> connections;
+        [SerializeField, ColoredBoxGroup("Board")] private Vector2 boardFrameSize;
+
+        [SerializeField, ColoredBoxGroup("References", false, true)] private Transform contentsParent;
+        [SerializeField, ColoredBoxGroup("References")] private LineRenderer connectionLinePrefab;
+        [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidenceStickyNotePrefab;
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidencePicturePrefab;
-        [SerializeField] private LineRenderer connectionLinePrefab;
-        [SerializeField] private Vector2 boardFrameSize;
-        [SerializeField] private Transform boardCenter;
-        [SerializeField] private ClueData testClue;
+
+        [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void HideAllClues() => HideAllCluesOnBoard();
+        [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void RevealAllClues() => RevealAllCluesOnBoard();
+        [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void ConnectAllClues() => ConnectAllCluesOnBoard();
+        [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void SpawnAllClues() => SpawnAllCluesOnBoard();
+        [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void ClearAllClues() => RemoveAllCluesFromBoard();
+
+        [SerializeField, HideInInspector] private DataStorage dataStorage;
 
         [Inject] ClueRegistry clueRegistry;
 
-        private void OnDrawGizmos()
+        [OnInspectorInit]
+        private void OnInspectorInit()
         {
-            Gizmos.DrawWireCube(boardCenter.position, new Vector3(0, boardFrameSize.x, boardFrameSize.y));
+            if (dataStorage == null)
+            {
+                dataStorage = Helper.LoadAsset("DataStorage", dataStorage);
+            }
+        }
+
+        [OnInspectorGUI]
+        private void OnInspectorGUI()
+        {
+            if (!Helper.GetKeyPressed(out KeyCode keyCode))
+            {
+               return;
+            }
+
+            if (keyCode != KeyCode.S)
+            {
+                return;
+            }
+
+            RefreshBoard();
         }
 
         protected override void OnInjected()
@@ -39,45 +70,32 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
         private void AddClue(EvidenceBoardNote note)
         {
-            clues.Add(note);
+            notes.Add(note);
         }
 
-        private void RemoveClue(EvidenceBoardNote note)
+        private void RemoveAllCluesFromBoard()
         {
-            clues.Remove(note);
+            DestroyAllConnections();
+
+            for (int i = notes.Count - 1; i >= 0; i--)
+            {
+                EvidenceBoardNote note = notes[i];
+
+                notes.Remove(note);
+
+                DestroyImmediate(note.gameObject);
+            }
         }
 
         public void OnClueFound(ClueData clueData)
         {
             Vector3 position = GetNewCluePosition();
 
-            EvidenceBoardNote note = SpawnClue(clueData.EvidenceBoardNoteType, position);
+            EvidenceBoardNote note = SpawnClueOnBoard(clueData.EvidenceBoardNoteType, position);
 
             note.Initialize(clueData);
-            note.SetHeadingText(clueData.ClueHeading);
 
             AddClue(note);
-        }
-
-        [Button]
-        private void TestSpawnClue()
-        {
-            OnClueFound(testClue);
-        }
-
-        [Button]
-        private void TestConnectToRandomClues()
-        {
-            EvidenceBoardNote firstNote = clues[Random.Range(0, clues.Count)];
-            EvidenceBoardNote secondNote = clues[Random.Range(0, clues.Count)];
-
-            ConnectClues(firstNote, secondNote);
-        }
-
-        [Button]
-        private void ClearEvidenceFromList()
-        {
-            clues.Clear();
         }
 
         private Vector3 GetNewCluePosition()
@@ -90,7 +108,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             clueRegistry.RegisterListener(this);
         }
 
-        private EvidenceBoardNote SpawnClue(EvidenceBoardNoteType noteType, Vector3 spawnPosition)
+        private EvidenceBoardNote SpawnClueOnBoard(EvidenceBoardNoteType noteType, Vector3 spawnPosition)
         {
             EvidenceBoardNote note = null;
 
@@ -113,17 +131,102 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             return note;
         }
 
-        private void SpawnConnectionLine(EvidenceBoardNote firstNote, EvidenceBoardNote secondNote)
+        private void ConnectClues(ClueData firstClue, ClueData secondClue)
         {
-            LineRenderer line = Instantiate(connectionLinePrefab, contentsParent);
+            EvidenceBoardNote firstNote = GetNoteByClue(firstClue);
+            EvidenceBoardNote secondNote = GetNoteByClue(secondClue);
 
-            line.SetPosition(0, firstNote.PinTransform.position);
-            line.SetPosition(1, secondNote.PinTransform.position);
+            LineRenderer lineRenderer = Instantiate(connectionLinePrefab, contentsParent);
+
+            ConnectionLine line = new ConnectionLine(lineRenderer, firstNote.PinTransform.position, secondNote.PinTransform.position, firstClue, secondClue);
+
+            connections.Add(line);
         }
 
-        private void ConnectClues(EvidenceBoardNote firstNote, EvidenceBoardNote secondNote)
+        private void SpawnAllCluesOnBoard()
         {
-            SpawnConnectionLine(firstNote, secondNote);
+            if (dataStorage == null)
+            {
+                return;
+            }
+
+            foreach (ClueData clueData in dataStorage.ClueData)
+            {
+                OnClueFound(clueData);
+            }
+        }
+
+        private EvidenceBoardNote GetNoteByClue(ClueData clueData)
+        {
+            foreach (EvidenceBoardNote note in notes)
+            {
+                if (note.ClueData != clueData)
+                {
+                    continue;
+                }
+
+                return note;
+            }
+
+            throw Log.Exception($"Note with clue {clueData.ClueHeading} not found!");
+        }
+
+        private void HideAllCluesOnBoard()
+        {
+            foreach (EvidenceBoardNote note in notes)
+            {
+                note.HideNote();
+            }
+        }
+
+        private void RevealAllCluesOnBoard()
+        {
+            foreach (EvidenceBoardNote note in notes)
+            {
+                note.RevealNote();
+            }
+        }
+
+        private void ConnectAllCluesOnBoard()
+        {
+            DestroyAllConnections();
+
+            foreach (EvidenceBoardNote note in notes)
+            {
+                if (note == null)
+                {
+                    continue;
+                }
+
+                foreach (ClueData secondClue in note.ClueData.CluesToConnectTo)
+                {
+                    ConnectClues(note.ClueData, secondClue);
+                }
+            }
+        }
+
+        private void DestroyAllConnections()
+        {
+            for (int i = connections.Count - 1; i >= 0; i--)
+            {
+                ConnectionLine line = connections[i];
+
+                connections.Remove(line);
+
+                DestroyImmediate(line.CurrentLine.gameObject);
+            }
+        }
+
+        private void RefreshBoard()
+        {
+            foreach (EvidenceBoardNote note in notes)
+            {
+                note.RefreshContents();
+            }
+
+            ConnectAllClues();
+
+            Log.Write("Board refreshed!");
         }
     }
 }
