@@ -26,10 +26,22 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             SetLineStartAndEnd(startPosition, endPosition);
         }
 
+        public void HideLine()
+        {
+            currentLine.gameObject.SetActive(false);
+        }
+
+        public void ShowLine()
+        {
+            currentLine.gameObject.SetActive(true);
+        }
+
         private void SetLineStartAndEnd(Vector3 startPosition, Vector3 endPosition)
         {
             currentLine.SetPosition(0, startPosition);
             currentLine.SetPosition(1, endPosition);
         }
+
+
     }
 }

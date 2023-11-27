@@ -19,8 +19,8 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         [SerializeField, ColoredBoxGroup("Note Settings", false, true)] private EvidenceBoardNoteType noteType;
         [SerializeField, ColoredBoxGroup("Note Settings")] private EvidenceNote evidenceNote;
 
-        [SerializeField] private ClueData clueData;
-        [SerializeField] private float clueHeadingDefaultFontSize;
+        [SerializeField, HideInInspector] private ClueData clueData;
+        [SerializeField, HideInInspector] private float clueHeadingDefaultFontSize;
 
         [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void Highlight() => HighlightNote();
         [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void Unhighlight() => UnhighlightNote();
@@ -75,6 +75,8 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
         public void InitializeNoteContents()
         {
+            gameObject.name = clueData.name;
+
             SetHeadingText(clueData.ClueHeading);
 
             evidenceNote.OnInitializeContents(this);

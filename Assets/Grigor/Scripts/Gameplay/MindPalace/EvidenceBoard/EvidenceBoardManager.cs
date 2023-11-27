@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
@@ -21,6 +22,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         [SerializeField, ColoredBoxGroup("Board")] private Vector2 boardFrameSize;
 
         [SerializeField, ColoredBoxGroup("References", false, true)] private Transform contentsParent;
+        [SerializeField, ColoredBoxGroup("References")] private Transform connectionsParent;
         [SerializeField, ColoredBoxGroup("References")] private LineRenderer connectionLinePrefab;
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidenceStickyNotePrefab;
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidencePicturePrefab;
@@ -156,7 +158,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             EvidenceBoardNote firstNote = GetNoteByClue(firstClue);
             EvidenceBoardNote secondNote = GetNoteByClue(secondClue);
 
-            LineRenderer lineRenderer = Instantiate(connectionLinePrefab, contentsParent);
+            LineRenderer lineRenderer = Instantiate(connectionLinePrefab, connectionsParent);
 
             ConnectionLine line = new ConnectionLine(lineRenderer, firstNote.PinTransform.position, secondNote.PinTransform.position, firstClue, secondClue);
 
@@ -172,6 +174,11 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
             foreach (ClueData clueData in dataStorage.ClueData)
             {
+                if (notes.Any(note => note.ClueData == clueData))
+                {
+                    continue;
+                }
+
                 SpawnClue(clueData);
             }
         }
@@ -197,6 +204,11 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             {
                 note.HideNote();
             }
+
+            foreach (ConnectionLine line in connections)
+            {
+                line.HideLine();
+            }
         }
 
         private void RevealAllCluesOnBoard()
@@ -204,6 +216,11 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             foreach (EvidenceBoardNote note in notes)
             {
                 note.RevealNote();
+            }
+
+            foreach (ConnectionLine line in connections)
+            {
+                line.ShowLine();
             }
         }
 
@@ -233,7 +250,14 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
                 connections.Remove(line);
 
-                DestroyImmediate(line.CurrentLine.gameObject);
+                try
+                {
+                    DestroyImmediate(line.CurrentLine.gameObject);
+                }
+                catch (Exception e)
+                {
+
+                }
             }
         }
 
