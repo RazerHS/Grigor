@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetName: name
   credentialType: 0
-  evidenceBoardNoteType: 0
+  evidenceBoardNoteType: 1
   clueHeading: name
   evidenceText: 
   cluesToConnectTo:
   - {fileID: 11400000, guid: 148c0ff15bda091409af06dca832b02c, type: 2}
-  evidenceSprite: {fileID: 0}
-  textureSize: {x: 0, y: 0}
-  upscaleFactor: 0
+  evidenceSprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  textureSize: {x: 64, y: 64}
+  upscaleFactor: 1

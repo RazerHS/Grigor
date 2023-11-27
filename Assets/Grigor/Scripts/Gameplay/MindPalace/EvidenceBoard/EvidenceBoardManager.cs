@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Data;
@@ -7,6 +8,7 @@ using Grigor.Gameplay.Clues;
 using Grigor.Utils;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,9 +25,10 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidenceStickyNotePrefab;
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidencePicturePrefab;
 
-        [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void HideAllClues() => HideAllCluesOnBoard();
+        [ColoredBoxGroup("Creating", false, true), Button(ButtonSizes.Large)] private void HideAllClues() => HideAllCluesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void RevealAllClues() => RevealAllCluesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void ConnectAllClues() => ConnectAllCluesOnBoard();
+        [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void Refresh() => RefreshBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void SpawnAllClues() => SpawnAllCluesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void ClearAllClues() => RemoveAllCluesFromBoard();
 
@@ -40,6 +43,10 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             {
                 dataStorage = Helper.LoadAsset("DataStorage", dataStorage);
             }
+
+            dataStorage.OnDataRefreshed += RefreshBoard;
+
+            RefreshBoard();
         }
 
         [OnInspectorGUI]
@@ -58,9 +65,17 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             RefreshBoard();
         }
 
+        [OnInspectorDispose]
+        private void OnInspectorDispose()
+        {
+            dataStorage.OnDataRefreshed -= RefreshBoard;
+        }
+
         protected override void OnInjected()
         {
             RegisterClueListener();
+
+            notes.ForEach(note => note.InitializeNoteContents());
         }
 
         protected override void OnReleased()
@@ -88,6 +103,11 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         }
 
         public void OnClueFound(ClueData clueData)
+        {
+            notes.FirstOrDefault(note => note.ClueData == clueData)?.RevealNote();
+        }
+
+        private void SpawnClue(ClueData clueData)
         {
             Vector3 position = GetNewCluePosition();
 
@@ -152,7 +172,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
             foreach (ClueData clueData in dataStorage.ClueData)
             {
-                OnClueFound(clueData);
+                SpawnClue(clueData);
             }
         }
 

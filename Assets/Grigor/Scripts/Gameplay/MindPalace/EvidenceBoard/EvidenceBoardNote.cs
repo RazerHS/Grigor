@@ -1,4 +1,5 @@
-﻿using CardboardCore.Utilities;
+﻿using System;
+using CardboardCore.Utilities;
 using Grigor.Data.Clues;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -18,37 +19,16 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         [SerializeField, ColoredBoxGroup("Note Settings", false, true)] private EvidenceBoardNoteType noteType;
         [SerializeField, ColoredBoxGroup("Note Settings")] private EvidenceNote evidenceNote;
 
+        [SerializeField] private ClueData clueData;
+        [SerializeField] private float clueHeadingDefaultFontSize;
+
         [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void Highlight() => HighlightNote();
         [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void Unhighlight() => UnhighlightNote();
-
-        private ClueData clueData;
-
-        private Vector3 contentsDefaultScale;
-        private Vector3 anchorToTopDefaultScale;
-        private float clueHeadingDefaultFontSize;
 
         public EvidenceBoardNoteType NoteType => noteType;
         public Transform PinTransform => pinTransform;
         public Transform ContentsParent => contentsParent;
         public ClueData ClueData => clueData;
-
-        public void ScaleContents(Vector3 scale, float upscaleFactor, float aspect)
-        {
-            contentsParent.localScale = scale;
-
-            //undoing the scaling done by the aspect ratio of the texture
-            Vector3 anchorToTopLocalScale = anchorToTopDefaultScale;
-            Vector3 newLocalScale = new Vector3(anchorToTopLocalScale.x / scale.x, anchorToTopLocalScale.y / scale.y, anchorToTopLocalScale.z / scale.z);
-
-            anchorToTopParent.localScale = newLocalScale;
-
-            clueHeadingText.fontSize = clueHeadingDefaultFontSize * upscaleFactor;
-        }
-
-        public void SetHeadingText(string text)
-        {
-            clueHeadingText.text = text;
-        }
 
         public void Initialize(ClueData clueData)
         {
@@ -59,13 +39,45 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
                 throw Log.Exception($"No EvidenceNote component found on board note <b>{gameObject.name}</b>!");
             }
 
-            contentsDefaultScale = contentsParent.localScale;
-            anchorToTopDefaultScale = anchorToTopParent.localScale;
             clueHeadingDefaultFontSize = clueHeadingText.fontSize;
 
             InitializeNoteContents();
 
             UnhighlightNote();
+        }
+
+        public void ScaleContents(Vector3 scale, float upscaleFactor, float aspect)
+        {
+            ResetContentScale();
+
+            contentsParent.localScale = scale;
+
+
+            //undoing the scaling done by the aspect ratio of the texture
+            Vector3 anchorToTopLocalScale = anchorToTopParent.localScale;
+            Vector3 newLocalScale = new Vector3(anchorToTopLocalScale.x / scale.x, anchorToTopLocalScale.y / scale.y, anchorToTopLocalScale.z / scale.z);
+
+            anchorToTopParent.localScale = newLocalScale;
+
+            clueHeadingText.fontSize = clueHeadingDefaultFontSize * upscaleFactor;
+        }
+
+        private void ResetContentScale()
+        {
+            contentsParent.localScale = Vector3.one;
+            anchorToTopParent.localScale = Vector3.one;
+        }
+
+        private void SetHeadingText(string text)
+        {
+            clueHeadingText.text = text;
+        }
+
+        public void InitializeNoteContents()
+        {
+            SetHeadingText(clueData.ClueHeading);
+
+            evidenceNote.OnInitializeContents(this);
         }
 
         public void HighlightNote()
@@ -93,11 +105,5 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             InitializeNoteContents();
         }
 
-        private void InitializeNoteContents()
-        {
-            SetHeadingText(clueData.ClueHeading);
-
-            evidenceNote.OnInitializeContents(this);
-        }
     }
 }
