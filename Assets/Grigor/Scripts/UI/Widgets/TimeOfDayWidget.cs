@@ -1,9 +1,7 @@
 ﻿using CardboardCore.DI;
 using Grigor.Gameplay.Time;
-using Microsoft.Win32.SafeHandles;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Grigor.UI.Widgets
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace Grigor.UI.Widgets
+﻿namespace Grigor.UI.Widgets
 {
     public class InteractWidget : UIWidget
     {

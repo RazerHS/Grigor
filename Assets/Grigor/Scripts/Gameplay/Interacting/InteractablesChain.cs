@@ -5,9 +5,6 @@ using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting.Components;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Interacting
