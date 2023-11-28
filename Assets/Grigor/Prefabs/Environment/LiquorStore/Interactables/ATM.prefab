@@ -18,6 +18,21 @@ PrefabInstance:
       propertyPath: 'interactableComponents.Array.data[0]'
       value: 
       objectReference: {fileID: 3630775316704127846}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: interactablesChain.interactableComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3630775316704127846}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8111107123989653288}
     - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_Name
@@ -85,6 +100,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2622548634776932733}
+    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8111107123989653288}
   m_SourcePrefab: {fileID: 100100000, guid: 074fe82d7e4a3014996892cf2abd72fc, type: 3}
 --- !u!1 &559303747361502387 stripped
 GameObject:
@@ -105,8 +124,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  singleUse: 1
+  removeFromChainAfterEffect: 0
+  stopsChain: 1
+  indexInChain: 0
+  hasTimeEffect: 0
+  timePassesOnInteract: 1
+  minutesToPass: 30
+  hoursToPass: 0
+  interactionEnabled: 0
   clue: {fileID: 2622548634776932733}
+  duringNightOnly: 0
 --- !u!114 &2622548634776932733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,3 +147,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   credentialToFind: 2
+--- !u!114 &8111107123989653288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559303747361502387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e87c73b5774a55a0164481fd81d3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 1
+  hasTimeEffect: 0
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  interactionEnabled: 0

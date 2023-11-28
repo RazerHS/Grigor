@@ -325,10 +325,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  singleUse: 1
-  useTime: 0
+  removeFromChainAfterEffect: 0
+  stopsChain: 0
+  indexInChain: 0
+  hasTimeEffect: 0
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  interactionEnabled: 0
   clueObject: {fileID: 0}
-  moveObjectByY: 1
+  moveObjectByY: 5
   clueCredentialType: 0
 --- !u!4 &7950649104214116574 stripped
 Transform:
