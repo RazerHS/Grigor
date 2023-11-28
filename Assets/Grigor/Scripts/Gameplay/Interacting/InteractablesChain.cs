@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting.Components;
+using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Interacting
@@ -11,13 +15,55 @@ namespace Grigor.Gameplay.Interacting
     [Serializable]
     public class InteractablesChain
     {
-        [SerializeField, LabelText("Chain")] private List<InteractableComponent> interactableComponents = new();
+        [SerializeField, LabelText("Chain"), ListElementInlineButton(nameof(IncrementElementIndex), "", SdfIconType.CaretDownFill), ListElementInlineButton(nameof(DecrementElementIndex), "", SdfIconType.CaretUpFill)] private List<InteractableComponent> interactableComponents = new();
 
         public int InteractablesInChainCount => interactableComponents.Count;
 
         public void OrderChain()
         {
             interactableComponents = interactableComponents.OrderBy(interactableComponent => interactableComponent.IndexInChain).ToList();
+        }
+
+        private void RefreshChainIndeces()
+        {
+            for (int i = 0; i < interactableComponents.Count; i++)
+            {
+                interactableComponents[i].SetDefaultIndexInChain(i);
+            }
+        }
+
+        private void IncrementElementIndex(int index, InteractableComponent element)
+        {
+            int targetIndex = index + 1;
+
+            if (targetIndex >= interactableComponents.Count)
+            {
+                return;
+            }
+
+            InteractableComponent elementToSwap = interactableComponents[targetIndex];
+
+            interactableComponents[targetIndex] = element;
+            interactableComponents[index] = elementToSwap;
+
+            RefreshChainIndeces();
+        }
+
+        private void DecrementElementIndex(int index, InteractableComponent element)
+        {
+            int targetIndex = index - 1;
+
+            if (targetIndex < 0)
+            {
+                return;
+            }
+
+            InteractableComponent elementToSwap = interactableComponents[targetIndex];
+
+            interactableComponents[targetIndex] = element;
+            interactableComponents[index] = elementToSwap;
+
+            RefreshChainIndeces();
         }
 
         public void AddToChain(InteractableComponent interactableComponent)
@@ -56,6 +102,8 @@ namespace Grigor.Gameplay.Interacting
             this.interactableComponents = interactableComponents;
 
             OrderChain();
+
+            RefreshChainIndeces();
         }
 
         private void ResetChain()

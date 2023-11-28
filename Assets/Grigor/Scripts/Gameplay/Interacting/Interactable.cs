@@ -19,7 +19,7 @@ namespace Grigor.Gameplay.Interacting
 
         [SerializeField, ColoredBoxGroup("Debugging", false, 0.5f, 0.1f, 0.2f)] private bool interactingEnabled;
 
-        [SerializeField, HideLabel, ReadOnly] private InteractablesChain interactablesChain;
+        [SerializeField, HideLabel] private InteractablesChain interactablesChain;
 
         [Inject] private InteractablesRegistry interactablesRegistry;
         [Inject] private UIManager uiManager;

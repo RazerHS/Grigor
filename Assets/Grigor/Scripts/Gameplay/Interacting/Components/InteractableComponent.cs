@@ -15,7 +15,7 @@ namespace Grigor.Gameplay.Interacting.Components
 
         [SerializeField, ColoredBoxGroup("Chain", false, true), HideIf(nameof(IsOnlyInteractableInChain)), InfoBox("Stays in chain and also stops the chain!", InfoMessageType.Warning, nameof(CheckConfig))] protected bool removeFromChainAfterEffect;
         [SerializeField, ColoredBoxGroup("Chain"), HideIf(nameof(IsOnlyInteractableInChain))] protected bool stopsChain;
-        [SerializeField, ColoredBoxGroup("Chain"), HideIf(nameof(IsOnlyInteractableInChain))] protected int indexInChain;
+        [SerializeField, ColoredBoxGroup("Chain"), HideIf(nameof(IsOnlyInteractableInChain)), ReadOnly] protected int indexInChain;
 
         [SerializeField, ColoredBoxGroup("Time", false, true)] protected bool hasTimeEffect;
         [SerializeField, ColoredBoxGroup("Time")] protected bool timePassesOnInteract;
@@ -190,6 +190,11 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             EnableInteraction();
             parentInteractable.ResetInteractable();
+        }
+
+        public void SetDefaultIndexInChain(int index)
+        {
+            indexInChain = index;
         }
     }
 }
