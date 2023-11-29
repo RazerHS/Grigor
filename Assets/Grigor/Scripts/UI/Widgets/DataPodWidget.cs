@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
@@ -7,25 +8,34 @@ using Grigor.Data.Credentials;
 using Grigor.Gameplay.Clues;
 using Grigor.UI;
 using Grigor.UI.Data;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DataPodWidget : UIWidget, IClueListener
 {
     [SerializeField] private CredentialUIDisplay credentialDisplayPrefab;
+    [SerializeField] private ClueUIDisplay clueDisplayPrefab;
     [SerializeField] private GameObject dataPodView;
     [SerializeField] private Transform credentialDisplayParent;
+    [SerializeField] private Transform clueDisplayParent;
     [SerializeField] private Button toggleDataPodButton;
 
     [Inject] private ClueRegistry clueRegistry;
     [Inject] private DataRegistry dataRegistry;
 
+    [ShowInInspector] private readonly Dictionary<CredentialType, CredentialUIDisplay> displayedCredentials = new();
+    [ShowInInspector] private List<ClueUIDisplay> displayedClues = new();
+    [ShowInInspector] private Dictionary<CredentialUIDisplay, ClueUIDisplay> correctMatches = new();
+
     private CredentialWallet criminalCredentialWallet;
-    private readonly Dictionary<CredentialType, CredentialUIDisplay> displayedCredentials = new();
+
+    public Transform ClueDisplayParent => clueDisplayParent;
 
     protected override void OnShow()
     {
         InsertCredentials();
+        InsertClues();
         RegisterClueListener();
 
         toggleDataPodButton.onClick.AddListener(OnToggleDataPodButtonClicked);
@@ -42,7 +52,19 @@ public class DataPodWidget : UIWidget, IClueListener
 
         foreach (CredentialEntry credential in criminalCredentialWallet.CredentialEntries)
         {
-            AddNewCredential(credential.CredentialType, credential.CredentialValue);
+            AddNewCredential(credential.CredentialType);
+        }
+    }
+
+    private void InsertClues()
+    {
+        foreach (ClueData clueData in dataRegistry.ClueData)
+        {
+            ClueUIDisplay clueUIDisplay = Instantiate(clueDisplayPrefab, clueDisplayParent);
+            clueUIDisplay.SetClueData(clueData);
+            clueUIDisplay.SetClueText(clueData.ClueHeading);
+
+            displayedClues.Add(clueUIDisplay);
         }
     }
 
@@ -51,20 +73,7 @@ public class DataPodWidget : UIWidget, IClueListener
         dataPodView.SetActive(!dataPodView.activeSelf);
     }
 
-    private void RevealCredentialValue(CredentialType credentialType)
-    {
-        if (!displayedCredentials.ContainsKey(credentialType))
-        {
-            Log.Error($"Credential <b>{credentialType}</b> does not exist in data pod. Maybe adding it was intended instead?");
-            return;
-        }
-
-        Log.Write($"<b>{credentialType}</b> value revealed: <b>{displayedCredentials[credentialType].StoredValue}</b>!");
-
-        displayedCredentials[credentialType].SetCredentialDisplay(credentialType.ToString(), true);
-    }
-
-    public void AddNewCredential(CredentialType credentialType, string value)
+    private void AddNewCredential(CredentialType credentialType)
     {
         if (displayedCredentials.ContainsKey(credentialType))
         {
@@ -72,23 +81,80 @@ public class DataPodWidget : UIWidget, IClueListener
             return;
         }
 
-        CredentialUIDisplay credential = Instantiate(credentialDisplayPrefab, credentialDisplayParent);
-        credential.StoreValue(value);
-        credential.SetCredentialDisplay(credentialType.ToString(), false);
+        CredentialUIDisplay credentialUIDisplay = Instantiate(credentialDisplayPrefab, credentialDisplayParent);
+        credentialUIDisplay.StoreCredentialType(credentialType);
+        credentialUIDisplay.SetCredentialDisplay(credentialType.ToString(), false);
 
-        displayedCredentials.Add(credentialType, credential);
+        displayedCredentials.Add(credentialType, credentialUIDisplay);
+
+        credentialUIDisplay.CheckDroppedClueEvent += OnClueAttached;
+    }
+
+    private void OnClueAttached(CredentialUIDisplay credentialUIDisplay, ClueUIDisplay clueUIDisplay)
+    {
+        if (credentialUIDisplay.CredentialType != clueUIDisplay.ClueData.CredentialType)
+        {
+            return;
+        }
+
+        Log.Write($"matched clue {clueUIDisplay.ClueData.CredentialType.ToString()}!");
+
+        CheckCurrentClueMatches();
+    }
+
+    private void CheckCurrentClueMatches()
+    {
+        Dictionary<CredentialUIDisplay, ClueUIDisplay> currentCorrectMatches = new();
+
+        foreach (CredentialUIDisplay credentialUIDisplay in displayedCredentials.Values)
+        {
+            if (credentialUIDisplay.AttachedClueUIDisplay == null)
+            {
+                continue;
+            }
+
+            if (credentialUIDisplay.CredentialType != credentialUIDisplay.AttachedClueUIDisplay.ClueData.CredentialType)
+            {
+                continue;
+            }
+
+            if (correctMatches.ContainsKey(credentialUIDisplay))
+            {
+                return;
+            }
+
+            currentCorrectMatches.Add(credentialUIDisplay, credentialUIDisplay.AttachedClueUIDisplay);
+        }
+
+        if (currentCorrectMatches.Count < GameConfig.Instance.CorrectCluesBeforeLock)
+        {
+            return;
+        }
+
+        FoundNewCorrectMatches(currentCorrectMatches);
+    }
+
+    private void FoundNewCorrectMatches(Dictionary<CredentialUIDisplay, ClueUIDisplay> currentCorrectMatches)
+    {
+        foreach (KeyValuePair<CredentialUIDisplay, ClueUIDisplay> keyValuePair in currentCorrectMatches)
+        {
+            CredentialUIDisplay credentialUIDisplay = keyValuePair.Key;
+            ClueUIDisplay clueUIDisplay = keyValuePair.Value;
+
+            credentialUIDisplay.DisableDrop();
+            clueUIDisplay.DisableDrag();
+
+            credentialUIDisplay.SnapClueToHolder();
+
+            Log.Write($"matched clue {clueUIDisplay.ClueData.ClueHeading}!");
+
+            correctMatches.Add(credentialUIDisplay, clueUIDisplay);
+        }
     }
 
     public void OnClueFound(ClueData clueData)
     {
-        CredentialUIDisplay credential = displayedCredentials[clueData.CredentialType];
-
-        if (credential == null)
-        {
-            throw Log.Exception($"Found clue <b>{clueData.CredentialType}</b> doesn't exist in data pod!");
-        }
-
-        RevealCredentialValue(clueData.CredentialType);
+        // TO-DO: add clues as they are found
     }
 
     public void RegisterClueListener()

@@ -256,7 +256,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
                 }
                 catch (Exception e)
                 {
-
+                    Log.Warn($"Suppressed: {e}");
                 }
             }
         }

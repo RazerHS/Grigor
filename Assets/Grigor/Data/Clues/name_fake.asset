@@ -17,8 +17,7 @@ MonoBehaviour:
   evidenceBoardNoteType: 1
   clueHeading: fakeeeeeeeee
   evidenceText: 
-  cluesToConnectTo:
-  - {fileID: 11400000, guid: 0cfb9e582fc9ab34295d196183544db8, type: 2}
-  evidenceSprite: {fileID: 21300000, guid: c2fab626b3b42d047888b183fa34471d, type: 3}
-  textureSize: {x: 1920, y: 1080}
-  upscaleFactor: 5
+  cluesToConnectTo: []
+  evidenceSprite: {fileID: 21300000, guid: adcfb3cb3e1487641ad1a0fe1b8ba3f7, type: 3}
+  textureSize: {x: 512, y: 512}
+  upscaleFactor: 2
