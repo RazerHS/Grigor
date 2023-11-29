@@ -9,18 +9,15 @@ using UnityEngine.EventSystems;
 namespace Grigor.UI.Data
 {
     [Serializable]
-    public class CredentialUIDisplay : CardboardCoreBehaviour
+    public class CredentialUIDisplay : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI credentialText;
         [SerializeField] private Droppable clueDroppable;
         [SerializeField] private RectTransform clueHolderTransform;
 
-        [Inject] private UIManager uiManager;
-
         [ShowInInspector] private ClueUIDisplay attachedClueUIDisplay;
 
         private CredentialType credentialType;
-        private DataPodWidget dataPodWidget;
         private bool ignoreFirstEndDrag = true;
 
         public CredentialType CredentialType => credentialType;
@@ -29,14 +26,12 @@ namespace Grigor.UI.Data
 
         public event Action<CredentialUIDisplay, ClueUIDisplay> CheckDroppedClueEvent;
 
-        protected override void OnInjected()
+        private void Awake()
         {
-            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
-
             clueDroppable.OnDropEvent += OnDrop;
         }
 
-        protected override void OnReleased()
+        private void OnDisable()
         {
             clueDroppable.OnDropEvent -= OnDrop;
         }
@@ -51,11 +46,6 @@ namespace Grigor.UI.Data
             }
 
             attachedClueUIDisplay = clueUIDisplay;
-
-            attachedClueUIDisplay.DragEndedEvent += OnAttachedClueDisplayDragEnded;
-
-            attachedClueUIDisplay.FlagAsAttached();
-            attachedClueUIDisplay.transform.SetParent(clueHolderTransform);
 
             CheckDroppedClueEvent?.Invoke(this, clueUIDisplay);
         }
@@ -81,24 +71,9 @@ namespace Grigor.UI.Data
             attachedClueUIDisplay.ResetPosition();
         }
 
-        private void OnAttachedClueDisplayDragEnded()
+        public void DetachClue()
         {
-            //a hack to prevent the first end drag event from being fired when the clue is dropped on the credential
-            if (ignoreFirstEndDrag)
-            {
-                ignoreFirstEndDrag = false;
-                return;
-            }
-
-            attachedClueUIDisplay.DragEndedEvent -= OnAttachedClueDisplayDragEnded;
-
-            attachedClueUIDisplay.FlagAsDetached();
-            attachedClueUIDisplay.transform.SetParent(dataPodWidget.ClueDisplayParent);
-            attachedClueUIDisplay.ResetPosition();
-
             attachedClueUIDisplay = null;
-
-            ignoreFirstEndDrag = true;
         }
     }
 }

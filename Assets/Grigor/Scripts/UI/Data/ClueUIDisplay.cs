@@ -1,10 +1,8 @@
 ﻿using System;
-using CardboardCore.Utilities;
 using Grigor.Data.Clues;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Grigor.UI.Data
 {
@@ -18,10 +16,13 @@ namespace Grigor.UI.Data
         private ClueData clueData;
         private Vector3 defaultPosition;
         private bool isAttached;
+        private CredentialUIDisplay attachedToCredentialUIDisplay;
+        private bool ignoreFirstEndDrag;
 
         public ClueData ClueData => clueData;
+        public CredentialUIDisplay AttachedToCredentialUIDisplay => attachedToCredentialUIDisplay;
 
-        public event Action DragEndedEvent;
+        public event Action<ClueUIDisplay> ClueDragStartedEvent;
 
         private void Awake()
         {
@@ -43,8 +44,12 @@ namespace Grigor.UI.Data
         {
             if (isAttached)
             {
-                DragEndedEvent?.Invoke();
+                return;
+            }
 
+            if (ignoreFirstEndDrag)
+            {
+                ignoreFirstEndDrag = false;
                 return;
             }
 
@@ -60,6 +65,8 @@ namespace Grigor.UI.Data
 
         private void OnBeginDrag(PointerEventData eventData)
         {
+            ClueDragStartedEvent?.Invoke(this);
+
             defaultPosition = viewTransform.anchoredPosition;
         }
 
@@ -78,14 +85,20 @@ namespace Grigor.UI.Data
             this.clueData = clueData;
         }
 
-        public void FlagAsAttached()
+        public void FlagAsAttached(CredentialUIDisplay credentialUIDisplay)
         {
+            ignoreFirstEndDrag = true;
+
             isAttached = true;
+            attachedToCredentialUIDisplay = credentialUIDisplay;
         }
 
         public void FlagAsDetached()
         {
+            ignoreFirstEndDrag = false;
+
             isAttached = false;
+            attachedToCredentialUIDisplay = null;
         }
 
         public void ResetPosition()

@@ -30,8 +30,6 @@ public class DataPodWidget : UIWidget, IClueListener
 
     private CredentialWallet criminalCredentialWallet;
 
-    public Transform ClueDisplayParent => clueDisplayParent;
-
     protected override void OnShow()
     {
         InsertCredentials();
@@ -92,14 +90,23 @@ public class DataPodWidget : UIWidget, IClueListener
 
     private void OnClueAttached(CredentialUIDisplay credentialUIDisplay, ClueUIDisplay clueUIDisplay)
     {
-        if (credentialUIDisplay.CredentialType != clueUIDisplay.ClueData.CredentialType)
-        {
-            return;
-        }
+        clueUIDisplay.FlagAsAttached(credentialUIDisplay);
+        clueUIDisplay.transform.SetParent(credentialUIDisplay.ClueHolderTransform);
 
-        Log.Write($"matched clue {clueUIDisplay.ClueData.CredentialType.ToString()}!");
+        clueUIDisplay.ClueDragStartedEvent += OnClueDetached;
 
         CheckCurrentClueMatches();
+    }
+
+    private void OnClueDetached(ClueUIDisplay clueUIDisplay)
+    {
+        clueUIDisplay.ClueDragStartedEvent -= OnClueDetached;
+
+        clueUIDisplay.AttachedToCredentialUIDisplay.DetachClue();
+
+        clueUIDisplay.FlagAsDetached();
+        clueUIDisplay.ResetPosition();
+        clueUIDisplay.transform.SetParent(clueDisplayParent);
     }
 
     private void CheckCurrentClueMatches()
@@ -108,12 +115,19 @@ public class DataPodWidget : UIWidget, IClueListener
 
         foreach (CredentialUIDisplay credentialUIDisplay in displayedCredentials.Values)
         {
-            if (credentialUIDisplay.AttachedClueUIDisplay == null)
+            ClueUIDisplay clueUIDisplay = credentialUIDisplay.AttachedClueUIDisplay;
+
+            if (clueUIDisplay == null)
             {
                 continue;
             }
 
-            if (credentialUIDisplay.CredentialType != credentialUIDisplay.AttachedClueUIDisplay.ClueData.CredentialType)
+            if (credentialUIDisplay.CredentialType != clueUIDisplay.ClueData.CredentialType)
+            {
+                continue;
+            }
+
+            if (clueUIDisplay.ClueData != criminalCredentialWallet.GetMatchingClue(clueUIDisplay.ClueData.CredentialType))
             {
                 continue;
             }
@@ -123,7 +137,7 @@ public class DataPodWidget : UIWidget, IClueListener
                 return;
             }
 
-            currentCorrectMatches.Add(credentialUIDisplay, credentialUIDisplay.AttachedClueUIDisplay);
+            currentCorrectMatches.Add(credentialUIDisplay, clueUIDisplay);
         }
 
         if (currentCorrectMatches.Count < GameConfig.Instance.CorrectCluesBeforeLock)
@@ -146,7 +160,7 @@ public class DataPodWidget : UIWidget, IClueListener
 
             credentialUIDisplay.SnapClueToHolder();
 
-            Log.Write($"matched clue {clueUIDisplay.ClueData.ClueHeading}!");
+            Log.Write($"Clue {clueUIDisplay.ClueData.CredentialType.ToString()} locked in as correct!");
 
             correctMatches.Add(credentialUIDisplay, clueUIDisplay);
         }

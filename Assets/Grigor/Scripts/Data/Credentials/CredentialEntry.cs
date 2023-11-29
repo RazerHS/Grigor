@@ -9,11 +9,10 @@ namespace Grigor.Data.Credentials
     [Serializable]
     public struct CredentialEntry
     {
-         [SerializeField, HorizontalGroup("credential", Width = 0.5f), HideLabel] private CredentialType credentialType;
-         [SerializeField, HorizontalGroup("credential", Width = 0.5f), HideLabel] private string credentialValue;
-         [SerializeField] private ClueData matchingClue;
+        [SerializeField, HorizontalGroup("credential", Width = 0.5f), HideLabel] private CredentialType credentialType;
+        [SerializeField, HorizontalGroup("credential", Width = 0.5f), HideLabel] private ClueData matchingClue;
 
         public CredentialType CredentialType => credentialType;
-        public string CredentialValue => credentialValue;
+        public ClueData MatchingClue => matchingClue;
     }
 }
