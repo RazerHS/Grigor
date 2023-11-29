@@ -150,10 +150,14 @@ public class DataPodWidget : UIWidget, IClueListener
 
     private void FoundNewCorrectMatches(Dictionary<CredentialUIDisplay, ClueUIDisplay> currentCorrectMatches)
     {
+        List<ClueData> matchedClues = new();
+
         foreach (KeyValuePair<CredentialUIDisplay, ClueUIDisplay> keyValuePair in currentCorrectMatches)
         {
             CredentialUIDisplay credentialUIDisplay = keyValuePair.Key;
             ClueUIDisplay clueUIDisplay = keyValuePair.Value;
+
+            matchedClues.Add(clueUIDisplay.ClueData);
 
             credentialUIDisplay.DisableDrop();
             clueUIDisplay.DisableDrag();
@@ -164,11 +168,18 @@ public class DataPodWidget : UIWidget, IClueListener
 
             correctMatches.Add(credentialUIDisplay, clueUIDisplay);
         }
+
+        clueRegistry.RegisterMatchedClues(matchedClues);
     }
 
     public void OnClueFound(ClueData clueData)
     {
         // TO-DO: add clues as they are found
+    }
+
+    public void OnMatchedClues(List<ClueData> matchedClues)
+    {
+
     }
 
     public void RegisterClueListener()

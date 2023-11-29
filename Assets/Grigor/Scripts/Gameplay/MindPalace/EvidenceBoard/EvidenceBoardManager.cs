@@ -109,6 +109,11 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             notes.FirstOrDefault(note => note.ClueData == clueData)?.RevealNote();
         }
 
+        public void OnMatchedClues(List<ClueData> matchedClues)
+        {
+
+        }
+
         private void SpawnClue(ClueData clueData)
         {
             Vector3 position = GetNewCluePosition();

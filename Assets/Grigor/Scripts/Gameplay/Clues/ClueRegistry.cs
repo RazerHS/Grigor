@@ -9,6 +9,7 @@ namespace Grigor.Gameplay.Clues
     public class ClueRegistry : MonoBehaviour
     {
         private readonly List<Clue> clues = new();
+        private readonly List<ClueData> matchedClues = new();
         private readonly List<IClueListener> clueListeners = new();
 
         private void OnDisable()
@@ -71,6 +72,14 @@ namespace Grigor.Gameplay.Clues
             }
 
             clueListeners.Remove(listener);
+        }
+
+        public void RegisterMatchedClues(List<ClueData> matchesClues)
+        {
+            foreach (IClueListener listener in clueListeners)
+            {
+                listener.OnMatchedClues(matchesClues);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CardboardCore.DI;
+﻿using System.Collections.Generic;
+using CardboardCore.DI;
 using CardboardCore.Utilities;
 using DG.Tweening;
 using Grigor.Data.Clues;
@@ -45,14 +46,22 @@ namespace Grigor.Gameplay.World.Components
 
         public void OnClueFound(ClueData clueData)
         {
-            if (clueData.CredentialType != clueCredentialType)
+
+        }
+
+        public void OnMatchedClues(List<ClueData> matchedClues)
+        {
+            foreach (ClueData clueData in matchedClues)
             {
-                return;
+                if (clueData.CredentialType != clueCredentialType)
+                {
+                    continue;
+                }
+
+                clueFound = true;
+
+                Log.Write($"Clue object enabled for interactable <b>{name}</b> in mind palace!");
             }
-
-            clueFound = true;
-
-            Log.Write($"Clue object enabled for interactable <b>{name}</b> in mind palace!");
         }
 
         public void RegisterClueListener()
