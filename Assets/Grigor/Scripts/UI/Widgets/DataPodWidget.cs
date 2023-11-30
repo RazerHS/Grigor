@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
@@ -33,7 +32,6 @@ public class DataPodWidget : UIWidget, IClueListener
     protected override void OnShow()
     {
         InsertCredentials();
-        InsertClues();
         RegisterClueListener();
 
         toggleDataPodButton.onClick.AddListener(OnToggleDataPodButtonClicked);
@@ -42,6 +40,16 @@ public class DataPodWidget : UIWidget, IClueListener
     protected override void OnHide()
     {
         toggleDataPodButton.onClick.RemoveListener(OnToggleDataPodButtonClicked);
+
+        foreach (CredentialUIDisplay credentialUIDisplay in displayedCredentials.Values)
+        {
+            credentialUIDisplay.Dispose();
+        }
+
+        foreach (ClueUIDisplay clueUIDisplay in displayedClues)
+        {
+            clueUIDisplay.Dispose();
+        }
     }
 
     private void InsertCredentials()
@@ -54,7 +62,7 @@ public class DataPodWidget : UIWidget, IClueListener
         }
     }
 
-    private void InsertClues()
+    private void InsertExistingClues()
     {
         foreach (ClueData clueData in dataRegistry.ClueData)
         {
@@ -80,6 +88,7 @@ public class DataPodWidget : UIWidget, IClueListener
         }
 
         CredentialUIDisplay credentialUIDisplay = Instantiate(credentialDisplayPrefab, credentialDisplayParent);
+        credentialUIDisplay.Initialize();
         credentialUIDisplay.StoreCredentialType(credentialType);
         credentialUIDisplay.SetCredentialDisplay(credentialType.ToString(), false);
 
@@ -174,7 +183,12 @@ public class DataPodWidget : UIWidget, IClueListener
 
     public void OnClueFound(ClueData clueData)
     {
-        // TO-DO: add clues as they are found
+        ClueUIDisplay clueUIDisplay = Instantiate(clueDisplayPrefab, clueDisplayParent);
+        clueUIDisplay.Initialize();
+        clueUIDisplay.SetClueData(clueData);
+        clueUIDisplay.SetClueText(clueData.ClueHeading);
+
+        displayedClues.Add(clueUIDisplay);
     }
 
     public void OnMatchedClues(List<ClueData> matchedClues)

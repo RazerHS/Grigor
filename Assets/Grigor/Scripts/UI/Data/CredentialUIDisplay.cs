@@ -26,12 +26,12 @@ namespace Grigor.UI.Data
 
         public event Action<CredentialUIDisplay, ClueUIDisplay> CheckDroppedClueEvent;
 
-        private void Awake()
+        public void Initialize()
         {
             clueDroppable.OnDropEvent += OnDrop;
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             clueDroppable.OnDropEvent -= OnDrop;
         }

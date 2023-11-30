@@ -9,7 +9,6 @@ using Grigor.Gameplay.Clues;
 using Grigor.Utils;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,9 +26,10 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidenceStickyNotePrefab;
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidencePicturePrefab;
 
-        [ColoredBoxGroup("Creating", false, true), Button(ButtonSizes.Large)] private void HideAllClues() => HideAllCluesOnBoard();
+        [ColoredBoxGroup("Creating", false, true), Button(ButtonSizes.Large)] private void HideAllClues() => HideAllElementsOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void RevealAllClues() => RevealAllCluesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void ConnectAllClues() => ConnectAllCluesOnBoard();
+        [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void HideAllLines() => HideAllLinesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void Refresh() => RefreshBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void SpawnAllClues() => SpawnAllCluesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void ClearAllClues() => RemoveAllCluesFromBoard();
@@ -38,6 +38,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
         [Inject] ClueRegistry clueRegistry;
 
+#if UNITY_EDITOR
         [OnInspectorInit]
         private void OnInspectorInit()
         {
@@ -45,39 +46,16 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             {
                 dataStorage = Helper.LoadAsset("DataStorage", dataStorage);
             }
-
-            dataStorage.OnDataRefreshed += RefreshBoard;
-
-            RefreshBoard();
         }
-
-        [OnInspectorGUI]
-        private void OnInspectorGUI()
-        {
-            if (!Helper.GetKeyPressed(out KeyCode keyCode))
-            {
-               return;
-            }
-
-            if (keyCode != KeyCode.S)
-            {
-                return;
-            }
-
-            RefreshBoard();
-        }
-
-        [OnInspectorDispose]
-        private void OnInspectorDispose()
-        {
-            dataStorage.OnDataRefreshed -= RefreshBoard;
-        }
+#endif
 
         protected override void OnInjected()
         {
             RegisterClueListener();
 
             notes.ForEach(note => note.InitializeNoteContents());
+
+            HideAllElementsOnBoard();
         }
 
         protected override void OnReleased()
@@ -111,7 +89,32 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
         public void OnMatchedClues(List<ClueData> matchedClues)
         {
+            foreach (EvidenceBoardNote note in notes)
+            {
+                if (!note.IsRevealed)
+                {
+                    continue;
+                }
 
+                List<ClueData> cluesToConnect = note.ClueData.CluesToConnectTo.Intersect(matchedClues).ToList();
+
+                if (!cluesToConnect.Any())
+                {
+                    continue;
+                }
+
+                foreach (ClueData clue in cluesToConnect)
+                {
+                    if (!TryGetConnectionLine(note.ClueData, clue, out ConnectionLine line))
+                    {
+                        throw Log.Exception($"Connection line between clues <b>{note.ClueData.name}</b> and <b>{clue.name}</b> not found!");
+                    }
+
+                    Log.Write($"Connected clues <b>{note.ClueData.name}</b> and <b>{clue.name}</b> on the evidence board!");
+
+                    line.ShowLine();
+                }
+            }
         }
 
         private void SpawnClue(ClueData clueData)
@@ -121,6 +124,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             EvidenceBoardNote note = SpawnClueOnBoard(clueData.EvidenceBoardNoteType, position);
 
             note.Initialize(clueData);
+            note.RevealNote();
 
             AddClue(note);
         }
@@ -167,6 +171,8 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
             ConnectionLine line = new ConnectionLine(lineRenderer, firstNote.PinTransform.position, secondNote.PinTransform.position, firstClue, secondClue);
 
+            line.ShowLine();
+
             connections.Add(line);
         }
 
@@ -203,16 +209,25 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             throw Log.Exception($"Note with clue {clueData.ClueHeading} not found!");
         }
 
-        private void HideAllCluesOnBoard()
+        private void HideAllElementsOnBoard()
+        {
+            HideAllNotesOnBoard();
+            HideAllLinesOnBoard();
+        }
+
+        private void HideAllLinesOnBoard()
+        {
+            foreach (ConnectionLine line in connections)
+            {
+                line.HideLine();
+            }
+        }
+
+        private void HideAllNotesOnBoard()
         {
             foreach (EvidenceBoardNote note in notes)
             {
                 note.HideNote();
-            }
-
-            foreach (ConnectionLine line in connections)
-            {
-                line.HideLine();
             }
         }
 
@@ -273,9 +288,30 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
                 note.RefreshContents();
             }
 
-            ConnectAllClues();
+            ConnectAllCluesOnBoard();
 
             Log.Write("Board refreshed!");
+        }
+
+        private bool TryGetConnectionLine(ClueData firstCLue, ClueData secondClue, out ConnectionLine connectionLine)
+        {
+            connectionLine = null;
+
+            foreach (ConnectionLine line in connections)
+            {
+                bool lineExists = (line.FirstClue == firstCLue && line.SecondClue == secondClue) || (line.FirstClue == secondClue && line.SecondClue == firstCLue);
+
+                if (!lineExists)
+                {
+                    continue;
+                }
+
+                connectionLine = line;
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

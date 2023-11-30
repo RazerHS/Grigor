@@ -41,7 +41,5 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             currentLine.SetPosition(0, startPosition);
             currentLine.SetPosition(1, endPosition);
         }
-
-
     }
 }

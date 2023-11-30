@@ -24,7 +24,7 @@ namespace Grigor.UI.Data
 
         public event Action<ClueUIDisplay> ClueDragStartedEvent;
 
-        private void Awake()
+        public void Initialize()
         {
             rectTransform = GetComponent<RectTransform>();
 
@@ -33,7 +33,7 @@ namespace Grigor.UI.Data
             draggable.OnEndDragEvent += OnEndDrag;
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             draggable.OnBeginDragEvent -= OnBeginDrag;
             draggable.OnDragEvent -= OnDrag;

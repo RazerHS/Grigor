@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Security;
 using CardboardCore.Utilities;
 using Grigor.Data.Clues;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using TMPro;
+using Unity.Collections;
 using UnityEngine;
 
 namespace Grigor.Gameplay.MindPalace.EvidenceBoard
@@ -19,6 +22,8 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         [SerializeField, ColoredBoxGroup("Note Settings", false, true)] private EvidenceBoardNoteType noteType;
         [SerializeField, ColoredBoxGroup("Note Settings")] private EvidenceNote evidenceNote;
 
+        [SerializeField, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debug", true, true)] private bool isRevealed;
+
         [SerializeField, HideInInspector] private ClueData clueData;
         [SerializeField, HideInInspector] private float clueHeadingDefaultFontSize;
 
@@ -29,6 +34,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         public Transform PinTransform => pinTransform;
         public Transform ContentsParent => contentsParent;
         public ClueData ClueData => clueData;
+        public bool IsRevealed => isRevealed;
 
         public void Initialize(ClueData clueData)
         {
@@ -51,7 +57,6 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
             ResetContentScale();
 
             contentsParent.localScale = scale;
-
 
             //undoing the scaling done by the aspect ratio of the texture
             Vector3 anchorToTopLocalScale = anchorToTopParent.localScale;
@@ -94,11 +99,15 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
 
         public void HideNote()
         {
+            isRevealed = false;
+
             gameObject.SetActive(false);
         }
 
         public void RevealNote()
         {
+            isRevealed = true;
+
             gameObject.SetActive(true);
         }
 
@@ -106,6 +115,5 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         {
             InitializeNoteContents();
         }
-
     }
 }
