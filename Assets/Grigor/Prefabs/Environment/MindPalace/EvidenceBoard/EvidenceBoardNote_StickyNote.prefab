@@ -235,6 +235,11 @@ PrefabInstance:
       propertyPath: evidenceNote
       value: 
       objectReference: {fileID: 823929432143284157}
+    - target: {fileID: 3789442076713372241, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d77073f3056e1fd4b9fc9d1817a4e5de, type: 2}
     - target: {fileID: 6608958374886716856, guid: efd3f23e7f14250428aa94b16b204b28,
         type: 3}
       propertyPath: m_Name

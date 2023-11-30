@@ -1,12 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-using System.Security;
-using CardboardCore.Utilities;
+﻿using CardboardCore.Utilities;
 using Grigor.Data.Clues;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using TMPro;
-using Unity.Collections;
 using UnityEngine;
 
 namespace Grigor.Gameplay.MindPalace.EvidenceBoard
@@ -22,7 +18,7 @@ namespace Grigor.Gameplay.MindPalace.EvidenceBoard
         [SerializeField, ColoredBoxGroup("Note Settings", false, true)] private EvidenceBoardNoteType noteType;
         [SerializeField, ColoredBoxGroup("Note Settings")] private EvidenceNote evidenceNote;
 
-        [SerializeField, Sirenix.OdinInspector.ReadOnly, ColoredBoxGroup("Debug", true, true)] private bool isRevealed;
+        [SerializeField, ReadOnly, ColoredBoxGroup("Debug", true, true)] private bool isRevealed;
 
         [SerializeField, HideInInspector] private ClueData clueData;
         [SerializeField, HideInInspector] private float clueHeadingDefaultFontSize;

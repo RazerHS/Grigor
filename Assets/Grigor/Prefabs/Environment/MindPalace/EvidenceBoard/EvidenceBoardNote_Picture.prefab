@@ -134,7 +134,7 @@ Transform:
   m_GameObject: {fileID: 5185175965945599667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.1, z: 0.53}
+  m_LocalPosition: {x: -0, y: 0.1, z: 0.91}
   m_LocalScale: {x: 0.7142171, y: 0.7142171, z: 0.7142172}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -280,10 +280,50 @@ PrefabInstance:
       propertyPath: evidenceNote
       value: 
       objectReference: {fileID: 7790735607030734157}
+    - target: {fileID: 3918854754118693124, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918854754118693124, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728305322433780653, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6608958374886716856, guid: efd3f23e7f14250428aa94b16b204b28,
         type: 3}
       propertyPath: m_Name
       value: EvidenceBoardNote_Picture
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719204642686582183, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1031.493
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719204642686582183, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1031.493
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719204642686582183, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1031.493
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719204642686582183, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719204642686582183, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
