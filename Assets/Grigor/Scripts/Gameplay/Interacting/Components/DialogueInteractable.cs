@@ -21,7 +21,7 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             dialogueController.DialogueEndedEvent -= OnDialogueEnded;
 
-            Log.Write($"Found clue: <b>{clue.CredentialToFind}</b>");
+            Log.Write($"Found clue: <b>{clue.ClueData.CredentialType}</b>");
 
             clue.FindClue();
 

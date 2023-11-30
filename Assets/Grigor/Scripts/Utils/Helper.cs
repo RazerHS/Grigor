@@ -11,6 +11,8 @@ namespace Grigor.Utils
 {
     public static class Helper
     {
+        private static KeyCode lastKeyPressed;
+
         private static IEnumerator<float> DelayCoroutine(float delay, Action callback)
         {
             yield return Timing.WaitForSeconds(delay);
@@ -71,6 +73,41 @@ namespace Grigor.Utils
             }
 
             Log.Write($"Data updated in {Time.time - startTime} seconds!");
+        }
+#endif
+
+        public static Vector3 GetScaleBasedOnTextureSize(float width, float height, float upscaleFactor = 1f)
+        {
+            float aspect = width / height;
+
+            return new Vector3(aspect, 1, 1) * upscaleFactor;
+        }
+
+#if UNITY_EDITOR
+        public static bool GetKeyPressed(out KeyCode keyCode)
+        {
+            keyCode = KeyCode.None;
+            var @event = Event.current;
+
+            if (!@event.isKey)
+            {
+                return false;
+            }
+
+            if (@event.type != EventType.KeyDown)
+            {
+                return false;
+            }
+
+            if (@event.keyCode == lastKeyPressed)
+            {
+                return false;
+            }
+
+            keyCode = @event.keyCode;
+            lastKeyPressed = keyCode;
+
+            return true;
         }
 #endif
     }

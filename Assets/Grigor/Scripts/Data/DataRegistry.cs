@@ -3,6 +3,7 @@ using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
+using Grigor.Data.Clues;
 using Grigor.Data.Credentials;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Grigor.Data
         [SerializeField] private DataStorage dataStorage;
 
         public List<CharacterData> CharacterData => dataStorage.CharacterData;
+        public List<ClueData> ClueData => dataStorage.ClueData;
 
         private void Awake()
         {

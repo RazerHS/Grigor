@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credentialToFind: 1
+  clueData: {fileID: 11400000, guid: 2b839199426fa6048a968b9c50adbc2b, type: 2}
 --- !u!114 &2973691249057055509
 MonoBehaviour:
   m_ObjectHideFlags: 0

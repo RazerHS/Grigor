@@ -17,8 +17,8 @@ MonoBehaviour:
   credentialWallet:
     credentialEntries:
     - credentialType: 0
-      credentialValue: Margaret
+      matchingClue: {fileID: 11400000, guid: 0cfb9e582fc9ab34295d196183544db8, type: 2}
     - credentialType: 2
-      credentialValue: NL87ABNA829892839283
+      matchingClue: {fileID: 11400000, guid: d726d4d4347c0af4a82d7657d901355a, type: 2}
     - credentialType: 1
-      credentialValue: 57
+      matchingClue: {fileID: 11400000, guid: 2b839199426fa6048a968b9c50adbc2b, type: 2}
