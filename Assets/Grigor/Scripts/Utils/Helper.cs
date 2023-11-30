@@ -4,7 +4,6 @@ using CardboardCore.Utilities;
 using Grigor.Data.Editor;
 using JetBrains.Annotations;
 using MEC;
-using PlasticPipe.PlasticProtocol.Messages;
 using UnityEditor;
 using UnityEngine;
 

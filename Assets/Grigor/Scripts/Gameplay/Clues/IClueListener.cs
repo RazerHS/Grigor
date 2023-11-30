@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Grigor.Data.Clues;
-using Grigor.Data.Credentials;
 
 namespace Grigor.Gameplay.Clues
 {

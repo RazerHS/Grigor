@@ -1,7 +1,6 @@
 ﻿using System;
 using Grigor.Data.Clues;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 namespace Grigor.Gameplay.MindPalace.EvidenceBoard

@@ -1,6 +1,5 @@
 ﻿using System;
 using Grigor.Data.Clues;
-using Grigor.Gameplay.Clues;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

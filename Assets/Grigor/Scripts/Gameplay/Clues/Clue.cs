@@ -1,9 +1,7 @@
 ﻿using System;
 using CardboardCore.DI;
 using Grigor.Data.Clues;
-using Grigor.Data.Credentials;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Gameplay.Clues
 {

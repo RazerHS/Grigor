@@ -1,8 +1,5 @@
-﻿using System.Numerics;
-using CardboardCore.Utilities;
-using Grigor.Data.Clues;
+﻿using CardboardCore.Utilities;
 using Grigor.Utils;
-using PlasticGui;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
