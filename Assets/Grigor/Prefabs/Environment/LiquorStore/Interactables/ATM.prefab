@@ -18,6 +18,21 @@ PrefabInstance:
       propertyPath: 'interactableComponents.Array.data[0]'
       value: 
       objectReference: {fileID: 3630775316704127846}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: interactablesChain.interactableComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3630775316704127846}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8111107123989653288}
     - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_Name
@@ -85,6 +100,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2622548634776932733}
+    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8111107123989653288}
   m_SourcePrefab: {fileID: 100100000, guid: 074fe82d7e4a3014996892cf2abd72fc, type: 3}
 --- !u!1 &559303747361502387 stripped
 GameObject:
