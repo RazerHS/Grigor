@@ -2,13 +2,14 @@
 {
     public enum CredentialType
     {
-        Name,
-        Age,
-        IBAN,
-        BSN,
+        FirstName,
+        LastName,
+        DateOfBirth,
         Address,
-        City,
-        Country,
-        Email,
+        MedicalInfo1,
+        MedicalInfo2,
+        MedicalInfo3,
+        ChildFirstName,
+        ChildLastName,
     }
 }
