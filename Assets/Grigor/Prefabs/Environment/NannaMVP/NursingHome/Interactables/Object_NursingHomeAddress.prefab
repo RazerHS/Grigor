@@ -1309,8 +1309,13 @@ PrefabInstance:
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8353127918427156701}
     - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_Name
