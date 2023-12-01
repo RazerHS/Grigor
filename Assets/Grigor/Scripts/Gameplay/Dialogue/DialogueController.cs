@@ -6,6 +6,7 @@ using Grigor.UI.Widgets;
 
 namespace Grigor.Gameplay.Dialogue
 {
+    [Injectable]
     public class DialogueController : CardboardCoreBehaviour
     {
         [Inject] private UIManager uiManager;
