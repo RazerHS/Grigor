@@ -1,12 +1,14 @@
 ﻿using System;
+using UnityEngine.Serialization;
 
 namespace Grigor.Utils.StoryGraph.Runtime
 {
     [Serializable]
     public class NodeLinkData
     {
-        public string BaseNodeGuid;
-        public string PortName;
-        public string TargetNodeGuid;
+        public string OutputPortName;
+        public string InputPortName;
+        [FormerlySerializedAs("StartingNodeGuid")] public string OutputNodeGuid;
+        [FormerlySerializedAs("TargetNodeGuid")] public string InputNodeGuid;
     }
 }

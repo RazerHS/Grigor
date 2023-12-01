@@ -10,5 +10,7 @@ namespace Grigor.Utils.StoryGraph.Runtime
         public List<string> ChildNodes = new List<string>();
         public Vector2 Position;
         public string Title= "Comment Block";
+
+
     }
 }

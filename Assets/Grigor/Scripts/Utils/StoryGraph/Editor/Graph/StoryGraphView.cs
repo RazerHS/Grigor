@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using CardboardCore.Utilities;
+using Grigor.Characters;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
 using Grigor.Utils.StoryGraph.Runtime;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Search;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 
 namespace Grigor.Utils.StoryGraph.Editor.Graph
 {
-    public class StoryGraphView : GraphView
+    public class StoryGraphView : GraphView, IEdgeConnectorListener
     {
         private NodeSearchWindow searchWindow;
 
@@ -22,6 +24,8 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         public Blackboard Blackboard = new Blackboard();
 
         public List<ExposedProperty> ExposedProperties { get; private set; } = new List<ExposedProperty>();
+
+        public event Action RequestNodeCreationEvent;
 
         public StoryGraphView(StoryGraph editorWindow)
         {
@@ -38,7 +42,6 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             Insert(0, grid);
             grid.StretchToParentSize();
 
-            AddElement(GetEntryPointNodeInstance());
             AddSearchWindow(editorWindow);
         }
 
@@ -139,51 +142,173 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             AddElement(CreateNode(nodeName, position));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position)
+        public DialogueNode CreateNode(string nodeName, Vector2 position, DialogueNodeData savedNodeData = null)
         {
+            DialogueNodeData dialogueNodeData;
+
+            if (savedNodeData == null)
+            {
+                dialogueNodeData = new DialogueNodeData();
+
+                dialogueNodeData.SetGuid(Guid.NewGuid().ToString());
+            }
+            else
+            {
+                dialogueNodeData = new DialogueNodeData(savedNodeData);
+            }
+
             DialogueNode dialogueNode = new DialogueNode
             {
                 title = nodeName,
-                DialogueText = nodeName,
-                GUID = Guid.NewGuid().ToString()
+                Data = dialogueNodeData,
             };
 
+            CreateNodeTypeField(dialogueNode);
+
+            CreateChoiceButton(dialogueNode);
+            CreateSpeakerField(dialogueNode);
+            CreateDialogueTextField(dialogueNode);
+
+
             dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+
+            dialogueNode.RefreshExpandedState();
+            dialogueNode.RefreshPorts();
+            dialogueNode.SetPosition(new Rect(position, DefaultNodeSize));
+
+            return dialogueNode;
+        }
+
+        private void CreateNodeTypeField(DialogueNode dialogueNode)
+        {
+            EnumField nodeTypeField = new EnumField(dialogueNode.Data.NodeType)
+            {
+                value = dialogueNode.Data.NodeType,
+            };
+
+            UpdatePortsBasedOnNodeType(dialogueNode, dialogueNode.Data.NodeType);
+
+            nodeTypeField.RegisterValueChangedCallback(@event =>
+            {
+                NodeType previousNodeType = dialogueNode.Data.NodeType;
+
+                dialogueNode.Data.SetNodeType((NodeType)@event.newValue);
+
+                UpdatePortsBasedOnNodeType(dialogueNode, previousNodeType);
+            });
+
+            dialogueNode.titleContainer.Add(nodeTypeField);
+        }
+
+        private void UpdatePortsBasedOnNodeType(DialogueNode dialogueNode, NodeType previousNodeType)
+        {
+            switch (dialogueNode.Data.NodeType)
+            {
+                case NodeType.START:
+                    if (previousNodeType is not NodeType.NONE)
+                    {
+                        AddChoicePort(dialogueNode);
+                    }
+
+                    dialogueNode.inputContainer.Clear();
+                    break;
+
+                case NodeType.END:
+                    if (previousNodeType is not NodeType.NONE)
+                    {
+                        CreateInputPort(dialogueNode);
+                    }
+
+                    dialogueNode.outputContainer.Clear();
+                    break;
+
+                case NodeType.NONE:
+                    if (previousNodeType is NodeType.START)
+                    {
+                        CreateInputPort(dialogueNode);
+                    }
+                    else if (previousNodeType is NodeType.END)
+                    {
+                        AddChoicePort(dialogueNode);
+                    }
+                    else
+                    {
+                        CreateInputPort(dialogueNode);
+                        AddChoicePort(dialogueNode);
+                    }
+                    break;
+            }
+        }
+
+        private Port CreateInputPort(DialogueNode dialogueNode)
+        {
+            dialogueNode.inputContainer.Clear();
 
             Port inputPort = GetPortInstance(dialogueNode, Direction.Input, Port.Capacity.Multi);
             inputPort.portName = "Input";
 
             dialogueNode.inputContainer.Add(inputPort);
-            dialogueNode.RefreshExpandedState();
-            dialogueNode.RefreshPorts();
 
-            // TO-DO: implement screen center instantiation positioning
-            dialogueNode.SetPosition(new Rect(position, DefaultNodeSize));
+            return inputPort;
+        }
 
-            TextField textField = new TextField("");
-
-            textField.RegisterValueChangedCallback(@event =>
+        private TextField CreateDialogueTextField(DialogueNode dialogueNode)
+        {
+            TextField dialogueTextField = new TextField("")
             {
-                dialogueNode.DialogueText = @event.newValue;
-                dialogueNode.title = @event.newValue;
+                multiline = true,
+                style =
+                {
+                    whiteSpace = WhiteSpace.Normal
+                }
+            };
+
+            dialogueTextField.RegisterValueChangedCallback(@event => {
+                dialogueNode.Data.SetDialogueText(@event.newValue);
             });
 
-            textField.SetValueWithoutNotify(dialogueNode.title);
-            dialogueNode.mainContainer.Add(textField);
+            dialogueTextField.SetValueWithoutNotify(dialogueNode.title);
 
-            Button button = new Button(() => { AddChoicePort(dialogueNode); })
+            dialogueNode.mainContainer.Add(dialogueTextField);
+
+            return dialogueTextField;
+        }
+
+        private Button CreateChoiceButton(DialogueNode dialogueNode)
+        {
+            Button createChoicePortButton = new Button(() => { AddChoicePort(dialogueNode); })
             {
                 text = "Add Choice"
             };
 
-            dialogueNode.titleButtonContainer.Add(button);
+            dialogueNode.titleButtonContainer.Add(createChoicePortButton);
 
-            return dialogueNode;
+            return createChoicePortButton;
         }
 
-        public void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "")
+        private ObjectField CreateSpeakerField(DialogueNode dialogueNode)
+        {
+            ObjectField speakerField = new ObjectField("Speaker")
+            {
+                value = dialogueNode.Data.Speaker,
+                objectType = typeof(CharacterData)
+            };
+
+            speakerField.RegisterValueChangedCallback(@event => {
+                dialogueNode.Data.SetSpeaker(@event.newValue as CharacterData);
+            });
+
+            dialogueNode.mainContainer.Add(speakerField);
+
+            return speakerField;
+        }
+
+        private void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "")
         {
             Port generatedPort = GetPortInstance(nodeCache, Direction.Output);
+
+            generatedPort.AddManipulator(new EdgeConnector<Edge>(this));
+
             Label portLabel = generatedPort.contentContainer.Q<Label>("type");
 
             generatedPort.contentContainer.Remove(portLabel);
@@ -205,6 +330,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             textField.RegisterValueChangedCallback(@event => generatedPort.portName = @event.newValue);
             textField.AddToClassList("DialogueChoiceTextField");
 
+            textField.pickingMode = PickingMode.Ignore;
             textField.style.minWidth = 60;
             textField.style.maxWidth = 100;
 
@@ -245,29 +371,14 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             return node.InstantiatePort(Orientation.Horizontal, nodeDirection, capacity, typeof(float));
         }
 
-        private DialogueNode GetEntryPointNodeInstance()
+        public void OnDropOutsidePort(Edge edge, Vector2 position)
         {
-            var nodeCache = new DialogueNode
-            {
-                title = "START",
-                GUID = Guid.NewGuid().ToString(),
-                DialogueText = "ENTRYPOINT",
-                EntryPoint = true
-            };
+            RequestNodeCreationEvent?.Invoke();
+        }
 
-            Port generatedPort = GetPortInstance(nodeCache, Direction.Output);
-            generatedPort.portName = "Next";
+        public void OnDrop(GraphView graphView, Edge edge)
+        {
 
-            nodeCache.outputContainer.Add(generatedPort);
-
-            nodeCache.capabilities &= ~Capabilities.Movable;
-            nodeCache.capabilities &= ~Capabilities.Deletable;
-
-            nodeCache.RefreshExpandedState();
-            nodeCache.RefreshPorts();
-            nodeCache.SetPosition(new Rect(100, 200, 100, 150));
-
-            return nodeCache;
         }
     }
 }

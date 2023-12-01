@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CardboardCore.Utilities;
 using Grigor.Utils.StoryGraph.Runtime;
 using UnityEditor;
@@ -14,7 +15,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         private string fileName = "New Narrative";
 
         private StoryGraphView graphView;
-        private DialogueContainer dialogueContainer;
+        private DialogueGraphData dialogueGraphData;
 
         [MenuItem("Grigor/Narrative Graph")]
         public static void CreateGraphViewWindow()
@@ -28,7 +29,9 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             ConstructGraphView();
             GenerateToolbar();
             GenerateMiniMap();
-            GenerateBlackboard();
+            // GenerateBlackboard();
+
+            rootVisualElement.RegisterCallback<KeyDownEvent>(OnKeyDown);
         }
 
         private void OnDisable()
@@ -44,6 +47,8 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             };
 
             graphView.StretchToParentSize();
+            graphView.RequestNodeCreationEvent += OnRequestNodeCreation;
+
             rootVisualElement.Add(graphView);
         }
 
@@ -75,7 +80,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 }
                 else
                 {
-                    saveUtility.LoadNarrative(fileName);
+                    saveUtility.LoadGraph(fileName);
                 }
             }
             else
@@ -131,6 +136,35 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
             graphView.Add(blackboard);
             graphView.Blackboard = blackboard;
+        }
+
+        private void OnKeyDown(KeyDownEvent @event)
+        {
+            Vector2 graphMousePosition = Event.current.mousePosition;
+
+            switch (@event.keyCode)
+            {
+                case KeyCode.C:
+                {
+                    Rect rect = new Rect(graphMousePosition, graphView.DefaultCommentBlockSize);
+                    graphView.CreateCommentBlock(rect);
+                    break;
+                }
+                case KeyCode.Space:
+                    graphView.CreateNewDialogueNode("Dialogue Node", graphMousePosition);
+                    break;
+
+                case KeyCode.Tab:
+                    graphView.CreateNewDialogueNode("Dialogue Node", graphMousePosition);
+                    break;
+            }
+        }
+
+        private void OnRequestNodeCreation()
+        {
+            Vector2 mousePosition = Event.current.mousePosition;
+
+            graphView.CreateNewDialogueNode("Dialogue Node", mousePosition);
         }
     }
 }

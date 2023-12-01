@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: ada
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - OutputPortName: Option 1
+    InputPortName: Input
+    OutputNodeGuid: c1232404-aada-42b9-a369-3aed4ede445d
+    InputNodeGuid: 49a357a9-4c3f-4781-9501-0e6dac6147de
+  - OutputPortName: Option 1
+    InputPortName: Input
+    OutputNodeGuid: dd78343f-bc61-43f2-9302-6660a30a7fc3
+    InputNodeGuid: c1232404-aada-42b9-a369-3aed4ede445d
+  dialogueNodeData:
+  - guid: c1232404-aada-42b9-a369-3aed4ede445d
+    position: {x: 1113, y: 420}
+    dialogueText: 
+    speaker: {fileID: 0}
+    nodeType: 0
+  - guid: 49a357a9-4c3f-4781-9501-0e6dac6147de
+    position: {x: 1491, y: 420}
+    dialogueText: 
+    speaker: {fileID: 0}
+    nodeType: 2
+  - guid: dd78343f-bc61-43f2-9302-6660a30a7fc3
+    position: {x: 639, y: 420}
+    dialogueText: 
+    speaker: {fileID: 0}
+    nodeType: 1
+  exposedProperties: []
+  commentBlockData: []

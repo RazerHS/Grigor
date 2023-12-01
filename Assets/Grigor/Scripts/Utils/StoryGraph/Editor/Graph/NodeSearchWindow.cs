@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CardboardCore.Utilities;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -44,12 +45,11 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             return tree;
         }
 
-        public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
+        public bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context)
         {
-            Vector2 mousePosition = window.rootVisualElement.ChangeCoordinatesTo(window.rootVisualElement.parent, context.screenMousePosition - window.position.position);
-            Vector2 graphMousePosition = graphView.contentViewContainer.WorldToLocal(mousePosition);
+            Vector2 graphMousePosition = Event.current.mousePosition;
 
-            switch (SearchTreeEntry.userData)
+            switch (searchTreeEntry.userData)
             {
                 case DialogueNode dialogueNode:
                     graphView.CreateNewDialogueNode("Dialogue Node", graphMousePosition);

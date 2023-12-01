@@ -13,12 +13,11 @@ namespace Grigor.Utils.StoryGraph.Editor
 {
     public class GraphSaveUtility
     {
-        private DialogueContainer dialogueContainer;
         private StoryGraphView graphView;
 
-        public List<Edge> Edges => graphView.edges.ToList();
-        public List<DialogueNode> Nodes => graphView.nodes.ToList().Cast<DialogueNode>().ToList();
-        public List<Group> CommentBlocks => graphView.graphElements.ToList().Where(graphElement => graphElement is Group).Cast<Group>().ToList();
+        private List<Edge> edges => graphView.edges.ToList();
+        private List<DialogueNode> nodes => graphView.nodes.ToList().Cast<DialogueNode>().ToList();
+        private List<Group> commentBlocks => graphView.graphElements.ToList().Where(graphElement => graphElement is Group).Cast<Group>().ToList();
 
         public static GraphSaveUtility GetInstance(StoryGraphView graphView)
         {
@@ -30,55 +29,52 @@ namespace Grigor.Utils.StoryGraph.Editor
 
         public void SaveGraph(string fileName)
         {
-            DialogueContainer dialogueContainerObject = ScriptableObject.CreateInstance<DialogueContainer>();
+            DialogueGraphData newDialogueGraphData = ScriptableObject.CreateInstance<DialogueGraphData>();
 
-            if (!SaveNodes(fileName, dialogueContainerObject))
+            if (!SaveNodes(fileName, newDialogueGraphData))
             {
                 return;
             }
 
-            SaveExposedProperties(dialogueContainerObject);
-            SaveCommentBlocks(dialogueContainerObject);
+            SaveExposedProperties(newDialogueGraphData);
+            SaveCommentBlocks(newDialogueGraphData);
 
             if (!AssetDatabase.IsValidFolder("Assets/Resources"))
             {
                 AssetDatabase.CreateFolder("Assets", "Resources");
             }
 
-            UnityEngine.Object loadedAsset = AssetDatabase.LoadAssetAtPath($"Assets/Resources/{fileName}.asset", typeof(DialogueContainer));
+            Object loadedAsset = AssetDatabase.LoadAssetAtPath($"Assets/Resources/{fileName}.asset", typeof(DialogueGraphData));
 
             if (loadedAsset == null || !AssetDatabase.Contains(loadedAsset))
 			{
-                AssetDatabase.CreateAsset(dialogueContainerObject, $"Assets/Resources/{fileName}.asset");
+                AssetDatabase.CreateAsset(newDialogueGraphData, $"Assets/Resources/{fileName}.asset");
             }
             else
 			{
-                DialogueContainer container = loadedAsset as DialogueContainer;
+                DialogueGraphData dialogueGraphData = loadedAsset as DialogueGraphData;
 
-                if (container == null)
+                if (dialogueGraphData == null)
                 {
-                    throw Log.Exception($"Loaded asset is not a {nameof(DialogueContainer)}");
+                    throw Log.Exception($"Loaded asset is not a {nameof(DialogueGraphData)}");
                 }
 
-                container.NodeLinks = dialogueContainerObject.NodeLinks;
-                container.DialogueNodeData = dialogueContainerObject.DialogueNodeData;
-                container.ExposedProperties = dialogueContainerObject.ExposedProperties;
-                container.CommentBlockData = dialogueContainerObject.CommentBlockData;
+                dialogueGraphData.SetData(newDialogueGraphData.NodeLinks, newDialogueGraphData.DialogueNodeData, newDialogueGraphData.ExposedProperties, newDialogueGraphData.CommentBlockData);
 
-                EditorUtility.SetDirty(container);
+                EditorUtility.SetDirty(dialogueGraphData);
             }
 
             AssetDatabase.SaveAssets();
         }
 
-        private bool SaveNodes(string fileName, DialogueContainer dialogueContainerObject)
+        private bool SaveNodes(string fileName, DialogueGraphData dialogueGraphData)
         {
-            if (!Edges.Any())
+            if (!edges.Any())
             {
                 return false;
             }
 
-            Edge[] connectedSockets = Edges.Where(edge => edge.input.node != null).ToArray();
+            Edge[] connectedSockets = edges.Where(edge => edge.input.node != null).ToArray();
 
             for (int i = 0; i < connectedSockets.Length; i++)
             {
@@ -92,40 +88,40 @@ namespace Grigor.Utils.StoryGraph.Editor
                     throw Log.Exception("Output node not found!");
                 }
 
-                dialogueContainerObject.NodeLinks.Add(new NodeLinkData
+                dialogueGraphData.NodeLinks.Add(new NodeLinkData
                 {
-                    BaseNodeGuid = outputNode.GUID,
-                    PortName = connectedSockets[i].output.portName,
-                    TargetNodeGuid = inputNode.GUID
+                    OutputPortName = connectedSockets[i].output.portName,
+                    OutputNodeGuid = outputNode.Data.Guid,
+                    InputNodeGuid = inputNode.Data.Guid,
+                    InputPortName = connectedSockets[i].input.portName,
                 });
             }
 
-            foreach (DialogueNode node in Nodes.Where(node => !node.EntryPoint))
+            foreach (DialogueNode node in nodes)
             {
-                dialogueContainerObject.DialogueNodeData.Add(new DialogueNodeData
-                {
-                    NodeGuid = node.GUID,
-                    DialogueText = node.DialogueText,
-                    Position = node.GetPosition().position
-                });
+                node.Data.SetPosition(node.GetPosition().position);
+
+                DialogueNodeData nodeData = new(node.Data);
+
+                dialogueGraphData.DialogueNodeData.Add(nodeData);
             }
 
             return true;
         }
 
-        private void SaveExposedProperties(DialogueContainer dialogueContainer)
+        private void SaveExposedProperties(DialogueGraphData dialogueGraphData)
         {
-            dialogueContainer.ExposedProperties.Clear();
-            dialogueContainer.ExposedProperties.AddRange(graphView.ExposedProperties);
+            dialogueGraphData.ExposedProperties.Clear();
+            dialogueGraphData.ExposedProperties.AddRange(graphView.ExposedProperties);
         }
 
-        private void SaveCommentBlocks(DialogueContainer dialogueContainer)
+        private void SaveCommentBlocks(DialogueGraphData dialogueGraphData)
         {
-            foreach (Group block in CommentBlocks)
+            foreach (Group block in commentBlocks)
             {
-                List<string> nodeGuids = block.containedElements.Where(graphElement => graphElement is DialogueNode).Cast<DialogueNode>().Select(node => node.GUID).ToList();
+                List<string> nodeGuids = block.containedElements.Where(graphElement => graphElement is DialogueNode).Cast<DialogueNode>().Select(node => node.Data.Guid).ToList();
 
-                dialogueContainer.CommentBlockData.Add(new CommentBlockData
+                dialogueGraphData.CommentBlockData.Add(new CommentBlockData
                 {
                     ChildNodes = nodeGuids,
                     Title = block.title,
@@ -134,75 +130,60 @@ namespace Grigor.Utils.StoryGraph.Editor
             }
         }
 
-        public void LoadNarrative(string fileName)
+        public void LoadGraph(string fileName)
         {
-            dialogueContainer = Resources.Load<DialogueContainer>(fileName);
+            DialogueGraphData dialogueGraphData = Resources.Load<DialogueGraphData>(fileName);
 
-            if (dialogueContainer == null)
+            if (dialogueGraphData == null)
             {
                 throw Log.Exception($"Dialogue Container with name {fileName} not found!");
             }
 
             ClearGraph();
-            GenerateDialogueNodes();
-            ConnectDialogueNodes();
-            AddExposedProperties();
-            GenerateCommentBlocks();
+
+            GenerateDialogueNodes(dialogueGraphData);
+            ConnectDialogueNodes(dialogueGraphData);
+            AddExposedProperties(dialogueGraphData);
+            GenerateCommentBlocks(dialogueGraphData);
         }
 
-        /// <summary>
-        /// Set Entry point GUID then Get All Nodes, remove all and their edges. Leave only the entrypoint node. (Remove its edge too)
-        /// </summary>
         private void ClearGraph()
         {
-            Nodes.Find(node => node.EntryPoint).GUID = dialogueContainer.NodeLinks[0].BaseNodeGuid;
-
-            foreach (DialogueNode node in Nodes)
+            foreach (DialogueNode node in nodes)
             {
-                if (node.EntryPoint)
-                {
-                    continue;
-                }
-
-                Edges.Where(edge => edge.input.node == node).ToList().ForEach(edge => graphView.RemoveElement(edge));
+                edges.Where(edge => edge.input.node == node).ToList().ForEach(edge => graphView.RemoveElement(edge));
                 graphView.RemoveElement(node);
             }
         }
 
-        /// <summary>
-        /// Create All serialized nodes and assign their guid and dialogue text to them
-        /// </summary>
-        private void GenerateDialogueNodes()
+        private void GenerateDialogueNodes(DialogueGraphData dialogueGraphData)
         {
-            foreach (DialogueNodeData nodeData in dialogueContainer.DialogueNodeData)
+            foreach (DialogueNodeData nodeData in dialogueGraphData.DialogueNodeData)
             {
-                DialogueNode tempNode = graphView.CreateNode(nodeData.DialogueText, Vector2.zero);
-                tempNode.GUID = nodeData.NodeGuid;
+                DialogueNode newNode = graphView.CreateNode(nodeData.DialogueText, nodeData.Position, nodeData);
 
-                graphView.AddElement(tempNode);
-
-                List<NodeLinkData> nodePorts = dialogueContainer.NodeLinks.Where(nodeLinkData => nodeLinkData.BaseNodeGuid == nodeData.NodeGuid).ToList();
-
-                nodePorts.ForEach(nodeLinkData => graphView.AddChoicePort(tempNode, nodeLinkData.PortName));
+                graphView.AddElement(newNode);
             }
         }
 
-        private void ConnectDialogueNodes()
+        private void ConnectDialogueNodes(DialogueGraphData dialogueGraphData)
         {
-            for (int i = 0; i < Nodes.Count; i++)
+            for (int i = 0; i < nodes.Count; i++)
             {
-                int index = i; //Prevent access to modified closure
+                DialogueNode currentNode = nodes[i];
 
-                List<NodeLinkData> connections = dialogueContainer.NodeLinks.Where(nodeLinkData => nodeLinkData.BaseNodeGuid == Nodes[index].GUID).ToList();
+                List<NodeLinkData> connectionsToCurrentNode = dialogueGraphData.NodeLinks.Where(nodeLink => nodeLink.OutputNodeGuid == currentNode.Data.Guid).ToList();
 
-                for (int j = 0; j < connections.Count; j++)
+                for (int j = 0; j < connectionsToCurrentNode.Count; j++)
                 {
-                    string targetNodeGuid = connections[j].TargetNodeGuid;
-                    DialogueNode targetNode = Nodes.First(x => x.GUID == targetNodeGuid);
+                    DialogueNode targetNode = nodes.First(node => node.Data.Guid == connectionsToCurrentNode[j].InputNodeGuid);
 
-                    LinkNodesTogether(Nodes[i].outputContainer[j].Q<Port>(), (Port) targetNode.inputContainer[0]);
+                    if (targetNode == null)
+                    {
+                        throw Log.Exception($"Could not find input node with guid {connectionsToCurrentNode[j].InputNodeGuid}!");
+                    }
 
-                    targetNode.SetPosition(new Rect(dialogueContainer.DialogueNodeData.First(nodeData => nodeData.NodeGuid == targetNodeGuid).Position, graphView.DefaultNodeSize));
+                    LinkNodesTogether(nodes[i].outputContainer[j].Q<Port>(), (Port)targetNode.inputContainer[0]);
                 }
             }
         }
@@ -221,28 +202,28 @@ namespace Grigor.Utils.StoryGraph.Editor
             graphView.Add(edge);
         }
 
-        private void AddExposedProperties()
+        private void AddExposedProperties(DialogueGraphData dialogueGraphData)
         {
             graphView.ClearBlackboardAndExposedProperties();
 
-            foreach (ExposedProperty exposedProperty in dialogueContainer.ExposedProperties)
+            foreach (ExposedProperty exposedProperty in dialogueGraphData.ExposedProperties)
             {
                 graphView.AddPropertyToBlackboard(exposedProperty);
             }
         }
 
-        private void GenerateCommentBlocks()
+        private void GenerateCommentBlocks(DialogueGraphData dialogueGraphData)
         {
-            foreach (Group commentBlock in CommentBlocks)
+            foreach (Group commentBlock in commentBlocks)
             {
                 graphView.RemoveElement(commentBlock);
             }
 
-            foreach (CommentBlockData commentBlockData in dialogueContainer.CommentBlockData)
+            foreach (CommentBlockData commentBlockData in dialogueGraphData.CommentBlockData)
             {
                Group block = graphView.CreateCommentBlock(new Rect(commentBlockData.Position, graphView.DefaultCommentBlockSize), commentBlockData);
 
-               block.AddElements(Nodes.Where(node => commentBlockData.ChildNodes.Contains(node.GUID)));
+               block.AddElements(nodes.Where(node => commentBlockData.ChildNodes.Contains(node.Data.Guid)));
             }
         }
     }
