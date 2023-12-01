@@ -160,7 +160,7 @@ namespace Grigor.Utils.StoryGraph.Editor
         {
             foreach (DialogueNodeData nodeData in dialogueGraphData.DialogueNodeData)
             {
-                DialogueNode newNode = graphView.CreateNode(nodeData.DialogueText, nodeData.Position, nodeData);
+                DialogueNode newNode = graphView.CreateNode(nodeData.Position, nodeData);
 
                 graphView.AddElement(newNode);
             }

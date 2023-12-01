@@ -13,29 +13,34 @@ MonoBehaviour:
   m_Name: ada
   m_EditorClassIdentifier: 
   nodeLinks:
-  - OutputPortName: Option 1
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Option 1
     InputPortName: Input
-    OutputNodeGuid: c1232404-aada-42b9-a369-3aed4ede445d
-    InputNodeGuid: 49a357a9-4c3f-4781-9501-0e6dac6147de
-  - OutputPortName: Option 1
+    OutputNodeGuid: 16f3ac90-2e16-4e16-903c-09f8b77ab563
+    InputNodeGuid: 203cc752-5734-46d0-a5e5-cbaf1e1fee0f
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Option 1
     InputPortName: Input
-    OutputNodeGuid: dd78343f-bc61-43f2-9302-6660a30a7fc3
-    InputNodeGuid: c1232404-aada-42b9-a369-3aed4ede445d
+    OutputNodeGuid: 203cc752-5734-46d0-a5e5-cbaf1e1fee0f
+    InputNodeGuid: 66ba2724-7579-4710-b289-bdd71eb5bff0
   dialogueNodeData:
-  - guid: c1232404-aada-42b9-a369-3aed4ede445d
-    position: {x: 1113, y: 420}
-    dialogueText: 
-    speaker: {fileID: 0}
-    nodeType: 0
-  - guid: 49a357a9-4c3f-4781-9501-0e6dac6147de
-    position: {x: 1491, y: 420}
-    dialogueText: 
-    speaker: {fileID: 0}
-    nodeType: 2
-  - guid: dd78343f-bc61-43f2-9302-6660a30a7fc3
-    position: {x: 639, y: 420}
-    dialogueText: 
-    speaker: {fileID: 0}
+  - nodeName: start node!
+    guid: 16f3ac90-2e16-4e16-903c-09f8b77ab563
+    position: {x: 398, y: 424}
+    dialogueText: start node!
+    speaker: {fileID: 11400000, guid: 8014931489753bc4591822b145c72fa1, type: 2}
     nodeType: 1
+  - nodeName: middle!!1
+    guid: 203cc752-5734-46d0-a5e5-cbaf1e1fee0f
+    position: {x: 895, y: 424}
+    dialogueText: middle!!1
+    speaker: {fileID: 11400000, guid: 8014931489753bc4591822b145c72fa1, type: 2}
+    nodeType: 0
+  - nodeName: end node
+    guid: 66ba2724-7579-4710-b289-bdd71eb5bff0
+    position: {x: 1372, y: 424}
+    dialogueText: end node
+    speaker: {fileID: 11400000, guid: 8014931489753bc4591822b145c72fa1, type: 2}
+    nodeType: 2
   exposedProperties: []
   commentBlockData: []

@@ -52,7 +52,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             switch (searchTreeEntry.userData)
             {
                 case DialogueNode dialogueNode:
-                    graphView.CreateNewDialogueNode("Dialogue Node", graphMousePosition);
+                    graphView.CreateNewDialogueNode(graphMousePosition);
                     return true;
 
                 case Group group:

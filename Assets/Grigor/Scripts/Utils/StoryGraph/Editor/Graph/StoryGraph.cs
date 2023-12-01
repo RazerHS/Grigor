@@ -151,11 +151,11 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                     break;
                 }
                 case KeyCode.Space:
-                    graphView.CreateNewDialogueNode("Dialogue Node", graphMousePosition);
+                    graphView.CreateNewDialogueNode(graphMousePosition);
                     break;
 
                 case KeyCode.Tab:
-                    graphView.CreateNewDialogueNode("Dialogue Node", graphMousePosition);
+                    graphView.CreateNewDialogueNode(graphMousePosition);
                     break;
             }
         }
@@ -164,7 +164,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         {
             Vector2 mousePosition = Event.current.mousePosition;
 
-            graphView.CreateNewDialogueNode("Dialogue Node", mousePosition);
+            graphView.CreateNewDialogueNode(mousePosition);
         }
     }
 }

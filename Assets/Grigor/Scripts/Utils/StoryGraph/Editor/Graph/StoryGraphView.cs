@@ -137,12 +137,12 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(string nodeName, Vector2 position)
+        public void CreateNewDialogueNode(Vector2 position)
         {
-            AddElement(CreateNode(nodeName, position));
+            AddElement(CreateNode(position));
         }
 
-        public DialogueNode CreateNode(string nodeName, Vector2 position, DialogueNodeData savedNodeData = null)
+        public DialogueNode CreateNode(Vector2 position, DialogueNodeData savedNodeData = null)
         {
             DialogueNodeData dialogueNodeData;
 
@@ -159,7 +159,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
             DialogueNode dialogueNode = new DialogueNode
             {
-                title = nodeName,
+                title = dialogueNodeData.NodeName,
                 Data = dialogueNodeData,
             };
 
@@ -263,8 +263,10 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 }
             };
 
-            dialogueTextField.RegisterValueChangedCallback(@event => {
+            dialogueTextField.RegisterValueChangedCallback(@event =>
+            {
                 dialogueNode.Data.SetDialogueText(@event.newValue);
+                dialogueNode.Data.SetNodeName(@event.newValue);
             });
 
             dialogueTextField.SetValueWithoutNotify(dialogueNode.title);
