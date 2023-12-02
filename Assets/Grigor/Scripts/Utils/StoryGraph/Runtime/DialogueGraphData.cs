@@ -88,5 +88,17 @@ namespace Grigor.Utils.StoryGraph.Runtime
 
             return startNodeData;
         }
+
+        public DialogueNodeData GetNodeByGuid(string guid)
+        {
+            DialogueNodeData nodeData = dialogueNodeData.Find(dialogueNode => dialogueNode.Guid == guid);
+
+            if (nodeData == null)
+            {
+                throw Log.Exception($"Node with guid <b>{guid}</b> not found!");
+            }
+
+            return nodeData;
+        }
     }
 }

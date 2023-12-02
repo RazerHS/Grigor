@@ -95,6 +95,10 @@ namespace Grigor.Utils.StoryGraph.Editor
                     InputNodeGuid = inputNode.Data.Guid,
                     InputPortName = connectedSockets[i].input.portName,
                 });
+
+                DialogueChoiceData choice = outputNode.Data.GetChoiceByText(connectedSockets[i].output.portName);
+
+                choice.SetNextNodeGuid(inputNode.Data.Guid);
             }
 
             foreach (DialogueNode node in nodes)

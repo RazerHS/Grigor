@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CardboardCore.DI;
 using Grigor.Input;
 using Grigor.UI;
@@ -17,6 +18,7 @@ namespace Grigor.Gameplay.Dialogue
         private DialogueGraphData currentDialogueGraph;
         private DialogueNodeData currentNode;
         private bool inDialogue;
+        private bool currentNodeRequiresChoices;
 
         public event Action DialogueStartedEvent;
         public event Action DialogueEndedEvent;
@@ -30,12 +32,17 @@ namespace Grigor.Gameplay.Dialogue
 
         protected override void OnReleased()
         {
-
         }
+
 
         private void OnSkipInput()
         {
             if (!inDialogue)
+            {
+                return;
+            }
+
+            if (currentNodeRequiresChoices)
             {
                 return;
             }
@@ -56,18 +63,39 @@ namespace Grigor.Gameplay.Dialogue
         private void OnNextNodeEntered(DialogueNodeData nextNode)
         {
             currentNode = nextNode;
+            currentNodeRequiresChoices = currentNode.NodeRequiresChoices(out List<DialogueChoiceData> choices);
 
             UpdateDialogueWidget();
+
+            if (!currentNodeRequiresChoices)
+            {
+                return;
+            }
+
+            foreach (DialogueChoiceData choice in choices)
+            {
+                dialogueWidget.AddChoice(choice);
+            }
+
+            dialogueWidget.ChoiceSelectedEvent += OnChoiceSelected;
+        }
+
+        private void OnChoiceSelected(DialogueChoiceData choiceData)
+        {
+           dialogueWidget.RemoveAllChoices();
+
+           dialogueWidget.ChoiceSelectedEvent -= OnChoiceSelected;
+
+           OnNextNodeEntered(currentDialogueGraph.GetNodeByGuid(choiceData.NextNodeGuid));
         }
 
         public void StartDialogue(DialogueGraphData dialogueGraphData, DialogueNodeData startNode)
         {
             currentDialogueGraph = dialogueGraphData;
-            currentNode = startNode;
 
             inDialogue = true;
 
-            UpdateDialogueWidget();
+            OnNextNodeEntered(startNode);
 
             dialogueWidget.Show();
 
@@ -88,7 +116,7 @@ namespace Grigor.Gameplay.Dialogue
         private void UpdateDialogueWidget()
         {
             dialogueWidget.SetDialogueText(currentNode.DialogueText);
-            dialogueWidget.SetSpeakerText(currentNode.Speaker.name);
+            dialogueWidget.SetSpeakerText(currentNode.GetSpeakerName());
         }
     }
 }

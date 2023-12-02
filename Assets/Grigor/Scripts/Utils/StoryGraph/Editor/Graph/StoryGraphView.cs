@@ -145,6 +145,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         public DialogueNode CreateNode(Vector2 position, DialogueNodeData savedNodeData = null)
         {
             DialogueNodeData dialogueNodeData;
+            bool loadingData = false;
 
             if (savedNodeData == null)
             {
@@ -155,6 +156,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             else
             {
                 dialogueNodeData = new DialogueNodeData(savedNodeData);
+                loadingData = true;
             }
 
             DialogueNode dialogueNode = new DialogueNode
@@ -164,11 +166,16 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             };
 
             CreateNodeTypeField(dialogueNode);
+            UpdatePortsBasedOnNodeType(dialogueNode, dialogueNode.Data.NodeType, loadingData);
+
+            if (loadingData)
+            {
+                CreateOverridenPorts(dialogueNode);
+            }
 
             CreateChoiceButton(dialogueNode);
             CreateSpeakerField(dialogueNode);
             CreateDialogueTextField(dialogueNode);
-
 
             dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
 
@@ -186,8 +193,6 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 value = dialogueNode.Data.NodeType,
             };
 
-            UpdatePortsBasedOnNodeType(dialogueNode, dialogueNode.Data.NodeType);
-
             nodeTypeField.RegisterValueChangedCallback(@event =>
             {
                 NodeType previousNodeType = dialogueNode.Data.NodeType;
@@ -200,8 +205,36 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             dialogueNode.titleContainer.Add(nodeTypeField);
         }
 
-        private void UpdatePortsBasedOnNodeType(DialogueNode dialogueNode, NodeType previousNodeType)
+        private bool CreateOverridenPorts(DialogueNode dialogueNode)
         {
+            dialogueNode.inputContainer.Clear();
+            dialogueNode.outputContainer.Clear();
+
+            if (dialogueNode.Data.NodeType != NodeType.START)
+            {
+                CreateInputPort(dialogueNode);
+            }
+
+            if (dialogueNode.Data.NodeType == NodeType.END)
+            {
+                dialogueNode.Data.RemoveAllChoices();
+            }
+
+            foreach (DialogueChoiceData choice in dialogueNode.Data.Choices)
+            {
+                AddChoicePort(dialogueNode, choice);
+            }
+
+            return true;
+        }
+
+        private void UpdatePortsBasedOnNodeType(DialogueNode dialogueNode, NodeType previousNodeType, bool loadingData = false)
+        {
+            if (loadingData)
+            {
+                return;
+            }
+
             switch (dialogueNode.Data.NodeType)
             {
                 case NodeType.START:
@@ -245,7 +278,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             dialogueNode.inputContainer.Clear();
 
             Port inputPort = GetPortInstance(dialogueNode, Direction.Input, Port.Capacity.Multi);
-            inputPort.portName = "Input";
+            inputPort.portName = "";
 
             dialogueNode.inputContainer.Add(inputPort);
 
@@ -305,8 +338,17 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             return speakerField;
         }
 
-        private void AddChoicePort(DialogueNode nodeCache, string overriddenPortName = "")
+        private void AddChoicePort(DialogueNode nodeCache, DialogueChoiceData existingChoice = null)
         {
+            DialogueChoiceData choice = new();
+
+            bool choiceOverriden = existingChoice != null;
+
+            if (choiceOverriden)
+            {
+                choice = existingChoice;
+            }
+
             Port generatedPort = GetPortInstance(nodeCache, Direction.Output);
 
             generatedPort.AddManipulator(new EdgeConnector<Edge>(this));
@@ -319,9 +361,16 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             connector.pickingMode = PickingMode.Position;
 
             int outputPortCount = nodeCache.outputContainer.Query("connector").ToList().Count;
-            string outputPortName = string.IsNullOrEmpty(overriddenPortName) ? $"Option {outputPortCount + 1}" : overriddenPortName;
+            string outputPortName = choiceOverriden ? existingChoice.Text : $"{outputPortCount + 1}";
 
             generatedPort.portName = outputPortName;
+
+            if (!choiceOverriden)
+            {
+                choice.SetChoiceText(generatedPort.portName);
+
+                nodeCache.Data.AddChoice(choice);
+            }
 
             TextField textField = new TextField
             {
@@ -329,7 +378,12 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 value = outputPortName
             };
 
-            textField.RegisterValueChangedCallback(@event => generatedPort.portName = @event.newValue);
+            textField.RegisterValueChangedCallback(@event =>
+            {
+                choice.SetChoiceText(@event.newValue);
+                generatedPort.portName = @event.newValue;
+            });
+
             textField.AddToClassList("DialogueChoiceTextField");
 
             textField.pickingMode = PickingMode.Ignore;
@@ -347,25 +401,27 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             generatedPort.contentContainer.Add(deleteButton);
 
             nodeCache.outputContainer.Add(generatedPort);
+
             nodeCache.RefreshPorts();
             nodeCache.RefreshExpandedState();
         }
 
-        private void RemovePort(Node node, Port socket)
+        private void RemovePort(DialogueNode dialogueNode, Port socket)
         {
-            IEnumerable<Edge> targetEdges = edges.ToList().Where(x => x.output.portName == socket.portName && x.output.node == socket.node);
+            dialogueNode.Data.RemoveChoiceByChoiceText(socket.portName);
+
+            IEnumerable<Edge> targetEdges = edges.ToList().Where(edge => edge.output.portName == socket.portName && edge.output.node == socket.node);
 
             if (targetEdges.Any())
             {
                 Edge edge = targetEdges.First();
-
                 edge.input.Disconnect(edge);
-                RemoveElement(targetEdges.First());
+                RemoveElement(edge);
             }
 
-            node.outputContainer.Remove(socket);
-            node.RefreshPorts();
-            node.RefreshExpandedState();
+            dialogueNode.outputContainer.Remove(socket);
+            dialogueNode.RefreshPorts();
+            dialogueNode.RefreshExpandedState();
         }
 
         private Port GetPortInstance(DialogueNode node, Direction nodeDirection, Port.Capacity capacity = Port.Capacity.Single)
