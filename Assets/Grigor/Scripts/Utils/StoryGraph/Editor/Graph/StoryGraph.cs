@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Utils.StoryGraph.Runtime;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Gameplay.Lighting;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
@@ -9,7 +8,6 @@ using Grigor.Utils.StoryGraph.Runtime;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.Search;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 

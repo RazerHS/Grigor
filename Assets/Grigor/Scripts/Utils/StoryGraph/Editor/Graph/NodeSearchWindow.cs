@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using CardboardCore.Utilities;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Grigor.Utils.StoryGraph.Editor.Graph
 {
