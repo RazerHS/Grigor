@@ -136,8 +136,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 anchored = true
             };
 
-            Vector2 coordinates = graphView.contentViewContainer.WorldToLocal(new Vector2(maxSize.x - 10, 30));
-            miniMap.SetPosition(new Rect(coordinates.x, coordinates.y, 200, 140));
+            miniMap.SetPosition(new Rect(10, 30, 200, 140));
 
             graphView.Add(miniMap);
         }
