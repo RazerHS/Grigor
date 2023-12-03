@@ -28,8 +28,6 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
         private NodeSearchWindow searchWindow;
 
-        public event Action RequestNodeCreationEvent;
-
         public StoryGraphView(StoryGraph editorWindow)
         {
             styleSheets.Add(Resources.Load<StyleSheet>("StoryGraph"));
@@ -142,9 +140,13 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             return compatiblePorts;
         }
 
-        public void CreateNewDialogueNode(Vector2 position)
+        public DialogueNode CreateNewDialogueNode(Vector2 position)
         {
-            AddElement(CreateNode(position));
+            DialogueNode dialogueNode = CreateNode(position);
+
+            AddElement(dialogueNode);
+
+            return dialogueNode;
         }
 
         public DialogueNode CreateNode(Vector2 position, DialogueNodeData savedNodeData = null)
@@ -432,7 +434,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             textField.style.minWidth = 60;
             textField.style.maxWidth = 100;
 
-            generatedPort.contentContainer.Add(new Label(" "));
+            generatedPort.contentContainer.Add(new Label("   "));
             generatedPort.contentContainer.Add(textField);
 
             Button deleteButton = new Button(() => RemovePort(nodeCache, generatedPort))
@@ -473,12 +475,19 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
         public void OnDropOutsidePort(Edge edge, Vector2 position)
         {
-            RequestNodeCreationEvent?.Invoke();
+            DialogueNode inputNode = CreateNewDialogueNode(ConvertWorldPositionToLocalPosition(position));
+
+            // TO-DO: connect new edge to input node correctly
         }
 
         public void OnDrop(GraphView graphView, Edge edge)
         {
 
+        }
+
+        public Vector2 ConvertWorldPositionToLocalPosition(Vector2 position)
+        {
+           return contentViewContainer.WorldToLocal(position);
         }
     }
 }

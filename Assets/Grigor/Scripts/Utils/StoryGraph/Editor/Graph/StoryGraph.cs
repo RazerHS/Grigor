@@ -51,7 +51,6 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             };
 
             graphView.StretchToParentSize();
-            graphView.RequestNodeCreationEvent += OnRequestNodeCreation;
 
             rootVisualElement.Add(graphView);
         }
@@ -180,7 +179,9 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
         private void OnKeyDown(KeyDownEvent @event)
         {
-            Vector2 graphMousePosition = Event.current.mousePosition;
+            Vector2 worldPosition = Event.current.mousePosition;
+
+            Vector2 graphMousePosition = graphView.ConvertWorldPositionToLocalPosition(worldPosition);
 
             switch (@event.keyCode)
             {
@@ -197,21 +198,14 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 case KeyCode.Tab:
                     graphView.CreateNewDialogueNode(graphMousePosition);
                     break;
+
                 case KeyCode.S:
                     if (Event.current.control)
                     {
                         RequestDataOperation(DataOperationType.Save);
                     }
-
                     break;
             }
-        }
-
-        private void OnRequestNodeCreation()
-        {
-            Vector2 mousePosition = Event.current.mousePosition;
-
-            graphView.CreateNewDialogueNode(mousePosition);
         }
     }
 }
