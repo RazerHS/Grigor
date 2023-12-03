@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: wrwr
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 042ca686-2549-41b0-a01b-516ee15a4274
+    InputNodeGuid: 1063b858-151a-4cb5-a4b7-abce4e3f8dd4
+  dialogueNodeData:
+  - nodeName: 
+    guid: 1063b858-151a-4cb5-a4b7-abce4e3f8dd4
+    position: {x: 844, y: 349}
+    dialogueText: 
+    speaker: {fileID: 0}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
+  - nodeName: 
+    guid: 042ca686-2549-41b0-a01b-516ee15a4274
+    position: {x: 477, y: 349}
+    dialogueText: 
+    speaker: {fileID: 0}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 1063b858-151a-4cb5-a4b7-abce4e3f8dd4
+  exposedProperties: []
+  commentBlockData: []

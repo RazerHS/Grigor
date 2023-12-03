@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CardboardCore.Utilities;
+using Grigor.Characters;
 using Grigor.Utils.StoryGraph.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -16,6 +17,9 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
         private StoryGraphView graphView;
         private DialogueGraphData dialogueGraphData;
+        private CharacterData defaultSpeaker;
+
+        public CharacterData DefaultSpeaker => defaultSpeaker;
 
         [MenuItem("Grigor/Narrative Graph")]
         public static void CreateGraphViewWindow()
@@ -55,38 +59,74 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         private void GenerateToolbar()
         {
             Toolbar toolbar = new Toolbar();
-            TextField fileNameTextField = new TextField("File Name:");
+
+            TextField fileNameTextField = new TextField("");
 
             fileNameTextField.SetValueWithoutNotify(fileName);
             fileNameTextField.MarkDirtyRepaint();
             fileNameTextField.RegisterValueChangedCallback(@event => fileName = @event.newValue);
 
+            toolbar.Add(new Button(() => RequestDataOperation(DataOperationType.Save)) {text = "Save Data"});
+            toolbar.Add(new Button(() => RequestDataOperation(DataOperationType.Load)) {text = "Load Data"});
+
+            ObjectField speaker = new ObjectField() { objectType = typeof(CharacterData), value = defaultSpeaker };
+            speaker.RegisterValueChangedCallback(@event => defaultSpeaker = @event.newValue as CharacterData);
+
+            ObjectField dialogueAsset = new ObjectField() { objectType = typeof(DialogueGraphData), value = dialogueGraphData };
+            dialogueAsset.RegisterValueChangedCallback(@event =>
+            {
+                dialogueGraphData = @event.newValue as DialogueGraphData;
+
+                if (dialogueGraphData != null)
+                {
+                    RequestDataOperation(DataOperationType.Load);
+                }
+            });
+
+            toolbar.Add(dialogueAsset);
+            toolbar.Add(speaker);
+
+            toolbar.Add(new Button(() =>
+            {
+                if (dialogueGraphData != null)
+                {
+                    RequestDataOperation(DataOperationType.Save);
+                }
+
+                RequestDataOperation(DataOperationType.Create);
+
+                dialogueAsset.value = dialogueGraphData;
+            })
+            {
+                text = "Create New"
+            });
+
             toolbar.Add(fileNameTextField);
-            toolbar.Add(new Button(() => RequestDataOperation(true)) {text = "Save Data"});
-            toolbar.Add(new Button(() => RequestDataOperation(false)) {text = "Load Data"});
 
             rootVisualElement.Add(toolbar);
         }
 
-        private void RequestDataOperation(bool save)
+        private void RequestDataOperation(DataOperationType dataOperationType)
         {
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                GraphSaveUtility saveUtility = GraphSaveUtility.GetInstance(graphView);
+            GraphSaveUtility saveUtility = GraphSaveUtility.GetInstance(graphView);
 
-                if (save)
-                {
-                    saveUtility.SaveGraph(fileName);
-                }
-                else
-                {
-                    saveUtility.LoadGraph(fileName);
-                }
-            }
-            else
+            switch (dataOperationType)
             {
-                //EditorUtility.DisplayDialog("Invalid File name", "Please Enter a valid filename", "OK");
-                throw Log.Exception("Invalid file name! Please enter a valid file name.");
+                case DataOperationType.Create:
+                    DialogueGraphData newDialogueGraphData = saveUtility.CreateNewGraphAsset(fileName);
+                    dialogueGraphData = newDialogueGraphData;
+                    break;
+
+                case DataOperationType.Save:
+                    saveUtility.SaveGraph(dialogueGraphData);
+                    break;
+
+                case DataOperationType.Load:
+                    saveUtility.LoadGraph(dialogueGraphData);
+                    break;
+
+                default:
+                    throw Log.Exception($"Data operation {dataOperationType} is not supported!");
             }
         }
 
@@ -156,6 +196,13 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
                 case KeyCode.Tab:
                     graphView.CreateNewDialogueNode(graphMousePosition);
+                    break;
+                case KeyCode.S:
+                    if (Event.current.control)
+                    {
+                        RequestDataOperation(DataOperationType.Save);
+                    }
+
                     break;
             }
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.Utilities;
 using Grigor.Utils.StoryGraph.Editor.Graph;
@@ -27,53 +28,49 @@ namespace Grigor.Utils.StoryGraph.Editor
             };
         }
 
-        public void SaveGraph(string fileName)
+        public DialogueGraphData CreateNewGraphAsset(string fileName)
+        {
+            DialogueGraphData existingDialogueGraphData = AssetDatabase.LoadAssetAtPath<DialogueGraphData>($"Assets/Grigor/Data/DialogueGraphs/{fileName}.asset");
+
+            if (existingDialogueGraphData != null)
+            {
+                Log.Write($"Graph with name <b>{fileName}</b> already exists! Saved instead.");
+
+                return existingDialogueGraphData;
+            }
+
+            DialogueGraphData newDialogueGraphData = ScriptableObject.CreateInstance<DialogueGraphData>();
+
+            if (!AssetDatabase.IsValidFolder("Assets/Grigor/Data/DialogueGraphs"))
+            {
+                AssetDatabase.CreateFolder("Assets/Grigor/Data", "DialogueGraphs");
+            }
+
+            AssetDatabase.CreateAsset(newDialogueGraphData, $"Assets/Grigor/Data/DialogueGraphs/{fileName}.asset");
+
+            AssetDatabase.SaveAssets();
+
+            Log.Write($"Graph with name <b>{fileName}</b> created!");
+
+            return newDialogueGraphData;
+        }
+
+        public void SaveGraph(DialogueGraphData dialogueGraphData)
         {
             DialogueGraphData newDialogueGraphData = ScriptableObject.CreateInstance<DialogueGraphData>();
 
-            if (!SaveNodes(fileName, newDialogueGraphData))
-            {
-                return;
-            }
-
+            SaveNodes(newDialogueGraphData);
             SaveExposedProperties(newDialogueGraphData);
             SaveCommentBlocks(newDialogueGraphData);
 
-            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-            {
-                AssetDatabase.CreateFolder("Assets", "Resources");
-            }
+            dialogueGraphData.SetData(newDialogueGraphData.NodeLinks, newDialogueGraphData.DialogueNodeData, newDialogueGraphData.ExposedProperties, newDialogueGraphData.CommentBlockData);
 
-            Object loadedAsset = AssetDatabase.LoadAssetAtPath($"Assets/Resources/{fileName}.asset", typeof(DialogueGraphData));
-
-            if (loadedAsset == null || !AssetDatabase.Contains(loadedAsset))
-			{
-                AssetDatabase.CreateAsset(newDialogueGraphData, $"Assets/Resources/{fileName}.asset");
-            }
-            else
-			{
-                DialogueGraphData dialogueGraphData = loadedAsset as DialogueGraphData;
-
-                if (dialogueGraphData == null)
-                {
-                    throw Log.Exception($"Loaded asset is not a {nameof(DialogueGraphData)}");
-                }
-
-                dialogueGraphData.SetData(newDialogueGraphData.NodeLinks, newDialogueGraphData.DialogueNodeData, newDialogueGraphData.ExposedProperties, newDialogueGraphData.CommentBlockData);
-
-                EditorUtility.SetDirty(dialogueGraphData);
-            }
-
+            EditorUtility.SetDirty(dialogueGraphData);
             AssetDatabase.SaveAssets();
         }
 
-        private bool SaveNodes(string fileName, DialogueGraphData dialogueGraphData)
+        private void SaveNodes(DialogueGraphData dialogueGraphData)
         {
-            if (!edges.Any())
-            {
-                return false;
-            }
-
             Edge[] connectedSockets = edges.Where(edge => edge.input.node != null).ToArray();
 
             for (int i = 0; i < connectedSockets.Length; i++)
@@ -109,8 +106,6 @@ namespace Grigor.Utils.StoryGraph.Editor
 
                 dialogueGraphData.DialogueNodeData.Add(nodeData);
             }
-
-            return true;
         }
 
         private void SaveExposedProperties(DialogueGraphData dialogueGraphData)
@@ -134,15 +129,8 @@ namespace Grigor.Utils.StoryGraph.Editor
             }
         }
 
-        public void LoadGraph(string fileName)
+        public void LoadGraph(DialogueGraphData dialogueGraphData)
         {
-            DialogueGraphData dialogueGraphData = Resources.Load<DialogueGraphData>(fileName);
-
-            if (dialogueGraphData == null)
-            {
-                throw Log.Exception($"Dialogue Container with name {fileName} not found!");
-            }
-
             ClearGraph();
 
             GenerateDialogueNodes(dialogueGraphData);
@@ -187,7 +175,10 @@ namespace Grigor.Utils.StoryGraph.Editor
                         throw Log.Exception($"Could not find input node with guid {connectionsToCurrentNode[j].InputNodeGuid}!");
                     }
 
-                    LinkNodesTogether(nodes[i].outputContainer[j].Q<Port>(), (Port)targetNode.inputContainer[0]);
+                    Port outputPort = currentNode.outputContainer[j].Q<Port>();
+                    Port inputPort = (Port)targetNode.inputContainer[0];
+
+                    LinkNodesTogether(outputPort, inputPort);
                 }
             }
         }

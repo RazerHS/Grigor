@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.Utilities;
 using Grigor.Characters;
+using Grigor.Gameplay.Lighting;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
 using Grigor.Utils.StoryGraph.Runtime;
 using UnityEditor.Experimental.GraphView;
@@ -16,7 +17,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 {
     public class StoryGraphView : GraphView, IEdgeConnectorListener
     {
-        private NodeSearchWindow searchWindow;
+        private CharacterData defaultSpeaker;
 
         public readonly Vector2 DefaultNodeSize = new Vector2(200, 150);
         public readonly Vector2 DefaultCommentBlockSize = new Vector2(300, 200);
@@ -24,6 +25,8 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         public Blackboard Blackboard = new Blackboard();
 
         public List<ExposedProperty> ExposedProperties { get; private set; } = new List<ExposedProperty>();
+
+        private NodeSearchWindow searchWindow;
 
         public event Action RequestNodeCreationEvent;
 
@@ -43,6 +46,8 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             grid.StretchToParentSize();
 
             AddSearchWindow(editorWindow);
+
+            defaultSpeaker = editorWindow.DefaultSpeaker;
         }
 
         private void AddSearchWindow(StoryGraph editorWindow)
@@ -179,6 +184,8 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
             dialogueNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
 
+            UpdateNodeColors(dialogueNode);
+
             dialogueNode.RefreshExpandedState();
             dialogueNode.RefreshPorts();
             dialogueNode.SetPosition(new Rect(position, DefaultNodeSize));
@@ -200,9 +207,37 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 dialogueNode.Data.SetNodeType((NodeType)@event.newValue);
 
                 UpdatePortsBasedOnNodeType(dialogueNode, previousNodeType);
+
+                UpdateNodeColors(dialogueNode);
             });
 
             dialogueNode.titleContainer.Add(nodeTypeField);
+        }
+
+        private void UpdateNodeColors(DialogueNode dialogueNode)
+        {
+            dialogueNode.titleContainer.style.backgroundColor = dialogueNode.Data.NodeType switch
+            {
+                NodeType.START => new StyleColor(GameConfig.Instance.StartNodeColor),
+                NodeType.END => new StyleColor(GameConfig.Instance.EndNodeColor),
+                _ => new StyleColor(GameConfig.Instance.NormalNodeColor)
+            };
+
+            VisualElement speakerField = dialogueNode.mainContainer.Query("speakerField");
+
+            if (speakerField == null)
+            {
+                return;
+            }
+
+            if (dialogueNode.Data.Speaker == null)
+            {
+                speakerField.style.backgroundColor = GameConfig.Instance.NoSpeakerColor;
+
+                return;
+            }
+
+            speakerField.style.backgroundColor = dialogueNode.Data.Speaker.SpeakerColor;
         }
 
         private bool CreateOverridenPorts(DialogueNode dialogueNode)
@@ -325,14 +360,21 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         {
             ObjectField speakerField = new ObjectField("Speaker")
             {
-                value = dialogueNode.Data.Speaker,
+                value = defaultSpeaker,
                 objectType = typeof(CharacterData)
             };
 
-            speakerField.RegisterValueChangedCallback(@event => {
+            speakerField.RegisterValueChangedCallback(@event =>
+            {
                 dialogueNode.Data.SetSpeaker(@event.newValue as CharacterData);
+
+                UpdateNodeColors(dialogueNode);
             });
 
+            dialogueNode.Data.SetSpeaker(defaultSpeaker);
+
+            speakerField.name = "speakerField";
+;
             dialogueNode.mainContainer.Add(speakerField);
 
             return speakerField;
