@@ -12,7 +12,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 {
     public class StoryGraph : EditorWindow
     {
-        private string fileName = "New Narrative";
+        private string fileName = "New Story Graph";
 
         private StoryGraphView graphView;
         private DialogueGraphData dialogueGraphData;
@@ -20,11 +20,11 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
         public CharacterData DefaultSpeaker => defaultSpeaker;
 
-        [MenuItem("Grigor/Narrative Graph")]
+        [MenuItem("Grigor/Story Graph")]
         public static void CreateGraphViewWindow()
         {
             StoryGraph window = GetWindow<StoryGraph>();
-            window.titleContent = new GUIContent("Narrative Graph");
+            window.titleContent = new GUIContent("Story Graph");
         }
 
         private void OnEnable()
@@ -46,10 +46,12 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         {
             graphView = new StoryGraphView(this)
             {
-                name = "Narrative Graph",
+                name = "Story Graph",
             };
 
             graphView.StretchToParentSize();
+
+            graphView.SetDefaultSpeaker(defaultSpeaker);
 
             rootVisualElement.Add(graphView);
         }
@@ -68,7 +70,11 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             toolbar.Add(new Button(() => RequestDataOperation(DataOperationType.Load)) {text = "Load Data"});
 
             ObjectField speaker = new ObjectField() { objectType = typeof(CharacterData), value = defaultSpeaker };
-            speaker.RegisterValueChangedCallback(@event => defaultSpeaker = @event.newValue as CharacterData);
+            speaker.RegisterValueChangedCallback(@event =>
+            {
+                defaultSpeaker = @event.newValue as CharacterData;
+                graphView.SetDefaultSpeaker(defaultSpeaker);
+            });
 
             ObjectField dialogueAsset = new ObjectField() { objectType = typeof(DialogueGraphData), value = dialogueGraphData };
             dialogueAsset.RegisterValueChangedCallback(@event =>

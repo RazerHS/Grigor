@@ -1,4 +1,4 @@
-﻿using CardboardCore.DI;
+using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
@@ -17,11 +17,15 @@ namespace Grigor.StateMachines.Gameplay.States
 
         private GameplayScreen gameplayScreen;
         private EndDayWidget endDayWidget;
+        private TimeOfDayWidget timeOfDayWidget;
 
         protected override void OnEnter()
         {
             gameplayScreen = uiManager.ShowScreen<GameplayScreen>();
             endDayWidget = uiManager.GetWidget<EndDayWidget>();
+            timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
+
+            timeManager.TimeChangedEvent += OnTimeChanged;
 
             RegisterTimeEffect();
 
@@ -30,7 +34,12 @@ namespace Grigor.StateMachines.Gameplay.States
 
         protected override void OnExit()
         {
+            timeManager.TimeChangedEvent -= OnTimeChanged;
+        }
 
+        private void OnTimeChanged(int minutes, int hours)
+        {
+            timeOfDayWidget.UpdateTimeText(minutes, hours);
         }
 
         public void RegisterTimeEffect()

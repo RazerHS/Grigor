@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Grigor.Characters;
+using Grigor.Data;
 using Grigor.Gameplay.Lighting;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
 using Grigor.Utils.StoryGraph.Runtime;
@@ -42,8 +43,6 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             grid.StretchToParentSize();
 
             AddSearchWindow(editorWindow);
-
-            defaultSpeaker = editorWindow.DefaultSpeaker;
         }
 
         private void AddSearchWindow(StoryGraph editorWindow)
@@ -220,7 +219,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             {
                 NodeType.START => new StyleColor(GameConfig.Instance.StartNodeColor),
                 NodeType.END => new StyleColor(GameConfig.Instance.EndNodeColor),
-                _ => new StyleColor(GameConfig.Instance.NormalNodeColor)
+                _ => new StyleColor(GameConfig.Instance.DefaultNodeColor)
             };
 
             VisualElement speakerField = dialogueNode.mainContainer.Query("speakerField");
@@ -486,6 +485,11 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         public Vector2 ConvertWorldPositionToLocalPosition(Vector2 position)
         {
            return contentViewContainer.WorldToLocal(position);
+        }
+
+        public void SetDefaultSpeaker(CharacterData speaker)
+        {
+            defaultSpeaker = speaker;
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting.Components;
+using Grigor.UI;
+using Grigor.UI.Widgets;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -18,20 +19,28 @@ namespace Grigor.Gameplay.Interacting
 
         [SerializeField, ColoredBoxGroup("Debugging", false, 0.5f, 0.1f, 0.2f)] private bool interactingEnabled;
 
-        [SerializeField] private List<InteractableComponent> interactableComponents;
+        [SerializeField, HideLabel] private InteractablesChain interactablesChain;
 
         [Inject] private InteractablesRegistry interactablesRegistry;
+        [Inject] private UIManager uiManager;
 
         private bool inRange;
+        private InteractWidget interactWidget;
 
         public Transform InteractPoint => interactPoint;
         public float InteractDistance => interactDistance;
-        public List<InteractableComponent> InteractableComponents => interactableComponents;
         public bool InteractingEnabled => interactingEnabled;
+        public InteractablesChain InteractablesChain => interactablesChain;
 
         public event Action InteractEvent;
         public event Action<Characters.Components.Character> InRangeEvent;
         public event Action<Characters.Components.Character> OutOfRangeEvent;
+
+        [Button]
+        private void ResetChain()
+        {
+            interactablesChain.ResetInitialChain(GetComponents<InteractableComponent>().ToList());
+        }
 
         private void OnDrawGizmos()
         {
@@ -54,20 +63,15 @@ namespace Grigor.Gameplay.Interacting
             }
         }
 
-        [OnInspectorInit]
-        private void GetAllInteractableComponents()
-        {
-            interactableComponents = GetComponents<InteractableComponent>().ToList();
-        }
-
         protected override void OnInjected()
         {
             interactablesRegistry.Register(this);
 
-            if (interactableComponents.Count == 0)
-            {
-                GetAllInteractableComponents();
-            }
+            interactablesChain.ResetInitialChain(GetComponents<InteractableComponent>().ToList());
+
+            interactablesChain.OrderChain();
+
+            interactWidget = uiManager.GetWidget<InteractWidget>();
         }
 
         protected override void OnReleased()
@@ -115,6 +119,8 @@ namespace Grigor.Gameplay.Interacting
 
             inRange = true;
 
+            interactWidget.Show();
+
             InRangeEvent?.Invoke(interactingCharacter);
         }
 
@@ -127,6 +133,8 @@ namespace Grigor.Gameplay.Interacting
 
             inRange = false;
 
+            interactWidget.Hide();
+
             OutOfRangeEvent?.Invoke(interactingCharacter);
         }
 
@@ -135,29 +143,18 @@ namespace Grigor.Gameplay.Interacting
             InteractEvent?.Invoke();
         }
 
-        public InteractableComponent GetPrimaryInteractable()
-        {
-            // TO-DO: create flexible chains
-            if (interactableComponents.Count == 0)
-            {
-                throw Log.Exception($"There are no interactable components on this {name}!");
-            }
-
-            return interactableComponents[0];
-        }
-
         public void EnableInteractable()
         {
             interactingEnabled = true;
 
-            interactableComponents.ForEach(interactableComponent => interactableComponent.Initialize());
+            interactablesChain.Initialize(this);
         }
 
         public void DisableInteractable()
         {
             interactingEnabled = false;
 
-            interactableComponents.ForEach(interactableComponent => interactableComponent.Dispose());
+            interactablesChain.Dispose();
         }
 
         public void ResetInteractable()

@@ -1,4 +1,4 @@
-﻿using CardboardCore.StateMachines;
+using CardboardCore.StateMachines;
 using Grigor.StateMachines.Player.States;
 
 namespace Grigor.StateMachines.Player
@@ -15,10 +15,10 @@ namespace Grigor.StateMachines.Player
 
             AddStaticTransition<IdleState, FreeRoamState>();
             AddStaticTransition<FreeRoamState, BeginInteractionState>();
+            AddStaticTransition<BeginInteractionState, EndInteractionState>();
 
-            AddFreeFlowTransition<BeginInteractionState, EndInteractionState>();
-
-            AddStaticTransition<EndInteractionState, FreeRoamState>();
+            AddFreeFlowTransition<EndInteractionState, BeginInteractionState>();
+            AddFreeFlowTransition<EndInteractionState, FreeRoamState>();
 
             AddFreeFlowTransition<FreeRoamState, MoveToRoomState>();
             AddFreeFlowTransition<MoveToRoomState, FreeRoamState>();

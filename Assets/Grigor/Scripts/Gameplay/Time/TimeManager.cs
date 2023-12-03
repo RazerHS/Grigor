@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using DG.Tweening;
@@ -10,14 +10,18 @@ namespace Grigor.Gameplay.Time
     [Injectable]
     public class TimeManager : MonoBehaviour
     {
-        [SerializeField, ReadOnly, Range(0, 24)] private float timeOfDay = 10f;
-        [SerializeField] private float dayStartTime = 8f;
-        [SerializeField] private float nightStartTime = 22f;
+        [SerializeField, ReadOnly, Range(0, 60)] private float seconds = 0f;
+        [SerializeField, ReadOnly, Range(0, 60)] private int minutes = 0;
+        [SerializeField, ReadOnly, Range(0, 24)] private int hours = 0;
+        [SerializeField, ReadOnly] private int daysPassed;
+        [SerializeField] private int dayStartHour = 8;
+        [SerializeField] private int nightStartHour = 22;
         [SerializeField] private bool changeTimeAutomatically;
+        [SerializeField, ShowIf(nameof(changeTimeAutomatically))] private float timeMultiplier;
 
         private TimeOfDay currentTimeOfDay;
 
-        public event Action<float> TimeChangedEvent;
+        public event Action<int, int> TimeChangedEvent;
         public event Action ChangedToDayEvent;
         public event Action ChangedToNightEvent;
 
@@ -33,29 +37,80 @@ namespace Grigor.Gameplay.Time
                 return;
             }
 
-            timeOfDay += UnityEngine.Time.deltaTime;
+            seconds += UnityEngine.Time.deltaTime * timeMultiplier;
 
             OnTimeChanged();
         }
 
         private void OnTimeChanged()
         {
-            timeOfDay %= 24;
+            ParseSeconds();
+            ParseMinutes();
+            ParseHours();
 
             CheckTimeOfDay();
 
-            TimeChangedEvent?.Invoke(timeOfDay);
+            TimeChangedEvent?.Invoke(minutes, hours);
         }
 
-        private void SetTime(float value)
+        private void ParseSeconds()
         {
-            timeOfDay = value;
-            OnTimeChanged();
+            if (seconds < 60)
+            {
+                return;
+            }
+
+            seconds = 0;
+            minutes++;
+        }
+
+        private void ParseMinutes()
+        {
+            while (true)
+            {
+                if (minutes < 60)
+                {
+                    return;
+                }
+
+                hours++;
+
+                minutes -= 60;
+
+                if (minutes >= 60)
+                {
+                    continue;
+                }
+
+                break;
+            }
+        }
+
+        private void ParseHours()
+        {
+            while (true)
+            {
+                if (hours < 24)
+                {
+                    return;
+                }
+
+                daysPassed++;
+
+                hours -= 24;
+
+                if (hours >= 24)
+                {
+                    continue;
+                }
+
+                break;
+            }
         }
 
         private void CheckTimeOfDay()
         {
-            if (timeOfDay >= dayStartTime && timeOfDay < nightStartTime)
+            if (hours >= dayStartHour && hours < nightStartHour)
             {
                 if (currentTimeOfDay == TimeOfDay.Day)
                 {
@@ -77,7 +132,9 @@ namespace Grigor.Gameplay.Time
 
         private void CheckStartTimeOfDay()
         {
-            if (timeOfDay >= dayStartTime && timeOfDay < nightStartTime)
+            hours = dayStartHour;
+
+            if (hours >= dayStartHour && hours < nightStartHour)
             {
                OnChangedToDay();
             }
@@ -86,7 +143,7 @@ namespace Grigor.Gameplay.Time
                OnChangedToNight();
             }
 
-            CheckTimeOfDay();
+            OnTimeChanged();
         }
 
         private void OnChangedToDay()
@@ -109,17 +166,48 @@ namespace Grigor.Gameplay.Time
 
         public void ToggleTimeOfDay(float duration, Action callback)
         {
-            float targetTimeOfDay = currentTimeOfDay == TimeOfDay.Day ? nightStartTime : dayStartTime;
+            int targetTimeOfDay = currentTimeOfDay == TimeOfDay.Day ? nightStartHour : dayStartHour;
 
-            DOVirtual.Float(timeOfDay, targetTimeOfDay, duration, SetTime).OnComplete(() =>
+            DOVirtual.Int(hours, targetTimeOfDay, duration, SetTimeToHour).OnComplete(() =>
             {
                 callback?.Invoke();
             });
         }
 
+        private void SetTimeToHour(int value)
+        {
+            hours = value;
+            minutes = 0;
+            seconds = 0;
+
+            OnTimeChanged();
+        }
+
         public void StartTime()
         {
             CheckStartTimeOfDay();
+
+            OnTimeChanged();
+        }
+
+        public void PassTime(int minutes, int hours)
+        {
+            this.minutes += minutes;
+            this.hours += hours;
+
+            Log.Write($"Time passed! New time: <b>{this.hours}:{this.minutes}</b>");
+
+            OnTimeChanged();
+        }
+
+        public void SetTimeToNight()
+        {
+            SetTimeToHour(nightStartHour);
+        }
+
+        public void SetTimeToDay()
+        {
+            SetTimeToHour(dayStartHour);
         }
     }
 }

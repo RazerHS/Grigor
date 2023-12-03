@@ -102,7 +102,8 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  startNodeColor: {r: 0.8679245, g: 0.816878, b: 0.26610893, a: 0.7607843}
-  normalNodeColor: {r: 1, g: 1, b: 1, a: 0.7607843}
-  endNodeColor: {r: 0.7169812, g: 0, b: 0, a: 0.7607843}
-  noSpeakerColor: {r: 0, g: 0, b: 0, a: 0.54509807}
+  correctCluesBeforeLock: 3
+  startNodeColor: {r: 0.8113208, g: 0.6803733, b: 0.17221434, a: 0.7607843}
+  defaultNodeColor: {r: 1, g: 1, b: 1, a: 0.7607843}
+  endNodeColor: {r: 0.6981132, g: 0.07573871, b: 0.07573871, a: 0.7607843}
+  noSpeakerColor: {r: 0, g: 0, b: 0, a: 0.7607843}
