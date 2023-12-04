@@ -14,10 +14,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 034cb1db663a5094cb59ef24f3371ad0,
         type: 2}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: characterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 034cb1db663a5094cb59ef24f3371ad0,
+        type: 2}
     - target: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: m_Name
-      value: Character_SusanDaughter
+      value: NPC__SusanDaughter
       objectReference: {fileID: 0}
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}

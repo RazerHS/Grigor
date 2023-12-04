@@ -16,13 +16,19 @@ PrefabInstance:
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
-      propertyPath: clue
+      propertyPath: characterData
       value: 
-      objectReference: {fileID: 5231529596458844693}
+      objectReference: {fileID: 11400000, guid: 9f9dd936fdf5a6043be778e46a9fbb07,
+        type: 2}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: startNodeName
+      value: hi clerk
+      objectReference: {fileID: 0}
     - target: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: m_Name
-      value: Character_Nanna
+      value: NPC_Nanna
       objectReference: {fileID: 0}
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -77,79 +83,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5231529596458844693}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1779152814203683121}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8808896342202402357}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2488453335173540022}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
---- !u!1 &1093726980007126424 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-    type: 3}
-  m_PrefabInstance: {fileID: 3174813636317394566}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5231529596458844693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: 46982aff892498349a6678771ec70fd1, type: 2}
---- !u!114 &1779152814203683121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: 9f0ef24472685264f8fc1786720975b6, type: 2}
---- !u!114 &8808896342202402357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: 28b94822d789dd24480b4b975e42e58e, type: 2}
---- !u!114 &2488453335173540022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: da4934514b3c6624fbca42fed3023176, type: 2}

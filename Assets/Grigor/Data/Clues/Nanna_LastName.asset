@@ -17,7 +17,9 @@ MonoBehaviour:
   evidenceBoardNoteType: 0
   clueHeading: Stevenson
   evidenceText: Nanna's last name
-  cluesToConnectTo: []
+  cluesToConnectTo:
+  - {fileID: 11400000, guid: 77ffbe3ed0fd0c646ae8b6c8df73222f, type: 2}
+  - {fileID: 11400000, guid: 6ba1b7c93fd30cf4b882efe722a301f0, type: 2}
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}
   upscaleFactor: 1

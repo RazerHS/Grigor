@@ -16,13 +16,19 @@ PrefabInstance:
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
-      propertyPath: clue
+      propertyPath: characterData
       value: 
-      objectReference: {fileID: 7334404631987250832}
+      objectReference: {fileID: 11400000, guid: 29d9dd48607b6fe41baca301d26dc731,
+        type: 2}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: startNodeName
+      value: hi clerk
+      objectReference: {fileID: 0}
     - target: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: m_Name
-      value: Character_CandaceNursing
+      value: NPC_CandaceNursing
       objectReference: {fileID: 0}
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -77,96 +83,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7334404631987250832}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8756111096939998886}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 439326935760578042}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4640369136532345890}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7268007771781718715}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
---- !u!1 &1093726980007126424 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-    type: 3}
-  m_PrefabInstance: {fileID: 3174813636317394566}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7334404631987250832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: 77ffbe3ed0fd0c646ae8b6c8df73222f, type: 2}
---- !u!114 &8756111096939998886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: adbf0a2728a630a429762242e81e199a, type: 2}
---- !u!114 &439326935760578042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: 22c4fca11594a2448961808721c8ffe7, type: 2}
---- !u!114 &4640369136532345890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: 5739e13d4784e6e4aa76c98a8c9be738, type: 2}
---- !u!114 &7268007771781718715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093726980007126424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: 7e13f81495b9a8d4f96663dba3b1a6d9, type: 2}

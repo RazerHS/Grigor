@@ -15,6 +15,11 @@ namespace Grigor.Gameplay.Interacting.Components
 
         protected override void OnInitialized()
         {
+
+            if (clueToFind == null)
+            {
+                throw Log.Exception($"Clue to find not set in interactable {name}!");
+            }
             clueRegistry.RegisterClue(clueToFind);
         }
 
