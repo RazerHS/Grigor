@@ -56,12 +56,12 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             if (characterData == null)
             {
-                throw Log.Exception($"Character data in interactable {name} is null!");
+                Log.Error($"Character data in interactable {name} is null!");
             }
 
             if (characterData.CharacterDialogue == null)
             {
-                throw Log.Exception($"Character data in interactable {name} has no dialogue graph set!");
+                Log.Error($"Character data in interactable {name} has no dialogue graph set!");
             }
         }
 
