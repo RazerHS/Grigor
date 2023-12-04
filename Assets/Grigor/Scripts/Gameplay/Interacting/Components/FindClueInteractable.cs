@@ -1,4 +1,7 @@
-﻿using CardboardCore.Utilities;
+﻿using System;
+using CardboardCore.DI;
+using CardboardCore.Utilities;
+using Grigor.Data.Clues;
 using Grigor.Gameplay.Clues;
 using UnityEngine;
 
@@ -6,14 +9,22 @@ namespace Grigor.Gameplay.Interacting.Components
 {
     public class FindClueInteractable : InteractableComponent
     {
-        [SerializeField] private Clue clue;
-        [SerializeField] private bool duringNightOnly;
+        [SerializeField] private ClueData clueToFind;
+
+        [Inject] private ClueRegistry clueRegistry;
+
+        protected override void OnInitialized()
+        {
+            clueRegistry.RegisterClue(clueToFind);
+        }
 
         protected override void OnInteractEffect()
         {
-            Log.Write($"Found clue: <b>{clue.ClueData.CredentialType}</b>");
+            Log.Write($"Found clue: <b>{clueToFind.CredentialType}</b>");
 
-            clue.FindClue();
+            clueToFind.OnClueFound();
+
+            clueRegistry.UnregisterClue(clueToFind);
 
             EndInteract();
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CardboardCore.Utilities;
 using Grigor.Data.Credentials;
 using Grigor.Data.Editor;
@@ -29,6 +30,8 @@ namespace Grigor.Data.Clues
         public Vector2 TextureSize => textureSize;
         public float UpscaleFactor => upscaleFactor;
 
+        public event Action<ClueData> ClueFoundEvent;
+
         private void SetTextureSize()
         {
             textureSize.x = evidenceSprite.texture.width;
@@ -48,6 +51,11 @@ namespace Grigor.Data.Clues
 
                 Log.Write($"Removed {clueHeading}'s connection to itself!");
             }
+        }
+
+        public void OnClueFound()
+        {
+            ClueFoundEvent?.Invoke(this);
         }
     }
 }
