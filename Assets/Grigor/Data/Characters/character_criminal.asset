@@ -17,8 +17,20 @@ MonoBehaviour:
   credentialWallet:
     credentialEntries:
     - credentialType: 0
-      matchingClue: {fileID: 11400000, guid: 0cfb9e582fc9ab34295d196183544db8, type: 2}
-    - credentialType: 2
-      matchingClue: {fileID: 11400000, guid: d726d4d4347c0af4a82d7657d901355a, type: 2}
+      matchingClue: {fileID: 11400000, guid: 9f0ef24472685264f8fc1786720975b6, type: 2}
     - credentialType: 1
-      matchingClue: {fileID: 11400000, guid: 2b839199426fa6048a968b9c50adbc2b, type: 2}
+      matchingClue: {fileID: 11400000, guid: 28b94822d789dd24480b4b975e42e58e, type: 2}
+    - credentialType: 2
+      matchingClue: {fileID: 11400000, guid: adbf0a2728a630a429762242e81e199a, type: 2}
+    - credentialType: 3
+      matchingClue: {fileID: 11400000, guid: 6ba1b7c93fd30cf4b882efe722a301f0, type: 2}
+    - credentialType: 4
+      matchingClue: {fileID: 11400000, guid: 22c4fca11594a2448961808721c8ffe7, type: 2}
+    - credentialType: 5
+      matchingClue: {fileID: 11400000, guid: 5739e13d4784e6e4aa76c98a8c9be738, type: 2}
+    - credentialType: 6
+      matchingClue: {fileID: 11400000, guid: 7e13f81495b9a8d4f96663dba3b1a6d9, type: 2}
+    - credentialType: 7
+      matchingClue: {fileID: 11400000, guid: 77ffbe3ed0fd0c646ae8b6c8df73222f, type: 2}
+    - credentialType: 8
+      matchingClue: {fileID: 11400000, guid: 46982aff892498349a6678771ec70fd1, type: 2}
