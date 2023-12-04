@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: iban
+  m_Name: Child_Address
   m_EditorClassIdentifier: 
-  assetName: iban
-  credentialType: 2
+  assetName: Child_Address
+  credentialType: 3
   evidenceBoardNoteType: 1
-  clueHeading: NL56INFG
+  clueHeading: Wot Apartments No. 2
   evidenceText: 
-  cluesToConnectTo:
-  - {fileID: 11400000, guid: 148c0ff15bda091409af06dca832b02c, type: 2}
-  - {fileID: 11400000, guid: 2b839199426fa6048a968b9c50adbc2b, type: 2}
-  evidenceSprite: {fileID: 21300000, guid: 10716e093a09e0e4190e31be9e69b608, type: 3}
-  textureSize: {x: 372, y: 386}
-  upscaleFactor: 2
+  cluesToConnectTo: []
+  evidenceSprite: {fileID: 21300000, guid: c2fab626b3b42d047888b183fa34471d, type: 3}
+  textureSize: {x: 1920, y: 1080}
+  upscaleFactor: 1
