@@ -31,8 +31,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
+      propertyPath: characterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8014931489753bc4591822b145c72fa1,
+        type: 2}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
       propertyPath: minutesToPass
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: startNodeName
+      value: hi clerk
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -109,6 +120,21 @@ PrefabInstance:
       propertyPath: 'interactableComponents.Array.data[1]'
       value: 
       objectReference: {fileID: 8626980197297991705}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: interactablesChain.interactableComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2772406031413939329}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8626980197297991705}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -166,7 +192,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  singleUse: 1
-  useTime: 0
+  removeFromChainAfterEffect: 0
+  stopsChain: 0
+  indexInChain: 1
+  hasTimeEffect: 0
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  interactionEnabled: 0
   clue: {fileID: 5687227135043310266}
   duringNightOnly: 0

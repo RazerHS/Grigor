@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: clerk
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 051469dc-745d-45d2-98c5-64d2266b8b12
+    InputNodeGuid: 25feb30f-aa0f-4e51-9c66-5d4d84072419
+  - OutportPortChoiceIndex: 0
+    OutputPortName: test 1
+    InputPortName: 
+    OutputNodeGuid: 25feb30f-aa0f-4e51-9c66-5d4d84072419
+    InputNodeGuid: 790657a9-a782-495b-ba3c-75e1425ef181
+  - OutportPortChoiceIndex: 0
+    OutputPortName: test 2
+    InputPortName: 
+    OutputNodeGuid: 25feb30f-aa0f-4e51-9c66-5d4d84072419
+    InputNodeGuid: 790657a9-a782-495b-ba3c-75e1425ef181
+  dialogueNodeData:
+  - nodeName: wrwrwr
+    guid: 790657a9-a782-495b-ba3c-75e1425ef181
+    position: {x: 1544, y: 460}
+    dialogueText: wrwrwr
+    speaker: {fileID: 11400000, guid: 8014931489753bc4591822b145c72fa1, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
+  - nodeName: hi clerk
+    guid: 051469dc-745d-45d2-98c5-64d2266b8b12
+    position: {x: 623, y: 448}
+    dialogueText: hi clerk
+    speaker: {fileID: 11400000, guid: 8014931489753bc4591822b145c72fa1, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 25feb30f-aa0f-4e51-9c66-5d4d84072419
+  - nodeName: 
+    guid: 25feb30f-aa0f-4e51-9c66-5d4d84072419
+    position: {x: 1075, y: 448}
+    dialogueText: 
+    speaker: {fileID: 11400000, guid: 8014931489753bc4591822b145c72fa1, type: 2}
+    nodeType: 0
+    choices:
+    - text: test 1
+      nextNodeGuid: 790657a9-a782-495b-ba3c-75e1425ef181
+    - text: test 2
+      nextNodeGuid: 790657a9-a782-495b-ba3c-75e1425ef181
+  exposedProperties: []
+  commentBlockData: []
