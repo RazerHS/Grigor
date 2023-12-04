@@ -2,6 +2,7 @@ using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
+using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Widgets;
 
@@ -13,8 +14,8 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private RoomRegistry roomRegistry;
         [Inject] private RoomManager roomManager;
         [Inject] private TimeManager timeManager;
+        [Inject] private PlayerInput playerInput;
 
-        private EndDayWidget endDayWidget;
         private TimeOfDayWidget timeOfDayWidget;
 
         protected override void OnEnter()
@@ -23,14 +24,13 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.Owner.Look.EnableLook();
             owningStateMachine.Owner.Interact.EnableInteract();
 
-            endDayWidget = uiManager.GetWidget<EndDayWidget>();
             timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
             roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
 
-            endDayWidget.DayEndedEvent += OnDayEnded;
+            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
 
             if (roomManager.CurrentRoomName == RoomName.Start)
             {
@@ -48,9 +48,12 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.ToState<MoveToRoomState>();
         }
 
-        private void OnDayEnded()
+        private void OnEndedDayInput()
         {
-            endDayWidget.DisableButton();
+            if (!timeManager.TryEndDay())
+            {
+                return;
+            }
 
             timeManager.SetTimeToNight();
 
@@ -60,11 +63,6 @@ namespace Grigor.StateMachines.Player.States
 
         private void OnDayStarted()
         {
-            if (roomManager.CurrentRoomName != RoomName.MindPalace)
-            {
-                endDayWidget.EnableButton();
-            }
-
             timeManager.SetTimeToDay();
         }
 
@@ -77,8 +75,6 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
 
             roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
-
-            endDayWidget.DayEndedEvent -= OnDayEnded;
         }
 
         private void OnInteract()

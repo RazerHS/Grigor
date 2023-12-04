@@ -17,15 +17,11 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private RoomManager roomManager;
 
         private TransitionWidget transitionWidget;
-        private EndDayWidget endDayWidget;
 
         protected override void OnEnter()
         {
             owningStateMachine.Owner.Movement.DisableMovement();
             owningStateMachine.Owner.Interact.DisableInteract();
-
-            endDayWidget = uiManager.GetWidget<EndDayWidget>();
-            endDayWidget.DisableButton();
 
             transitionWidget = uiManager.ShowWidget<TransitionWidget>();
 

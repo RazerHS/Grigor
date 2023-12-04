@@ -64,6 +64,5 @@ namespace Grigor.Gameplay.Interacting.Components
                 Log.Error($"Character data in interactable {name} has no dialogue graph set!");
             }
         }
-
     }
 }

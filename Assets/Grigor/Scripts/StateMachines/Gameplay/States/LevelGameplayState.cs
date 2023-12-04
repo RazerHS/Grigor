@@ -2,34 +2,42 @@
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
+using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Screens;
 using Grigor.UI.Widgets;
 
 namespace Grigor.StateMachines.Gameplay.States
 {
-    public class LevelGameplayState : State, ITimeEffect
+    public class LevelGameplayState : State
     {
         [Inject] private UIManager uiManager;
         [Inject] private TimeEffectRegistry timeEffectRegistry;
         [Inject] private TimeManager timeManager;
         [Inject] private RoomManager roomManager;
+        [Inject] private PlayerInput playerInput;
 
         private GameplayScreen gameplayScreen;
-        private EndDayWidget endDayWidget;
         private TimeOfDayWidget timeOfDayWidget;
+        private DataPodWidget dataPodWidget;
 
         protected override void OnEnter()
         {
             gameplayScreen = uiManager.ShowScreen<GameplayScreen>();
-            endDayWidget = uiManager.GetWidget<EndDayWidget>();
             timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
+            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
 
             timeManager.TimeChangedEvent += OnTimeChanged;
 
-            RegisterTimeEffect();
-
             timeManager.StartTime();
+
+            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
+            playerInput.EndDayInputStartedEvent += OnEndDayInputStarted;
+        }
+
+        private void OnEndDayInputStarted()
+        {
+
         }
 
         protected override void OnExit()
@@ -42,19 +50,9 @@ namespace Grigor.StateMachines.Gameplay.States
             timeOfDayWidget.UpdateTimeText(minutes, hours);
         }
 
-        public void RegisterTimeEffect()
+        private void OnDataPodInputStarted()
         {
-            timeEffectRegistry.Register(this);
-        }
-
-        public void OnChangedToDay()
-        {
-            endDayWidget.DisableButton();
-        }
-
-        public void OnChangedToNight()
-        {
-            endDayWidget.EnableButton();
+            dataPodWidget.OnToggleDataPod();
         }
     }
 }
