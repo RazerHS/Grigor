@@ -709,9 +709,9 @@ MonoBehaviour:
   removeFromChainAfterEffect: 0
   stopsChain: 0
   indexInChain: 0
-  hasTimeEffect: 0
-  timePassesOnInteract: 0
-  minutesToPass: 1
-  hoursToPass: 1
+  hasTimeEffect: 1
+  timePassesOnInteract: 1
+  minutesToPass: 5
+  hoursToPass: 0
   interactionEnabled: 0
   clueToFind: {fileID: 11400000, guid: da4934514b3c6624fbca42fed3023176, type: 2}
