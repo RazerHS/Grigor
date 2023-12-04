@@ -1,5 +1,6 @@
-﻿using CardboardCore.DI;
+using CardboardCore.DI;
 using CardboardCore.Utilities;
+using Grigor.Data.Clues;
 using Grigor.Gameplay.Clues;
 using Grigor.UI;
 using Grigor.UI.Widgets;
@@ -10,9 +11,9 @@ namespace Grigor.Gameplay.Interacting.Components
 {
     public class FindClueInteractable : InteractableComponent
     {
-        [SerializeField] private Clue clue;
-        [SerializeField] private bool duringNightOnly;
+        [SerializeField] private ClueData clueToFind;
 
+        [Inject] private ClueRegistry clueRegistry;
         [Inject] private UIManager uiManager;
 
         private MessagePopupWidget messagePopupWidget;
@@ -20,6 +21,12 @@ namespace Grigor.Gameplay.Interacting.Components
         protected override void OnInitialized()
         {
             messagePopupWidget = uiManager.GetWidget<MessagePopupWidget>();
+
+            if (clueToFind == null)
+            {
+                throw Log.Exception($"Clue to find not set in interactable {name}!");
+            }
+            clueRegistry.RegisterClue(clueToFind);
         }
 
         protected override void OnInteractEffect()
@@ -32,11 +39,11 @@ namespace Grigor.Gameplay.Interacting.Components
         [Button]
         private void FindClue()
         {
-            Log.Write($"Found clue: <b>{clue.ClueData.CredentialType}</b>");
+            Log.Write($"Found clue: <b>{clueToFind.CredentialType}</b>");
 
-            clue.FindClue();
+            clueToFind.OnClueFound();
 
-            messagePopupWidget.DisplayMessage($"Found clue {clue.name}!");
+            messagePopupWidget.DisplayMessage($"Found {clueToFind.name}!");
         }
     }
 }
