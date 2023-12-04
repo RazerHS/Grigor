@@ -1319,7 +1319,7 @@ PrefabInstance:
     - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_Name
-      value: Interactable_NursingHomeAddress
+      value: Object_NursingHomeAddress
       objectReference: {fileID: 0}
     - target: {fileID: 8475032777802215821, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
@@ -1382,10 +1382,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3207534633011101229}
-    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8353127918427156701}
   m_SourcePrefab: {fileID: 100100000, guid: 074fe82d7e4a3014996892cf2abd72fc, type: 3}
 --- !u!4 &4162353108576533685 stripped
@@ -1400,19 +1396,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2629331230377315543}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3207534633011101229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262747071254683437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: 96e97dd77acab15438e099e07d7223f6, type: 2}
 --- !u!114 &8353127918427156701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,5 +1417,4 @@ MonoBehaviour:
   minutesToPass: 1
   hoursToPass: 1
   interactionEnabled: 0
-  clue: {fileID: 3207534633011101229}
-  duringNightOnly: 0
+  clueToFind: {fileID: 11400000, guid: 96e97dd77acab15438e099e07d7223f6, type: 2}

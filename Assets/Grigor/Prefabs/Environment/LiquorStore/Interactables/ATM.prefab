@@ -15,24 +15,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
-      propertyPath: 'interactableComponents.Array.data[0]'
-      value: 
-      objectReference: {fileID: 3630775316704127846}
-    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
-        type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
-        type: 3}
-      propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
-      value: 
-      objectReference: {fileID: 3630775316704127846}
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
       value: 
-      objectReference: {fileID: 8111107123989653288}
+      objectReference: {fileID: 8111107123989653288, guid: 00000000000000000000000000000000,
+        type: 0}
     - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_Name
@@ -91,53 +82,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3630775316704127846}
-    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2622548634776932733}
-    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8111107123989653288}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 074fe82d7e4a3014996892cf2abd72fc, type: 3}
---- !u!1 &559303747361502387 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
-    type: 3}
-  m_PrefabInstance: {fileID: 8455497710680483657}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3630775316704127846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559303747361502387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactInRange: 0
-  singleUse: 1
-  useTime: 0
-  clue: {fileID: 2622548634776932733}
-  duringNightOnly: 0
---- !u!114 &2622548634776932733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559303747361502387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e2e54e0477476ca98cfdde6419cf06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clueData: {fileID: 11400000, guid: d726d4d4347c0af4a82d7657d901355a, type: 2}

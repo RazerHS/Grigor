@@ -12,7 +12,6 @@ namespace Grigor.Gameplay.Interacting.Components
 {
     public class DialogueInteractable : InteractableComponent
     {
-        [SerializeField] private Clue clue;
         [SerializeField] private CharacterData characterData;
         [SerializeField, ValueDropdown(nameof(GetStartNodes))] private string startNodeName;
 
@@ -37,10 +36,6 @@ namespace Grigor.Gameplay.Interacting.Components
         private void OnDialogueEnded()
         {
             dialogueController.DialogueEndedEvent -= OnDialogueEnded;
-
-            Log.Write($"Found clue: <b>{clue.ClueData.CredentialType}</b>");
-
-            clue.FindClue();
 
             EndInteract();
         }
