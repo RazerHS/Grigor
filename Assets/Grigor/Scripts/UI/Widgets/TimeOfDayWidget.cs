@@ -13,13 +13,20 @@ namespace Grigor.UI.Widgets
 
         protected override void OnShow()
         {
+            timeManager.TimeChangedEvent += OnTimeChanged;
         }
 
         protected override void OnHide()
         {
+            if (timeManager == null)
+            {
+                return;
+            }
+
+            timeManager.TimeChangedEvent -= OnTimeChanged;
         }
 
-        public void UpdateTimeText(int minutes, int hours)
+        private void OnTimeChanged(int minutes, int hours)
         {
             string minutesString = minutes.ToString();
             string hoursString = hours.ToString();

@@ -198,8 +198,6 @@ namespace Grigor.Gameplay.Time
             this.minutes += minutes;
             this.hours += hours;
 
-            Log.Write($"Time passed! New time: <b>{this.hours}:{this.minutes}</b>");
-
             OnTimeChanged();
         }
 

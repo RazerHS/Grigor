@@ -169,14 +169,20 @@ namespace Grigor.Gameplay.Interacting.Components
 
         public void EnableInteraction()
         {
-            parentInteractable.InteractEvent += OnInteract;
+            if (!interactionEnabled)
+            {
+               parentInteractable.InteractEvent += OnInteract;
+            }
 
             interactionEnabled = true;
         }
 
         public void DisableInteraction()
         {
-            parentInteractable.InteractEvent -= OnInteract;
+            if (interactionEnabled)
+            {
+                parentInteractable.InteractEvent -= OnInteract;
+            }
 
             interactionEnabled = false;
         }
@@ -184,11 +190,14 @@ namespace Grigor.Gameplay.Interacting.Components
         public void OnCurrentChainEnded()
         {
             interactedWithInCurrentChain = false;
+
+            EnableInteraction();
         }
 
         protected void ResetInteraction()
         {
             EnableInteraction();
+
             parentInteractable.ResetInteractable();
         }
 

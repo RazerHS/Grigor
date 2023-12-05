@@ -1,4 +1,4 @@
-﻿using CardboardCore.DI;
+using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
@@ -27,8 +27,6 @@ namespace Grigor.StateMachines.Gameplay.States
             timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
             dataPodWidget = uiManager.GetWidget<DataPodWidget>();
 
-            timeManager.TimeChangedEvent += OnTimeChanged;
-
             timeManager.StartTime();
 
             playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
@@ -42,12 +40,7 @@ namespace Grigor.StateMachines.Gameplay.States
 
         protected override void OnExit()
         {
-            timeManager.TimeChangedEvent -= OnTimeChanged;
-        }
 
-        private void OnTimeChanged(int minutes, int hours)
-        {
-            timeOfDayWidget.UpdateTimeText(minutes, hours);
         }
 
         private void OnDataPodInputStarted()

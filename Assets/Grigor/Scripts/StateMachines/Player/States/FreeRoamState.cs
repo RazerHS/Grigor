@@ -4,7 +4,6 @@ using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
-using Grigor.UI.Widgets;
 
 namespace Grigor.StateMachines.Player.States
 {
@@ -16,26 +15,15 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private TimeManager timeManager;
         [Inject] private PlayerInput playerInput;
 
-        private TimeOfDayWidget timeOfDayWidget;
-
         protected override void OnEnter()
         {
             owningStateMachine.Owner.Movement.EnableMovement();
             owningStateMachine.Owner.Look.EnableLook();
             owningStateMachine.Owner.Interact.EnableInteract();
 
-            timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
-
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
             roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
-
-            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
-
-            if (roomManager.CurrentRoomName == RoomName.Start)
-            {
-                OnDayStarted();
-            }
         }
 
         private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
