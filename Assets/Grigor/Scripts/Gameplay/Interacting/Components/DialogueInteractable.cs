@@ -2,7 +2,6 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
-using Grigor.Gameplay.Clues;
 using Grigor.Gameplay.Dialogue;
 using Grigor.Utils.StoryGraph.Runtime;
 using Sirenix.OdinInspector;

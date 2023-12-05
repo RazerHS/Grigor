@@ -6,7 +6,6 @@ using Grigor.UI;
 using Grigor.UI.Widgets;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Interacting.Components
