@@ -10,7 +10,6 @@ using Grigor.UI.Data;
 using Grigor.UI.Widgets;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DataPodWidget : UIWidget, IClueListener
 {
@@ -35,6 +34,8 @@ public class DataPodWidget : UIWidget, IClueListener
     {
         InsertCredentials();
         RegisterClueListener();
+
+        OnToggleDataPod();
 
         messagePopupWidget = uiManager.GetWidget<MessagePopupWidget>();
     }

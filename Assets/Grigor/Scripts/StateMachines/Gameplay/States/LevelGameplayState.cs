@@ -6,6 +6,8 @@ using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Screens;
 using Grigor.UI.Widgets;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 namespace Grigor.StateMachines.Gameplay.States
 {
@@ -31,6 +33,8 @@ namespace Grigor.StateMachines.Gameplay.States
 
             playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
             playerInput.EndDayInputStartedEvent += OnEndDayInputStarted;
+
+            Cursor.visible = false;
         }
 
         private void OnEndDayInputStarted()
@@ -46,6 +50,8 @@ namespace Grigor.StateMachines.Gameplay.States
         private void OnDataPodInputStarted()
         {
             dataPodWidget.OnToggleDataPod();
+
+            Cursor.visible = !Cursor.visible;
         }
     }
 }

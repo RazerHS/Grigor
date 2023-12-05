@@ -284,7 +284,7 @@ namespace Grigor.Input
                 {
                     ""name"": """",
                     ""id"": ""f4f6642e-7f8f-4d67-9ecc-50f4e640de9b"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -295,7 +295,7 @@ namespace Grigor.Input
                 {
                     ""name"": """",
                     ""id"": ""7694106e-4cc5-4150-a781-289e52b4c929"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
