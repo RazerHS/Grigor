@@ -6,7 +6,6 @@ using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Screens;
 using Grigor.UI.Widgets;
-using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
 namespace Grigor.StateMachines.Gameplay.States
@@ -21,37 +20,19 @@ namespace Grigor.StateMachines.Gameplay.States
 
         private GameplayScreen gameplayScreen;
         private TimeOfDayWidget timeOfDayWidget;
-        private DataPodWidget dataPodWidget;
 
         protected override void OnEnter()
         {
             gameplayScreen = uiManager.ShowScreen<GameplayScreen>();
-            timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
-            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
 
             timeManager.StartTime();
 
-            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
-            playerInput.EndDayInputStartedEvent += OnEndDayInputStarted;
-
             Cursor.visible = false;
-        }
-
-        private void OnEndDayInputStarted()
-        {
-
         }
 
         protected override void OnExit()
         {
 
-        }
-
-        private void OnDataPodInputStarted()
-        {
-            dataPodWidget.OnToggleDataPod();
-
-            Cursor.visible = !Cursor.visible;
         }
     }
 }

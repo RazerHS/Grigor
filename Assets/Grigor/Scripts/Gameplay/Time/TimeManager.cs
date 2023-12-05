@@ -155,6 +155,8 @@ namespace Grigor.Gameplay.Time
 
             Log.Write("Day started!");
 
+            canEndDay = true;
+
             ChangedToDayEvent?.Invoke();
         }
 
@@ -215,6 +217,8 @@ namespace Grigor.Gameplay.Time
         {
             canEndDay = true;
 
+            SetTimeToDay();
+
             DayStartedEvent?.Invoke();
         }
 
@@ -222,14 +226,19 @@ namespace Grigor.Gameplay.Time
         {
             if (!canEndDay)
             {
-                return canEndDay;
+                return false;
             }
 
             DayEndedEvent?.Invoke();
 
             canEndDay = false;
 
-            return canEndDay;
+            if (currentTimeOfDay == TimeOfDay.Day)
+            {
+                SetTimeToNight();
+            }
+
+            return true;
         }
     }
 }

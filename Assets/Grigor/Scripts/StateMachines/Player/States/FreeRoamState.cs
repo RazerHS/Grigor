@@ -4,6 +4,7 @@ using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
+using UnityEngine;
 
 namespace Grigor.StateMachines.Player.States
 {
@@ -15,8 +16,12 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private TimeManager timeManager;
         [Inject] private PlayerInput playerInput;
 
+        private DataPodWidget dataPodWidget;
+
         protected override void OnEnter()
         {
+            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
+
             owningStateMachine.Owner.Movement.EnableMovement();
             owningStateMachine.Owner.Look.EnableLook();
             owningStateMachine.Owner.Interact.EnableInteract();
@@ -24,6 +29,23 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
             roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
+
+            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
+            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
+        }
+
+        protected override void OnExit()
+        {
+            owningStateMachine.Owner.Movement.DisableMovement();
+            owningStateMachine.Owner.Look.DisableLook();
+            owningStateMachine.Owner.Interact.DisableInteract();
+
+            owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
+
+            roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
+
+            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
+            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
         }
 
         private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
@@ -43,31 +65,19 @@ namespace Grigor.StateMachines.Player.States
                 return;
             }
 
-            timeManager.SetTimeToNight();
-
-            RoomName nextRoom = roomManager.PlayerInMindPalace ? RoomName.Start : RoomName.MindPalace;
-            roomManager.MovePlayerToRoom(nextRoom, owningStateMachine.Owner.transform.position);
-        }
-
-        private void OnDayStarted()
-        {
-            timeManager.SetTimeToDay();
-        }
-
-        protected override void OnExit()
-        {
-            owningStateMachine.Owner.Movement.DisableMovement();
-            owningStateMachine.Owner.Look.DisableLook();
-            owningStateMachine.Owner.Interact.DisableInteract();
-
-            owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
-
-            roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
+            roomManager.MovePlayerToRoom(RoomName.MindPalace, owningStateMachine.Owner.transform.position);
         }
 
         private void OnInteract()
         {
             owningStateMachine.ToNextState();
+        }
+
+        private void OnDataPodInputStarted()
+        {
+            dataPodWidget.OnToggleDataPod();
+
+            Cursor.visible = !Cursor.visible;
         }
     }
 }
