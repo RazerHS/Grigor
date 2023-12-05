@@ -6721,7 +6721,7 @@ PrefabInstance:
     - target: {fileID: 5976817574252545906, guid: ddb1c51e2a5ebfd4b8c580a29280403b,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 26
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6262747071254683437, guid: ddb1c51e2a5ebfd4b8c580a29280403b,
         type: 3}
@@ -6884,25 +6884,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1018617574447017636}
     m_Modifications:
-    - target: {fileID: 2804073958596687567, guid: 05982d660aabb8e468aa1c14bbae8632,
-        type: 3}
-      propertyPath: isBox
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2804073958596687567, guid: 05982d660aabb8e468aa1c14bbae8632,
-        type: 3}
-      propertyPath: interactingEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2804073958596687567, guid: 05982d660aabb8e468aa1c14bbae8632,
-        type: 3}
-      propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3910342802306102056, guid: 05982d660aabb8e468aa1c14bbae8632,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 206
+      value: 203
       objectReference: {fileID: 0}
     - target: {fileID: 5899750396045983066, guid: 05982d660aabb8e468aa1c14bbae8632,
         type: 3}
@@ -6962,12 +6947,12 @@ PrefabInstance:
     - target: {fileID: 7601664206408091874, guid: 05982d660aabb8e468aa1c14bbae8632,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 26
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7952031850213941797, guid: 05982d660aabb8e468aa1c14bbae8632,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 29
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7043,12 +7028,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC_CandaceNursing
       objectReference: {fileID: 0}
-    - target: {fileID: 6462104462434602285, guid: f0241ab79c0eafb4fbd970d7f4529e23,
-        type: 3}
-      propertyPath: characterData
-      value: 
-      objectReference: {fileID: 11400000, guid: 29d9dd48607b6fe41baca301d26dc731,
-        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
