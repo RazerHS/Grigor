@@ -23,6 +23,8 @@ namespace Grigor.UI.Widgets
 
         protected override void OnShow()
         {
+            transitionImage.DOFade(0f, 0f);
+
             sequence?.Kill();
 
             sequence = DOTween.Sequence();

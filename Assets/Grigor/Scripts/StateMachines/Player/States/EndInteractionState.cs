@@ -35,6 +35,8 @@ namespace Grigor.StateMachines.Player.States
                     return;
                 }
 
+                currentInteractable.DisableInteraction();
+
                 nextInChain.EnableInteraction();
 
                 ForceSetNextInteract(nextInChain);

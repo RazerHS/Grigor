@@ -117,7 +117,7 @@ namespace Grigor.Gameplay.Interacting
                 return true;
             }
 
-            Log.Write("Current chain ended!");
+            Log.Write("Current chain ended and reset!");
 
             ResetChain();
 

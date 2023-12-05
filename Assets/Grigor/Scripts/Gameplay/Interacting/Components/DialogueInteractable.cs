@@ -2,7 +2,6 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
-using Grigor.Gameplay.Clues;
 using Grigor.Gameplay.Dialogue;
 using Grigor.Utils.StoryGraph.Runtime;
 using Sirenix.OdinInspector;
@@ -51,14 +50,13 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             if (characterData == null)
             {
-                throw Log.Exception($"Character data in interactable {name} is null!");
+                Log.Error($"Character data in interactable {name} is null!");
             }
 
             if (characterData.CharacterDialogue == null)
             {
-                throw Log.Exception($"Character data in interactable {name} has no dialogue graph set!");
+                Log.Error($"Character data in interactable {name} has no dialogue graph set!");
             }
         }
-
     }
 }

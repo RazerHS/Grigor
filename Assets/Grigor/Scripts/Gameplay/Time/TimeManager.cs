@@ -20,10 +20,13 @@ namespace Grigor.Gameplay.Time
         [SerializeField, ShowIf(nameof(changeTimeAutomatically))] private float timeMultiplier;
 
         private TimeOfDay currentTimeOfDay;
+        private bool canEndDay;
 
         public event Action<int, int> TimeChangedEvent;
         public event Action ChangedToDayEvent;
         public event Action ChangedToNightEvent;
+        public event Action DayStartedEvent;
+        public event Action DayEndedEvent;
 
         private void Awake()
         {
@@ -152,6 +155,8 @@ namespace Grigor.Gameplay.Time
 
             Log.Write("Day started!");
 
+            canEndDay = true;
+
             ChangedToDayEvent?.Invoke();
         }
 
@@ -195,8 +200,6 @@ namespace Grigor.Gameplay.Time
             this.minutes += minutes;
             this.hours += hours;
 
-            Log.Write($"Time passed! New time: <b>{this.hours}:{this.minutes}</b>");
-
             OnTimeChanged();
         }
 
@@ -208,6 +211,34 @@ namespace Grigor.Gameplay.Time
         public void SetTimeToDay()
         {
             SetTimeToHour(dayStartHour);
+        }
+
+        public void OnDayStarted()
+        {
+            canEndDay = true;
+
+            SetTimeToDay();
+
+            DayStartedEvent?.Invoke();
+        }
+
+        public bool TryEndDay()
+        {
+            if (!canEndDay)
+            {
+                return false;
+            }
+
+            DayEndedEvent?.Invoke();
+
+            canEndDay = false;
+
+            if (currentTimeOfDay == TimeOfDay.Day)
+            {
+                SetTimeToNight();
+            }
+
+            return true;
         }
     }
 }

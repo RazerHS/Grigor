@@ -2,8 +2,9 @@ using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
+using Grigor.Input;
 using Grigor.UI;
-using Grigor.UI.Widgets;
+using UnityEngine;
 
 namespace Grigor.StateMachines.Player.States
 {
@@ -13,59 +14,24 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private RoomRegistry roomRegistry;
         [Inject] private RoomManager roomManager;
         [Inject] private TimeManager timeManager;
+        [Inject] private PlayerInput playerInput;
 
-        private EndDayWidget endDayWidget;
-        private TimeOfDayWidget timeOfDayWidget;
+        private DataPodWidget dataPodWidget;
 
         protected override void OnEnter()
         {
+            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
+
             owningStateMachine.Owner.Movement.EnableMovement();
             owningStateMachine.Owner.Look.EnableLook();
             owningStateMachine.Owner.Interact.EnableInteract();
-
-            endDayWidget = uiManager.GetWidget<EndDayWidget>();
-            timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
             roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
 
-            endDayWidget.DayEndedEvent += OnDayEnded;
-
-            if (roomManager.CurrentRoomName == RoomName.Start)
-            {
-                OnDayStarted();
-            }
-        }
-
-        private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
-        {
-            if (roomManager.CurrentRoomName == previousRoomName)
-            {
-                return;
-            }
-
-            owningStateMachine.ToState<MoveToRoomState>();
-        }
-
-        private void OnDayEnded()
-        {
-            endDayWidget.DisableButton();
-
-            timeManager.SetTimeToNight();
-
-            RoomName nextRoom = roomManager.PlayerInMindPalace ? RoomName.Start : RoomName.MindPalace;
-            roomManager.MovePlayerToRoom(nextRoom, owningStateMachine.Owner.transform.position);
-        }
-
-        private void OnDayStarted()
-        {
-            if (roomManager.CurrentRoomName != RoomName.MindPalace)
-            {
-                endDayWidget.EnableButton();
-            }
-
-            timeManager.SetTimeToDay();
+            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
+            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
         }
 
         protected override void OnExit()
@@ -78,12 +44,40 @@ namespace Grigor.StateMachines.Player.States
 
             roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
 
-            endDayWidget.DayEndedEvent -= OnDayEnded;
+            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
+            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
+        }
+
+        private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
+        {
+            if (roomManager.CurrentRoomName == previousRoomName)
+            {
+                return;
+            }
+
+            owningStateMachine.ToState<MoveToRoomState>();
+        }
+
+        private void OnEndedDayInput()
+        {
+            if (!timeManager.TryEndDay())
+            {
+                return;
+            }
+
+            roomManager.MovePlayerToRoom(RoomName.MindPalace, owningStateMachine.Owner.transform.position);
         }
 
         private void OnInteract()
         {
             owningStateMachine.ToNextState();
+        }
+
+        private void OnDataPodInputStarted()
+        {
+            dataPodWidget.OnToggleDataPod();
+
+            Cursor.visible = !Cursor.visible;
         }
     }
 }
