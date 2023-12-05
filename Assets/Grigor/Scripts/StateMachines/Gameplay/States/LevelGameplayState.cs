@@ -1,60 +1,38 @@
-﻿using CardboardCore.DI;
+using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
+using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Screens;
 using Grigor.UI.Widgets;
+using Cursor = UnityEngine.Cursor;
 
 namespace Grigor.StateMachines.Gameplay.States
 {
-    public class LevelGameplayState : State, ITimeEffect
+    public class LevelGameplayState : State
     {
         [Inject] private UIManager uiManager;
         [Inject] private TimeEffectRegistry timeEffectRegistry;
         [Inject] private TimeManager timeManager;
         [Inject] private RoomManager roomManager;
+        [Inject] private PlayerInput playerInput;
 
         private GameplayScreen gameplayScreen;
-        private EndDayWidget endDayWidget;
         private TimeOfDayWidget timeOfDayWidget;
 
         protected override void OnEnter()
         {
             gameplayScreen = uiManager.ShowScreen<GameplayScreen>();
-            endDayWidget = uiManager.GetWidget<EndDayWidget>();
-            timeOfDayWidget = uiManager.GetWidget<TimeOfDayWidget>();
-
-            timeManager.TimeChangedEvent += OnTimeChanged;
-
-            RegisterTimeEffect();
 
             timeManager.StartTime();
+
+            Cursor.visible = false;
         }
 
         protected override void OnExit()
         {
-            timeManager.TimeChangedEvent -= OnTimeChanged;
-        }
 
-        private void OnTimeChanged(int minutes, int hours)
-        {
-            timeOfDayWidget.UpdateTimeText(minutes, hours);
-        }
-
-        public void RegisterTimeEffect()
-        {
-            timeEffectRegistry.Register(this);
-        }
-
-        public void OnChangedToDay()
-        {
-            endDayWidget.DisableButton();
-        }
-
-        public void OnChangedToNight()
-        {
-            endDayWidget.EnableButton();
         }
     }
 }

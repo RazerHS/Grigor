@@ -20,6 +20,8 @@ namespace Grigor.Gameplay.World.Components
         private void MovePlayerToRoom()
         {
             roomManager.MovePlayerToRoom(RoomName.Start, characterRegistry.Player.transform.position);
+
+            timeManager.OnDayStarted();
         }
     }
 }

@@ -7,9 +7,9 @@ using Grigor.Data.Credentials;
 using Grigor.Gameplay.Clues;
 using Grigor.UI;
 using Grigor.UI.Data;
+using Grigor.UI.Widgets;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DataPodWidget : UIWidget, IClueListener
 {
@@ -18,29 +18,30 @@ public class DataPodWidget : UIWidget, IClueListener
     [SerializeField] private GameObject dataPodView;
     [SerializeField] private Transform credentialDisplayParent;
     [SerializeField] private Transform clueDisplayParent;
-    [SerializeField] private Button toggleDataPodButton;
 
     [Inject] private ClueRegistry clueRegistry;
     [Inject] private DataRegistry dataRegistry;
+    [Inject] private UIManager uiManager;
 
     [ShowInInspector] private readonly Dictionary<CredentialType, CredentialUIDisplay> displayedCredentials = new();
     [ShowInInspector] private List<ClueUIDisplay> displayedClues = new();
     [ShowInInspector] private Dictionary<CredentialUIDisplay, ClueUIDisplay> correctMatches = new();
 
     private CredentialWallet criminalCredentialWallet;
+    private MessagePopupWidget messagePopupWidget;
 
     protected override void OnShow()
     {
         InsertCredentials();
         RegisterClueListener();
 
-        toggleDataPodButton.onClick.AddListener(OnToggleDataPodButtonClicked);
+        OnToggleDataPod();
+
+        messagePopupWidget = uiManager.GetWidget<MessagePopupWidget>();
     }
 
     protected override void OnHide()
     {
-        toggleDataPodButton.onClick.RemoveListener(OnToggleDataPodButtonClicked);
-
         foreach (CredentialUIDisplay credentialUIDisplay in displayedCredentials.Values)
         {
             credentialUIDisplay.Dispose();
@@ -74,7 +75,7 @@ public class DataPodWidget : UIWidget, IClueListener
         }
     }
 
-    private void OnToggleDataPodButtonClicked()
+    public void OnToggleDataPod()
     {
         dataPodView.SetActive(!dataPodView.activeSelf);
     }
@@ -193,7 +194,7 @@ public class DataPodWidget : UIWidget, IClueListener
 
     public void OnMatchedClues(List<ClueData> matchedClues)
     {
-
+        messagePopupWidget.DisplayMessage("You matched 3 clues!");
     }
 
     public void RegisterClueListener()
