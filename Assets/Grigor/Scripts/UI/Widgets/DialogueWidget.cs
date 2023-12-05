@@ -21,12 +21,12 @@ namespace Grigor.UI.Widgets
 
         protected override void OnShow()
         {
-
+            Cursor.visible = true;
         }
 
         protected override void OnHide()
         {
-
+            Cursor.visible = false;
         }
 
         public void SetDialogueText(string text)
