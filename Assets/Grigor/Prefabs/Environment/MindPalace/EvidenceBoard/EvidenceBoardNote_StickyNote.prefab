@@ -245,6 +245,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: EvidenceBoardNote_StickyNote
       objectReference: {fileID: 0}
+    - target: {fileID: 6913725314105014076, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144344793515822178, guid: efd3f23e7f14250428aa94b16b204b28,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.61
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

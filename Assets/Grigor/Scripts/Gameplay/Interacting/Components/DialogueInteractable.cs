@@ -3,6 +3,8 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Gameplay.Dialogue;
+using Grigor.Input;
+using Grigor.Utils;
 using Grigor.Utils.StoryGraph.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -57,6 +59,11 @@ namespace Grigor.Gameplay.Interacting.Components
             {
                 Log.Error($"Character data in interactable {name} has no dialogue graph set!");
             }
+        }
+
+        protected override void OnSkipInputDuringInteraction()
+        {
+            dialogueController.OnSkipInput();
         }
     }
 }

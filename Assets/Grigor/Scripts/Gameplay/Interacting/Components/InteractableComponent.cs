@@ -3,6 +3,7 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters.Components;
 using Grigor.Gameplay.Time;
+using Grigor.Input;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace Grigor.Gameplay.Interacting.Components
         [ShowInInspector, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactedWithInCurrentChain;
 
         [Inject] protected TimeManager timeManager;
+        [Inject] private PlayerInput playerInput;
 
         protected Interactable parentInteractable;
         protected bool wentInRange;
@@ -144,15 +146,12 @@ namespace Grigor.Gameplay.Interacting.Components
 
         private void OnInteract()
         {
-            Interact();
-        }
-
-        private void Interact()
-        {
             BeginInteractionEvent?.Invoke();
 
             currentlyInteracting = true;
             interactedWith = true;
+
+            EnableSkipInput();
 
             OnInteractEffect();
         }
@@ -169,6 +168,8 @@ namespace Grigor.Gameplay.Interacting.Components
             currentlyInteracting = false;
 
             interactedWithInCurrentChain = true;
+
+            DisableSkipInput();
 
             EndInteractionEvent?.Invoke();
 
@@ -210,6 +211,23 @@ namespace Grigor.Gameplay.Interacting.Components
 
             parentInteractable.ResetInteractable();
         }
+
+        private void EnableSkipInput()
+        {
+            playerInput.InteractInputStartedEvent += OnSkipInputDuringInteraction;
+            playerInput.SkipInputStartedEvent += OnSkipInputDuringInteraction;
+        }
+
+        private void DisableSkipInput()
+        {
+            playerInput.InteractInputStartedEvent -= OnSkipInputDuringInteraction;
+            playerInput.SkipInputStartedEvent -= OnSkipInputDuringInteraction;
+        }
+
+        /// <summary>
+        /// Used to listen for the press of the interact key while interacting.
+        /// </summary>
+        protected virtual void OnSkipInputDuringInteraction() { }
 
         public void SetDefaultIndexInChain(int index)
         {

@@ -123,6 +123,11 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
+            if (previousInteraction.CurrentlyInteracting)
+            {
+                return;
+            }
+
             Interact();
         }
 
