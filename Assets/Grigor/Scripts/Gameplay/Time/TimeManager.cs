@@ -10,9 +10,11 @@ namespace Grigor.Gameplay.Time
     [Injectable]
     public class TimeManager : MonoBehaviour
     {
-        [SerializeField, ReadOnly, Range(0, 60)] private float seconds = 0f;
-        [SerializeField, ReadOnly, Range(0, 60)] private int minutes = 0;
-        [SerializeField, ReadOnly, Range(0, 24)] private int hours = 0;
+        [SerializeField, Wrap(0, 24), HorizontalGroup("Time"), HideLabel] private int hours = 0;
+        [ShowInInspector, HorizontalGroup("Time", Width = 0.01f), HideLabel, DisplayAsString] private string separator = ":";
+        [SerializeField, Wrap(0, 60), HorizontalGroup("Time"), HideLabel] private int minutes = 0;
+        [ShowInInspector, HorizontalGroup("Time", Width = 0.01f), HideLabel, DisplayAsString] private string secondSeparator = ":";
+        [SerializeField, Wrap(0, 60), HorizontalGroup("Time"), HideLabel] private float seconds = 0f;
         [SerializeField, ReadOnly] private int daysPassed;
         [SerializeField] private int dayStartHour = 8;
         [SerializeField] private int nightStartHour = 22;
