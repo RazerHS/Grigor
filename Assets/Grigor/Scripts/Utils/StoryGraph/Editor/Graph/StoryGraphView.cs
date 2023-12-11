@@ -29,7 +29,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         public StoryGraphView(StoryGraph editorWindow)
         {
             styleSheets.Add(Resources.Load<StyleSheet>("StoryGraph"));
-            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
+            SetupZoom(ContentZoomer.DefaultMinScale, 1.5f);
 
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());

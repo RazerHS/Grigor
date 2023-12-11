@@ -3,6 +3,7 @@ using CardboardCore.Utilities;
 using Grigor.Utils;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -52,6 +53,7 @@ namespace Grigor.Data.Editor
             tree.Config.DrawSearchToolbar = true;
 
             SortTree();
+            tree.EnumerateTree().ForEach(AddDragHandles);
 
             OnDrawTree(tree);
 
