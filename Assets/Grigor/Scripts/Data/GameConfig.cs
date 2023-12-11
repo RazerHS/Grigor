@@ -12,6 +12,7 @@ namespace Grigor.Data
         [SerializeField, ColoredBoxGroup("Sky and Ambience Color")] private Gradient fogColor;
 
         [SerializeField, ColoredBoxGroup("Gameplay", true, true)] private int correctCluesBeforeLock = 3;
+        [SerializeField, ColoredBoxGroup("Gameplay")] private float timePassTweenDuration = 1f;
 
         [SerializeField, ColoredBoxGroup("Story Graph", true, 0.2f, 0.5f, 0.5f)] private Color startNodeColor;
         [SerializeField, ColoredBoxGroup("Story Graph")] private Color defaultNodeColor;
@@ -23,6 +24,7 @@ namespace Grigor.Data
         public Gradient FogColor => fogColor;
 
         public int CorrectCluesBeforeLock => correctCluesBeforeLock;
+        public float TimePassTweenDuration => timePassTweenDuration;
 
         public Color StartNodeColor => startNodeColor;
         public Color DefaultNodeColor => defaultNodeColor;

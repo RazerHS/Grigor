@@ -2,6 +2,7 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using DG.Tweening;
+using Grigor.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -197,12 +198,30 @@ namespace Grigor.Gameplay.Time
             OnTimeChanged();
         }
 
-        public void PassTime(int minutes, int hours)
+        public void PassTime(int minutesToPass, int hoursToPass)
         {
-            this.minutes += minutes;
-            this.hours += hours;
+            int newMinutes = minutesToPass + hoursToPass * 60;
 
-            OnTimeChanged();
+            int previousValue = 0;
+
+            DOVirtual.Int(minutes, minutes + newMinutes, GameConfig.Instance.TimePassTweenDuration, value =>
+            {
+                if (previousValue == 0)
+                {
+                    previousValue = minutes;
+                }
+
+                if (value == previousValue)
+                {
+                    return;
+                }
+
+                minutes += value - previousValue;
+
+                previousValue = value;
+
+                OnTimeChanged();
+            });
         }
 
         public void SetTimeToNight()

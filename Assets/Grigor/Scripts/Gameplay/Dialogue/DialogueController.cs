@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using CardboardCore.DI;
+using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Widgets;
+using Grigor.Utils.StoryGraph.Editor.Nodes;
 using Grigor.Utils.StoryGraph.Runtime;
 
 namespace Grigor.Gameplay.Dialogue
@@ -13,6 +15,7 @@ namespace Grigor.Gameplay.Dialogue
     {
         [Inject] private UIManager uiManager;
         [Inject] private PlayerInput playerInput;
+        [Inject] private TimeManager timeManager;
 
         private DialogueWidget dialogueWidget;
         private DialogueGraphData currentDialogueGraph;
@@ -22,6 +25,7 @@ namespace Grigor.Gameplay.Dialogue
 
         public event Action DialogueStartedEvent;
         public event Action DialogueEndedEvent;
+        public event Action<DialogueNodeData> NodeEnteredEvent;
 
         protected override void OnInjected()
         {
@@ -32,8 +36,8 @@ namespace Grigor.Gameplay.Dialogue
 
         protected override void OnReleased()
         {
-        }
 
+        }
 
         private void OnSkipInput()
         {
@@ -66,6 +70,8 @@ namespace Grigor.Gameplay.Dialogue
             currentNodeRequiresChoices = currentNode.NodeRequiresChoices(out List<DialogueChoiceData> choices);
 
             UpdateDialogueWidget();
+
+            NodeEnteredEvent?.Invoke(nextNode);
 
             if (!currentNodeRequiresChoices)
             {
