@@ -356,9 +356,11 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
         private ObjectField CreateSpeakerField(DialogueNode dialogueNode)
         {
+            CharacterData newSpeaker = dialogueNode.Data.Speaker == null ? defaultSpeaker : dialogueNode.Data.Speaker;
+
             ObjectField speakerField = new ObjectField("Speaker")
             {
-                value = defaultSpeaker,
+                value = newSpeaker,
                 objectType = typeof(CharacterData)
             };
 
@@ -369,7 +371,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 UpdateNodeColors(dialogueNode);
             });
 
-            dialogueNode.Data.SetSpeaker(defaultSpeaker);
+            dialogueNode.Data.SetSpeaker(newSpeaker);
 
             speakerField.name = "speakerField";
 ;
