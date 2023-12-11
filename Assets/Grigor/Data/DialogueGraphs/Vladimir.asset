@@ -12,7 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
   m_Name: Vladimir
   m_EditorClassIdentifier: 
-  nodeLinks: []
-  dialogueNodeData: []
+  nodeLinks:
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 36162042-74f0-422c-99fe-19d16fd4eb68
+    InputNodeGuid: b56c5efb-181e-47e7-bf9b-1f6972c08882
+  - OutportPortChoiceIndex: 0
+    OutputPortName: ok
+    InputPortName: 
+    OutputNodeGuid: b56c5efb-181e-47e7-bf9b-1f6972c08882
+    InputNodeGuid: c7457f8f-b833-4626-85eb-e5930f1d74ce
+  dialogueNodeData:
+  - nodeName: I am god
+    guid: 36162042-74f0-422c-99fe-19d16fd4eb68
+    position: {x: 165, y: 14}
+    dialogueText: I am god
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: b56c5efb-181e-47e7-bf9b-1f6972c08882
+  - nodeName: 
+    guid: b56c5efb-181e-47e7-bf9b-1f6972c08882
+    position: {x: 557, y: 24}
+    dialogueText: 
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: ok
+      nextNodeGuid: c7457f8f-b833-4626-85eb-e5930f1d74ce
+  - nodeName: hehehehehe
+    guid: c7457f8f-b833-4626-85eb-e5930f1d74ce
+    position: {x: 909, y: 14}
+    dialogueText: hehehehehe
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
   exposedProperties: []
   commentBlockData: []

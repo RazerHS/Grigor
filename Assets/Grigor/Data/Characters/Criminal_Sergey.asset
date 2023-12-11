@@ -15,12 +15,6 @@ MonoBehaviour:
   assetName: Criminal_Sergey
   characterType: 1
   credentialWallet:
-    credentialEntries:
-    - credentialType: 0
-      matchingClue: {fileID: 0}
-    - credentialType: 0
-      matchingClue: {fileID: 0}
-    - credentialType: 0
-      matchingClue: {fileID: 0}
+    credentialEntries: []
   characterDialogue: {fileID: 0}
   speakerColor: {r: 0.3207547, g: 0.0015129976, b: 0.0048811566, a: 0.8}

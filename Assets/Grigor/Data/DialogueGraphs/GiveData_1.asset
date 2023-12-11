@@ -29,20 +29,23 @@ MonoBehaviour:
     OutputNodeGuid: 4185ba30-b4b7-4a1d-8ff6-5333a207d66c
     InputNodeGuid: a9ce162a-7c53-4201-8aae-946dffd11672
   dialogueNodeData:
-  - nodeName: Welcome! To enter this building, you must share your Name, Age and
-      Date of Birth!
-    guid: d620522f-ba9e-4c28-b916-fa4d7e5a327f
-    position: {x: 133, y: 11}
-    dialogueText: Welcome! To enter this building, you must share your Name, Age
-      and Date of Birth!
+  - nodeName: Please enjoy your visit :)
+    guid: 250fc52a-0cc0-4988-99c5-c720ff042469
+    position: {x: 1249, y: -95}
+    dialogueText: Please enjoy your visit :)
     speaker: {fileID: 11400000, guid: 7e0e1e587780f7c43bd7c8b1a607b51c, type: 2}
-    nodeType: 1
-    choices:
-    - text: 1
-      nextNodeGuid: 4185ba30-b4b7-4a1d-8ff6-5333a207d66c
+    nodeType: 2
+    choices: []
+  - nodeName: You may not enter without consenting. Please turn around.
+    guid: a9ce162a-7c53-4201-8aae-946dffd11672
+    position: {x: 1249, y: 175}
+    dialogueText: You may not enter without consenting. Please turn around.
+    speaker: {fileID: 11400000, guid: 7e0e1e587780f7c43bd7c8b1a607b51c, type: 2}
+    nodeType: 2
+    choices: []
   - nodeName: Do you consent?
     guid: 4185ba30-b4b7-4a1d-8ff6-5333a207d66c
-    position: {x: 659, y: 11}
+    position: {x: 815, y: 21}
     dialogueText: Do you consent?
     speaker: {fileID: 11400000, guid: 7e0e1e587780f7c43bd7c8b1a607b51c, type: 2}
     nodeType: 0
@@ -51,23 +54,16 @@ MonoBehaviour:
       nextNodeGuid: 250fc52a-0cc0-4988-99c5-c720ff042469
     - text: No
       nextNodeGuid: a9ce162a-7c53-4201-8aae-946dffd11672
-  - nodeName: Please enjoy your visit :)
-    guid: 250fc52a-0cc0-4988-99c5-c720ff042469
-    position: {x: 1070, y: -97}
-    dialogueText: Please enjoy your visit :)
+  - nodeName: Welcome! To enter this building, you must share your Name, Age and
+      Date of Birth!
+    guid: d620522f-ba9e-4c28-b916-fa4d7e5a327f
+    position: {x: 50, y: 21}
+    dialogueText: Welcome! To enter this building, you must share your Name, Age
+      and Date of Birth!
     speaker: {fileID: 11400000, guid: 7e0e1e587780f7c43bd7c8b1a607b51c, type: 2}
-    nodeType: 2
+    nodeType: 1
     choices:
     - text: 1
-      nextNodeGuid: 
-  - nodeName: You may not enter without consenting. Please turn around.
-    guid: a9ce162a-7c53-4201-8aae-946dffd11672
-    position: {x: 1070, y: 146}
-    dialogueText: You may not enter without consenting. Please turn around.
-    speaker: {fileID: 11400000, guid: 7e0e1e587780f7c43bd7c8b1a607b51c, type: 2}
-    nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 
+      nextNodeGuid: 4185ba30-b4b7-4a1d-8ff6-5333a207d66c
   exposedProperties: []
   commentBlockData: []

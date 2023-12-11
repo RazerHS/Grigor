@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Igor
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 3e1ce0dd-0911-4c5f-98f8-53642eab74bc
+    InputNodeGuid: 3b7f47f0-5258-4e27-a186-356da3d9f335
+  dialogueNodeData:
+  - nodeName: baaaalgllglglglg
+    guid: 3e1ce0dd-0911-4c5f-98f8-53642eab74bc
+    position: {x: 363, y: 213}
+    dialogueText: baaaalgllglglglg
+    speaker: {fileID: 11400000, guid: 672507b76b3794c49b51131b4d0c215b, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 3b7f47f0-5258-4e27-a186-356da3d9f335
+  - nodeName: tttttsssssstttyyyyyy69
+    guid: 3b7f47f0-5258-4e27-a186-356da3d9f335
+    position: {x: 755, y: 226}
+    dialogueText: tttttsssssstttyyyyyy69
+    speaker: {fileID: 11400000, guid: 672507b76b3794c49b51131b4d0c215b, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
+  exposedProperties: []
+  commentBlockData: []
