@@ -2,6 +2,7 @@
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
+using Grigor.Characters.Components;
 using Grigor.Gameplay.Interacting.Components;
 using Grigor.UI;
 using Grigor.UI.Widgets;
@@ -27,6 +28,7 @@ namespace Grigor.Gameplay.Interacting
         private bool inRange;
         private InteractWidget interactWidget;
 
+        public bool InRange => inRange;
         public Transform InteractPoint => interactPoint;
         public float InteractDistance => interactDistance;
         public bool InteractingEnabled => interactingEnabled;
@@ -124,7 +126,7 @@ namespace Grigor.Gameplay.Interacting
             InRangeEvent?.Invoke(interactingCharacter);
         }
 
-        public void DisableProximityEffect(Characters.Components.Character interactingCharacter)
+        public void DisableProximityEffect(Character interactingCharacter)
         {
             if (!inRange)
             {
@@ -133,9 +135,19 @@ namespace Grigor.Gameplay.Interacting
 
             inRange = false;
 
-            interactWidget.Hide();
+            DisableProximityEffectVisuals();
 
             OutOfRangeEvent?.Invoke(interactingCharacter);
+        }
+
+        public void DisableProximityEffectWithoutNotify(Character interactingCharacter)
+        {
+            DisableProximityEffectVisuals();
+        }
+
+        private void DisableProximityEffectVisuals()
+        {
+            interactWidget.Hide();
         }
 
         public void Interact(Characters.Components.Character interactingCharacter)

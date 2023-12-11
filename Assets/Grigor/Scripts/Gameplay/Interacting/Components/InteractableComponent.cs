@@ -28,12 +28,12 @@ namespace Grigor.Gameplay.Interacting.Components
         [Inject] protected TimeManager timeManager;
 
         protected Interactable parentInteractable;
-        protected bool wentInRange;
-        protected bool interactedWith;
+        protected bool stillInRangeAfterInteraction;
         protected bool currentlyInteracting;
 
         public bool InteractInRange => interactInRange;
         public bool CurrentlyInteracting => currentlyInteracting;
+        public bool StillInRangeAfterInteraction => stillInRangeAfterInteraction;
         public bool StopsChain => stopsChain;
         public bool RemoveFromChainAfterEffect => removeFromChainAfterEffect;
         public int IndexInChain => indexInChain;
@@ -116,15 +116,15 @@ namespace Grigor.Gameplay.Interacting.Components
             }
         }
 
-        private void OnInRange(Character character)
+        public void OnInRange(Character character)
         {
-            wentInRange = true;
-
             InRangeEffect();
         }
 
         private void OnOutOfRange(Character character)
         {
+            stillInRangeAfterInteraction = false;
+
             OutOfRangeEffect();
         }
 
@@ -142,7 +142,6 @@ namespace Grigor.Gameplay.Interacting.Components
             BeginInteractionEvent?.Invoke();
 
             currentlyInteracting = true;
-            interactedWith = true;
 
             OnInteractEffect();
         }
@@ -154,6 +153,11 @@ namespace Grigor.Gameplay.Interacting.Components
             if (timePassesOnInteract)
             {
                 timeManager.PassTime(minutesToPass, hoursToPass);
+            }
+
+            if (parentInteractable.InRange)
+            {
+                stillInRangeAfterInteraction = true;
             }
 
             currentlyInteracting = false;

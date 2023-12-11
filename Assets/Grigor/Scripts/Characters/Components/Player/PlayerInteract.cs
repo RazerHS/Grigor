@@ -85,7 +85,10 @@ namespace Grigor.Characters.Components.Player
 
             if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out InteractableComponent interactableComponent, false))
             {
-                currentNearestParentInteractable.DisableProximityEffect(Owner);
+                if (!currentNearestParentInteractable.InRange)
+                {
+                    currentNearestParentInteractable.DisableProximityEffect(Owner);
+                }
 
                 if (interactableComponent == null)
                 {
@@ -103,7 +106,15 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
-            TryInteractInRange(interactableComponent);
+            currentNearestParentInteractable.EnableProximityEffect(Owner);
+
+            if (!TryInteractInRange(interactableComponent))
+            {
+                return;
+            }
+
+            //case where the interactable that triggers in range is still in range, but the interaction is happening and the visuals should disappear
+            currentNearestParentInteractable.DisableProximityEffectWithoutNotify(Owner);
         }
 
         private void OnInteractInput()
@@ -134,24 +145,31 @@ namespace Grigor.Characters.Components.Player
             currentNearestParentInteractable.Interact(Owner);
         }
 
-        private void TryInteractInRange(InteractableComponent interactableComponent)
+        private bool TryInteractInRange(InteractableComponent interactableComponent)
         {
             if (!interactableComponent.InteractInRange)
             {
-                return;
+                return false;
             }
 
             if (interactableComponent.CurrentlyInteracting)
             {
-                return;
+                return false;
+            }
+
+            if (interactableComponent.StillInRangeAfterInteraction)
+            {
+                return false;
             }
 
             if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out previousInteraction))
             {
-                return;
+                return false;
             }
 
             Interact();
+
+            return true;
         }
 
         public void EnableInteract()
