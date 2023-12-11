@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 352aaa2b8e4e4f9aab7594f461fbb441, type: 3}
-  m_Name: character_clerk
+  m_Name: Clerk_Igor
   m_EditorClassIdentifier: 
-  assetName: character_clerk
+  assetName: Clerk_Igor
   characterType: 2
   credentialWallet:
     credentialEntries: []
-  characterDialogue: {fileID: 11400000, guid: 4313ca714bd27734fbd7ef7fd50189c2, type: 2}
-  speakerColor: {r: 0.754717, g: 0.16731933, b: 0.70538646, a: 0.7607843}
+  characterDialogue: {fileID: 0}
+  speakerColor: {r: 0.5943396, g: 0.06448025, b: 0.5356048, a: 0.79607844}
