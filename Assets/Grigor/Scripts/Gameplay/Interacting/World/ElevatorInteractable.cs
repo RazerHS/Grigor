@@ -27,13 +27,13 @@ namespace Grigor.Gameplay.World.Components
             targetPosition.y = elevatorAtTarget ? elevatorOriginPositionY : elevatorTargetPositionY;
 
             elevatorTransform.DOLocalMove(targetPosition, elevatorDuration).SetEase(Ease.OutSine).OnComplete(OnElevatorArrived);
+
+            EndInteract();
         }
 
         private void OnElevatorArrived()
         {
             elevatorAtTarget = !elevatorAtTarget;
-
-            EndInteract();
         }
     }
 }
