@@ -30,6 +30,11 @@ PrefabInstance:
       propertyPath: interactInRange
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: minutesToPassPerNode
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: m_Name
