@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3621792391136643058}
   - component: {fileID: 4196080869766958007}
   - component: {fileID: 1164885268200375066}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 946021502265802302}
   - component: {fileID: 8183631849326395900}
   - component: {fileID: 7893218240172983658}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +720,7 @@ GameObject:
   - component: {fileID: 6582433694965833787}
   - component: {fileID: 2905715940861520623}
   - component: {fileID: 6843217754170133591}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1069,10 +1069,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5448619533357236517, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377776607238552706, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816175738141785049, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_Name
       value: Object_Elevator_1a
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8475032777802215821, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}

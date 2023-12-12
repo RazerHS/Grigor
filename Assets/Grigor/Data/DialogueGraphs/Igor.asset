@@ -19,35 +19,30 @@ MonoBehaviour:
     OutputNodeGuid: 3e1ce0dd-0911-4c5f-98f8-53642eab74bc
     InputNodeGuid: 3b7f47f0-5258-4e27-a186-356da3d9f335
   - OutportPortChoiceIndex: 0
-    OutputPortName: You know of a murderer?
-    InputPortName: 
-    OutputNodeGuid: 3b7f47f0-5258-4e27-a186-356da3d9f335
-    InputNodeGuid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
-  - OutportPortChoiceIndex: 0
-    OutputPortName: Do you have vodka?
-    InputPortName: 
-    OutputNodeGuid: 3b7f47f0-5258-4e27-a186-356da3d9f335
-    InputNodeGuid: 29f3326a-9963-4b13-bdbd-6272bedd96de
-  - OutportPortChoiceIndex: 0
     OutputPortName: We think a murderer passed by here.
     InputPortName: 
     OutputNodeGuid: 3b7f47f0-5258-4e27-a186-356da3d9f335
     InputNodeGuid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: You know of a murderer?
     InputPortName: 
-    OutputNodeGuid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
-    InputNodeGuid: 96c78121-fd2f-42eb-9909-81d8123209de
+    OutputNodeGuid: 3b7f47f0-5258-4e27-a186-356da3d9f335
+    InputNodeGuid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
     OutputNodeGuid: 96c78121-fd2f-42eb-9909-81d8123209de
     InputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
   - OutportPortChoiceIndex: 0
-    OutputPortName: WHAT??
+    OutputPortName: What did he look like???
     InputPortName: 
     OutputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
     InputNodeGuid: 5a5dc884-c460-4049-9b70-fbda0b673418
+  - OutportPortChoiceIndex: 0
+    OutputPortName: WHAT??
+    InputPortName: 
+    OutputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
+    InputNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -58,11 +53,6 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
     InputNodeGuid: 553dd96e-ce69-4ca1-9b68-164c3f5e60d0
-  - OutportPortChoiceIndex: 0
-    OutputPortName: What did he look like???
-    InputPortName: 
-    OutputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
-    InputNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -81,23 +71,28 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: dbb6a266-889c-48d0-b4b9-183db75c01f3
-    InputNodeGuid: cf13ccd5-cea7-4f91-b6cb-1c36a0e6909c
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
     OutputNodeGuid: cf13ccd5-cea7-4f91-b6cb-1c36a0e6909c
     InputNodeGuid: bfe70b17-8ed9-4772-8046-2fa6c6594e59
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: bfe70b17-8ed9-4772-8046-2fa6c6594e59
-    InputNodeGuid: 48002f80-d830-4156-9e96-92d37a5d2a4e
+    OutputNodeGuid: dbb6a266-889c-48d0-b4b9-183db75c01f3
+    InputNodeGuid: cf13ccd5-cea7-4f91-b6cb-1c36a0e6909c
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
+    InputNodeGuid: 96c78121-fd2f-42eb-9909-81d8123209de
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
     OutputNodeGuid: 48002f80-d830-4156-9e96-92d37a5d2a4e
     InputNodeGuid: 0643edbc-9c55-4169-a2fc-53ec66feeeb1
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: bfe70b17-8ed9-4772-8046-2fa6c6594e59
+    InputNodeGuid: 48002f80-d830-4156-9e96-92d37a5d2a4e
   dialogueNodeData:
   - nodeName: Yo, what do you need?
     guid: 3e1ce0dd-0911-4c5f-98f8-53642eab74bc
@@ -108,10 +103,10 @@ MonoBehaviour:
     choices:
     - text: 1
       nextNodeGuid: 3b7f47f0-5258-4e27-a186-356da3d9f335
-  - nodeName: (snickering to yourself)
+  - nodeName: 
     guid: 3b7f47f0-5258-4e27-a186-356da3d9f335
     position: {x: 748, y: 194}
-    dialogueText: (snickering to yourself)
+    dialogueText: 
     speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
     nodeType: 0
     choices:
@@ -119,17 +114,6 @@ MonoBehaviour:
       nextNodeGuid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
     - text: You know of a murderer?
       nextNodeGuid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
-    - text: Do you have vodka?
-      nextNodeGuid: 29f3326a-9963-4b13-bdbd-6272bedd96de
-  - nodeName: Murderer? Of course. He comes by to buy a drink every now and then.
-    guid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
-    position: {x: 1142, y: 251}
-    dialogueText: Murderer? Of course. He comes by to buy a drink every now and then.
-    speaker: {fileID: 11400000, guid: 672507b76b3794c49b51131b4d0c215b, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 96c78121-fd2f-42eb-9909-81d8123209de
   - nodeName: Did so yesterday actually.
     guid: 96c78121-fd2f-42eb-9909-81d8123209de
     position: {x: 1570, y: 251}
@@ -139,15 +123,6 @@ MonoBehaviour:
     choices:
     - text: 1
       nextNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
-  - nodeName: 
-    guid: 29f3326a-9963-4b13-bdbd-6272bedd96de
-    position: {x: 1142, y: 404}
-    dialogueText: 
-    speaker: {fileID: 11400000, guid: 672507b76b3794c49b51131b4d0c215b, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 
   - nodeName: (WHAT)
     guid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
     position: {x: 1931, y: 251}
@@ -156,9 +131,9 @@ MonoBehaviour:
     nodeType: 0
     choices:
     - text: What did he look like???
-      nextNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
-    - text: WHAT??
       nextNodeGuid: 5a5dc884-c460-4049-9b70-fbda0b673418
+    - text: WHAT??
+      nextNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
   - nodeName: Yeah man, he dropped out of school 'cause math was too hard.
     guid: 5a5dc884-c460-4049-9b70-fbda0b673418
     position: {x: 2311, y: 417}
@@ -179,15 +154,6 @@ MonoBehaviour:
     choices:
     - text: 1
       nextNodeGuid: 553dd96e-ce69-4ca1-9b68-164c3f5e60d0
-  - nodeName: His baileys bottle was in the way.
-    guid: 553dd96e-ce69-4ca1-9b68-164c3f5e60d0
-    position: {x: 2773, y: 251}
-    dialogueText: His baileys bottle was in the way.
-    speaker: {fileID: 11400000, guid: 672507b76b3794c49b51131b4d0c215b, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: ccf74dba-ff7e-425d-9ad1-e55d55445cad
   - nodeName: (brainwaves running)
     guid: ccf74dba-ff7e-425d-9ad1-e55d55445cad
     position: {x: 3144, y: 251}
@@ -219,20 +185,27 @@ MonoBehaviour:
     choices:
     - text: 1
       nextNodeGuid: cf13ccd5-cea7-4f91-b6cb-1c36a0e6909c
-  - nodeName: ~WE HEARD OF A GUY WITH A BUNCH OF CAMERAS OUTSIDE HIS APARTMENT.
-    guid: bfe70b17-8ed9-4772-8046-2fa6c6594e59
-    position: {x: 4370, y: 262}
-    dialogueText: ~WE HEARD OF A GUY WITH A BUNCH OF CAMERAS OUTSIDE HIS APARTMENT.
-    speaker: {fileID: 11400000, guid: de87e513827b2eb4abd62eeccb4ca9ce, type: 2}
+  - nodeName: Murderer? Of course. He comes by to buy a drink every now and then.
+    guid: ab04b4fd-0108-4dac-8bd4-dcd4287cbb21
+    position: {x: 1142, y: 110}
+    dialogueText: Murderer? Of course. He comes by to buy a drink every now and then.
+    speaker: {fileID: 11400000, guid: 672507b76b3794c49b51131b4d0c215b, type: 2}
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 48002f80-d830-4156-9e96-92d37a5d2a4e
+      nextNodeGuid: 96c78121-fd2f-42eb-9909-81d8123209de
+  - nodeName: His baileys bottle was in the way.
+    guid: 553dd96e-ce69-4ca1-9b68-164c3f5e60d0
+    position: {x: 2768, y: 122}
+    dialogueText: His baileys bottle was in the way.
+    speaker: {fileID: 11400000, guid: 672507b76b3794c49b51131b4d0c215b, type: 2}
+    nodeType: 0
+    choices:
     - text: 1
-      nextNodeGuid: 
+      nextNodeGuid: ccf74dba-ff7e-425d-9ad1-e55d55445cad
   - nodeName: HE LIVES AROUND THE CORNER. GO NOW~.
     guid: 48002f80-d830-4156-9e96-92d37a5d2a4e
-    position: {x: 4857, y: 262}
+    position: {x: 5392, y: 244}
     dialogueText: HE LIVES AROUND THE CORNER. GO NOW~.
     speaker: {fileID: 11400000, guid: de87e513827b2eb4abd62eeccb4ca9ce, type: 2}
     nodeType: 0
@@ -241,12 +214,19 @@ MonoBehaviour:
       nextNodeGuid: 0643edbc-9c55-4169-a2fc-53ec66feeeb1
   - nodeName: Rude, but ok.
     guid: 0643edbc-9c55-4169-a2fc-53ec66feeeb1
-    position: {x: 5233, y: 262}
+    position: {x: 5884, y: 244}
     dialogueText: Rude, but ok.
     speaker: {fileID: 11400000, guid: 672507b76b3794c49b51131b4d0c215b, type: 2}
     nodeType: 2
+    choices: []
+  - nodeName: ~WE HEARD OF A GUY WITH A BUNCH OF CAMERAS OUTSIDE HIS APARTMENT.
+    guid: bfe70b17-8ed9-4772-8046-2fa6c6594e59
+    position: {x: 4580, y: 232}
+    dialogueText: ~WE HEARD OF A GUY WITH A BUNCH OF CAMERAS OUTSIDE HIS APARTMENT.
+    speaker: {fileID: 11400000, guid: de87e513827b2eb4abd62eeccb4ca9ce, type: 2}
+    nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 
+      nextNodeGuid: 48002f80-d830-4156-9e96-92d37a5d2a4e
   exposedProperties: []
   commentBlockData: []
