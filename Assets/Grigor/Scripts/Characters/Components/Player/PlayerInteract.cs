@@ -85,9 +85,16 @@ namespace Grigor.Characters.Components.Player
 
             if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out InteractableComponent interactableComponent, false))
             {
+                currentNearestParentInteractable.DisableProximityEffect(Owner);
+
+                if (interactableComponent == null)
+                {
+                    return;
+                }
+
+                //edge-case when the interactable is still in the chain but already has been interacted with in the current chain
                 if (interactableComponent.InteractionEnabled)
                 {
-                    //edge-case when the interactable is still in the chain but already has been interacted with in the current chain
                     return;
                 }
 
@@ -112,6 +119,11 @@ namespace Grigor.Characters.Components.Player
             }
 
             if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out previousInteraction))
+            {
+                return;
+            }
+
+            if (previousInteraction.CurrentlyInteracting)
             {
                 return;
             }

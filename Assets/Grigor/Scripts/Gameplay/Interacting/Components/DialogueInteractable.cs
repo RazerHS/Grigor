@@ -2,8 +2,9 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
-using Grigor.Gameplay.Clues;
 using Grigor.Gameplay.Dialogue;
+using Grigor.Input;
+using Grigor.Utils;
 using Grigor.Utils.StoryGraph.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -12,7 +13,6 @@ namespace Grigor.Gameplay.Interacting.Components
 {
     public class DialogueInteractable : InteractableComponent
     {
-        [SerializeField] private Clue clue;
         [SerializeField] private CharacterData characterData;
         [SerializeField, ValueDropdown(nameof(GetStartNodes))] private string startNodeName;
 
@@ -38,10 +38,6 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             dialogueController.DialogueEndedEvent -= OnDialogueEnded;
 
-            Log.Write($"Found clue: <b>{clue.ClueData.CredentialType}</b>");
-
-            clue.FindClue();
-
             EndInteract();
         }
 
@@ -56,14 +52,18 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             if (characterData == null)
             {
-                throw Log.Exception($"Character data in interactable {name} is null!");
+                Log.Error($"Character data in interactable {name} is null!");
             }
 
             if (characterData.CharacterDialogue == null)
             {
-                throw Log.Exception($"Character data in interactable {name} has no dialogue graph set!");
+                Log.Error($"Character data in interactable {name} has no dialogue graph set!");
             }
         }
 
+        protected override void OnSkipInputDuringInteraction()
+        {
+            dialogueController.OnSkipInput();
+        }
     }
 }

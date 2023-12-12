@@ -34,6 +34,10 @@ namespace Grigor.Input
         public event Action SkipInputStartedEvent;
         public event Action SkipInputCanceledEvent;
 
+        public event Action DataPodInputStartedEvent;
+
+        public event Action EndDayInputStartedEvent;
+
         private void Awake()
         {
             playerInputActions = new PlayerInputActions();
@@ -57,6 +61,10 @@ namespace Grigor.Input
 
             playerInputActions.Player.Skip.started += OnSkipInputStarted;
             playerInputActions.Player.Skip.canceled += OnSkipInputCanceled;
+
+            playerInputActions.Player.DataPod.started += OnDataPodInputStarted;
+
+            playerInputActions.Player.EndDay.started += OnEndDayInputStarted;
         }
 
         private void OnDisable()
@@ -148,6 +156,16 @@ namespace Grigor.Input
         private void OnSkipInputCanceled(InputAction.CallbackContext context)
         {
             SkipInputCanceledEvent?.Invoke();
+        }
+
+        private void OnDataPodInputStarted(InputAction.CallbackContext context)
+        {
+            DataPodInputStartedEvent?.Invoke();
+        }
+
+        private void OnEndDayInputStarted(InputAction.CallbackContext context)
+        {
+            EndDayInputStartedEvent?.Invoke();
         }
     }
 }

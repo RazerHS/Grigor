@@ -8,7 +8,7 @@ namespace Grigor.Gameplay.Clues
     [Injectable]
     public class ClueRegistry : MonoBehaviour
     {
-        private readonly List<Clue> clues = new();
+        private readonly List<ClueData> clues = new();
         private readonly List<ClueData> matchedClues = new();
         private readonly List<IClueListener> clueListeners = new();
 
@@ -20,17 +20,17 @@ namespace Grigor.Gameplay.Clues
             }
         }
 
-        private void OnClueFound(Clue clue)
+        private void OnClueFound(ClueData clue)
         {
             clue.ClueFoundEvent -= OnClueFound;
 
             foreach (IClueListener listener in clueListeners)
             {
-                listener.OnClueFound(clue.ClueData);
+                listener.OnClueFound(clue);
             }
         }
 
-        public void RegisterClue(Clue clue)
+        public void RegisterClue(ClueData clue)
         {
             if (clues.Contains(clue))
             {
@@ -42,7 +42,7 @@ namespace Grigor.Gameplay.Clues
             clues.Add(clue);
         }
 
-        public void UnregisterClue(Clue clue)
+        public void UnregisterClue(ClueData clue)
         {
             if (!clues.Contains(clue))
             {
