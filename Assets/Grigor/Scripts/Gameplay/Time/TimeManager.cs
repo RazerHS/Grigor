@@ -19,6 +19,7 @@ namespace Grigor.Gameplay.Time
         [SerializeField, ReadOnly] private int daysPassed;
         [SerializeField] private int dayStartHour = 8;
         [SerializeField] private int nightStartHour = 22;
+        [SerializeField] private int startHour = 8;
         [SerializeField] private bool changeTimeAutomatically;
         [SerializeField, ShowIf(nameof(changeTimeAutomatically))] private float timeMultiplier;
 
@@ -138,7 +139,7 @@ namespace Grigor.Gameplay.Time
 
         private void CheckStartTimeOfDay()
         {
-            hours = dayStartHour;
+            hours = startHour;
 
             if (hours >= dayStartHour && hours < nightStartHour)
             {

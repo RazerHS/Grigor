@@ -37,7 +37,7 @@ namespace Grigor.Gameplay.World.Components
             EndInteractEffect();
         }
 
-        private void OpenDoor()
+        protected void OpenDoor()
         {
             if (locked)
             {
@@ -54,7 +54,7 @@ namespace Grigor.Gameplay.World.Components
             doorTransform.DORotate(angleToRotate, rotationDuration);
         }
 
-        private void CloseDoor()
+        protected void CloseDoor()
         {
             doorTransform.DORotate(defaultRotation, rotationDuration);
         }

@@ -26,7 +26,7 @@ namespace Grigor.Gameplay.World.Components
 
             targetPosition.y = elevatorAtTarget ? elevatorOriginPositionY : elevatorTargetPositionY;
 
-            elevatorTransform.DOLocalMove(targetPosition, elevatorDuration).SetEase(Ease.OutCubic).OnComplete(OnElevatorArrived);
+            elevatorTransform.DOLocalMove(targetPosition, elevatorDuration).SetEase(Ease.OutSine).OnComplete(OnElevatorArrived);
         }
 
         private void OnElevatorArrived()
