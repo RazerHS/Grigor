@@ -33,12 +33,12 @@ PrefabInstance:
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: interactInRange
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: minutesToPassPerNode
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -103,7 +103,7 @@ PrefabInstance:
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -125,6 +125,11 @@ PrefabInstance:
       propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
       value: 
       objectReference: {fileID: 1173650392565169737}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8040994047838145611}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -141,6 +146,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1173650392565169737}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8040994047838145611}
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
 --- !u!114 &3037959173025414781 stripped
 MonoBehaviour:
@@ -174,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactInRange: 0
   removeFromChainAfterEffect: 1
-  stopsChain: 1
+  stopsChain: 0
   indexInChain: 2
   hasTimeEffect: 0
   timePassesOnInteract: 0
@@ -183,7 +192,7 @@ MonoBehaviour:
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: 'Here''s a little tease. It happened at 19:58pm. '
-  minutesToPassPerNode: 5
+  minutesToPassPerNode: 30
   hoursToPassPerNode: 0
 --- !u!114 &6609351950633042639
 MonoBehaviour:
@@ -208,7 +217,7 @@ MonoBehaviour:
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: 'I saw you giving your data away on the cameras. For some shortcut?  '
-  minutesToPassPerNode: 5
+  minutesToPassPerNode: 30
   hoursToPassPerNode: 0
   dataInteractable: {fileID: 0}
 --- !u!114 &1173650392565169737
@@ -225,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactInRange: 0
   removeFromChainAfterEffect: 1
-  stopsChain: 1
+  stopsChain: 0
   indexInChain: 3
   hasTimeEffect: 0
   timePassesOnInteract: 0
@@ -234,5 +243,27 @@ MonoBehaviour:
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: ~SHIFT'S UP MAN, BACK TO THE STATION. STAT~.
-  minutesToPassPerNode: 5
+  minutesToPassPerNode: 15
   hoursToPassPerNode: 0
+--- !u!114 &8040994047838145611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 4
+  hasTimeEffect: 0
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  interactionEnabled: 0
+  clueToFind: {fileID: 11400000, guid: a8465ed3ceb73e54093b2f7dadaa23bb, type: 2}
