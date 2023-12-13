@@ -1,5 +1,6 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.Utilities;
+using DG.Tweening;
 using Grigor.Data;
 using Grigor.Gameplay.Time;
 using Sirenix.OdinInspector;
@@ -51,7 +52,9 @@ namespace Grigor.Gameplay.Lighting
             }
 
             directionalLight.color = GameConfig.Instance.DirectionalColor.Evaluate(timePercent);
-            directionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) + sunRotationDegreeOffset - 90f, 170f, 0f));
+
+            Vector3 newRotation = new Vector3((timePercent * 360f) + sunRotationDegreeOffset - 90f, 170f, 0f);
+            directionalLight.transform.DOLocalRotate(newRotation, 0.5f).SetEase(Ease.OutSine);
         }
     }
 }
