@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Grigor.Gameplay.Interacting.Components;
 using RazerCore.Utils.Attributes;
 using UnityEngine;

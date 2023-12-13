@@ -1,5 +1,4 @@
-﻿using System;
-using CardboardCore.Utilities;
+﻿using CardboardCore.Utilities;
 using Grigor.Utils;
 using RazerCore.Utils.Attributes;
 using UnityEngine;

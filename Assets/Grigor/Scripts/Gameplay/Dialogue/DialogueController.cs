@@ -5,7 +5,6 @@ using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Widgets;
-using Grigor.Utils.StoryGraph.Editor.Nodes;
 using Grigor.Utils.StoryGraph.Runtime;
 
 namespace Grigor.Gameplay.Dialogue
@@ -30,8 +29,6 @@ namespace Grigor.Gameplay.Dialogue
         protected override void OnInjected()
         {
             dialogueWidget = uiManager.GetWidget<DialogueWidget>();
-
-            playerInput.SkipInputStartedEvent += OnSkipInput;
         }
 
         protected override void OnReleased()
@@ -39,7 +36,7 @@ namespace Grigor.Gameplay.Dialogue
 
         }
 
-        private void OnSkipInput()
+        public void OnSkipInput()
         {
             if (!inDialogue)
             {
@@ -51,7 +48,6 @@ namespace Grigor.Gameplay.Dialogue
                 return;
             }
 
-            // TO-DO: add choices to change the index
             bool lastNode = !currentDialogueGraph.GetNextNode(currentNode, 0, out DialogueNodeData nextNode);
 
             if (lastNode)

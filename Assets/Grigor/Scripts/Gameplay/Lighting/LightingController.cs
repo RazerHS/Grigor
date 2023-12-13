@@ -4,7 +4,6 @@ using Grigor.Data;
 using Grigor.Gameplay.Time;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Gameplay.Lighting
 {

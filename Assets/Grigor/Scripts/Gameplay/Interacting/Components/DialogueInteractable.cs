@@ -18,9 +18,6 @@ namespace Grigor.Gameplay.Interacting.Components
         [SerializeField, ColoredBoxGroup("Dialogue"), Range(0, 60)] private int minutesToPassPerNode = 0;
         [SerializeField, ColoredBoxGroup("Dialogue"), Range(0, 24)] private int hoursToPassPerNode = 0;
 
-        public int MinutesToPassPerNode => minutesToPassPerNode;
-        public int HoursToPassPerNode => hoursToPassPerNode;
-
         [Inject] private DialogueController dialogueController;
 
         private DialogueNodeData startNode;
@@ -76,6 +73,11 @@ namespace Grigor.Gameplay.Interacting.Components
             {
                 Log.Error($"Character data in interactable {name} has no dialogue graph set!");
             }
+        }
+
+        protected override void OnSkipInputDuringInteraction()
+        {
+            dialogueController.OnSkipInput();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Grigor.Data.Clues;
-using Grigor.Gameplay.Interacting;
+﻿using Grigor.Gameplay.Interacting;
 using Grigor.Gameplay.Interacting.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
