@@ -34,16 +34,6 @@ MonoBehaviour:
     OutputNodeGuid: 96c78121-fd2f-42eb-9909-81d8123209de
     InputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
   - OutportPortChoiceIndex: 0
-    OutputPortName: What did he look like???
-    InputPortName: 
-    OutputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
-    InputNodeGuid: 5a5dc884-c460-4049-9b70-fbda0b673418
-  - OutportPortChoiceIndex: 0
-    OutputPortName: WHAT??
-    InputPortName: 
-    OutputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
-    InputNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
-  - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
     OutputNodeGuid: 5a5dc884-c460-4049-9b70-fbda0b673418
@@ -53,11 +43,6 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
     InputNodeGuid: 553dd96e-ce69-4ca1-9b68-164c3f5e60d0
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 553dd96e-ce69-4ca1-9b68-164c3f5e60d0
-    InputNodeGuid: ccf74dba-ff7e-425d-9ad1-e55d55445cad
   - OutportPortChoiceIndex: 0
     OutputPortName: Didn't you see his ID if he bought something?
     InputPortName: 
@@ -86,6 +71,11 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
+    OutputNodeGuid: 553dd96e-ce69-4ca1-9b68-164c3f5e60d0
+    InputNodeGuid: ccf74dba-ff7e-425d-9ad1-e55d55445cad
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
     OutputNodeGuid: 48002f80-d830-4156-9e96-92d37a5d2a4e
     InputNodeGuid: 0643edbc-9c55-4169-a2fc-53ec66feeeb1
   - OutportPortChoiceIndex: 0
@@ -93,6 +83,16 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: bfe70b17-8ed9-4772-8046-2fa6c6594e59
     InputNodeGuid: 48002f80-d830-4156-9e96-92d37a5d2a4e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: WHAT??
+    InputPortName: 
+    OutputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
+    InputNodeGuid: 5a5dc884-c460-4049-9b70-fbda0b673418
+  - OutportPortChoiceIndex: 0
+    OutputPortName: What did he look like???
+    InputPortName: 
+    OutputNodeGuid: b91e7d7a-b909-4c00-bbb5-b67d9415d6ff
+    InputNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
   dialogueNodeData:
   - nodeName: Yo, what do you need?
     guid: 3e1ce0dd-0911-4c5f-98f8-53642eab74bc
@@ -131,9 +131,9 @@ MonoBehaviour:
     nodeType: 0
     choices:
     - text: What did he look like???
-      nextNodeGuid: 5a5dc884-c460-4049-9b70-fbda0b673418
-    - text: WHAT??
       nextNodeGuid: 7bc1bd1f-3a75-4bfc-8b0f-03ba06b97bc9
+    - text: WHAT??
+      nextNodeGuid: 5a5dc884-c460-4049-9b70-fbda0b673418
   - nodeName: Yeah man, he dropped out of school 'cause math was too hard.
     guid: 5a5dc884-c460-4049-9b70-fbda0b673418
     position: {x: 2311, y: 417}

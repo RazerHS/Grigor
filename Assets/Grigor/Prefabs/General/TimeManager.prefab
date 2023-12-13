@@ -50,5 +50,6 @@ MonoBehaviour:
   daysPassed: 0
   dayStartHour: 9
   nightStartHour: 20
-  changeTimeAutomatically: 0
-  timeMultiplier: 300
+  startHour: 8
+  changeTimeAutomatically: 1
+  timeMultiplier: 15
