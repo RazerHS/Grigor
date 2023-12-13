@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Vladimir
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - OutportPortChoiceIndex: 0
+    OutputPortName: A murder happened. Please give the footage.
+    InputPortName: 
+    OutputNodeGuid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
+    InputNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
+  - OutportPortChoiceIndex: 0
+    OutputPortName: What was time of murder?
+    InputPortName: 
+    OutputNodeGuid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
+    InputNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 5d6d10d0-7fb8-47c8-b894-aa32fde8d01a
+    InputNodeGuid: 51e943de-9d98-460f-b239-9283561b3f6c
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 4344125d-6a0a-4d33-b364-07aaa033f3c0
+    InputNodeGuid: 5b7cbfc3-8c07-4cd7-9971-65df93a7d581
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 36162042-74f0-422c-99fe-19d16fd4eb68
+    InputNodeGuid: 54e3e7e0-1702-48e6-980e-ca26a26475c6
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 54e3e7e0-1702-48e6-980e-ca26a26475c6
+    InputNodeGuid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 0e84eab1-8333-403a-86bd-a313016210fb
+    InputNodeGuid: 5d6d10d0-7fb8-47c8-b894-aa32fde8d01a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: d11efb0b-99f3-44be-881c-7761e6ec7805
+    InputNodeGuid: 4344125d-6a0a-4d33-b364-07aaa033f3c0
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: bc77f22e-4a57-4e33-8302-2e481f0a86f4
+    InputNodeGuid: 85482e75-a71e-4c78-bce0-a19a17231dcd
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Did you see anyone suspicious afterwards?
+    InputPortName: 
+    OutputNodeGuid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
+    InputNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
+  dialogueNodeData:
+  - nodeName: (intimidately)
+    guid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
+    position: {x: 1057, y: 14}
+    dialogueText: (intimidately)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: A murder happened. Please give the footage.
+      nextNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
+    - text: What was time of murder?
+      nextNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
+    - text: Did you see anyone suspicious afterwards?
+      nextNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
+  - nodeName: No. I don't just give away data. You won't survive a day in this world
+      with that sharing attitude.
+    guid: b33405ff-20f7-4c62-bf42-3603035002ac
+    position: {x: 1502, y: 40}
+    dialogueText: No. I don't just give away data. You won't survive a day in this
+      world with that sharing attitude.
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: You're just like the other sheep. Damn cop.
+    guid: 51e943de-9d98-460f-b239-9283561b3f6c
+    position: {x: 2479, y: 286}
+    dialogueText: You're just like the other sheep. Damn cop.
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: How can I trust you?
+    guid: 5d6d10d0-7fb8-47c8-b894-aa32fde8d01a
+    position: {x: 2071, y: 286}
+    dialogueText: How can I trust you?
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 51e943de-9d98-460f-b239-9283561b3f6c
+  - nodeName: Then we'll talk.
+    guid: 5b7cbfc3-8c07-4cd7-9971-65df93a7d581
+    position: {x: 2523, y: 464}
+    dialogueText: Then we'll talk.
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: You've had a taste. If you want more, come back with cake and cookies.
+    guid: 4344125d-6a0a-4d33-b364-07aaa033f3c0
+    position: {x: 2078, y: 464}
+    dialogueText: You've had a taste. If you want more, come back with cake and cookies.
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 5b7cbfc3-8c07-4cd7-9971-65df93a7d581
+  - nodeName: (Not intrusive at all...)
+    guid: 85482e75-a71e-4c78-bce0-a19a17231dcd
+    position: {x: 2025, y: 651}
+    dialogueText: (Not intrusive at all...)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: Hello, I am god, I murdered that man.
+    guid: 36162042-74f0-422c-99fe-19d16fd4eb68
+    position: {x: -184, y: -3}
+    dialogueText: Hello, I am god, I murdered that man.
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 54e3e7e0-1702-48e6-980e-ca26a26475c6
+  - nodeName: Is what you want to hear. What do you want? I don't give my footage
+      to nobodies.
+    guid: 54e3e7e0-1702-48e6-980e-ca26a26475c6
+    position: {x: 226, y: -3}
+    dialogueText: Is what you want to hear. What do you want? I don't give my footage
+      to nobodies.
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
+  - nodeName: 'I saw you giving your data away on the cameras. For some shortcut?  '
+    guid: 0e84eab1-8333-403a-86bd-a313016210fb
+    position: {x: 1423, y: 286}
+    dialogueText: 'I saw you giving your data away on the cameras. For some shortcut?  '
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 5d6d10d0-7fb8-47c8-b894-aa32fde8d01a
+  - nodeName: 'Here''s a little tease. It happened at 19:58pm. '
+    guid: d11efb0b-99f3-44be-881c-7761e6ec7805
+    position: {x: 1484, y: 464}
+    dialogueText: 'Here''s a little tease. It happened at 19:58pm. '
+    speaker: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 4344125d-6a0a-4d33-b364-07aaa033f3c0
+  - nodeName: ~SHIFT'S UP MAN, BACK TO THE STATION. STAT~.
+    guid: bc77f22e-4a57-4e33-8302-2e481f0a86f4
+    position: {x: 1484, y: 651}
+    dialogueText: ~SHIFT'S UP MAN, BACK TO THE STATION. STAT~.
+    speaker: {fileID: 11400000, guid: de87e513827b2eb4abd62eeccb4ca9ce, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 85482e75-a71e-4c78-bce0-a19a17231dcd
+  exposedProperties: []
+  commentBlockData: []

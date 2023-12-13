@@ -3,6 +3,7 @@ using CardboardCore.Utilities;
 using Grigor.Utils;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -14,15 +15,16 @@ namespace Grigor.Data.Editor
         protected virtual string dataName => "Data";
         protected virtual string dataAssetsPath => "Assets/Grigor/Data";
 
-        protected DataStorage dataStorage;
-
         private NewData newData;
+        private OdinMenuItem newItemMenuItem;
+        private OdinMenuTree tree;
         protected T currentInstance;
         protected OdinMenuTreeSelection selection;
+        protected DataStorage dataStorage;
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            OdinMenuTree tree = new OdinMenuTree
+            tree = new OdinMenuTree
             {
                 DefaultMenuStyle =
                 {
@@ -46,7 +48,12 @@ namespace Grigor.Data.Editor
             tree.Add($"New {dataName}", newData);
             tree.AddAllAssetsAtPath($"{dataName}s", dataAssetsPath, typeof(T), true, true);
 
+            newItemMenuItem = tree.GetMenuItem($"New {dataName}");
+
             tree.Config.DrawSearchToolbar = true;
+
+            SortTree();
+            tree.EnumerateTree().ForEach(AddDragHandles);
 
             OnDrawTree(tree);
 
@@ -57,7 +64,7 @@ namespace Grigor.Data.Editor
 
         protected override void OnBeginDrawEditors()
         {
-            if (MenuTree.Selection != null)
+            if (MenuTree is { Selection: not null })
             {
                 selection = MenuTree.Selection;
             }
@@ -115,6 +122,15 @@ namespace Grigor.Data.Editor
             DestroyImmediate(newData.Data);
 
             base.OnDestroy();
+        }
+
+        private void SortTree()
+        {
+            newItemMenuItem.Name = $".{newItemMenuItem.Name}";
+
+            tree.EnumerateTree().SortMenuItemsByName();
+
+            newItemMenuItem.Name = newItemMenuItem.Name.Replace(".", "");
         }
 
         private void OnNewDataCreated(T data)

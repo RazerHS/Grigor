@@ -2,6 +2,7 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using DG.Tweening;
+using Grigor.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,12 +11,15 @@ namespace Grigor.Gameplay.Time
     [Injectable]
     public class TimeManager : MonoBehaviour
     {
-        [SerializeField, ReadOnly, Range(0, 60)] private float seconds = 0f;
-        [SerializeField, ReadOnly, Range(0, 60)] private int minutes = 0;
-        [SerializeField, ReadOnly, Range(0, 24)] private int hours = 0;
+        [SerializeField, Wrap(0, 24), HorizontalGroup("Time"), HideLabel] private int hours = 0;
+        [ShowInInspector, HorizontalGroup("Time", Width = 0.01f), HideLabel, DisplayAsString] private string separator = ":";
+        [SerializeField, Wrap(0, 60), HorizontalGroup("Time"), HideLabel] private int minutes = 0;
+        [ShowInInspector, HorizontalGroup("Time", Width = 0.01f), HideLabel, DisplayAsString] private string secondSeparator = ":";
+        [SerializeField, Wrap(0, 60), HorizontalGroup("Time"), HideLabel] private float seconds = 0f;
         [SerializeField, ReadOnly] private int daysPassed;
         [SerializeField] private int dayStartHour = 8;
         [SerializeField] private int nightStartHour = 22;
+        [SerializeField] private int startHour = 8;
         [SerializeField] private bool changeTimeAutomatically;
         [SerializeField, ShowIf(nameof(changeTimeAutomatically))] private float timeMultiplier;
 
@@ -135,7 +139,7 @@ namespace Grigor.Gameplay.Time
 
         private void CheckStartTimeOfDay()
         {
-            hours = dayStartHour;
+            hours = startHour;
 
             if (hours >= dayStartHour && hours < nightStartHour)
             {
@@ -195,12 +199,30 @@ namespace Grigor.Gameplay.Time
             OnTimeChanged();
         }
 
-        public void PassTime(int minutes, int hours)
+        public void PassTime(int minutesToPass, int hoursToPass)
         {
-            this.minutes += minutes;
-            this.hours += hours;
+            int newMinutes = minutesToPass + hoursToPass * 60;
 
-            OnTimeChanged();
+            int previousValue = 0;
+
+            DOVirtual.Int(minutes, minutes + newMinutes, GameConfig.Instance.TimePassTweenDuration, value =>
+            {
+                if (previousValue == 0)
+                {
+                    previousValue = minutes;
+                }
+
+                if (value == previousValue)
+                {
+                    return;
+                }
+
+                minutes += value - previousValue;
+
+                previousValue = value;
+
+                OnTimeChanged();
+            });
         }
 
         public void SetTimeToNight()

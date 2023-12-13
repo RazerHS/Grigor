@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597f19e60b264b0795931ec3355a0e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 0
-  minutes: 0
   hours: 10
+  minutes: 0
+  seconds: 0
   daysPassed: 0
-  dayStartHour: 8
-  nightStartHour: 22
-  changeTimeAutomatically: 0
-  timeMultiplier: 300
+  dayStartHour: 9
+  nightStartHour: 20
+  startHour: 8
+  changeTimeAutomatically: 1
+  timeMultiplier: 15
