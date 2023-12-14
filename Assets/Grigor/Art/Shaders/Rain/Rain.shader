@@ -5,8 +5,8 @@ Shader "GRIGOR/Rain"
 	Properties
 	{
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
-		_TextureSample0("Texture Sample 0", 2D) = "white" {}
-		_IsRaining("Is Raining", Float) = 1
+		[HDR]_TextureSample2("Texture Sample 2", 2D) = "white" {}
+		_RipplesIntensity("Ripples Intensity", Range( 0 , 1)) = 1
 
 		[HideInInspector] _RenderQueueType("Render Queue Type", Float) = 5
 		[HideInInspector][ToggleUI] _AddPrecomputedVelocity("Add Precomputed Velocity", Float) = 1
@@ -372,7 +372,7 @@ Shader "GRIGOR/Rain"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float _IsRaining;
+			float _RipplesIntensity;
 			float4 _EmissionColor;
 			float _AlphaCutoff;
 			float _RenderQueueType;
@@ -435,7 +435,7 @@ Shader "GRIGOR/Rain"
 			int _PassValue;
             #endif
 
-			sampler2D _TextureSample0;
+			sampler2D _TextureSample2;
 
 
             #ifdef DEBUG_DISPLAY
@@ -480,7 +480,6 @@ Shader "GRIGOR/Rain"
 				float4 uv1 : TEXCOORD3;
 				float4 uv2 : TEXCOORD4;
 				float4 ase_texcoord5 : TEXCOORD5;
-				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 				#if defined(SHADER_STAGE_FRAGMENT) && defined(ASE_NEED_CULLFACE)
@@ -715,7 +714,6 @@ Shader "GRIGOR/Rain"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( outputPackedVaryingsMeshToPS );
 
 				outputPackedVaryingsMeshToPS.ase_texcoord5.xy = inputMesh.ase_texcoord.xy;
-				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				outputPackedVaryingsMeshToPS.ase_texcoord5.zw = 0;
@@ -881,16 +879,48 @@ Shader "GRIGOR/Rain"
 				BuiltinData builtinData;
 
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float2 texCoord34 = packedInput.ase_texcoord5.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode35 = tex2D( _TextureSample0, ( texCoord34 * float2( 1.5,1.5 ) ) );
-				float2 appendResult36 = (float2(tex2DNode35.r , tex2DNode35.g));
-				float mulTime48 = _TimeParameters.x * 0.7;
-				float temp_output_44_0 = ( ( tex2DNode35.a * 2.0 ) - 1.0 );
-				float temp_output_83_0 = ( ( ( frac( ( tex2DNode35.b - mulTime48 ) ) * saturate( temp_output_44_0 ) ) + saturate( ( ( temp_output_44_0 * -1.0 ) - 0.5 ) ) ) * ( saturate( packedInput.ase_normal.y ) * _IsRaining ) );
-				float3 appendResult54 = (float3(( ( ( appendResult36 * float2( 8,8 ) ) - float2( 4,4 ) ) * temp_output_83_0 ) , 1.0));
+				float temp_output_36_0_g1 = _RipplesIntensity;
+				float4 appendResult37_g1 = (float4(temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1));
+				float4 temp_output_41_0_g1 = saturate( ( ( appendResult37_g1 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g1 = temp_output_41_0_g1;
+				float4 appendResult11_g1 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g1 = frac( ( ( ( appendResult11_g1 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float2 texCoord117 = packedInput.ase_texcoord5.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_24_0_g1 = texCoord117;
+				float4 tex2DNode19_g6 = tex2D( _TextureSample2, ( temp_output_24_0_g1 * float2( 0.7,0.7 ) ) );
+				float temp_output_1_0_g6 = frac( ( break47_g1.x + tex2DNode19_g6.a ) );
+				float clampResult13_g6 = clamp( ( ( ( temp_output_1_0_g6 - 1.0 ) + tex2DNode19_g6.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g6 = (float2(tex2DNode19_g6.g , tex2DNode19_g6.b));
+				float3 appendResult17_g6 = (float3(( ( saturate( ( ( ( break48_g1.x * 0.8 ) + 0.2 ) - temp_output_1_0_g6 ) ) * sin( ( clampResult13_g6 * PI ) ) ) * ( ( appendResult8_g6 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_7_0_g7 = appendResult17_g6;
+				float4 temp_output_2_0_g7 = temp_output_41_0_g1;
+				float4 break39_g7 = temp_output_2_0_g7;
+				float4 tex2DNode19_g3 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) );
+				float temp_output_1_0_g3 = frac( ( break47_g1.y + tex2DNode19_g3.a ) );
+				float clampResult13_g3 = clamp( ( ( ( temp_output_1_0_g3 - 1.0 ) + tex2DNode19_g3.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g3 = (float2(tex2DNode19_g3.g , tex2DNode19_g3.b));
+				float3 appendResult17_g3 = (float3(( ( saturate( ( ( ( break48_g1.y * 0.8 ) + 0.2 ) - temp_output_1_0_g3 ) ) * sin( ( clampResult13_g3 * PI ) ) ) * ( ( appendResult8_g3 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_8_0_g7 = appendResult17_g3;
+				float4 tex2DNode19_g4 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) );
+				float temp_output_1_0_g4 = frac( ( break47_g1.z + tex2DNode19_g4.a ) );
+				float clampResult13_g4 = clamp( ( ( ( temp_output_1_0_g4 - 1.0 ) + tex2DNode19_g4.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g4 = (float2(tex2DNode19_g4.g , tex2DNode19_g4.b));
+				float3 appendResult17_g4 = (float3(( ( saturate( ( ( ( break48_g1.z * 0.8 ) + 0.2 ) - temp_output_1_0_g4 ) ) * sin( ( clampResult13_g4 * PI ) ) ) * ( ( appendResult8_g4 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_9_0_g7 = appendResult17_g4;
+				float4 tex2DNode19_g5 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) );
+				float temp_output_1_0_g5 = frac( ( break47_g1.w + tex2DNode19_g5.a ) );
+				float clampResult13_g5 = clamp( ( ( ( temp_output_1_0_g5 - 1.0 ) + tex2DNode19_g5.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g5 = (float2(tex2DNode19_g5.g , tex2DNode19_g5.b));
+				float3 appendResult17_g5 = (float3(( ( saturate( ( ( ( break48_g1.w * 0.8 ) + 0.2 ) - temp_output_1_0_g5 ) ) * sin( ( clampResult13_g5 * PI ) ) ) * ( ( appendResult8_g5 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_10_0_g7 = appendResult17_g5;
+				float4 appendResult27_g7 = (float4((temp_output_7_0_g7).z , (temp_output_8_0_g7).z , (temp_output_9_0_g7).z , (temp_output_10_0_g7).z));
+				float4 lerpResult29_g7 = lerp( float4( 1,1,1,1 ) , appendResult27_g7 , temp_output_2_0_g7);
+				float4 break38_g7 = lerpResult29_g7;
+				float3 appendResult36_g7 = (float3(( ( (temp_output_7_0_g7).xy * break39_g7.x ) + ( (temp_output_8_0_g7).xy * break39_g7.y ) + ( (temp_output_9_0_g7).xy * break39_g7.z ) + ( (temp_output_10_0_g7).xy * break39_g7.w ) ) , ( break38_g7.x * break38_g7.y * break38_g7.z * break38_g7.w )));
+				float3 normalizeResult37_g7 = normalize( appendResult36_g7 );
 				
 				surfaceDescription.BaseColor = float3( 0.5, 0.5, 0.5 );
-				surfaceDescription.Normal = appendResult54;
+				surfaceDescription.Normal = normalizeResult37_g7;
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
 				surfaceDescription.Metallic = 0;
@@ -900,9 +930,9 @@ Shader "GRIGOR/Rain"
 				#endif
 
 				surfaceDescription.Emission = 0;
-				surfaceDescription.Smoothness = pow( temp_output_83_0 , 0.1 );
+				surfaceDescription.Smoothness = 1.0;
 				surfaceDescription.Occlusion = 1;
-				surfaceDescription.Alpha = 0.0;
+				surfaceDescription.Alpha = 1;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -1060,7 +1090,7 @@ Shader "GRIGOR/Rain"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float _IsRaining;
+			float _RipplesIntensity;
 			float4 _EmissionColor;
 			float _AlphaCutoff;
 			float _RenderQueueType;
@@ -1123,7 +1153,7 @@ Shader "GRIGOR/Rain"
 			int _PassValue;
             #endif
 
-			sampler2D _TextureSample0;
+			sampler2D _TextureSample2;
 
 
             #ifdef DEBUG_DISPLAY
@@ -1169,7 +1199,6 @@ Shader "GRIGOR/Rain"
 				float4 LightCoord : TEXCOORD1;
 				#endif
 				float4 ase_texcoord2 : TEXCOORD2;
-				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				#if defined(SHADER_STAGE_FRAGMENT) && defined(ASE_NEED_CULLFACE)
 				FRONT_FACE_TYPE cullFace : FRONT_FACE_SEMANTIC;
@@ -1387,7 +1416,6 @@ Shader "GRIGOR/Rain"
 				UNITY_TRANSFER_INSTANCE_ID(inputMesh, outputPackedVaryingsMeshToPS);
 
 				outputPackedVaryingsMeshToPS.ase_texcoord2.xy = inputMesh.uv0.xy;
-				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				outputPackedVaryingsMeshToPS.ase_texcoord2.zw = 0;
@@ -1545,16 +1573,48 @@ Shader "GRIGOR/Rain"
 				SurfaceData surfaceData;
 				BuiltinData builtinData;
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float2 texCoord34 = packedInput.ase_texcoord2.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode35 = tex2D( _TextureSample0, ( texCoord34 * float2( 1.5,1.5 ) ) );
-				float2 appendResult36 = (float2(tex2DNode35.r , tex2DNode35.g));
-				float mulTime48 = _TimeParameters.x * 0.7;
-				float temp_output_44_0 = ( ( tex2DNode35.a * 2.0 ) - 1.0 );
-				float temp_output_83_0 = ( ( ( frac( ( tex2DNode35.b - mulTime48 ) ) * saturate( temp_output_44_0 ) ) + saturate( ( ( temp_output_44_0 * -1.0 ) - 0.5 ) ) ) * ( saturate( packedInput.ase_normal.y ) * _IsRaining ) );
-				float3 appendResult54 = (float3(( ( ( appendResult36 * float2( 8,8 ) ) - float2( 4,4 ) ) * temp_output_83_0 ) , 1.0));
+				float temp_output_36_0_g1 = _RipplesIntensity;
+				float4 appendResult37_g1 = (float4(temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1));
+				float4 temp_output_41_0_g1 = saturate( ( ( appendResult37_g1 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g1 = temp_output_41_0_g1;
+				float4 appendResult11_g1 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g1 = frac( ( ( ( appendResult11_g1 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float2 texCoord117 = packedInput.ase_texcoord2.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_24_0_g1 = texCoord117;
+				float4 tex2DNode19_g6 = tex2D( _TextureSample2, ( temp_output_24_0_g1 * float2( 0.7,0.7 ) ) );
+				float temp_output_1_0_g6 = frac( ( break47_g1.x + tex2DNode19_g6.a ) );
+				float clampResult13_g6 = clamp( ( ( ( temp_output_1_0_g6 - 1.0 ) + tex2DNode19_g6.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g6 = (float2(tex2DNode19_g6.g , tex2DNode19_g6.b));
+				float3 appendResult17_g6 = (float3(( ( saturate( ( ( ( break48_g1.x * 0.8 ) + 0.2 ) - temp_output_1_0_g6 ) ) * sin( ( clampResult13_g6 * PI ) ) ) * ( ( appendResult8_g6 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_7_0_g7 = appendResult17_g6;
+				float4 temp_output_2_0_g7 = temp_output_41_0_g1;
+				float4 break39_g7 = temp_output_2_0_g7;
+				float4 tex2DNode19_g3 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) );
+				float temp_output_1_0_g3 = frac( ( break47_g1.y + tex2DNode19_g3.a ) );
+				float clampResult13_g3 = clamp( ( ( ( temp_output_1_0_g3 - 1.0 ) + tex2DNode19_g3.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g3 = (float2(tex2DNode19_g3.g , tex2DNode19_g3.b));
+				float3 appendResult17_g3 = (float3(( ( saturate( ( ( ( break48_g1.y * 0.8 ) + 0.2 ) - temp_output_1_0_g3 ) ) * sin( ( clampResult13_g3 * PI ) ) ) * ( ( appendResult8_g3 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_8_0_g7 = appendResult17_g3;
+				float4 tex2DNode19_g4 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) );
+				float temp_output_1_0_g4 = frac( ( break47_g1.z + tex2DNode19_g4.a ) );
+				float clampResult13_g4 = clamp( ( ( ( temp_output_1_0_g4 - 1.0 ) + tex2DNode19_g4.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g4 = (float2(tex2DNode19_g4.g , tex2DNode19_g4.b));
+				float3 appendResult17_g4 = (float3(( ( saturate( ( ( ( break48_g1.z * 0.8 ) + 0.2 ) - temp_output_1_0_g4 ) ) * sin( ( clampResult13_g4 * PI ) ) ) * ( ( appendResult8_g4 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_9_0_g7 = appendResult17_g4;
+				float4 tex2DNode19_g5 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) );
+				float temp_output_1_0_g5 = frac( ( break47_g1.w + tex2DNode19_g5.a ) );
+				float clampResult13_g5 = clamp( ( ( ( temp_output_1_0_g5 - 1.0 ) + tex2DNode19_g5.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g5 = (float2(tex2DNode19_g5.g , tex2DNode19_g5.b));
+				float3 appendResult17_g5 = (float3(( ( saturate( ( ( ( break48_g1.w * 0.8 ) + 0.2 ) - temp_output_1_0_g5 ) ) * sin( ( clampResult13_g5 * PI ) ) ) * ( ( appendResult8_g5 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_10_0_g7 = appendResult17_g5;
+				float4 appendResult27_g7 = (float4((temp_output_7_0_g7).z , (temp_output_8_0_g7).z , (temp_output_9_0_g7).z , (temp_output_10_0_g7).z));
+				float4 lerpResult29_g7 = lerp( float4( 1,1,1,1 ) , appendResult27_g7 , temp_output_2_0_g7);
+				float4 break38_g7 = lerpResult29_g7;
+				float3 appendResult36_g7 = (float3(( ( (temp_output_7_0_g7).xy * break39_g7.x ) + ( (temp_output_8_0_g7).xy * break39_g7.y ) + ( (temp_output_9_0_g7).xy * break39_g7.z ) + ( (temp_output_10_0_g7).xy * break39_g7.w ) ) , ( break38_g7.x * break38_g7.y * break38_g7.z * break38_g7.w )));
+				float3 normalizeResult37_g7 = normalize( appendResult36_g7 );
 				
 				surfaceDescription.BaseColor = float3( 0.5, 0.5, 0.5 );
-				surfaceDescription.Normal = appendResult54;
+				surfaceDescription.Normal = normalizeResult37_g7;
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
 				surfaceDescription.Metallic = 0;
@@ -1564,9 +1624,9 @@ Shader "GRIGOR/Rain"
 				#endif
 
 				surfaceDescription.Emission = 0;
-				surfaceDescription.Smoothness = pow( temp_output_83_0 , 0.1 );
+				surfaceDescription.Smoothness = 1.0;
 				surfaceDescription.Occlusion = 1;
-				surfaceDescription.Alpha = 0.0;
+				surfaceDescription.Alpha = 1;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -1727,7 +1787,7 @@ Shader "GRIGOR/Rain"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float _IsRaining;
+			float _RipplesIntensity;
 			float4 _EmissionColor;
 			float _AlphaCutoff;
 			float _RenderQueueType;
@@ -2161,7 +2221,7 @@ Shader "GRIGOR/Rain"
 
 				AlphaSurfaceDescription surfaceDescription = (AlphaSurfaceDescription)0;
 				
-				surfaceDescription.Alpha = 0.0;
+				surfaceDescription.Alpha = 1;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -2298,7 +2358,7 @@ Shader "GRIGOR/Rain"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float _IsRaining;
+			float _RipplesIntensity;
 			float4 _EmissionColor;
 			float _AlphaCutoff;
 			float _RenderQueueType;
@@ -2711,7 +2771,7 @@ Shader "GRIGOR/Rain"
 
 				SceneSurfaceDescription surfaceDescription = (SceneSurfaceDescription)0;
 				
-				surfaceDescription.Alpha = 0.0;
+				surfaceDescription.Alpha = 1;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -2832,7 +2892,7 @@ Shader "GRIGOR/Rain"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float _IsRaining;
+			float _RipplesIntensity;
 			float4 _EmissionColor;
 			float _AlphaCutoff;
 			float _RenderQueueType;
@@ -2895,7 +2955,7 @@ Shader "GRIGOR/Rain"
 			int _PassValue;
             #endif
 
-			sampler2D _TextureSample0;
+			sampler2D _TextureSample2;
 
 
             #ifdef DEBUG_DISPLAY
@@ -2936,7 +2996,6 @@ Shader "GRIGOR/Rain"
 				float3 normalWS : TEXCOORD1;
 				float4 tangentWS : TEXCOORD2;
 				float4 ase_texcoord3 : TEXCOORD3;
-				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 				#if defined(SHADER_STAGE_FRAGMENT) && defined(ASE_NEED_CULLFACE)
@@ -3105,7 +3164,6 @@ Shader "GRIGOR/Rain"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( outputPackedVaryingsMeshToPS );
 
 				outputPackedVaryingsMeshToPS.ase_texcoord3.xy = inputMesh.ase_texcoord.xy;
-				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				outputPackedVaryingsMeshToPS.ase_texcoord3.zw = 0;
@@ -3289,17 +3347,49 @@ Shader "GRIGOR/Rain"
 				float3 V = GetWorldSpaceNormalizeViewDir(input.positionRWS);
 
 				SmoothSurfaceDescription surfaceDescription = (SmoothSurfaceDescription)0;
-				float2 texCoord34 = packedInput.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode35 = tex2D( _TextureSample0, ( texCoord34 * float2( 1.5,1.5 ) ) );
-				float2 appendResult36 = (float2(tex2DNode35.r , tex2DNode35.g));
-				float mulTime48 = _TimeParameters.x * 0.7;
-				float temp_output_44_0 = ( ( tex2DNode35.a * 2.0 ) - 1.0 );
-				float temp_output_83_0 = ( ( ( frac( ( tex2DNode35.b - mulTime48 ) ) * saturate( temp_output_44_0 ) ) + saturate( ( ( temp_output_44_0 * -1.0 ) - 0.5 ) ) ) * ( saturate( packedInput.ase_normal.y ) * _IsRaining ) );
-				float3 appendResult54 = (float3(( ( ( appendResult36 * float2( 8,8 ) ) - float2( 4,4 ) ) * temp_output_83_0 ) , 1.0));
+				float temp_output_36_0_g1 = _RipplesIntensity;
+				float4 appendResult37_g1 = (float4(temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1));
+				float4 temp_output_41_0_g1 = saturate( ( ( appendResult37_g1 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g1 = temp_output_41_0_g1;
+				float4 appendResult11_g1 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g1 = frac( ( ( ( appendResult11_g1 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float2 texCoord117 = packedInput.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_24_0_g1 = texCoord117;
+				float4 tex2DNode19_g6 = tex2D( _TextureSample2, ( temp_output_24_0_g1 * float2( 0.7,0.7 ) ) );
+				float temp_output_1_0_g6 = frac( ( break47_g1.x + tex2DNode19_g6.a ) );
+				float clampResult13_g6 = clamp( ( ( ( temp_output_1_0_g6 - 1.0 ) + tex2DNode19_g6.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g6 = (float2(tex2DNode19_g6.g , tex2DNode19_g6.b));
+				float3 appendResult17_g6 = (float3(( ( saturate( ( ( ( break48_g1.x * 0.8 ) + 0.2 ) - temp_output_1_0_g6 ) ) * sin( ( clampResult13_g6 * PI ) ) ) * ( ( appendResult8_g6 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_7_0_g7 = appendResult17_g6;
+				float4 temp_output_2_0_g7 = temp_output_41_0_g1;
+				float4 break39_g7 = temp_output_2_0_g7;
+				float4 tex2DNode19_g3 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) );
+				float temp_output_1_0_g3 = frac( ( break47_g1.y + tex2DNode19_g3.a ) );
+				float clampResult13_g3 = clamp( ( ( ( temp_output_1_0_g3 - 1.0 ) + tex2DNode19_g3.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g3 = (float2(tex2DNode19_g3.g , tex2DNode19_g3.b));
+				float3 appendResult17_g3 = (float3(( ( saturate( ( ( ( break48_g1.y * 0.8 ) + 0.2 ) - temp_output_1_0_g3 ) ) * sin( ( clampResult13_g3 * PI ) ) ) * ( ( appendResult8_g3 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_8_0_g7 = appendResult17_g3;
+				float4 tex2DNode19_g4 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) );
+				float temp_output_1_0_g4 = frac( ( break47_g1.z + tex2DNode19_g4.a ) );
+				float clampResult13_g4 = clamp( ( ( ( temp_output_1_0_g4 - 1.0 ) + tex2DNode19_g4.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g4 = (float2(tex2DNode19_g4.g , tex2DNode19_g4.b));
+				float3 appendResult17_g4 = (float3(( ( saturate( ( ( ( break48_g1.z * 0.8 ) + 0.2 ) - temp_output_1_0_g4 ) ) * sin( ( clampResult13_g4 * PI ) ) ) * ( ( appendResult8_g4 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_9_0_g7 = appendResult17_g4;
+				float4 tex2DNode19_g5 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) );
+				float temp_output_1_0_g5 = frac( ( break47_g1.w + tex2DNode19_g5.a ) );
+				float clampResult13_g5 = clamp( ( ( ( temp_output_1_0_g5 - 1.0 ) + tex2DNode19_g5.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g5 = (float2(tex2DNode19_g5.g , tex2DNode19_g5.b));
+				float3 appendResult17_g5 = (float3(( ( saturate( ( ( ( break48_g1.w * 0.8 ) + 0.2 ) - temp_output_1_0_g5 ) ) * sin( ( clampResult13_g5 * PI ) ) ) * ( ( appendResult8_g5 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_10_0_g7 = appendResult17_g5;
+				float4 appendResult27_g7 = (float4((temp_output_7_0_g7).z , (temp_output_8_0_g7).z , (temp_output_9_0_g7).z , (temp_output_10_0_g7).z));
+				float4 lerpResult29_g7 = lerp( float4( 1,1,1,1 ) , appendResult27_g7 , temp_output_2_0_g7);
+				float4 break38_g7 = lerpResult29_g7;
+				float3 appendResult36_g7 = (float3(( ( (temp_output_7_0_g7).xy * break39_g7.x ) + ( (temp_output_8_0_g7).xy * break39_g7.y ) + ( (temp_output_9_0_g7).xy * break39_g7.z ) + ( (temp_output_10_0_g7).xy * break39_g7.w ) ) , ( break38_g7.x * break38_g7.y * break38_g7.z * break38_g7.w )));
+				float3 normalizeResult37_g7 = normalize( appendResult36_g7 );
 				
-				surfaceDescription.Normal = appendResult54;
-				surfaceDescription.Smoothness = pow( temp_output_83_0 , 0.1 );
-				surfaceDescription.Alpha = 0.0;
+				surfaceDescription.Normal = normalizeResult37_g7;
+				surfaceDescription.Smoothness = 1.0;
+				surfaceDescription.Alpha = 1;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -3446,7 +3536,7 @@ Shader "GRIGOR/Rain"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float _IsRaining;
+			float _RipplesIntensity;
 			float4 _EmissionColor;
 			float _AlphaCutoff;
 			float _RenderQueueType;
@@ -3509,7 +3599,7 @@ Shader "GRIGOR/Rain"
 			int _PassValue;
             #endif
 
-			sampler2D _TextureSample0;
+			sampler2D _TextureSample2;
 
 
             #ifdef DEBUG_DISPLAY
@@ -3551,7 +3641,6 @@ Shader "GRIGOR/Rain"
 				float3 vpassInterpolators0 : TEXCOORD1; //interpolators0
 				float3 vpassInterpolators1 : TEXCOORD2; //interpolators1
 				float4 ase_texcoord3 : TEXCOORD3;
-				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 				#if defined(SHADER_STAGE_FRAGMENT) && defined(ASE_NEED_CULLFACE)
@@ -3711,7 +3800,6 @@ Shader "GRIGOR/Rain"
 			{
 				_TimeParameters.xyz = timeParameters;
 				outputPackedVaryingsMeshToPS.ase_texcoord3.xy = inputMesh.ase_texcoord.xy;
-				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				outputPackedVaryingsMeshToPS.ase_texcoord3.zw = 0;
@@ -3952,17 +4040,49 @@ Shader "GRIGOR/Rain"
 				BuiltinData builtinData;
 
 				SmoothSurfaceDescription surfaceDescription = (SmoothSurfaceDescription)0;
-				float2 texCoord34 = packedInput.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode35 = tex2D( _TextureSample0, ( texCoord34 * float2( 1.5,1.5 ) ) );
-				float2 appendResult36 = (float2(tex2DNode35.r , tex2DNode35.g));
-				float mulTime48 = _TimeParameters.x * 0.7;
-				float temp_output_44_0 = ( ( tex2DNode35.a * 2.0 ) - 1.0 );
-				float temp_output_83_0 = ( ( ( frac( ( tex2DNode35.b - mulTime48 ) ) * saturate( temp_output_44_0 ) ) + saturate( ( ( temp_output_44_0 * -1.0 ) - 0.5 ) ) ) * ( saturate( packedInput.ase_normal.y ) * _IsRaining ) );
-				float3 appendResult54 = (float3(( ( ( appendResult36 * float2( 8,8 ) ) - float2( 4,4 ) ) * temp_output_83_0 ) , 1.0));
+				float temp_output_36_0_g1 = _RipplesIntensity;
+				float4 appendResult37_g1 = (float4(temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1));
+				float4 temp_output_41_0_g1 = saturate( ( ( appendResult37_g1 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g1 = temp_output_41_0_g1;
+				float4 appendResult11_g1 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g1 = frac( ( ( ( appendResult11_g1 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float2 texCoord117 = packedInput.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_24_0_g1 = texCoord117;
+				float4 tex2DNode19_g6 = tex2D( _TextureSample2, ( temp_output_24_0_g1 * float2( 0.7,0.7 ) ) );
+				float temp_output_1_0_g6 = frac( ( break47_g1.x + tex2DNode19_g6.a ) );
+				float clampResult13_g6 = clamp( ( ( ( temp_output_1_0_g6 - 1.0 ) + tex2DNode19_g6.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g6 = (float2(tex2DNode19_g6.g , tex2DNode19_g6.b));
+				float3 appendResult17_g6 = (float3(( ( saturate( ( ( ( break48_g1.x * 0.8 ) + 0.2 ) - temp_output_1_0_g6 ) ) * sin( ( clampResult13_g6 * PI ) ) ) * ( ( appendResult8_g6 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_7_0_g7 = appendResult17_g6;
+				float4 temp_output_2_0_g7 = temp_output_41_0_g1;
+				float4 break39_g7 = temp_output_2_0_g7;
+				float4 tex2DNode19_g3 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) );
+				float temp_output_1_0_g3 = frac( ( break47_g1.y + tex2DNode19_g3.a ) );
+				float clampResult13_g3 = clamp( ( ( ( temp_output_1_0_g3 - 1.0 ) + tex2DNode19_g3.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g3 = (float2(tex2DNode19_g3.g , tex2DNode19_g3.b));
+				float3 appendResult17_g3 = (float3(( ( saturate( ( ( ( break48_g1.y * 0.8 ) + 0.2 ) - temp_output_1_0_g3 ) ) * sin( ( clampResult13_g3 * PI ) ) ) * ( ( appendResult8_g3 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_8_0_g7 = appendResult17_g3;
+				float4 tex2DNode19_g4 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) );
+				float temp_output_1_0_g4 = frac( ( break47_g1.z + tex2DNode19_g4.a ) );
+				float clampResult13_g4 = clamp( ( ( ( temp_output_1_0_g4 - 1.0 ) + tex2DNode19_g4.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g4 = (float2(tex2DNode19_g4.g , tex2DNode19_g4.b));
+				float3 appendResult17_g4 = (float3(( ( saturate( ( ( ( break48_g1.z * 0.8 ) + 0.2 ) - temp_output_1_0_g4 ) ) * sin( ( clampResult13_g4 * PI ) ) ) * ( ( appendResult8_g4 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_9_0_g7 = appendResult17_g4;
+				float4 tex2DNode19_g5 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) );
+				float temp_output_1_0_g5 = frac( ( break47_g1.w + tex2DNode19_g5.a ) );
+				float clampResult13_g5 = clamp( ( ( ( temp_output_1_0_g5 - 1.0 ) + tex2DNode19_g5.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g5 = (float2(tex2DNode19_g5.g , tex2DNode19_g5.b));
+				float3 appendResult17_g5 = (float3(( ( saturate( ( ( ( break48_g1.w * 0.8 ) + 0.2 ) - temp_output_1_0_g5 ) ) * sin( ( clampResult13_g5 * PI ) ) ) * ( ( appendResult8_g5 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_10_0_g7 = appendResult17_g5;
+				float4 appendResult27_g7 = (float4((temp_output_7_0_g7).z , (temp_output_8_0_g7).z , (temp_output_9_0_g7).z , (temp_output_10_0_g7).z));
+				float4 lerpResult29_g7 = lerp( float4( 1,1,1,1 ) , appendResult27_g7 , temp_output_2_0_g7);
+				float4 break38_g7 = lerpResult29_g7;
+				float3 appendResult36_g7 = (float3(( ( (temp_output_7_0_g7).xy * break39_g7.x ) + ( (temp_output_8_0_g7).xy * break39_g7.y ) + ( (temp_output_9_0_g7).xy * break39_g7.z ) + ( (temp_output_10_0_g7).xy * break39_g7.w ) ) , ( break38_g7.x * break38_g7.y * break38_g7.z * break38_g7.w )));
+				float3 normalizeResult37_g7 = normalize( appendResult36_g7 );
 				
-				surfaceDescription.Normal = appendResult54;
-				surfaceDescription.Smoothness = pow( temp_output_83_0 , 0.1 );
-				surfaceDescription.Alpha = 0.0;
+				surfaceDescription.Normal = normalizeResult37_g7;
+				surfaceDescription.Smoothness = 1.0;
+				surfaceDescription.Alpha = 1;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -4144,7 +4264,7 @@ Shader "GRIGOR/Rain"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float _IsRaining;
+			float _RipplesIntensity;
 			float4 _EmissionColor;
 			float _AlphaCutoff;
 			float _RenderQueueType;
@@ -4207,7 +4327,7 @@ Shader "GRIGOR/Rain"
 			int _PassValue;
             #endif
 
-			sampler2D _TextureSample0;
+			sampler2D _TextureSample2;
 
 
             #ifdef DEBUG_DISPLAY
@@ -4261,7 +4381,6 @@ Shader "GRIGOR/Rain"
 					float3 vpassPreviousPositionCS : TEXCOORD6;
 				#endif
 				float4 ase_texcoord7 : TEXCOORD7;
-				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 				#if defined(SHADER_STAGE_FRAGMENT) && defined(ASE_NEED_CULLFACE)
@@ -4490,7 +4609,6 @@ Shader "GRIGOR/Rain"
 			{
 				_TimeParameters.xyz = timeParameters;
 				outputPackedVaryingsMeshToPS.ase_texcoord7.xy = inputMesh.ase_texcoord.xy;
-				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				outputPackedVaryingsMeshToPS.ase_texcoord7.zw = 0;
@@ -4750,16 +4868,48 @@ Shader "GRIGOR/Rain"
 				float3 V = GetWorldSpaceNormalizeViewDir(input.positionRWS);
 
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float2 texCoord34 = packedInput.ase_texcoord7.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode35 = tex2D( _TextureSample0, ( texCoord34 * float2( 1.5,1.5 ) ) );
-				float2 appendResult36 = (float2(tex2DNode35.r , tex2DNode35.g));
-				float mulTime48 = _TimeParameters.x * 0.7;
-				float temp_output_44_0 = ( ( tex2DNode35.a * 2.0 ) - 1.0 );
-				float temp_output_83_0 = ( ( ( frac( ( tex2DNode35.b - mulTime48 ) ) * saturate( temp_output_44_0 ) ) + saturate( ( ( temp_output_44_0 * -1.0 ) - 0.5 ) ) ) * ( saturate( packedInput.ase_normal.y ) * _IsRaining ) );
-				float3 appendResult54 = (float3(( ( ( appendResult36 * float2( 8,8 ) ) - float2( 4,4 ) ) * temp_output_83_0 ) , 1.0));
+				float temp_output_36_0_g1 = _RipplesIntensity;
+				float4 appendResult37_g1 = (float4(temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1 , temp_output_36_0_g1));
+				float4 temp_output_41_0_g1 = saturate( ( ( appendResult37_g1 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g1 = temp_output_41_0_g1;
+				float4 appendResult11_g1 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g1 = frac( ( ( ( appendResult11_g1 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float2 texCoord117 = packedInput.ase_texcoord7.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_24_0_g1 = texCoord117;
+				float4 tex2DNode19_g6 = tex2D( _TextureSample2, ( temp_output_24_0_g1 * float2( 0.7,0.7 ) ) );
+				float temp_output_1_0_g6 = frac( ( break47_g1.x + tex2DNode19_g6.a ) );
+				float clampResult13_g6 = clamp( ( ( ( temp_output_1_0_g6 - 1.0 ) + tex2DNode19_g6.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g6 = (float2(tex2DNode19_g6.g , tex2DNode19_g6.b));
+				float3 appendResult17_g6 = (float3(( ( saturate( ( ( ( break48_g1.x * 0.8 ) + 0.2 ) - temp_output_1_0_g6 ) ) * sin( ( clampResult13_g6 * PI ) ) ) * ( ( appendResult8_g6 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_7_0_g7 = appendResult17_g6;
+				float4 temp_output_2_0_g7 = temp_output_41_0_g1;
+				float4 break39_g7 = temp_output_2_0_g7;
+				float4 tex2DNode19_g3 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) );
+				float temp_output_1_0_g3 = frac( ( break47_g1.y + tex2DNode19_g3.a ) );
+				float clampResult13_g3 = clamp( ( ( ( temp_output_1_0_g3 - 1.0 ) + tex2DNode19_g3.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g3 = (float2(tex2DNode19_g3.g , tex2DNode19_g3.b));
+				float3 appendResult17_g3 = (float3(( ( saturate( ( ( ( break48_g1.y * 0.8 ) + 0.2 ) - temp_output_1_0_g3 ) ) * sin( ( clampResult13_g3 * PI ) ) ) * ( ( appendResult8_g3 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_8_0_g7 = appendResult17_g3;
+				float4 tex2DNode19_g4 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) );
+				float temp_output_1_0_g4 = frac( ( break47_g1.z + tex2DNode19_g4.a ) );
+				float clampResult13_g4 = clamp( ( ( ( temp_output_1_0_g4 - 1.0 ) + tex2DNode19_g4.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g4 = (float2(tex2DNode19_g4.g , tex2DNode19_g4.b));
+				float3 appendResult17_g4 = (float3(( ( saturate( ( ( ( break48_g1.z * 0.8 ) + 0.2 ) - temp_output_1_0_g4 ) ) * sin( ( clampResult13_g4 * PI ) ) ) * ( ( appendResult8_g4 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_9_0_g7 = appendResult17_g4;
+				float4 tex2DNode19_g5 = tex2D( _TextureSample2, ( ( temp_output_24_0_g1 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) );
+				float temp_output_1_0_g5 = frac( ( break47_g1.w + tex2DNode19_g5.a ) );
+				float clampResult13_g5 = clamp( ( ( ( temp_output_1_0_g5 - 1.0 ) + tex2DNode19_g5.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g5 = (float2(tex2DNode19_g5.g , tex2DNode19_g5.b));
+				float3 appendResult17_g5 = (float3(( ( saturate( ( ( ( break48_g1.w * 0.8 ) + 0.2 ) - temp_output_1_0_g5 ) ) * sin( ( clampResult13_g5 * PI ) ) ) * ( ( appendResult8_g5 * float2( 2,2 ) ) - float2( 0,0 ) ) ) , 1.0));
+				float3 temp_output_10_0_g7 = appendResult17_g5;
+				float4 appendResult27_g7 = (float4((temp_output_7_0_g7).z , (temp_output_8_0_g7).z , (temp_output_9_0_g7).z , (temp_output_10_0_g7).z));
+				float4 lerpResult29_g7 = lerp( float4( 1,1,1,1 ) , appendResult27_g7 , temp_output_2_0_g7);
+				float4 break38_g7 = lerpResult29_g7;
+				float3 appendResult36_g7 = (float3(( ( (temp_output_7_0_g7).xy * break39_g7.x ) + ( (temp_output_8_0_g7).xy * break39_g7.y ) + ( (temp_output_9_0_g7).xy * break39_g7.z ) + ( (temp_output_10_0_g7).xy * break39_g7.w ) ) , ( break38_g7.x * break38_g7.y * break38_g7.z * break38_g7.w )));
+				float3 normalizeResult37_g7 = normalize( appendResult36_g7 );
 				
 				surfaceDescription.BaseColor = float3( 0.5, 0.5, 0.5 );
-				surfaceDescription.Normal = appendResult54;
+				surfaceDescription.Normal = normalizeResult37_g7;
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
 				surfaceDescription.Metallic = 0;
@@ -4769,9 +4919,9 @@ Shader "GRIGOR/Rain"
 				#endif
 
 				surfaceDescription.Emission = 0;
-				surfaceDescription.Smoothness = pow( temp_output_83_0 , 0.1 );
+				surfaceDescription.Smoothness = 1.0;
 				surfaceDescription.Occlusion = 1;
-				surfaceDescription.Alpha = 0.0;
+				surfaceDescription.Alpha = 1;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -5035,7 +5185,7 @@ Shader "GRIGOR/Rain"
 
 			float4 _SelectionID;
             CBUFFER_START( UnityPerMaterial )
-			float _IsRaining;
+			float _RipplesIntensity;
 			float4 _EmissionColor;
 			float _AlphaCutoff;
 			float _RenderQueueType;
@@ -5367,7 +5517,7 @@ Shader "GRIGOR/Rain"
 
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 				
-				surfaceDescription.Alpha = 0.0;
+				surfaceDescription.Alpha = 1;
 				surfaceDescription.AlphaClipThreshold =  _AlphaCutoff;
 
 
@@ -5657,6 +5807,39 @@ Shader "GRIGOR/Rain"
 }
 /*ASEBEGIN
 Version=19200
+Node;AmplifyShaderEditor.CommentaryNode;87;1559.749,-698.1753;Inherit;False;2638.715;1668.421;Rain Droplets;38;77;84;37;39;38;51;83;82;81;80;78;79;56;42;54;68;48;69;44;63;67;75;35;72;36;50;66;34;10;9;8;7;6;5;4;3;2;1;;1,1,1,1;0;0
+Node;AmplifyShaderEditor.TextureCoordinatesNode;34;1675.77,-424.6271;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SaturateNode;66;3067.986,209.2843;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleSubtractOpNode;50;2893.063,-35.79171;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.DynamicAppendNode;36;2582.769,-241.627;Inherit;True;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SaturateNode;72;3398.465,339.6969;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleSubtractOpNode;75;3230.446,374.1697;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0.5;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;67;3353.986,73.28429;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;63;2512.555,264.5308;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;2;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleSubtractOpNode;44;2738.069,271.373;Inherit;False;2;0;FLOAT;1;False;1;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;69;2978.466,336.6969;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;-1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleTimeNode;48;2618.163,32.60827;Inherit;False;1;0;FLOAT;0.7;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;68;3613.465,176.697;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.DynamicAppendNode;54;3939.601,-221.2652;Inherit;False;FLOAT3;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;42;3749.366,-95.37679;Inherit;False;Constant;_Float0;Float 0;6;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;56;3708.756,-228.7689;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.ComponentMaskNode;79;2789.917,669.803;Inherit;False;True;True;True;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.NormalVertexDataNode;78;2588.474,621.3162;Inherit;False;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SaturateNode;80;3045.245,670.6104;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;81;3264.245,672.6104;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;82;3051.245,788.6104;Inherit;False;Property;_IsRaining;Is Raining;15;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;83;3784.619,188.9473;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.FractNode;51;3149.563,-40.39173;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;38;2867.77,-236.627;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;8,8;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SimpleSubtractOpNode;39;3075.769,-238.627;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT2;4,4;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;37;1990.77,-412.6271;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;1.5,1.5;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.PowerNode;84;4024.446,182.4855;Inherit;False;False;2;0;FLOAT;0;False;1;FLOAT;0.1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;30;-1956.548,401.8919;Inherit;False;Property;_Smoothness;Smoothness;0;0;Create;True;0;0;0;False;0;False;0.5;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;32;-1953.548,490.892;Inherit;False;Property;_Wetness;Wetness;11;0;Create;True;0;0;0;False;0;False;0;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;31;-1955.548,310.8919;Inherit;False;Property;_Metallic;Metallic;10;0;Create;True;0;0;0;False;0;False;0.5;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;33;-1957.548,590.8919;Inherit;False;Property;_Absorbency;Absorbency;13;0;Create;True;0;0;0;False;0;False;1;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;77;4054.102,-26.95592;Inherit;False;Constant;_Float1;Float 1;5;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;35;2219.059,-265.627;Inherit;True;Property;_TextureSample0;Texture Sample 0;14;0;Create;True;0;0;0;False;0;False;-1;32b4dbb45a04dca449c02df16bfbfdfb;32b4dbb45a04dca449c02df16bfbfdfb;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;META;0;1;META;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;SceneSelectionPass;0;3;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
@@ -5667,46 +5850,17 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;7;0,0;Float;False;False;-1;
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;8;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;TransparentDepthPostpass;0;8;TransparentDepthPostpass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=TransparentDepthPostpass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;9;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;Forward;0;9;Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;True;2;5;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;True;_CullModeForward;False;False;False;True;True;True;True;True;0;True;_ColorMaskTransparentVelOne;False;True;True;True;True;True;0;True;_ColorMaskTransparentVelTwo;False;False;False;True;True;0;True;_StencilRef;255;False;;255;True;_StencilWriteMask;7;False;;3;False;;0;False;;0;False;;7;False;;3;False;;0;False;;0;False;;False;True;0;True;_ZWrite;True;0;True;_ZTestDepthEqualForOpaque;False;True;1;LightMode=Forward;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;10;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;ScenePickingPass;0;10;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;True;3;False;;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.RangedFloatNode;30;-1062.937,411.2491;Inherit;False;Property;_Smoothness;Smoothness;0;0;Create;True;0;0;0;False;0;False;0.5;0;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;32;-1059.937,500.2491;Inherit;False;Property;_Wetness;Wetness;2;0;Create;True;0;0;0;False;0;False;0;0;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;31;-1061.937,320.2491;Inherit;False;Property;_Metallic;Metallic;1;0;Create;True;0;0;0;False;0;False;0.5;0;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;33;-1063.937,600.2491;Inherit;False;Property;_Absorbency;Absorbency;3;0;Create;True;0;0;0;False;0;False;1;0;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.TextureCoordinatesNode;34;-1381.479,-321.9591;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SaturateNode;66;10.7375,311.9522;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleSubtractOpNode;50;-164.1861,66.87621;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.DynamicAppendNode;36;-474.4792,-138.9591;Inherit;True;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.SaturateNode;72;341.2168,442.3649;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SamplerNode;35;-839.4792,-162.9591;Inherit;True;Property;_TextureSample0;Texture Sample 0;4;0;Create;True;0;0;0;False;0;False;-1;32b4dbb45a04dca449c02df16bfbfdfb;32b4dbb45a04dca449c02df16bfbfdfb;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SimpleSubtractOpNode;75;173.1975,476.8377;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0.5;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;67;296.7375,175.9522;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;63;-544.6932,367.1988;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;2;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleSubtractOpNode;44;-319.1792,374.041;Inherit;False;2;0;FLOAT;1;False;1;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;69;-78.7832,439.3649;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;-1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleTimeNode;48;-439.0861,135.2762;Inherit;False;1;0;FLOAT;0.7;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleAddOpNode;68;556.2168,279.3649;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;77;814.8532,110.712;Inherit;False;Constant;_Float1;Float 1;5;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;1200.897,-148.4449;Float;False;True;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;GRIGOR/Rain;53b46d85872c5b24c8f4f0a1c3fe4c87;True;GBuffer;0;0;GBuffer;34;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;True;True;0;True;_StencilRefGBuffer;255;False;;255;True;_StencilWriteMaskGBuffer;7;False;;3;False;;0;False;;0;False;;7;False;;3;False;;0;False;;0;False;;False;False;True;0;True;_ZTestGBuffer;False;True;1;LightMode=GBuffer;False;False;0;;0;0;Standard;39;Surface Type;1;638381056573879485;  Rendering Pass;1;0;  Refraction Model;0;0;    Blending Mode;0;0;    Blend Preserves Specular;1;0;  Back Then Front Rendering;0;0;  Transparent Depth Prepass;0;0;  Transparent Depth Postpass;0;0;  ZWrite;0;0;  Z Test;4;0;Double-Sided;1;638381052524728727;Alpha Clipping;0;0;  Use Shadow Threshold;0;0;Material Type,InvertActionOnDeselection;0;0;  Energy Conserving Specular;1;0;  Transmission,InvertActionOnDeselection;0;0;Forward Only;0;0;Receive Decals;1;0;Receives SSR;1;0;Receive SSR Transparent;0;0;Motion Vectors;1;0;  Add Precomputed Velocity;0;0;Specular AA;0;0;Specular Occlusion Mode;1;0;Override Baked GI;0;0;Depth Offset;0;0;DOTS Instancing;0;0;GPU Instancing;1;0;LOD CrossFade;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position;1;0;0;11;True;True;True;True;True;True;False;False;False;True;True;False;;False;0
-Node;AmplifyShaderEditor.DynamicAppendNode;54;882.3528,-118.5973;Inherit;False;FLOAT3;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.RangedFloatNode;42;692.1171,7.291121;Inherit;False;Constant;_Float0;Float 0;6;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;56;651.5078,-126.101;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.ComponentMaskNode;79;-267.3323,772.4711;Inherit;False;True;True;True;True;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.NormalVertexDataNode;78;-468.7751,723.9843;Inherit;False;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SaturateNode;80;-12.00342,773.2784;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;81;206.9966,775.2784;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;82;-6.003418,891.2784;Inherit;False;Property;_IsRaining;Is Raining;5;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;83;727.37,291.6152;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.FractNode;51;92.3139,62.2762;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;38;-189.4792,-133.9591;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;8,8;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.SimpleSubtractOpNode;39;18.52075,-135.9591;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT2;4,4;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;37;-1066.479,-309.9591;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;1.5,1.5;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.PowerNode;84;933.3153,291.9499;Inherit;False;False;2;0;FLOAT;0;False;1;FLOAT;0.1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;727.8423,-82.56149;Float;False;True;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;GRIGOR/Rain;53b46d85872c5b24c8f4f0a1c3fe4c87;True;GBuffer;0;0;GBuffer;34;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;True;True;0;True;_StencilRefGBuffer;255;False;;255;True;_StencilWriteMaskGBuffer;7;False;;3;False;;0;False;;0;False;;7;False;;3;False;;0;False;;0;False;;False;False;True;0;True;_ZTestGBuffer;False;True;1;LightMode=GBuffer;False;False;0;;0;0;Standard;39;Surface Type;1;638381056573879485;  Rendering Pass;1;0;  Refraction Model;0;0;    Blending Mode;0;0;    Blend Preserves Specular;1;0;  Back Then Front Rendering;0;0;  Transparent Depth Prepass;0;0;  Transparent Depth Postpass;0;0;  ZWrite;0;0;  Z Test;4;0;Double-Sided;1;638381052524728727;Alpha Clipping;0;0;  Use Shadow Threshold;0;0;Material Type,InvertActionOnDeselection;0;0;  Energy Conserving Specular;1;0;  Transmission,InvertActionOnDeselection;0;0;Forward Only;0;0;Receive Decals;1;0;Receives SSR;1;0;Receive SSR Transparent;0;0;Motion Vectors;1;0;  Add Precomputed Velocity;0;0;Specular AA;0;0;Specular Occlusion Mode;1;0;Override Baked GI;0;0;Depth Offset;0;0;DOTS Instancing;0;0;GPU Instancing;1;0;LOD CrossFade;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position;1;0;0;11;True;True;True;True;True;True;False;False;False;True;True;False;;False;0
+Node;AmplifyShaderEditor.FunctionNode;116;306.3947,-11.53296;Inherit;False;RainRipples;1;;1;124ae40f49912164bb7d892a8ac2034a;0;2;36;FLOAT;0;False;24;FLOAT2;0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.TextureCoordinatesNode;117;-135.5575,4.347534;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.RangedFloatNode;118;-151.5575,-116.6525;Inherit;False;Property;_RipplesIntensity;Ripples Intensity;12;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;119;469.4425,127.3475;Inherit;False;Constant;_Float3;Float 3;12;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 WireConnection;66;0;44;0
 WireConnection;50;0;35;3
 WireConnection;50;1;48;0
 WireConnection;36;0;35;1
 WireConnection;36;1;35;2
 WireConnection;72;0;75;0
-WireConnection;35;1;37;0
 WireConnection;75;0;69;0
 WireConnection;67;0;51;0
 WireConnection;67;1;66;0
@@ -5715,9 +5869,6 @@ WireConnection;44;0;63;0
 WireConnection;69;0;44;0
 WireConnection;68;0;67;0
 WireConnection;68;1;72;0
-WireConnection;0;1;54;0
-WireConnection;0;7;84;0
-WireConnection;0;9;77;0
 WireConnection;54;0;56;0
 WireConnection;54;2;42;0
 WireConnection;56;0;39;0
@@ -5733,5 +5884,10 @@ WireConnection;38;0;36;0
 WireConnection;39;0;38;0
 WireConnection;37;0;34;0
 WireConnection;84;0;83;0
+WireConnection;35;1;37;0
+WireConnection;0;1;116;0
+WireConnection;0;7;119;0
+WireConnection;116;36;118;0
+WireConnection;116;24;117;0
 ASEEND*/
-//CHKSM=12368A81C5D36C3887E2D42AA211C7DE55D074B0
+//CHKSM=E8F463A5E3795243F3F1A2FB34ADD6AD66B3E7B4
