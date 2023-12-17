@@ -6,19 +6,24 @@ Shader "GRIGOR/RainFull"
 	{
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
 		_WindStrength("Wind Strength", Range( 0 , 1)) = 1
-		_WaterNormal("Water Normal", 2D) = "white" {}
-		_WaterNormal1("Water Normal", 2D) = "white" {}
+		_DropSpeed("Drop Speed", Range( 0 , 10)) = 1
+		[HideInInspector][HDR]_TextureSample0("Texture Sample 0", 2D) = "white" {}
+		_DropSize("Drop Size", Range( 0 , 5)) = 2
+		_RippleSize1("Ripple Size", Range( 0 , 10)) = 1
+		_RippleNormalStrength("Ripple Normal Strength", Range( 0.01 , 1)) = 0.01
+		[HideInInspector][HDR]_TextureSample2("Texture Sample 2", 2D) = "white" {}
 		_PuddleSize("Puddle Size", Range( 0 , 1)) = 1
-		_MaxPuddleSize("Max Puddle Size", Range( 0 , 1)) = 0.5
+		_MaxPuddleSize("Max Puddle Size", Range( 0 , 5)) = 1
+		[HideInInspector]_WaterNormal1("Water Normal", 2D) = "white" {}
+		[HideInInspector]_WaterNormal("Water Normal", 2D) = "white" {}
+		_NormalTiling("Normal Tiling", Range( 0 , 4)) = 0.2
+		[HideInInspector]_TextureSample1("Texture Sample 1", 2D) = "white" {}
 		_Wetness("Wetness", Range( 0 , 1)) = 1
-		_Rain("Rain", Range( 0 , 1)) = 1
-		_Smoothness("Smoothness", Range( 0 , 1)) = 0.5101905
-		_DropSize("Drop Size", Range( 0 , 5)) = 1
-		[HDR]_TextureSample2("Texture Sample 2", 2D) = "white" {}
-		[HDR]_TextureSample0("Texture Sample 0", 2D) = "white" {}
-		_TextureSample1("Texture Sample 1", 2D) = "white" {}
+		_RainStrength("Rain Strength", Range( 0 , 1)) = 1
+		_Smoothness("Smoothness", Range( 0 , 1)) = 0.5
+		_WindSpeed("Wind Speed", Range( 0 , 10)) = 1
 
-		[HideInInspector] _RenderQueueType("Render Queue Type", Float) = 1
+		[HideInInspector] _RenderQueueType("Render Queue Type", Float) = 5
 		[HideInInspector][ToggleUI] _AddPrecomputedVelocity("Add Precomputed Velocity", Float) = 1
 		[HideInInspector][ToggleUI] _SupportDecals("Support Decals", Float) = 1.0
 		[HideInInspector] _StencilRef("Stencil Ref", Int) = 0 // StencilUsage.Clear
@@ -35,21 +40,21 @@ Shader "GRIGOR/RainFull"
 		[HideInInspector][ToggleUI] _RequireSplitLighting("Require Split Lighting", Float) = 0
 		[HideInInspector][ToggleUI] _ReceivesSSR("Receives SSR", Float) = 1
 		[HideInInspector][ToggleUI] _ReceivesSSRTransparent("Receives SSR Transparent", Float) = 0
-		[HideInInspector] _SurfaceType("Surface Type", Float) = 0
+		[HideInInspector] _SurfaceType("Surface Type", Float) = 1
 		[HideInInspector] _BlendMode("Blend Mode", Float) = 0
 		[HideInInspector] _SrcBlend("Src Blend", Float) = 1
 		[HideInInspector] _DstBlend("Dst Blend", Float) = 0
 		[HideInInspector] _AlphaSrcBlend("Alpha Src Blend", Float) = 1
 		[HideInInspector] _AlphaDstBlend("Alpha Dst Blend", Float) = 0
 		[HideInInspector][ToggleUI] _ZWrite("ZWrite", Float) = 1
-		[HideInInspector][ToggleUI] _TransparentZWrite("Transparent ZWrite", Float) = 0
+		[HideInInspector][ToggleUI] _TransparentZWrite("Transparent ZWrite", Float) = 1
 		[HideInInspector] _CullMode("Cull Mode", Float) = 2
 		[HideInInspector] _TransparentSortPriority("Transparent Sort Priority", Float) = 0
 		[HideInInspector][ToggleUI] _EnableFogOnTransparent("Enable Fog", Float) = 1
 		[HideInInspector] _CullModeForward("Cull Mode Forward", Float) = 2 // This mode is dedicated to Forward to correctly handle backface then front face rendering thin transparent
 		[HideInInspector][Enum(UnityEditor.Rendering.HighDefinition.TransparentCullMode)] _TransparentCullMode("Transparent Cull Mode", Int) = 2 // Back culling by default
 		[HideInInspector] _ZTestDepthEqualForOpaque("ZTest Depth Equal For Opaque", Int) = 4 // Less equal
-		[HideInInspector][Enum(UnityEngine.Rendering.CompareFunction)] _ZTestTransparent("ZTest Transparent", Int) = 4 // Less equal
+		[HideInInspector][Enum(UnityEngine.Rendering.CompareFunction)] _ZTestTransparent("ZTest Transparent", Int) = 4// Less equal
 		[HideInInspector][ToggleUI] _TransparentBackfaceEnable("Transparent Backface Enable", Float) = 0
 		[HideInInspector][ToggleUI] _AlphaCutoffEnable("Alpha Cutoff Enable", Float) = 0
 		[HideInInspector][ToggleUI] _UseShadowThreshold("Use Shadow Threshold", Float) = 0
@@ -85,7 +90,7 @@ Shader "GRIGOR/RainFull"
 
 		
 
-		Tags { "RenderPipeline"="HDRenderPipeline" "RenderType"="Opaque" "Queue"="Geometry" }
+		Tags { "RenderPipeline"="HDRenderPipeline" "RenderType"="Transparent" "Queue"="Transparent" }
 
 		HLSLINCLUDE
 		#pragma target 4.5
@@ -300,14 +305,14 @@ Shader "GRIGOR/RainFull"
 
 			HLSLPROGRAM
 
+            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
+            #define _ENERGY_CONSERVING_SPECULAR 1
             #define _DISABLE_SSR_TRANSPARENT 1
             #define _SPECULAR_OCCLUSION_FROM_AO 1
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
             #define ASE_NEED_CULLFACE 1
             #define _MATERIAL_FEATURE_SPECULAR_COLOR 1
-            #define _ENERGY_CONSERVING_SPECULAR 1
-            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
             #define ASE_SRP_VERSION 150006
 
 
@@ -385,8 +390,13 @@ Shader "GRIGOR/RainFull"
 
 			CBUFFER_START( UnityPerMaterial )
 			float _DropSize;
-			float _Rain;
+			float _DropSpeed;
+			float _RainStrength;
+			float _RippleSize1;
+			float _RippleNormalStrength;
 			float _WindStrength;
+			float _NormalTiling;
+			float _WindSpeed;
 			float _PuddleSize;
 			float _MaxPuddleSize;
 			float _Wetness;
@@ -476,6 +486,7 @@ Shader "GRIGOR/RainFull"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Decal/DecalUtilities.hlsl"
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitDecalData.hlsl"
 
+			#define ASE_NEEDS_VERT_POSITION
 			#define ASE_NEEDS_FRAG_RELATIVE_WORLD_POS
 			#define ASE_NEEDS_FRAG_NORMAL
 
@@ -738,11 +749,15 @@ Shader "GRIGOR/RainFull"
 				UNITY_TRANSFER_INSTANCE_ID(inputMesh, outputPackedVaryingsMeshToPS);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( outputPackedVaryingsMeshToPS );
 
+				float3 objectToViewPos = TransformWorldToView(TransformObjectToWorld(inputMesh.positionOS));
+				float eyeDepth = -objectToViewPos.z;
+				outputPackedVaryingsMeshToPS.ase_texcoord5.z = eyeDepth;
+				
 				outputPackedVaryingsMeshToPS.ase_texcoord5.xy = inputMesh.ase_texcoord.xy;
 				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				outputPackedVaryingsMeshToPS.ase_texcoord5.zw = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord5.w = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				float3 defaultVertexValue = inputMesh.positionOS.xyz;
@@ -905,81 +920,85 @@ Shader "GRIGOR/RainFull"
 				BuiltinData builtinData;
 
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float3 temp_output_33_0_g975 = float3(0,0,1);
-				float2 texCoord39_g977 = packedInput.ase_texcoord5.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode54_g977 = tex2D( _TextureSample0, ( texCoord39_g977 * float2( 1.5,1.5 ) * _DropSize ) );
-				float2 appendResult47_g977 = (float2(tex2DNode54_g977.r , tex2DNode54_g977.g));
-				float temp_output_55_0_g977 = ( ( tex2DNode54_g977.a * 2.0 ) - 1.0 );
-				float temp_output_32_0_g975 = _Rain;
-				float temp_output_66_0_g977 = ( ( ( frac( ( tex2DNode54_g977.b - ( _TimeParameters.x * 0.7 ) ) ) * saturate( temp_output_55_0_g977 ) ) + ( 1.0 - step( ( temp_output_55_0_g977 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g975 ) );
-				float3 appendResult45_g977 = (float3(( ( ( appendResult47_g977 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g977 ) , 1.0));
-				float temp_output_69_32_g975 = temp_output_66_0_g977;
-				float3 lerpResult12_g975 = lerp( temp_output_33_0_g975 , BlendNormal( temp_output_33_0_g975 , appendResult45_g977 ) , saturate( temp_output_69_32_g975 ));
-				float temp_output_36_0_g980 = temp_output_32_0_g975;
-				float4 appendResult37_g980 = (float4(temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980));
-				float4 temp_output_41_0_g980 = saturate( ( ( appendResult37_g980 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
-				float4 break48_g980 = temp_output_41_0_g980;
-				float4 appendResult11_g980 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
-				float4 break47_g980 = frac( ( ( ( appendResult11_g980 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float3 temp_output_33_0_g502 = float3(0,0,1);
+				float2 texCoord39_g504 = packedInput.ase_texcoord5.xy * float2( 1,1 ) + float2( 0,0 );
+				float4 tex2DNode54_g504 = tex2D( _TextureSample0, ( texCoord39_g504 * float2( 1.5,1.5 ) * _DropSize ) );
+				float2 appendResult47_g504 = (float2(tex2DNode54_g504.r , tex2DNode54_g504.g));
+				float mulTime88_g504 = _TimeParameters.x * 0.2;
+				float temp_output_55_0_g504 = ( ( tex2DNode54_g504.a * 2.0 ) - 1.0 );
+				float temp_output_32_0_g502 = _RainStrength;
+				float temp_output_66_0_g504 = ( ( ( frac( ( tex2DNode54_g504.b - ( mulTime88_g504 * _DropSpeed ) ) ) * saturate( temp_output_55_0_g504 ) ) + ( 1.0 - step( ( temp_output_55_0_g504 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g502 ) );
+				float3 appendResult45_g504 = (float3(( ( ( appendResult47_g504 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g504 ) , 1.0));
+				float eyeDepth = packedInput.ase_texcoord5.z;
+				float cameraDepthFade93_g504 = (( eyeDepth -_ProjectionParams.y - 0.0 ) / 1.0);
+				float3 lerpResult91_g504 = lerp( float3(0,0,1) , appendResult45_g504 , cameraDepthFade93_g504);
+				float temp_output_91_32_g502 = temp_output_66_0_g504;
+				float3 lerpResult12_g502 = lerp( temp_output_33_0_g502 , BlendNormal( temp_output_33_0_g502 , lerpResult91_g504 ) , saturate( temp_output_91_32_g502 ));
+				float temp_output_36_0_g507 = temp_output_32_0_g502;
+				float4 appendResult37_g507 = (float4(temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507));
+				float4 temp_output_41_0_g507 = saturate( ( ( appendResult37_g507 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g507 = temp_output_41_0_g507;
+				float4 appendResult11_g507 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g507 = frac( ( ( ( appendResult11_g507 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
 				float3 ase_worldPos = GetAbsolutePositionWS( positionRWS );
-				float2 temp_output_24_0_g978 = (ase_worldPos).xz;
-				float2 temp_output_24_0_g980 = temp_output_24_0_g978;
-				float4 tex2DNode19_g984 = tex2D( _TextureSample2, ( ( temp_output_24_0_g980 * float2( 0.7,0.7 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g984 = frac( ( break47_g980.x + tex2DNode19_g984.a ) );
-				float clampResult13_g984 = clamp( ( ( ( temp_output_1_0_g984 - 1.0 ) + tex2DNode19_g984.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g984 = (float2(tex2DNode19_g984.g , tex2DNode19_g984.b));
-				float3 appendResult17_g984 = (float3(( ( saturate( ( ( ( break48_g980.x * 0.8 ) + 0.2 ) - temp_output_1_0_g984 ) ) * sin( ( clampResult13_g984 * PI ) ) ) * ( ( appendResult8_g984 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_7_0_g985 = appendResult17_g984;
-				float4 temp_output_2_0_g985 = temp_output_41_0_g980;
-				float4 break39_g985 = temp_output_2_0_g985;
-				float4 tex2DNode19_g981 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g981 = frac( ( break47_g980.y + tex2DNode19_g981.a ) );
-				float clampResult13_g981 = clamp( ( ( ( temp_output_1_0_g981 - 1.0 ) + tex2DNode19_g981.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g981 = (float2(tex2DNode19_g981.g , tex2DNode19_g981.b));
-				float3 appendResult17_g981 = (float3(( ( saturate( ( ( ( break48_g980.y * 0.8 ) + 0.2 ) - temp_output_1_0_g981 ) ) * sin( ( clampResult13_g981 * PI ) ) ) * ( ( appendResult8_g981 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_8_0_g985 = appendResult17_g981;
-				float4 tex2DNode19_g982 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g982 = frac( ( break47_g980.z + tex2DNode19_g982.a ) );
-				float clampResult13_g982 = clamp( ( ( ( temp_output_1_0_g982 - 1.0 ) + tex2DNode19_g982.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g982 = (float2(tex2DNode19_g982.g , tex2DNode19_g982.b));
-				float3 appendResult17_g982 = (float3(( ( saturate( ( ( ( break48_g980.z * 0.8 ) + 0.2 ) - temp_output_1_0_g982 ) ) * sin( ( clampResult13_g982 * PI ) ) ) * ( ( appendResult8_g982 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_9_0_g985 = appendResult17_g982;
-				float4 tex2DNode19_g983 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g983 = frac( ( break47_g980.w + tex2DNode19_g983.a ) );
-				float clampResult13_g983 = clamp( ( ( ( temp_output_1_0_g983 - 1.0 ) + tex2DNode19_g983.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g983 = (float2(tex2DNode19_g983.g , tex2DNode19_g983.b));
-				float3 appendResult17_g983 = (float3(( ( saturate( ( ( ( break48_g980.w * 0.8 ) + 0.2 ) - temp_output_1_0_g983 ) ) * sin( ( clampResult13_g983 * PI ) ) ) * ( ( appendResult8_g983 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_10_0_g985 = appendResult17_g983;
-				float4 appendResult27_g985 = (float4((temp_output_7_0_g985).z , (temp_output_8_0_g985).z , (temp_output_9_0_g985).z , (temp_output_10_0_g985).z));
-				float4 lerpResult29_g985 = lerp( float4( 1,1,1,1 ) , appendResult27_g985 , temp_output_2_0_g985);
-				float4 break38_g985 = lerpResult29_g985;
-				float3 appendResult36_g985 = (float3(( ( (temp_output_7_0_g985).xy * break39_g985.x ) + ( (temp_output_8_0_g985).xy * break39_g985.y ) + ( (temp_output_9_0_g985).xy * break39_g985.z ) + ( (temp_output_10_0_g985).xy * break39_g985.w ) ) , ( break38_g985.x * break38_g985.y * break38_g985.z * break38_g985.w )));
-				float3 normalizeResult37_g985 = normalize( appendResult36_g985 );
-				float lerpResult18_g979 = lerp( 0.2 , 0.5 , saturate( _WindStrength ));
-				float3 break5_g979 = ase_worldPos;
-				float4 appendResult6_g979 = (float4(break5_g979.x , break5_g979.z , break5_g979.x , break5_g979.z));
-				float mulTime9_g979 = _TimeParameters.x * 0.2;
-				float4 temp_output_8_0_g979 = ( ( appendResult6_g979 * float4( 0.018,0.013,0.007,0.017 ) ) + ( ( mulTime9_g979 * float4(0.4,-0.1,0.02,0.4) ) * float4( 0.2,0,0,0 ) ) );
-				float3 tex2DNode27_g979 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g979).xy ), 1.0f );
-				float2 appendResult19_g979 = (float2(tex2DNode27_g979.r , tex2DNode27_g979.g));
-				float3 tex2DNode29_g979 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g979).zw ), 1.0f );
-				float2 appendResult20_g979 = (float2(tex2DNode29_g979.r , tex2DNode29_g979.g));
-				float3 appendResult25_g979 = (float3(( lerpResult18_g979 * ( appendResult19_g979 + appendResult20_g979 ) ) , ( tex2DNode27_g979.b * tex2DNode29_g979.b )));
-				float3 appendResult14_g978 = (float3((( normalizeResult37_g985 + appendResult25_g979 )).xy , 1.0));
-				float2 lerpResult3_g978 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
-				float2 break4_g978 = lerpResult3_g978;
-				float temp_output_38_0_g975 = _Wetness;
-				float temp_output_37_0_g978 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g978 * _PuddleSize ) ).g - break4_g978.y ) / break4_g978.x ) ) ) - ( 1.0 - temp_output_38_0_g975 ) ) ) * 1.1 ) );
-				float3 lerpResult13_g978 = lerp( lerpResult12_g975 , appendResult14_g978 , temp_output_37_0_g978);
+				float2 temp_output_24_0_g505 = (ase_worldPos).xz;
+				float2 temp_output_24_0_g507 = temp_output_24_0_g505;
+				float4 tex2DNode19_g511 = tex2D( _TextureSample2, ( ( temp_output_24_0_g507 * float2( 0.7,0.7 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g511 = frac( ( break47_g507.x + tex2DNode19_g511.a ) );
+				float clampResult13_g511 = clamp( ( ( ( temp_output_1_0_g511 - 1.0 ) + tex2DNode19_g511.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g511 = (float2(tex2DNode19_g511.g , tex2DNode19_g511.b));
+				float3 appendResult17_g511 = (float3(( ( saturate( ( ( ( break48_g507.x * 0.8 ) + 0.2 ) - temp_output_1_0_g511 ) ) * sin( ( clampResult13_g511 * PI ) ) ) * ( ( appendResult8_g511 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_7_0_g508 = ( appendResult17_g511 * _RippleNormalStrength );
+				float4 temp_output_2_0_g508 = temp_output_41_0_g507;
+				float4 break39_g508 = temp_output_2_0_g508;
+				float4 tex2DNode19_g512 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g512 = frac( ( break47_g507.y + tex2DNode19_g512.a ) );
+				float clampResult13_g512 = clamp( ( ( ( temp_output_1_0_g512 - 1.0 ) + tex2DNode19_g512.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g512 = (float2(tex2DNode19_g512.g , tex2DNode19_g512.b));
+				float3 appendResult17_g512 = (float3(( ( saturate( ( ( ( break48_g507.y * 0.8 ) + 0.2 ) - temp_output_1_0_g512 ) ) * sin( ( clampResult13_g512 * PI ) ) ) * ( ( appendResult8_g512 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_8_0_g508 = ( appendResult17_g512 * _RippleNormalStrength );
+				float4 tex2DNode19_g509 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g509 = frac( ( break47_g507.z + tex2DNode19_g509.a ) );
+				float clampResult13_g509 = clamp( ( ( ( temp_output_1_0_g509 - 1.0 ) + tex2DNode19_g509.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g509 = (float2(tex2DNode19_g509.g , tex2DNode19_g509.b));
+				float3 appendResult17_g509 = (float3(( ( saturate( ( ( ( break48_g507.z * 0.8 ) + 0.2 ) - temp_output_1_0_g509 ) ) * sin( ( clampResult13_g509 * PI ) ) ) * ( ( appendResult8_g509 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_9_0_g508 = ( appendResult17_g509 * _RippleNormalStrength );
+				float4 tex2DNode19_g510 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g510 = frac( ( break47_g507.w + tex2DNode19_g510.a ) );
+				float clampResult13_g510 = clamp( ( ( ( temp_output_1_0_g510 - 1.0 ) + tex2DNode19_g510.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g510 = (float2(tex2DNode19_g510.g , tex2DNode19_g510.b));
+				float3 appendResult17_g510 = (float3(( ( saturate( ( ( ( break48_g507.w * 0.8 ) + 0.2 ) - temp_output_1_0_g510 ) ) * sin( ( clampResult13_g510 * PI ) ) ) * ( ( appendResult8_g510 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_10_0_g508 = ( appendResult17_g510 * _RippleNormalStrength );
+				float4 appendResult27_g508 = (float4((temp_output_7_0_g508).z , (temp_output_8_0_g508).z , (temp_output_9_0_g508).z , (temp_output_10_0_g508).z));
+				float4 lerpResult29_g508 = lerp( float4( 1,1,1,1 ) , appendResult27_g508 , temp_output_2_0_g508);
+				float4 break38_g508 = lerpResult29_g508;
+				float3 appendResult36_g508 = (float3(( ( (temp_output_7_0_g508).xy * break39_g508.x ) + ( (temp_output_8_0_g508).xy * break39_g508.y ) + ( (temp_output_9_0_g508).xy * break39_g508.z ) + ( (temp_output_10_0_g508).xy * break39_g508.w ) ) , ( break38_g508.x * break38_g508.y * break38_g508.z * break38_g508.w )));
+				float3 normalizeResult37_g508 = normalize( appendResult36_g508 );
+				float lerpResult18_g506 = lerp( 0.05733212 , 0.1 , saturate( _WindStrength ));
+				float3 break5_g506 = ase_worldPos;
+				float4 appendResult6_g506 = (float4(break5_g506.x , break5_g506.z , break5_g506.x , break5_g506.z));
+				float mulTime9_g506 = _TimeParameters.x * 0.2;
+				float4 temp_output_8_0_g506 = ( ( appendResult6_g506 * _NormalTiling ) + ( ( mulTime9_g506 * float4(0.4,-0.1,0.02,0.4) * _WindSpeed ) * _NormalTiling ) );
+				float3 tex2DNode27_g506 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g506).xy ), 1.0f );
+				float2 appendResult19_g506 = (float2(tex2DNode27_g506.r , tex2DNode27_g506.g));
+				float3 tex2DNode29_g506 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g506).zw ), 1.0f );
+				float2 appendResult20_g506 = (float2(tex2DNode29_g506.r , tex2DNode29_g506.g));
+				float3 appendResult25_g506 = (float3(( lerpResult18_g506 * ( appendResult19_g506 + appendResult20_g506 ) ) , ( tex2DNode27_g506.b * tex2DNode29_g506.b )));
+				float3 appendResult14_g505 = (float3((( normalizeResult37_g508 + appendResult25_g506 )).xy , 1.0));
+				float2 lerpResult3_g505 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
+				float2 break4_g505 = lerpResult3_g505;
+				float temp_output_38_0_g502 = _Wetness;
+				float temp_output_37_0_g505 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g505 * _PuddleSize ) ).g - break4_g505.y ) / break4_g505.x ) ) ) - ( 1.0 - temp_output_38_0_g502 ) ) ) * 1.1 ) );
+				float3 lerpResult13_g505 = lerp( lerpResult12_g502 , appendResult14_g505 , temp_output_37_0_g505);
 				
-				float temp_output_42_0_g975 = _Smoothness;
-				float2 appendResult8_g976 = (float2(temp_output_42_0_g975 , _Smoothness));
-				float temp_output_6_0_g976 = saturate( ( ( saturate( temp_output_38_0_g975 ) * 0.7 ) + saturate( max( temp_output_37_0_g978 , temp_output_69_32_g975 ) ) ) );
-				float2 lerpResult10_g976 = lerp( appendResult8_g976 , float2( 0.93,0.3 ) , temp_output_6_0_g976);
-				float3 temp_cast_0 = ((lerpResult10_g976).y).xxx;
+				float temp_output_42_0_g502 = _Smoothness;
+				float2 appendResult8_g503 = (float2(temp_output_42_0_g502 , _Smoothness));
+				float temp_output_6_0_g503 = saturate( ( ( saturate( temp_output_38_0_g502 ) * 0.7 ) + saturate( max( temp_output_37_0_g505 , temp_output_91_32_g502 ) ) ) );
+				float2 lerpResult10_g503 = lerp( appendResult8_g503 , float2( 0.93,0.3 ) , temp_output_6_0_g503);
+				float3 temp_cast_0 = ((lerpResult10_g503).y).xxx;
 				
 				surfaceDescription.BaseColor = float3( 0,0,0 );
-				surfaceDescription.Normal = lerpResult13_g978;
+				surfaceDescription.Normal = lerpResult13_g505;
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
 				surfaceDescription.Metallic = 0;
@@ -989,9 +1008,9 @@ Shader "GRIGOR/RainFull"
 				#endif
 
 				surfaceDescription.Emission = 0;
-				surfaceDescription.Smoothness = (lerpResult10_g976).x;
+				surfaceDescription.Smoothness = (lerpResult10_g503).x;
 				surfaceDescription.Occlusion = 1;
-				surfaceDescription.Alpha = 1;
+				surfaceDescription.Alpha = 0.0;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -1081,14 +1100,14 @@ Shader "GRIGOR/RainFull"
 
 			HLSLPROGRAM
 
+			#define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
+			#define _ENERGY_CONSERVING_SPECULAR 1
 			#define _DISABLE_SSR_TRANSPARENT 1
 			#define _SPECULAR_OCCLUSION_FROM_AO 1
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
 			#define ASE_NEED_CULLFACE 1
 			#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
-			#define _ENERGY_CONSERVING_SPECULAR 1
-			#define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
 			#define ASE_SRP_VERSION 150006
 
 
@@ -1152,8 +1171,13 @@ Shader "GRIGOR/RainFull"
 
 			CBUFFER_START( UnityPerMaterial )
 			float _DropSize;
-			float _Rain;
+			float _DropSpeed;
+			float _RainStrength;
+			float _RippleSize1;
+			float _RippleNormalStrength;
 			float _WindStrength;
+			float _NormalTiling;
+			float _WindSpeed;
 			float _PuddleSize;
 			float _MaxPuddleSize;
 			float _Wetness;
@@ -1243,6 +1267,7 @@ Shader "GRIGOR/RainFull"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Decal/DecalUtilities.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitDecalData.hlsl"
 
+			#define ASE_NEEDS_VERT_POSITION
 			#define ASE_NEEDS_FRAG_NORMAL
 
 
@@ -1489,6 +1514,9 @@ Shader "GRIGOR/RainFull"
 				UNITY_SETUP_INSTANCE_ID(inputMesh);
 				UNITY_TRANSFER_INSTANCE_ID(inputMesh, outputPackedVaryingsMeshToPS);
 
+				float3 objectToViewPos = TransformWorldToView(TransformObjectToWorld(inputMesh.positionOS));
+				float eyeDepth = -objectToViewPos.z;
+				outputPackedVaryingsMeshToPS.ase_texcoord2.z = eyeDepth;
 				float3 ase_worldPos = GetAbsolutePositionWS( TransformObjectToWorld( (inputMesh.positionOS).xyz ) );
 				outputPackedVaryingsMeshToPS.ase_texcoord3.xyz = ase_worldPos;
 				
@@ -1496,7 +1524,7 @@ Shader "GRIGOR/RainFull"
 				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				outputPackedVaryingsMeshToPS.ase_texcoord2.zw = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord2.w = 0;
 				outputPackedVaryingsMeshToPS.ase_texcoord3.w = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
@@ -1652,81 +1680,85 @@ Shader "GRIGOR/RainFull"
 				SurfaceData surfaceData;
 				BuiltinData builtinData;
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float3 temp_output_33_0_g975 = float3(0,0,1);
-				float2 texCoord39_g977 = packedInput.ase_texcoord2.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode54_g977 = tex2D( _TextureSample0, ( texCoord39_g977 * float2( 1.5,1.5 ) * _DropSize ) );
-				float2 appendResult47_g977 = (float2(tex2DNode54_g977.r , tex2DNode54_g977.g));
-				float temp_output_55_0_g977 = ( ( tex2DNode54_g977.a * 2.0 ) - 1.0 );
-				float temp_output_32_0_g975 = _Rain;
-				float temp_output_66_0_g977 = ( ( ( frac( ( tex2DNode54_g977.b - ( _TimeParameters.x * 0.7 ) ) ) * saturate( temp_output_55_0_g977 ) ) + ( 1.0 - step( ( temp_output_55_0_g977 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g975 ) );
-				float3 appendResult45_g977 = (float3(( ( ( appendResult47_g977 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g977 ) , 1.0));
-				float temp_output_69_32_g975 = temp_output_66_0_g977;
-				float3 lerpResult12_g975 = lerp( temp_output_33_0_g975 , BlendNormal( temp_output_33_0_g975 , appendResult45_g977 ) , saturate( temp_output_69_32_g975 ));
-				float temp_output_36_0_g980 = temp_output_32_0_g975;
-				float4 appendResult37_g980 = (float4(temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980));
-				float4 temp_output_41_0_g980 = saturate( ( ( appendResult37_g980 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
-				float4 break48_g980 = temp_output_41_0_g980;
-				float4 appendResult11_g980 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
-				float4 break47_g980 = frac( ( ( ( appendResult11_g980 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float3 temp_output_33_0_g502 = float3(0,0,1);
+				float2 texCoord39_g504 = packedInput.ase_texcoord2.xy * float2( 1,1 ) + float2( 0,0 );
+				float4 tex2DNode54_g504 = tex2D( _TextureSample0, ( texCoord39_g504 * float2( 1.5,1.5 ) * _DropSize ) );
+				float2 appendResult47_g504 = (float2(tex2DNode54_g504.r , tex2DNode54_g504.g));
+				float mulTime88_g504 = _TimeParameters.x * 0.2;
+				float temp_output_55_0_g504 = ( ( tex2DNode54_g504.a * 2.0 ) - 1.0 );
+				float temp_output_32_0_g502 = _RainStrength;
+				float temp_output_66_0_g504 = ( ( ( frac( ( tex2DNode54_g504.b - ( mulTime88_g504 * _DropSpeed ) ) ) * saturate( temp_output_55_0_g504 ) ) + ( 1.0 - step( ( temp_output_55_0_g504 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g502 ) );
+				float3 appendResult45_g504 = (float3(( ( ( appendResult47_g504 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g504 ) , 1.0));
+				float eyeDepth = packedInput.ase_texcoord2.z;
+				float cameraDepthFade93_g504 = (( eyeDepth -_ProjectionParams.y - 0.0 ) / 1.0);
+				float3 lerpResult91_g504 = lerp( float3(0,0,1) , appendResult45_g504 , cameraDepthFade93_g504);
+				float temp_output_91_32_g502 = temp_output_66_0_g504;
+				float3 lerpResult12_g502 = lerp( temp_output_33_0_g502 , BlendNormal( temp_output_33_0_g502 , lerpResult91_g504 ) , saturate( temp_output_91_32_g502 ));
+				float temp_output_36_0_g507 = temp_output_32_0_g502;
+				float4 appendResult37_g507 = (float4(temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507));
+				float4 temp_output_41_0_g507 = saturate( ( ( appendResult37_g507 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g507 = temp_output_41_0_g507;
+				float4 appendResult11_g507 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g507 = frac( ( ( ( appendResult11_g507 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
 				float3 ase_worldPos = packedInput.ase_texcoord3.xyz;
-				float2 temp_output_24_0_g978 = (ase_worldPos).xz;
-				float2 temp_output_24_0_g980 = temp_output_24_0_g978;
-				float4 tex2DNode19_g984 = tex2D( _TextureSample2, ( ( temp_output_24_0_g980 * float2( 0.7,0.7 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g984 = frac( ( break47_g980.x + tex2DNode19_g984.a ) );
-				float clampResult13_g984 = clamp( ( ( ( temp_output_1_0_g984 - 1.0 ) + tex2DNode19_g984.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g984 = (float2(tex2DNode19_g984.g , tex2DNode19_g984.b));
-				float3 appendResult17_g984 = (float3(( ( saturate( ( ( ( break48_g980.x * 0.8 ) + 0.2 ) - temp_output_1_0_g984 ) ) * sin( ( clampResult13_g984 * PI ) ) ) * ( ( appendResult8_g984 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_7_0_g985 = appendResult17_g984;
-				float4 temp_output_2_0_g985 = temp_output_41_0_g980;
-				float4 break39_g985 = temp_output_2_0_g985;
-				float4 tex2DNode19_g981 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g981 = frac( ( break47_g980.y + tex2DNode19_g981.a ) );
-				float clampResult13_g981 = clamp( ( ( ( temp_output_1_0_g981 - 1.0 ) + tex2DNode19_g981.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g981 = (float2(tex2DNode19_g981.g , tex2DNode19_g981.b));
-				float3 appendResult17_g981 = (float3(( ( saturate( ( ( ( break48_g980.y * 0.8 ) + 0.2 ) - temp_output_1_0_g981 ) ) * sin( ( clampResult13_g981 * PI ) ) ) * ( ( appendResult8_g981 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_8_0_g985 = appendResult17_g981;
-				float4 tex2DNode19_g982 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g982 = frac( ( break47_g980.z + tex2DNode19_g982.a ) );
-				float clampResult13_g982 = clamp( ( ( ( temp_output_1_0_g982 - 1.0 ) + tex2DNode19_g982.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g982 = (float2(tex2DNode19_g982.g , tex2DNode19_g982.b));
-				float3 appendResult17_g982 = (float3(( ( saturate( ( ( ( break48_g980.z * 0.8 ) + 0.2 ) - temp_output_1_0_g982 ) ) * sin( ( clampResult13_g982 * PI ) ) ) * ( ( appendResult8_g982 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_9_0_g985 = appendResult17_g982;
-				float4 tex2DNode19_g983 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g983 = frac( ( break47_g980.w + tex2DNode19_g983.a ) );
-				float clampResult13_g983 = clamp( ( ( ( temp_output_1_0_g983 - 1.0 ) + tex2DNode19_g983.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g983 = (float2(tex2DNode19_g983.g , tex2DNode19_g983.b));
-				float3 appendResult17_g983 = (float3(( ( saturate( ( ( ( break48_g980.w * 0.8 ) + 0.2 ) - temp_output_1_0_g983 ) ) * sin( ( clampResult13_g983 * PI ) ) ) * ( ( appendResult8_g983 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_10_0_g985 = appendResult17_g983;
-				float4 appendResult27_g985 = (float4((temp_output_7_0_g985).z , (temp_output_8_0_g985).z , (temp_output_9_0_g985).z , (temp_output_10_0_g985).z));
-				float4 lerpResult29_g985 = lerp( float4( 1,1,1,1 ) , appendResult27_g985 , temp_output_2_0_g985);
-				float4 break38_g985 = lerpResult29_g985;
-				float3 appendResult36_g985 = (float3(( ( (temp_output_7_0_g985).xy * break39_g985.x ) + ( (temp_output_8_0_g985).xy * break39_g985.y ) + ( (temp_output_9_0_g985).xy * break39_g985.z ) + ( (temp_output_10_0_g985).xy * break39_g985.w ) ) , ( break38_g985.x * break38_g985.y * break38_g985.z * break38_g985.w )));
-				float3 normalizeResult37_g985 = normalize( appendResult36_g985 );
-				float lerpResult18_g979 = lerp( 0.2 , 0.5 , saturate( _WindStrength ));
-				float3 break5_g979 = ase_worldPos;
-				float4 appendResult6_g979 = (float4(break5_g979.x , break5_g979.z , break5_g979.x , break5_g979.z));
-				float mulTime9_g979 = _TimeParameters.x * 0.2;
-				float4 temp_output_8_0_g979 = ( ( appendResult6_g979 * float4( 0.018,0.013,0.007,0.017 ) ) + ( ( mulTime9_g979 * float4(0.4,-0.1,0.02,0.4) ) * float4( 0.2,0,0,0 ) ) );
-				float3 tex2DNode27_g979 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g979).xy ), 1.0f );
-				float2 appendResult19_g979 = (float2(tex2DNode27_g979.r , tex2DNode27_g979.g));
-				float3 tex2DNode29_g979 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g979).zw ), 1.0f );
-				float2 appendResult20_g979 = (float2(tex2DNode29_g979.r , tex2DNode29_g979.g));
-				float3 appendResult25_g979 = (float3(( lerpResult18_g979 * ( appendResult19_g979 + appendResult20_g979 ) ) , ( tex2DNode27_g979.b * tex2DNode29_g979.b )));
-				float3 appendResult14_g978 = (float3((( normalizeResult37_g985 + appendResult25_g979 )).xy , 1.0));
-				float2 lerpResult3_g978 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
-				float2 break4_g978 = lerpResult3_g978;
-				float temp_output_38_0_g975 = _Wetness;
-				float temp_output_37_0_g978 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g978 * _PuddleSize ) ).g - break4_g978.y ) / break4_g978.x ) ) ) - ( 1.0 - temp_output_38_0_g975 ) ) ) * 1.1 ) );
-				float3 lerpResult13_g978 = lerp( lerpResult12_g975 , appendResult14_g978 , temp_output_37_0_g978);
+				float2 temp_output_24_0_g505 = (ase_worldPos).xz;
+				float2 temp_output_24_0_g507 = temp_output_24_0_g505;
+				float4 tex2DNode19_g511 = tex2D( _TextureSample2, ( ( temp_output_24_0_g507 * float2( 0.7,0.7 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g511 = frac( ( break47_g507.x + tex2DNode19_g511.a ) );
+				float clampResult13_g511 = clamp( ( ( ( temp_output_1_0_g511 - 1.0 ) + tex2DNode19_g511.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g511 = (float2(tex2DNode19_g511.g , tex2DNode19_g511.b));
+				float3 appendResult17_g511 = (float3(( ( saturate( ( ( ( break48_g507.x * 0.8 ) + 0.2 ) - temp_output_1_0_g511 ) ) * sin( ( clampResult13_g511 * PI ) ) ) * ( ( appendResult8_g511 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_7_0_g508 = ( appendResult17_g511 * _RippleNormalStrength );
+				float4 temp_output_2_0_g508 = temp_output_41_0_g507;
+				float4 break39_g508 = temp_output_2_0_g508;
+				float4 tex2DNode19_g512 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g512 = frac( ( break47_g507.y + tex2DNode19_g512.a ) );
+				float clampResult13_g512 = clamp( ( ( ( temp_output_1_0_g512 - 1.0 ) + tex2DNode19_g512.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g512 = (float2(tex2DNode19_g512.g , tex2DNode19_g512.b));
+				float3 appendResult17_g512 = (float3(( ( saturate( ( ( ( break48_g507.y * 0.8 ) + 0.2 ) - temp_output_1_0_g512 ) ) * sin( ( clampResult13_g512 * PI ) ) ) * ( ( appendResult8_g512 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_8_0_g508 = ( appendResult17_g512 * _RippleNormalStrength );
+				float4 tex2DNode19_g509 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g509 = frac( ( break47_g507.z + tex2DNode19_g509.a ) );
+				float clampResult13_g509 = clamp( ( ( ( temp_output_1_0_g509 - 1.0 ) + tex2DNode19_g509.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g509 = (float2(tex2DNode19_g509.g , tex2DNode19_g509.b));
+				float3 appendResult17_g509 = (float3(( ( saturate( ( ( ( break48_g507.z * 0.8 ) + 0.2 ) - temp_output_1_0_g509 ) ) * sin( ( clampResult13_g509 * PI ) ) ) * ( ( appendResult8_g509 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_9_0_g508 = ( appendResult17_g509 * _RippleNormalStrength );
+				float4 tex2DNode19_g510 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g510 = frac( ( break47_g507.w + tex2DNode19_g510.a ) );
+				float clampResult13_g510 = clamp( ( ( ( temp_output_1_0_g510 - 1.0 ) + tex2DNode19_g510.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g510 = (float2(tex2DNode19_g510.g , tex2DNode19_g510.b));
+				float3 appendResult17_g510 = (float3(( ( saturate( ( ( ( break48_g507.w * 0.8 ) + 0.2 ) - temp_output_1_0_g510 ) ) * sin( ( clampResult13_g510 * PI ) ) ) * ( ( appendResult8_g510 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_10_0_g508 = ( appendResult17_g510 * _RippleNormalStrength );
+				float4 appendResult27_g508 = (float4((temp_output_7_0_g508).z , (temp_output_8_0_g508).z , (temp_output_9_0_g508).z , (temp_output_10_0_g508).z));
+				float4 lerpResult29_g508 = lerp( float4( 1,1,1,1 ) , appendResult27_g508 , temp_output_2_0_g508);
+				float4 break38_g508 = lerpResult29_g508;
+				float3 appendResult36_g508 = (float3(( ( (temp_output_7_0_g508).xy * break39_g508.x ) + ( (temp_output_8_0_g508).xy * break39_g508.y ) + ( (temp_output_9_0_g508).xy * break39_g508.z ) + ( (temp_output_10_0_g508).xy * break39_g508.w ) ) , ( break38_g508.x * break38_g508.y * break38_g508.z * break38_g508.w )));
+				float3 normalizeResult37_g508 = normalize( appendResult36_g508 );
+				float lerpResult18_g506 = lerp( 0.05733212 , 0.1 , saturate( _WindStrength ));
+				float3 break5_g506 = ase_worldPos;
+				float4 appendResult6_g506 = (float4(break5_g506.x , break5_g506.z , break5_g506.x , break5_g506.z));
+				float mulTime9_g506 = _TimeParameters.x * 0.2;
+				float4 temp_output_8_0_g506 = ( ( appendResult6_g506 * _NormalTiling ) + ( ( mulTime9_g506 * float4(0.4,-0.1,0.02,0.4) * _WindSpeed ) * _NormalTiling ) );
+				float3 tex2DNode27_g506 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g506).xy ), 1.0f );
+				float2 appendResult19_g506 = (float2(tex2DNode27_g506.r , tex2DNode27_g506.g));
+				float3 tex2DNode29_g506 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g506).zw ), 1.0f );
+				float2 appendResult20_g506 = (float2(tex2DNode29_g506.r , tex2DNode29_g506.g));
+				float3 appendResult25_g506 = (float3(( lerpResult18_g506 * ( appendResult19_g506 + appendResult20_g506 ) ) , ( tex2DNode27_g506.b * tex2DNode29_g506.b )));
+				float3 appendResult14_g505 = (float3((( normalizeResult37_g508 + appendResult25_g506 )).xy , 1.0));
+				float2 lerpResult3_g505 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
+				float2 break4_g505 = lerpResult3_g505;
+				float temp_output_38_0_g502 = _Wetness;
+				float temp_output_37_0_g505 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g505 * _PuddleSize ) ).g - break4_g505.y ) / break4_g505.x ) ) ) - ( 1.0 - temp_output_38_0_g502 ) ) ) * 1.1 ) );
+				float3 lerpResult13_g505 = lerp( lerpResult12_g502 , appendResult14_g505 , temp_output_37_0_g505);
 				
-				float temp_output_42_0_g975 = _Smoothness;
-				float2 appendResult8_g976 = (float2(temp_output_42_0_g975 , _Smoothness));
-				float temp_output_6_0_g976 = saturate( ( ( saturate( temp_output_38_0_g975 ) * 0.7 ) + saturate( max( temp_output_37_0_g978 , temp_output_69_32_g975 ) ) ) );
-				float2 lerpResult10_g976 = lerp( appendResult8_g976 , float2( 0.93,0.3 ) , temp_output_6_0_g976);
-				float3 temp_cast_0 = ((lerpResult10_g976).y).xxx;
+				float temp_output_42_0_g502 = _Smoothness;
+				float2 appendResult8_g503 = (float2(temp_output_42_0_g502 , _Smoothness));
+				float temp_output_6_0_g503 = saturate( ( ( saturate( temp_output_38_0_g502 ) * 0.7 ) + saturate( max( temp_output_37_0_g505 , temp_output_91_32_g502 ) ) ) );
+				float2 lerpResult10_g503 = lerp( appendResult8_g503 , float2( 0.93,0.3 ) , temp_output_6_0_g503);
+				float3 temp_cast_0 = ((lerpResult10_g503).y).xxx;
 				
 				surfaceDescription.BaseColor = float3( 0,0,0 );
-				surfaceDescription.Normal = lerpResult13_g978;
+				surfaceDescription.Normal = lerpResult13_g505;
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
 				surfaceDescription.Metallic = 0;
@@ -1736,9 +1768,9 @@ Shader "GRIGOR/RainFull"
 				#endif
 
 				surfaceDescription.Emission = 0;
-				surfaceDescription.Smoothness = (lerpResult10_g976).x;
+				surfaceDescription.Smoothness = (lerpResult10_g503).x;
 				surfaceDescription.Occlusion = 1;
-				surfaceDescription.Alpha = 1;
+				surfaceDescription.Alpha = 0.0;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -1822,14 +1854,14 @@ Shader "GRIGOR/RainFull"
 
 			HLSLPROGRAM
 
+			#define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
+			#define _ENERGY_CONSERVING_SPECULAR 1
 			#define _DISABLE_SSR_TRANSPARENT 1
 			#define _SPECULAR_OCCLUSION_FROM_AO 1
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
 			#define ASE_NEED_CULLFACE 1
 			#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
-			#define _ENERGY_CONSERVING_SPECULAR 1
-			#define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
 			#define ASE_SRP_VERSION 150006
 
 
@@ -1902,8 +1934,13 @@ Shader "GRIGOR/RainFull"
 
 			CBUFFER_START( UnityPerMaterial )
 			float _DropSize;
-			float _Rain;
+			float _DropSpeed;
+			float _RainStrength;
+			float _RippleSize1;
+			float _RippleNormalStrength;
 			float _WindStrength;
+			float _NormalTiling;
+			float _WindSpeed;
 			float _PuddleSize;
 			float _MaxPuddleSize;
 			float _Wetness;
@@ -2341,7 +2378,7 @@ Shader "GRIGOR/RainFull"
 
 				AlphaSurfaceDescription surfaceDescription = (AlphaSurfaceDescription)0;
 				
-				surfaceDescription.Alpha = 1;
+				surfaceDescription.Alpha = 0.0;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -2403,14 +2440,14 @@ Shader "GRIGOR/RainFull"
 
 			HLSLPROGRAM
 
+            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
+            #define _ENERGY_CONSERVING_SPECULAR 1
             #define _DISABLE_SSR_TRANSPARENT 1
             #define _SPECULAR_OCCLUSION_FROM_AO 1
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
             #define ASE_NEED_CULLFACE 1
             #define _MATERIAL_FEATURE_SPECULAR_COLOR 1
-            #define _ENERGY_CONSERVING_SPECULAR 1
-            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
             #define ASE_SRP_VERSION 150006
 
 
@@ -2481,8 +2518,13 @@ Shader "GRIGOR/RainFull"
 
 			CBUFFER_START( UnityPerMaterial )
 			float _DropSize;
-			float _Rain;
+			float _DropSpeed;
+			float _RainStrength;
+			float _RippleSize1;
+			float _RippleNormalStrength;
 			float _WindStrength;
+			float _NormalTiling;
+			float _WindSpeed;
 			float _PuddleSize;
 			float _MaxPuddleSize;
 			float _Wetness;
@@ -2899,7 +2941,7 @@ Shader "GRIGOR/RainFull"
 
 				SceneSurfaceDescription surfaceDescription = (SceneSurfaceDescription)0;
 				
-				surfaceDescription.Alpha = 1;
+				surfaceDescription.Alpha = 0.0;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -2944,14 +2986,14 @@ Shader "GRIGOR/RainFull"
 
 			HLSLPROGRAM
 
+            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
+            #define _ENERGY_CONSERVING_SPECULAR 1
             #define _DISABLE_SSR_TRANSPARENT 1
             #define _SPECULAR_OCCLUSION_FROM_AO 1
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
             #define ASE_NEED_CULLFACE 1
             #define _MATERIAL_FEATURE_SPECULAR_COLOR 1
-            #define _ENERGY_CONSERVING_SPECULAR 1
-            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
             #define ASE_SRP_VERSION 150006
 
 
@@ -3023,8 +3065,13 @@ Shader "GRIGOR/RainFull"
 
 			CBUFFER_START( UnityPerMaterial )
 			float _DropSize;
-			float _Rain;
+			float _DropSpeed;
+			float _RainStrength;
+			float _RippleSize1;
+			float _RippleNormalStrength;
 			float _WindStrength;
+			float _NormalTiling;
+			float _WindSpeed;
 			float _PuddleSize;
 			float _MaxPuddleSize;
 			float _Wetness;
@@ -3114,6 +3161,7 @@ Shader "GRIGOR/RainFull"
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Decal/DecalUtilities.hlsl"
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitDecalData.hlsl"
 
+			#define ASE_NEEDS_VERT_POSITION
 			#define ASE_NEEDS_FRAG_RELATIVE_WORLD_POS
 			#define ASE_NEEDS_FRAG_NORMAL
 
@@ -3306,11 +3354,15 @@ Shader "GRIGOR/RainFull"
 				UNITY_TRANSFER_INSTANCE_ID(inputMesh, outputPackedVaryingsMeshToPS);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( outputPackedVaryingsMeshToPS );
 
+				float3 objectToViewPos = TransformWorldToView(TransformObjectToWorld(inputMesh.positionOS));
+				float eyeDepth = -objectToViewPos.z;
+				outputPackedVaryingsMeshToPS.ase_texcoord3.z = eyeDepth;
+				
 				outputPackedVaryingsMeshToPS.ase_texcoord3.xy = inputMesh.ase_texcoord.xy;
 				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				outputPackedVaryingsMeshToPS.ase_texcoord3.zw = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord3.w = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				float3 defaultVertexValue = inputMesh.positionOS.xyz;
@@ -3491,81 +3543,85 @@ Shader "GRIGOR/RainFull"
 				float3 V = GetWorldSpaceNormalizeViewDir(input.positionRWS);
 
 				SmoothSurfaceDescription surfaceDescription = (SmoothSurfaceDescription)0;
-				float3 temp_output_33_0_g975 = float3(0,0,1);
-				float2 texCoord39_g977 = packedInput.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode54_g977 = tex2D( _TextureSample0, ( texCoord39_g977 * float2( 1.5,1.5 ) * _DropSize ) );
-				float2 appendResult47_g977 = (float2(tex2DNode54_g977.r , tex2DNode54_g977.g));
-				float temp_output_55_0_g977 = ( ( tex2DNode54_g977.a * 2.0 ) - 1.0 );
-				float temp_output_32_0_g975 = _Rain;
-				float temp_output_66_0_g977 = ( ( ( frac( ( tex2DNode54_g977.b - ( _TimeParameters.x * 0.7 ) ) ) * saturate( temp_output_55_0_g977 ) ) + ( 1.0 - step( ( temp_output_55_0_g977 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g975 ) );
-				float3 appendResult45_g977 = (float3(( ( ( appendResult47_g977 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g977 ) , 1.0));
-				float temp_output_69_32_g975 = temp_output_66_0_g977;
-				float3 lerpResult12_g975 = lerp( temp_output_33_0_g975 , BlendNormal( temp_output_33_0_g975 , appendResult45_g977 ) , saturate( temp_output_69_32_g975 ));
-				float temp_output_36_0_g980 = temp_output_32_0_g975;
-				float4 appendResult37_g980 = (float4(temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980));
-				float4 temp_output_41_0_g980 = saturate( ( ( appendResult37_g980 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
-				float4 break48_g980 = temp_output_41_0_g980;
-				float4 appendResult11_g980 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
-				float4 break47_g980 = frac( ( ( ( appendResult11_g980 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float3 temp_output_33_0_g502 = float3(0,0,1);
+				float2 texCoord39_g504 = packedInput.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
+				float4 tex2DNode54_g504 = tex2D( _TextureSample0, ( texCoord39_g504 * float2( 1.5,1.5 ) * _DropSize ) );
+				float2 appendResult47_g504 = (float2(tex2DNode54_g504.r , tex2DNode54_g504.g));
+				float mulTime88_g504 = _TimeParameters.x * 0.2;
+				float temp_output_55_0_g504 = ( ( tex2DNode54_g504.a * 2.0 ) - 1.0 );
+				float temp_output_32_0_g502 = _RainStrength;
+				float temp_output_66_0_g504 = ( ( ( frac( ( tex2DNode54_g504.b - ( mulTime88_g504 * _DropSpeed ) ) ) * saturate( temp_output_55_0_g504 ) ) + ( 1.0 - step( ( temp_output_55_0_g504 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g502 ) );
+				float3 appendResult45_g504 = (float3(( ( ( appendResult47_g504 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g504 ) , 1.0));
+				float eyeDepth = packedInput.ase_texcoord3.z;
+				float cameraDepthFade93_g504 = (( eyeDepth -_ProjectionParams.y - 0.0 ) / 1.0);
+				float3 lerpResult91_g504 = lerp( float3(0,0,1) , appendResult45_g504 , cameraDepthFade93_g504);
+				float temp_output_91_32_g502 = temp_output_66_0_g504;
+				float3 lerpResult12_g502 = lerp( temp_output_33_0_g502 , BlendNormal( temp_output_33_0_g502 , lerpResult91_g504 ) , saturate( temp_output_91_32_g502 ));
+				float temp_output_36_0_g507 = temp_output_32_0_g502;
+				float4 appendResult37_g507 = (float4(temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507));
+				float4 temp_output_41_0_g507 = saturate( ( ( appendResult37_g507 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g507 = temp_output_41_0_g507;
+				float4 appendResult11_g507 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g507 = frac( ( ( ( appendResult11_g507 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
 				float3 ase_worldPos = GetAbsolutePositionWS( positionRWS );
-				float2 temp_output_24_0_g978 = (ase_worldPos).xz;
-				float2 temp_output_24_0_g980 = temp_output_24_0_g978;
-				float4 tex2DNode19_g984 = tex2D( _TextureSample2, ( ( temp_output_24_0_g980 * float2( 0.7,0.7 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g984 = frac( ( break47_g980.x + tex2DNode19_g984.a ) );
-				float clampResult13_g984 = clamp( ( ( ( temp_output_1_0_g984 - 1.0 ) + tex2DNode19_g984.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g984 = (float2(tex2DNode19_g984.g , tex2DNode19_g984.b));
-				float3 appendResult17_g984 = (float3(( ( saturate( ( ( ( break48_g980.x * 0.8 ) + 0.2 ) - temp_output_1_0_g984 ) ) * sin( ( clampResult13_g984 * PI ) ) ) * ( ( appendResult8_g984 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_7_0_g985 = appendResult17_g984;
-				float4 temp_output_2_0_g985 = temp_output_41_0_g980;
-				float4 break39_g985 = temp_output_2_0_g985;
-				float4 tex2DNode19_g981 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g981 = frac( ( break47_g980.y + tex2DNode19_g981.a ) );
-				float clampResult13_g981 = clamp( ( ( ( temp_output_1_0_g981 - 1.0 ) + tex2DNode19_g981.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g981 = (float2(tex2DNode19_g981.g , tex2DNode19_g981.b));
-				float3 appendResult17_g981 = (float3(( ( saturate( ( ( ( break48_g980.y * 0.8 ) + 0.2 ) - temp_output_1_0_g981 ) ) * sin( ( clampResult13_g981 * PI ) ) ) * ( ( appendResult8_g981 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_8_0_g985 = appendResult17_g981;
-				float4 tex2DNode19_g982 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g982 = frac( ( break47_g980.z + tex2DNode19_g982.a ) );
-				float clampResult13_g982 = clamp( ( ( ( temp_output_1_0_g982 - 1.0 ) + tex2DNode19_g982.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g982 = (float2(tex2DNode19_g982.g , tex2DNode19_g982.b));
-				float3 appendResult17_g982 = (float3(( ( saturate( ( ( ( break48_g980.z * 0.8 ) + 0.2 ) - temp_output_1_0_g982 ) ) * sin( ( clampResult13_g982 * PI ) ) ) * ( ( appendResult8_g982 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_9_0_g985 = appendResult17_g982;
-				float4 tex2DNode19_g983 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g983 = frac( ( break47_g980.w + tex2DNode19_g983.a ) );
-				float clampResult13_g983 = clamp( ( ( ( temp_output_1_0_g983 - 1.0 ) + tex2DNode19_g983.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g983 = (float2(tex2DNode19_g983.g , tex2DNode19_g983.b));
-				float3 appendResult17_g983 = (float3(( ( saturate( ( ( ( break48_g980.w * 0.8 ) + 0.2 ) - temp_output_1_0_g983 ) ) * sin( ( clampResult13_g983 * PI ) ) ) * ( ( appendResult8_g983 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_10_0_g985 = appendResult17_g983;
-				float4 appendResult27_g985 = (float4((temp_output_7_0_g985).z , (temp_output_8_0_g985).z , (temp_output_9_0_g985).z , (temp_output_10_0_g985).z));
-				float4 lerpResult29_g985 = lerp( float4( 1,1,1,1 ) , appendResult27_g985 , temp_output_2_0_g985);
-				float4 break38_g985 = lerpResult29_g985;
-				float3 appendResult36_g985 = (float3(( ( (temp_output_7_0_g985).xy * break39_g985.x ) + ( (temp_output_8_0_g985).xy * break39_g985.y ) + ( (temp_output_9_0_g985).xy * break39_g985.z ) + ( (temp_output_10_0_g985).xy * break39_g985.w ) ) , ( break38_g985.x * break38_g985.y * break38_g985.z * break38_g985.w )));
-				float3 normalizeResult37_g985 = normalize( appendResult36_g985 );
-				float lerpResult18_g979 = lerp( 0.2 , 0.5 , saturate( _WindStrength ));
-				float3 break5_g979 = ase_worldPos;
-				float4 appendResult6_g979 = (float4(break5_g979.x , break5_g979.z , break5_g979.x , break5_g979.z));
-				float mulTime9_g979 = _TimeParameters.x * 0.2;
-				float4 temp_output_8_0_g979 = ( ( appendResult6_g979 * float4( 0.018,0.013,0.007,0.017 ) ) + ( ( mulTime9_g979 * float4(0.4,-0.1,0.02,0.4) ) * float4( 0.2,0,0,0 ) ) );
-				float3 tex2DNode27_g979 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g979).xy ), 1.0f );
-				float2 appendResult19_g979 = (float2(tex2DNode27_g979.r , tex2DNode27_g979.g));
-				float3 tex2DNode29_g979 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g979).zw ), 1.0f );
-				float2 appendResult20_g979 = (float2(tex2DNode29_g979.r , tex2DNode29_g979.g));
-				float3 appendResult25_g979 = (float3(( lerpResult18_g979 * ( appendResult19_g979 + appendResult20_g979 ) ) , ( tex2DNode27_g979.b * tex2DNode29_g979.b )));
-				float3 appendResult14_g978 = (float3((( normalizeResult37_g985 + appendResult25_g979 )).xy , 1.0));
-				float2 lerpResult3_g978 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
-				float2 break4_g978 = lerpResult3_g978;
-				float temp_output_38_0_g975 = _Wetness;
-				float temp_output_37_0_g978 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g978 * _PuddleSize ) ).g - break4_g978.y ) / break4_g978.x ) ) ) - ( 1.0 - temp_output_38_0_g975 ) ) ) * 1.1 ) );
-				float3 lerpResult13_g978 = lerp( lerpResult12_g975 , appendResult14_g978 , temp_output_37_0_g978);
+				float2 temp_output_24_0_g505 = (ase_worldPos).xz;
+				float2 temp_output_24_0_g507 = temp_output_24_0_g505;
+				float4 tex2DNode19_g511 = tex2D( _TextureSample2, ( ( temp_output_24_0_g507 * float2( 0.7,0.7 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g511 = frac( ( break47_g507.x + tex2DNode19_g511.a ) );
+				float clampResult13_g511 = clamp( ( ( ( temp_output_1_0_g511 - 1.0 ) + tex2DNode19_g511.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g511 = (float2(tex2DNode19_g511.g , tex2DNode19_g511.b));
+				float3 appendResult17_g511 = (float3(( ( saturate( ( ( ( break48_g507.x * 0.8 ) + 0.2 ) - temp_output_1_0_g511 ) ) * sin( ( clampResult13_g511 * PI ) ) ) * ( ( appendResult8_g511 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_7_0_g508 = ( appendResult17_g511 * _RippleNormalStrength );
+				float4 temp_output_2_0_g508 = temp_output_41_0_g507;
+				float4 break39_g508 = temp_output_2_0_g508;
+				float4 tex2DNode19_g512 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g512 = frac( ( break47_g507.y + tex2DNode19_g512.a ) );
+				float clampResult13_g512 = clamp( ( ( ( temp_output_1_0_g512 - 1.0 ) + tex2DNode19_g512.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g512 = (float2(tex2DNode19_g512.g , tex2DNode19_g512.b));
+				float3 appendResult17_g512 = (float3(( ( saturate( ( ( ( break48_g507.y * 0.8 ) + 0.2 ) - temp_output_1_0_g512 ) ) * sin( ( clampResult13_g512 * PI ) ) ) * ( ( appendResult8_g512 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_8_0_g508 = ( appendResult17_g512 * _RippleNormalStrength );
+				float4 tex2DNode19_g509 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g509 = frac( ( break47_g507.z + tex2DNode19_g509.a ) );
+				float clampResult13_g509 = clamp( ( ( ( temp_output_1_0_g509 - 1.0 ) + tex2DNode19_g509.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g509 = (float2(tex2DNode19_g509.g , tex2DNode19_g509.b));
+				float3 appendResult17_g509 = (float3(( ( saturate( ( ( ( break48_g507.z * 0.8 ) + 0.2 ) - temp_output_1_0_g509 ) ) * sin( ( clampResult13_g509 * PI ) ) ) * ( ( appendResult8_g509 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_9_0_g508 = ( appendResult17_g509 * _RippleNormalStrength );
+				float4 tex2DNode19_g510 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g510 = frac( ( break47_g507.w + tex2DNode19_g510.a ) );
+				float clampResult13_g510 = clamp( ( ( ( temp_output_1_0_g510 - 1.0 ) + tex2DNode19_g510.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g510 = (float2(tex2DNode19_g510.g , tex2DNode19_g510.b));
+				float3 appendResult17_g510 = (float3(( ( saturate( ( ( ( break48_g507.w * 0.8 ) + 0.2 ) - temp_output_1_0_g510 ) ) * sin( ( clampResult13_g510 * PI ) ) ) * ( ( appendResult8_g510 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_10_0_g508 = ( appendResult17_g510 * _RippleNormalStrength );
+				float4 appendResult27_g508 = (float4((temp_output_7_0_g508).z , (temp_output_8_0_g508).z , (temp_output_9_0_g508).z , (temp_output_10_0_g508).z));
+				float4 lerpResult29_g508 = lerp( float4( 1,1,1,1 ) , appendResult27_g508 , temp_output_2_0_g508);
+				float4 break38_g508 = lerpResult29_g508;
+				float3 appendResult36_g508 = (float3(( ( (temp_output_7_0_g508).xy * break39_g508.x ) + ( (temp_output_8_0_g508).xy * break39_g508.y ) + ( (temp_output_9_0_g508).xy * break39_g508.z ) + ( (temp_output_10_0_g508).xy * break39_g508.w ) ) , ( break38_g508.x * break38_g508.y * break38_g508.z * break38_g508.w )));
+				float3 normalizeResult37_g508 = normalize( appendResult36_g508 );
+				float lerpResult18_g506 = lerp( 0.05733212 , 0.1 , saturate( _WindStrength ));
+				float3 break5_g506 = ase_worldPos;
+				float4 appendResult6_g506 = (float4(break5_g506.x , break5_g506.z , break5_g506.x , break5_g506.z));
+				float mulTime9_g506 = _TimeParameters.x * 0.2;
+				float4 temp_output_8_0_g506 = ( ( appendResult6_g506 * _NormalTiling ) + ( ( mulTime9_g506 * float4(0.4,-0.1,0.02,0.4) * _WindSpeed ) * _NormalTiling ) );
+				float3 tex2DNode27_g506 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g506).xy ), 1.0f );
+				float2 appendResult19_g506 = (float2(tex2DNode27_g506.r , tex2DNode27_g506.g));
+				float3 tex2DNode29_g506 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g506).zw ), 1.0f );
+				float2 appendResult20_g506 = (float2(tex2DNode29_g506.r , tex2DNode29_g506.g));
+				float3 appendResult25_g506 = (float3(( lerpResult18_g506 * ( appendResult19_g506 + appendResult20_g506 ) ) , ( tex2DNode27_g506.b * tex2DNode29_g506.b )));
+				float3 appendResult14_g505 = (float3((( normalizeResult37_g508 + appendResult25_g506 )).xy , 1.0));
+				float2 lerpResult3_g505 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
+				float2 break4_g505 = lerpResult3_g505;
+				float temp_output_38_0_g502 = _Wetness;
+				float temp_output_37_0_g505 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g505 * _PuddleSize ) ).g - break4_g505.y ) / break4_g505.x ) ) ) - ( 1.0 - temp_output_38_0_g502 ) ) ) * 1.1 ) );
+				float3 lerpResult13_g505 = lerp( lerpResult12_g502 , appendResult14_g505 , temp_output_37_0_g505);
 				
-				float temp_output_42_0_g975 = _Smoothness;
-				float2 appendResult8_g976 = (float2(temp_output_42_0_g975 , _Smoothness));
-				float temp_output_6_0_g976 = saturate( ( ( saturate( temp_output_38_0_g975 ) * 0.7 ) + saturate( max( temp_output_37_0_g978 , temp_output_69_32_g975 ) ) ) );
-				float2 lerpResult10_g976 = lerp( appendResult8_g976 , float2( 0.93,0.3 ) , temp_output_6_0_g976);
+				float temp_output_42_0_g502 = _Smoothness;
+				float2 appendResult8_g503 = (float2(temp_output_42_0_g502 , _Smoothness));
+				float temp_output_6_0_g503 = saturate( ( ( saturate( temp_output_38_0_g502 ) * 0.7 ) + saturate( max( temp_output_37_0_g505 , temp_output_91_32_g502 ) ) ) );
+				float2 lerpResult10_g503 = lerp( appendResult8_g503 , float2( 0.93,0.3 ) , temp_output_6_0_g503);
 				
-				surfaceDescription.Normal = lerpResult13_g978;
-				surfaceDescription.Smoothness = (lerpResult10_g976).x;
-				surfaceDescription.Alpha = 1;
+				surfaceDescription.Normal = lerpResult13_g505;
+				surfaceDescription.Smoothness = (lerpResult10_g503).x;
+				surfaceDescription.Alpha = 0.0;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -3632,14 +3688,14 @@ Shader "GRIGOR/RainFull"
 
 			HLSLPROGRAM
 
+            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
+            #define _ENERGY_CONSERVING_SPECULAR 1
             #define _DISABLE_SSR_TRANSPARENT 1
             #define _SPECULAR_OCCLUSION_FROM_AO 1
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
             #define ASE_NEED_CULLFACE 1
             #define _MATERIAL_FEATURE_SPECULAR_COLOR 1
-            #define _ENERGY_CONSERVING_SPECULAR 1
-            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
             #define ASE_SRP_VERSION 150006
 
 
@@ -3715,8 +3771,13 @@ Shader "GRIGOR/RainFull"
 
 			CBUFFER_START( UnityPerMaterial )
 			float _DropSize;
-			float _Rain;
+			float _DropSpeed;
+			float _RainStrength;
+			float _RippleSize1;
+			float _RippleNormalStrength;
 			float _WindStrength;
+			float _NormalTiling;
+			float _WindSpeed;
 			float _PuddleSize;
 			float _MaxPuddleSize;
 			float _Wetness;
@@ -3806,6 +3867,7 @@ Shader "GRIGOR/RainFull"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Decal/DecalUtilities.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitDecalData.hlsl"
 
+			#define ASE_NEEDS_VERT_POSITION
 			#define ASE_NEEDS_FRAG_NORMAL
 
 
@@ -3990,6 +4052,9 @@ Shader "GRIGOR/RainFull"
 			AttributesMesh ApplyMeshModification(AttributesMesh inputMesh, float3 timeParameters, inout PackedVaryingsMeshToPS outputPackedVaryingsMeshToPS )
 			{
 				_TimeParameters.xyz = timeParameters;
+				float3 objectToViewPos = TransformWorldToView(TransformObjectToWorld(inputMesh.positionOS));
+				float eyeDepth = -objectToViewPos.z;
+				outputPackedVaryingsMeshToPS.ase_texcoord3.z = eyeDepth;
 				float3 ase_worldPos = GetAbsolutePositionWS( TransformObjectToWorld( (inputMesh.positionOS).xyz ) );
 				outputPackedVaryingsMeshToPS.ase_texcoord4.xyz = ase_worldPos;
 				
@@ -3997,7 +4062,7 @@ Shader "GRIGOR/RainFull"
 				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				outputPackedVaryingsMeshToPS.ase_texcoord3.zw = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord3.w = 0;
 				outputPackedVaryingsMeshToPS.ase_texcoord4.w = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
@@ -4236,81 +4301,85 @@ Shader "GRIGOR/RainFull"
 				BuiltinData builtinData;
 
 				SmoothSurfaceDescription surfaceDescription = (SmoothSurfaceDescription)0;
-				float3 temp_output_33_0_g975 = float3(0,0,1);
-				float2 texCoord39_g977 = packedInput.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode54_g977 = tex2D( _TextureSample0, ( texCoord39_g977 * float2( 1.5,1.5 ) * _DropSize ) );
-				float2 appendResult47_g977 = (float2(tex2DNode54_g977.r , tex2DNode54_g977.g));
-				float temp_output_55_0_g977 = ( ( tex2DNode54_g977.a * 2.0 ) - 1.0 );
-				float temp_output_32_0_g975 = _Rain;
-				float temp_output_66_0_g977 = ( ( ( frac( ( tex2DNode54_g977.b - ( _TimeParameters.x * 0.7 ) ) ) * saturate( temp_output_55_0_g977 ) ) + ( 1.0 - step( ( temp_output_55_0_g977 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g975 ) );
-				float3 appendResult45_g977 = (float3(( ( ( appendResult47_g977 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g977 ) , 1.0));
-				float temp_output_69_32_g975 = temp_output_66_0_g977;
-				float3 lerpResult12_g975 = lerp( temp_output_33_0_g975 , BlendNormal( temp_output_33_0_g975 , appendResult45_g977 ) , saturate( temp_output_69_32_g975 ));
-				float temp_output_36_0_g980 = temp_output_32_0_g975;
-				float4 appendResult37_g980 = (float4(temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980));
-				float4 temp_output_41_0_g980 = saturate( ( ( appendResult37_g980 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
-				float4 break48_g980 = temp_output_41_0_g980;
-				float4 appendResult11_g980 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
-				float4 break47_g980 = frac( ( ( ( appendResult11_g980 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float3 temp_output_33_0_g502 = float3(0,0,1);
+				float2 texCoord39_g504 = packedInput.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
+				float4 tex2DNode54_g504 = tex2D( _TextureSample0, ( texCoord39_g504 * float2( 1.5,1.5 ) * _DropSize ) );
+				float2 appendResult47_g504 = (float2(tex2DNode54_g504.r , tex2DNode54_g504.g));
+				float mulTime88_g504 = _TimeParameters.x * 0.2;
+				float temp_output_55_0_g504 = ( ( tex2DNode54_g504.a * 2.0 ) - 1.0 );
+				float temp_output_32_0_g502 = _RainStrength;
+				float temp_output_66_0_g504 = ( ( ( frac( ( tex2DNode54_g504.b - ( mulTime88_g504 * _DropSpeed ) ) ) * saturate( temp_output_55_0_g504 ) ) + ( 1.0 - step( ( temp_output_55_0_g504 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g502 ) );
+				float3 appendResult45_g504 = (float3(( ( ( appendResult47_g504 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g504 ) , 1.0));
+				float eyeDepth = packedInput.ase_texcoord3.z;
+				float cameraDepthFade93_g504 = (( eyeDepth -_ProjectionParams.y - 0.0 ) / 1.0);
+				float3 lerpResult91_g504 = lerp( float3(0,0,1) , appendResult45_g504 , cameraDepthFade93_g504);
+				float temp_output_91_32_g502 = temp_output_66_0_g504;
+				float3 lerpResult12_g502 = lerp( temp_output_33_0_g502 , BlendNormal( temp_output_33_0_g502 , lerpResult91_g504 ) , saturate( temp_output_91_32_g502 ));
+				float temp_output_36_0_g507 = temp_output_32_0_g502;
+				float4 appendResult37_g507 = (float4(temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507));
+				float4 temp_output_41_0_g507 = saturate( ( ( appendResult37_g507 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g507 = temp_output_41_0_g507;
+				float4 appendResult11_g507 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g507 = frac( ( ( ( appendResult11_g507 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
 				float3 ase_worldPos = packedInput.ase_texcoord4.xyz;
-				float2 temp_output_24_0_g978 = (ase_worldPos).xz;
-				float2 temp_output_24_0_g980 = temp_output_24_0_g978;
-				float4 tex2DNode19_g984 = tex2D( _TextureSample2, ( ( temp_output_24_0_g980 * float2( 0.7,0.7 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g984 = frac( ( break47_g980.x + tex2DNode19_g984.a ) );
-				float clampResult13_g984 = clamp( ( ( ( temp_output_1_0_g984 - 1.0 ) + tex2DNode19_g984.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g984 = (float2(tex2DNode19_g984.g , tex2DNode19_g984.b));
-				float3 appendResult17_g984 = (float3(( ( saturate( ( ( ( break48_g980.x * 0.8 ) + 0.2 ) - temp_output_1_0_g984 ) ) * sin( ( clampResult13_g984 * PI ) ) ) * ( ( appendResult8_g984 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_7_0_g985 = appendResult17_g984;
-				float4 temp_output_2_0_g985 = temp_output_41_0_g980;
-				float4 break39_g985 = temp_output_2_0_g985;
-				float4 tex2DNode19_g981 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g981 = frac( ( break47_g980.y + tex2DNode19_g981.a ) );
-				float clampResult13_g981 = clamp( ( ( ( temp_output_1_0_g981 - 1.0 ) + tex2DNode19_g981.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g981 = (float2(tex2DNode19_g981.g , tex2DNode19_g981.b));
-				float3 appendResult17_g981 = (float3(( ( saturate( ( ( ( break48_g980.y * 0.8 ) + 0.2 ) - temp_output_1_0_g981 ) ) * sin( ( clampResult13_g981 * PI ) ) ) * ( ( appendResult8_g981 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_8_0_g985 = appendResult17_g981;
-				float4 tex2DNode19_g982 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g982 = frac( ( break47_g980.z + tex2DNode19_g982.a ) );
-				float clampResult13_g982 = clamp( ( ( ( temp_output_1_0_g982 - 1.0 ) + tex2DNode19_g982.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g982 = (float2(tex2DNode19_g982.g , tex2DNode19_g982.b));
-				float3 appendResult17_g982 = (float3(( ( saturate( ( ( ( break48_g980.z * 0.8 ) + 0.2 ) - temp_output_1_0_g982 ) ) * sin( ( clampResult13_g982 * PI ) ) ) * ( ( appendResult8_g982 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_9_0_g985 = appendResult17_g982;
-				float4 tex2DNode19_g983 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g983 = frac( ( break47_g980.w + tex2DNode19_g983.a ) );
-				float clampResult13_g983 = clamp( ( ( ( temp_output_1_0_g983 - 1.0 ) + tex2DNode19_g983.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g983 = (float2(tex2DNode19_g983.g , tex2DNode19_g983.b));
-				float3 appendResult17_g983 = (float3(( ( saturate( ( ( ( break48_g980.w * 0.8 ) + 0.2 ) - temp_output_1_0_g983 ) ) * sin( ( clampResult13_g983 * PI ) ) ) * ( ( appendResult8_g983 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_10_0_g985 = appendResult17_g983;
-				float4 appendResult27_g985 = (float4((temp_output_7_0_g985).z , (temp_output_8_0_g985).z , (temp_output_9_0_g985).z , (temp_output_10_0_g985).z));
-				float4 lerpResult29_g985 = lerp( float4( 1,1,1,1 ) , appendResult27_g985 , temp_output_2_0_g985);
-				float4 break38_g985 = lerpResult29_g985;
-				float3 appendResult36_g985 = (float3(( ( (temp_output_7_0_g985).xy * break39_g985.x ) + ( (temp_output_8_0_g985).xy * break39_g985.y ) + ( (temp_output_9_0_g985).xy * break39_g985.z ) + ( (temp_output_10_0_g985).xy * break39_g985.w ) ) , ( break38_g985.x * break38_g985.y * break38_g985.z * break38_g985.w )));
-				float3 normalizeResult37_g985 = normalize( appendResult36_g985 );
-				float lerpResult18_g979 = lerp( 0.2 , 0.5 , saturate( _WindStrength ));
-				float3 break5_g979 = ase_worldPos;
-				float4 appendResult6_g979 = (float4(break5_g979.x , break5_g979.z , break5_g979.x , break5_g979.z));
-				float mulTime9_g979 = _TimeParameters.x * 0.2;
-				float4 temp_output_8_0_g979 = ( ( appendResult6_g979 * float4( 0.018,0.013,0.007,0.017 ) ) + ( ( mulTime9_g979 * float4(0.4,-0.1,0.02,0.4) ) * float4( 0.2,0,0,0 ) ) );
-				float3 tex2DNode27_g979 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g979).xy ), 1.0f );
-				float2 appendResult19_g979 = (float2(tex2DNode27_g979.r , tex2DNode27_g979.g));
-				float3 tex2DNode29_g979 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g979).zw ), 1.0f );
-				float2 appendResult20_g979 = (float2(tex2DNode29_g979.r , tex2DNode29_g979.g));
-				float3 appendResult25_g979 = (float3(( lerpResult18_g979 * ( appendResult19_g979 + appendResult20_g979 ) ) , ( tex2DNode27_g979.b * tex2DNode29_g979.b )));
-				float3 appendResult14_g978 = (float3((( normalizeResult37_g985 + appendResult25_g979 )).xy , 1.0));
-				float2 lerpResult3_g978 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
-				float2 break4_g978 = lerpResult3_g978;
-				float temp_output_38_0_g975 = _Wetness;
-				float temp_output_37_0_g978 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g978 * _PuddleSize ) ).g - break4_g978.y ) / break4_g978.x ) ) ) - ( 1.0 - temp_output_38_0_g975 ) ) ) * 1.1 ) );
-				float3 lerpResult13_g978 = lerp( lerpResult12_g975 , appendResult14_g978 , temp_output_37_0_g978);
+				float2 temp_output_24_0_g505 = (ase_worldPos).xz;
+				float2 temp_output_24_0_g507 = temp_output_24_0_g505;
+				float4 tex2DNode19_g511 = tex2D( _TextureSample2, ( ( temp_output_24_0_g507 * float2( 0.7,0.7 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g511 = frac( ( break47_g507.x + tex2DNode19_g511.a ) );
+				float clampResult13_g511 = clamp( ( ( ( temp_output_1_0_g511 - 1.0 ) + tex2DNode19_g511.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g511 = (float2(tex2DNode19_g511.g , tex2DNode19_g511.b));
+				float3 appendResult17_g511 = (float3(( ( saturate( ( ( ( break48_g507.x * 0.8 ) + 0.2 ) - temp_output_1_0_g511 ) ) * sin( ( clampResult13_g511 * PI ) ) ) * ( ( appendResult8_g511 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_7_0_g508 = ( appendResult17_g511 * _RippleNormalStrength );
+				float4 temp_output_2_0_g508 = temp_output_41_0_g507;
+				float4 break39_g508 = temp_output_2_0_g508;
+				float4 tex2DNode19_g512 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g512 = frac( ( break47_g507.y + tex2DNode19_g512.a ) );
+				float clampResult13_g512 = clamp( ( ( ( temp_output_1_0_g512 - 1.0 ) + tex2DNode19_g512.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g512 = (float2(tex2DNode19_g512.g , tex2DNode19_g512.b));
+				float3 appendResult17_g512 = (float3(( ( saturate( ( ( ( break48_g507.y * 0.8 ) + 0.2 ) - temp_output_1_0_g512 ) ) * sin( ( clampResult13_g512 * PI ) ) ) * ( ( appendResult8_g512 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_8_0_g508 = ( appendResult17_g512 * _RippleNormalStrength );
+				float4 tex2DNode19_g509 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g509 = frac( ( break47_g507.z + tex2DNode19_g509.a ) );
+				float clampResult13_g509 = clamp( ( ( ( temp_output_1_0_g509 - 1.0 ) + tex2DNode19_g509.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g509 = (float2(tex2DNode19_g509.g , tex2DNode19_g509.b));
+				float3 appendResult17_g509 = (float3(( ( saturate( ( ( ( break48_g507.z * 0.8 ) + 0.2 ) - temp_output_1_0_g509 ) ) * sin( ( clampResult13_g509 * PI ) ) ) * ( ( appendResult8_g509 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_9_0_g508 = ( appendResult17_g509 * _RippleNormalStrength );
+				float4 tex2DNode19_g510 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g510 = frac( ( break47_g507.w + tex2DNode19_g510.a ) );
+				float clampResult13_g510 = clamp( ( ( ( temp_output_1_0_g510 - 1.0 ) + tex2DNode19_g510.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g510 = (float2(tex2DNode19_g510.g , tex2DNode19_g510.b));
+				float3 appendResult17_g510 = (float3(( ( saturate( ( ( ( break48_g507.w * 0.8 ) + 0.2 ) - temp_output_1_0_g510 ) ) * sin( ( clampResult13_g510 * PI ) ) ) * ( ( appendResult8_g510 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_10_0_g508 = ( appendResult17_g510 * _RippleNormalStrength );
+				float4 appendResult27_g508 = (float4((temp_output_7_0_g508).z , (temp_output_8_0_g508).z , (temp_output_9_0_g508).z , (temp_output_10_0_g508).z));
+				float4 lerpResult29_g508 = lerp( float4( 1,1,1,1 ) , appendResult27_g508 , temp_output_2_0_g508);
+				float4 break38_g508 = lerpResult29_g508;
+				float3 appendResult36_g508 = (float3(( ( (temp_output_7_0_g508).xy * break39_g508.x ) + ( (temp_output_8_0_g508).xy * break39_g508.y ) + ( (temp_output_9_0_g508).xy * break39_g508.z ) + ( (temp_output_10_0_g508).xy * break39_g508.w ) ) , ( break38_g508.x * break38_g508.y * break38_g508.z * break38_g508.w )));
+				float3 normalizeResult37_g508 = normalize( appendResult36_g508 );
+				float lerpResult18_g506 = lerp( 0.05733212 , 0.1 , saturate( _WindStrength ));
+				float3 break5_g506 = ase_worldPos;
+				float4 appendResult6_g506 = (float4(break5_g506.x , break5_g506.z , break5_g506.x , break5_g506.z));
+				float mulTime9_g506 = _TimeParameters.x * 0.2;
+				float4 temp_output_8_0_g506 = ( ( appendResult6_g506 * _NormalTiling ) + ( ( mulTime9_g506 * float4(0.4,-0.1,0.02,0.4) * _WindSpeed ) * _NormalTiling ) );
+				float3 tex2DNode27_g506 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g506).xy ), 1.0f );
+				float2 appendResult19_g506 = (float2(tex2DNode27_g506.r , tex2DNode27_g506.g));
+				float3 tex2DNode29_g506 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g506).zw ), 1.0f );
+				float2 appendResult20_g506 = (float2(tex2DNode29_g506.r , tex2DNode29_g506.g));
+				float3 appendResult25_g506 = (float3(( lerpResult18_g506 * ( appendResult19_g506 + appendResult20_g506 ) ) , ( tex2DNode27_g506.b * tex2DNode29_g506.b )));
+				float3 appendResult14_g505 = (float3((( normalizeResult37_g508 + appendResult25_g506 )).xy , 1.0));
+				float2 lerpResult3_g505 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
+				float2 break4_g505 = lerpResult3_g505;
+				float temp_output_38_0_g502 = _Wetness;
+				float temp_output_37_0_g505 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g505 * _PuddleSize ) ).g - break4_g505.y ) / break4_g505.x ) ) ) - ( 1.0 - temp_output_38_0_g502 ) ) ) * 1.1 ) );
+				float3 lerpResult13_g505 = lerp( lerpResult12_g502 , appendResult14_g505 , temp_output_37_0_g505);
 				
-				float temp_output_42_0_g975 = _Smoothness;
-				float2 appendResult8_g976 = (float2(temp_output_42_0_g975 , _Smoothness));
-				float temp_output_6_0_g976 = saturate( ( ( saturate( temp_output_38_0_g975 ) * 0.7 ) + saturate( max( temp_output_37_0_g978 , temp_output_69_32_g975 ) ) ) );
-				float2 lerpResult10_g976 = lerp( appendResult8_g976 , float2( 0.93,0.3 ) , temp_output_6_0_g976);
+				float temp_output_42_0_g502 = _Smoothness;
+				float2 appendResult8_g503 = (float2(temp_output_42_0_g502 , _Smoothness));
+				float temp_output_6_0_g503 = saturate( ( ( saturate( temp_output_38_0_g502 ) * 0.7 ) + saturate( max( temp_output_37_0_g505 , temp_output_91_32_g502 ) ) ) );
+				float2 lerpResult10_g503 = lerp( appendResult8_g503 , float2( 0.93,0.3 ) , temp_output_6_0_g503);
 				
-				surfaceDescription.Normal = lerpResult13_g978;
-				surfaceDescription.Smoothness = (lerpResult10_g976).x;
-				surfaceDescription.Alpha = 1;
+				surfaceDescription.Normal = lerpResult13_g505;
+				surfaceDescription.Smoothness = (lerpResult10_g503).x;
+				surfaceDescription.Alpha = 0.0;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -4398,14 +4467,14 @@ Shader "GRIGOR/RainFull"
 
 			HLSLPROGRAM
 
+            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
+            #define _ENERGY_CONSERVING_SPECULAR 1
             #define _DISABLE_SSR_TRANSPARENT 1
             #define _SPECULAR_OCCLUSION_FROM_AO 1
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
             #define ASE_NEED_CULLFACE 1
             #define _MATERIAL_FEATURE_SPECULAR_COLOR 1
-            #define _ENERGY_CONSERVING_SPECULAR 1
-            #define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
             #define ASE_SRP_VERSION 150006
 
 
@@ -4495,8 +4564,13 @@ Shader "GRIGOR/RainFull"
 
 			CBUFFER_START( UnityPerMaterial )
 			float _DropSize;
-			float _Rain;
+			float _DropSpeed;
+			float _RainStrength;
+			float _RippleSize1;
+			float _RippleNormalStrength;
 			float _WindStrength;
+			float _NormalTiling;
+			float _WindSpeed;
 			float _PuddleSize;
 			float _MaxPuddleSize;
 			float _Wetness;
@@ -4589,6 +4663,7 @@ Shader "GRIGOR/RainFull"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Decal/DecalUtilities.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitDecalData.hlsl"
 
+			#define ASE_NEEDS_VERT_POSITION
 			#define ASE_NEEDS_FRAG_RELATIVE_WORLD_POS
 			#define ASE_NEEDS_FRAG_NORMAL
 
@@ -4851,11 +4926,15 @@ Shader "GRIGOR/RainFull"
 			AttributesMesh ApplyMeshModification(AttributesMesh inputMesh, float3 timeParameters, inout PackedVaryingsMeshToPS outputPackedVaryingsMeshToPS )
 			{
 				_TimeParameters.xyz = timeParameters;
+				float3 objectToViewPos = TransformWorldToView(TransformObjectToWorld(inputMesh.positionOS));
+				float eyeDepth = -objectToViewPos.z;
+				outputPackedVaryingsMeshToPS.ase_texcoord7.z = eyeDepth;
+				
 				outputPackedVaryingsMeshToPS.ase_texcoord7.xy = inputMesh.ase_texcoord.xy;
 				outputPackedVaryingsMeshToPS.ase_normal = inputMesh.normalOS;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
-				outputPackedVaryingsMeshToPS.ase_texcoord7.zw = 0;
+				outputPackedVaryingsMeshToPS.ase_texcoord7.w = 0;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 				float3 defaultVertexValue = inputMesh.positionOS.xyz;
@@ -5112,81 +5191,85 @@ Shader "GRIGOR/RainFull"
 				float3 V = GetWorldSpaceNormalizeViewDir(input.positionRWS);
 
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float3 temp_output_33_0_g975 = float3(0,0,1);
-				float2 texCoord39_g977 = packedInput.ase_texcoord7.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode54_g977 = tex2D( _TextureSample0, ( texCoord39_g977 * float2( 1.5,1.5 ) * _DropSize ) );
-				float2 appendResult47_g977 = (float2(tex2DNode54_g977.r , tex2DNode54_g977.g));
-				float temp_output_55_0_g977 = ( ( tex2DNode54_g977.a * 2.0 ) - 1.0 );
-				float temp_output_32_0_g975 = _Rain;
-				float temp_output_66_0_g977 = ( ( ( frac( ( tex2DNode54_g977.b - ( _TimeParameters.x * 0.7 ) ) ) * saturate( temp_output_55_0_g977 ) ) + ( 1.0 - step( ( temp_output_55_0_g977 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g975 ) );
-				float3 appendResult45_g977 = (float3(( ( ( appendResult47_g977 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g977 ) , 1.0));
-				float temp_output_69_32_g975 = temp_output_66_0_g977;
-				float3 lerpResult12_g975 = lerp( temp_output_33_0_g975 , BlendNormal( temp_output_33_0_g975 , appendResult45_g977 ) , saturate( temp_output_69_32_g975 ));
-				float temp_output_36_0_g980 = temp_output_32_0_g975;
-				float4 appendResult37_g980 = (float4(temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980 , temp_output_36_0_g980));
-				float4 temp_output_41_0_g980 = saturate( ( ( appendResult37_g980 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
-				float4 break48_g980 = temp_output_41_0_g980;
-				float4 appendResult11_g980 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
-				float4 break47_g980 = frac( ( ( ( appendResult11_g980 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
+				float3 temp_output_33_0_g502 = float3(0,0,1);
+				float2 texCoord39_g504 = packedInput.ase_texcoord7.xy * float2( 1,1 ) + float2( 0,0 );
+				float4 tex2DNode54_g504 = tex2D( _TextureSample0, ( texCoord39_g504 * float2( 1.5,1.5 ) * _DropSize ) );
+				float2 appendResult47_g504 = (float2(tex2DNode54_g504.r , tex2DNode54_g504.g));
+				float mulTime88_g504 = _TimeParameters.x * 0.2;
+				float temp_output_55_0_g504 = ( ( tex2DNode54_g504.a * 2.0 ) - 1.0 );
+				float temp_output_32_0_g502 = _RainStrength;
+				float temp_output_66_0_g504 = ( ( ( frac( ( tex2DNode54_g504.b - ( mulTime88_g504 * _DropSpeed ) ) ) * saturate( temp_output_55_0_g504 ) ) + ( 1.0 - step( ( temp_output_55_0_g504 * -1.0 ) , 0.0 ) ) ) * ( saturate( packedInput.ase_normal.y ) * temp_output_32_0_g502 ) );
+				float3 appendResult45_g504 = (float3(( ( ( appendResult47_g504 * float2( 2,2 ) ) - float2( 1,1 ) ) * temp_output_66_0_g504 ) , 1.0));
+				float eyeDepth = packedInput.ase_texcoord7.z;
+				float cameraDepthFade93_g504 = (( eyeDepth -_ProjectionParams.y - 0.0 ) / 1.0);
+				float3 lerpResult91_g504 = lerp( float3(0,0,1) , appendResult45_g504 , cameraDepthFade93_g504);
+				float temp_output_91_32_g502 = temp_output_66_0_g504;
+				float3 lerpResult12_g502 = lerp( temp_output_33_0_g502 , BlendNormal( temp_output_33_0_g502 , lerpResult91_g504 ) , saturate( temp_output_91_32_g502 ));
+				float temp_output_36_0_g507 = temp_output_32_0_g502;
+				float4 appendResult37_g507 = (float4(temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507 , temp_output_36_0_g507));
+				float4 temp_output_41_0_g507 = saturate( ( ( appendResult37_g507 - float4( 0,0.25,0.5,0.75 ) ) * float4( 4,4,4,4 ) ) );
+				float4 break48_g507 = temp_output_41_0_g507;
+				float4 appendResult11_g507 = (float4(_TimeParameters.x , _TimeParameters.x , _TimeParameters.x , _TimeParameters.x));
+				float4 break47_g507 = frac( ( ( ( appendResult11_g507 * float4( 1,0.85,0.93,0.7 ) ) + float4( 0,0.2,0.45,0.7 ) ) * float4( 1.6,1.6,1.6,1.6 ) ) );
 				float3 ase_worldPos = GetAbsolutePositionWS( positionRWS );
-				float2 temp_output_24_0_g978 = (ase_worldPos).xz;
-				float2 temp_output_24_0_g980 = temp_output_24_0_g978;
-				float4 tex2DNode19_g984 = tex2D( _TextureSample2, ( ( temp_output_24_0_g980 * float2( 0.7,0.7 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g984 = frac( ( break47_g980.x + tex2DNode19_g984.a ) );
-				float clampResult13_g984 = clamp( ( ( ( temp_output_1_0_g984 - 1.0 ) + tex2DNode19_g984.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g984 = (float2(tex2DNode19_g984.g , tex2DNode19_g984.b));
-				float3 appendResult17_g984 = (float3(( ( saturate( ( ( ( break48_g980.x * 0.8 ) + 0.2 ) - temp_output_1_0_g984 ) ) * sin( ( clampResult13_g984 * PI ) ) ) * ( ( appendResult8_g984 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_7_0_g985 = appendResult17_g984;
-				float4 temp_output_2_0_g985 = temp_output_41_0_g980;
-				float4 break39_g985 = temp_output_2_0_g985;
-				float4 tex2DNode19_g981 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g981 = frac( ( break47_g980.y + tex2DNode19_g981.a ) );
-				float clampResult13_g981 = clamp( ( ( ( temp_output_1_0_g981 - 1.0 ) + tex2DNode19_g981.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g981 = (float2(tex2DNode19_g981.g , tex2DNode19_g981.b));
-				float3 appendResult17_g981 = (float3(( ( saturate( ( ( ( break48_g980.y * 0.8 ) + 0.2 ) - temp_output_1_0_g981 ) ) * sin( ( clampResult13_g981 * PI ) ) ) * ( ( appendResult8_g981 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_8_0_g985 = appendResult17_g981;
-				float4 tex2DNode19_g982 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g982 = frac( ( break47_g980.z + tex2DNode19_g982.a ) );
-				float clampResult13_g982 = clamp( ( ( ( temp_output_1_0_g982 - 1.0 ) + tex2DNode19_g982.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g982 = (float2(tex2DNode19_g982.g , tex2DNode19_g982.b));
-				float3 appendResult17_g982 = (float3(( ( saturate( ( ( ( break48_g980.z * 0.8 ) + 0.2 ) - temp_output_1_0_g982 ) ) * sin( ( clampResult13_g982 * PI ) ) ) * ( ( appendResult8_g982 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_9_0_g985 = appendResult17_g982;
-				float4 tex2DNode19_g983 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g980 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * float2( 2,2 ) ) );
-				float temp_output_1_0_g983 = frac( ( break47_g980.w + tex2DNode19_g983.a ) );
-				float clampResult13_g983 = clamp( ( ( ( temp_output_1_0_g983 - 1.0 ) + tex2DNode19_g983.r ) * 20.0 ) , 0.0 , 5.0 );
-				float2 appendResult8_g983 = (float2(tex2DNode19_g983.g , tex2DNode19_g983.b));
-				float3 appendResult17_g983 = (float3(( ( saturate( ( ( ( break48_g980.w * 0.8 ) + 0.2 ) - temp_output_1_0_g983 ) ) * sin( ( clampResult13_g983 * PI ) ) ) * ( ( appendResult8_g983 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
-				float3 temp_output_10_0_g985 = appendResult17_g983;
-				float4 appendResult27_g985 = (float4((temp_output_7_0_g985).z , (temp_output_8_0_g985).z , (temp_output_9_0_g985).z , (temp_output_10_0_g985).z));
-				float4 lerpResult29_g985 = lerp( float4( 1,1,1,1 ) , appendResult27_g985 , temp_output_2_0_g985);
-				float4 break38_g985 = lerpResult29_g985;
-				float3 appendResult36_g985 = (float3(( ( (temp_output_7_0_g985).xy * break39_g985.x ) + ( (temp_output_8_0_g985).xy * break39_g985.y ) + ( (temp_output_9_0_g985).xy * break39_g985.z ) + ( (temp_output_10_0_g985).xy * break39_g985.w ) ) , ( break38_g985.x * break38_g985.y * break38_g985.z * break38_g985.w )));
-				float3 normalizeResult37_g985 = normalize( appendResult36_g985 );
-				float lerpResult18_g979 = lerp( 0.2 , 0.5 , saturate( _WindStrength ));
-				float3 break5_g979 = ase_worldPos;
-				float4 appendResult6_g979 = (float4(break5_g979.x , break5_g979.z , break5_g979.x , break5_g979.z));
-				float mulTime9_g979 = _TimeParameters.x * 0.2;
-				float4 temp_output_8_0_g979 = ( ( appendResult6_g979 * float4( 0.018,0.013,0.007,0.017 ) ) + ( ( mulTime9_g979 * float4(0.4,-0.1,0.02,0.4) ) * float4( 0.2,0,0,0 ) ) );
-				float3 tex2DNode27_g979 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g979).xy ), 1.0f );
-				float2 appendResult19_g979 = (float2(tex2DNode27_g979.r , tex2DNode27_g979.g));
-				float3 tex2DNode29_g979 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g979).zw ), 1.0f );
-				float2 appendResult20_g979 = (float2(tex2DNode29_g979.r , tex2DNode29_g979.g));
-				float3 appendResult25_g979 = (float3(( lerpResult18_g979 * ( appendResult19_g979 + appendResult20_g979 ) ) , ( tex2DNode27_g979.b * tex2DNode29_g979.b )));
-				float3 appendResult14_g978 = (float3((( normalizeResult37_g985 + appendResult25_g979 )).xy , 1.0));
-				float2 lerpResult3_g978 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
-				float2 break4_g978 = lerpResult3_g978;
-				float temp_output_38_0_g975 = _Wetness;
-				float temp_output_37_0_g978 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g978 * _PuddleSize ) ).g - break4_g978.y ) / break4_g978.x ) ) ) - ( 1.0 - temp_output_38_0_g975 ) ) ) * 1.1 ) );
-				float3 lerpResult13_g978 = lerp( lerpResult12_g975 , appendResult14_g978 , temp_output_37_0_g978);
+				float2 temp_output_24_0_g505 = (ase_worldPos).xz;
+				float2 temp_output_24_0_g507 = temp_output_24_0_g505;
+				float4 tex2DNode19_g511 = tex2D( _TextureSample2, ( ( temp_output_24_0_g507 * float2( 0.7,0.7 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g511 = frac( ( break47_g507.x + tex2DNode19_g511.a ) );
+				float clampResult13_g511 = clamp( ( ( ( temp_output_1_0_g511 - 1.0 ) + tex2DNode19_g511.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g511 = (float2(tex2DNode19_g511.g , tex2DNode19_g511.b));
+				float3 appendResult17_g511 = (float3(( ( saturate( ( ( ( break48_g507.x * 0.8 ) + 0.2 ) - temp_output_1_0_g511 ) ) * sin( ( clampResult13_g511 * PI ) ) ) * ( ( appendResult8_g511 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_7_0_g508 = ( appendResult17_g511 * _RippleNormalStrength );
+				float4 temp_output_2_0_g508 = temp_output_41_0_g507;
+				float4 break39_g508 = temp_output_2_0_g508;
+				float4 tex2DNode19_g512 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( -0.55,0.3 ) ) * float2( 0.75,0.75 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g512 = frac( ( break47_g507.y + tex2DNode19_g512.a ) );
+				float clampResult13_g512 = clamp( ( ( ( temp_output_1_0_g512 - 1.0 ) + tex2DNode19_g512.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g512 = (float2(tex2DNode19_g512.g , tex2DNode19_g512.b));
+				float3 appendResult17_g512 = (float3(( ( saturate( ( ( ( break48_g507.y * 0.8 ) + 0.2 ) - temp_output_1_0_g512 ) ) * sin( ( clampResult13_g512 * PI ) ) ) * ( ( appendResult8_g512 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_8_0_g508 = ( appendResult17_g512 * _RippleNormalStrength );
+				float4 tex2DNode19_g509 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,0.85 ) ) * float2( 0.65,0.65 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g509 = frac( ( break47_g507.z + tex2DNode19_g509.a ) );
+				float clampResult13_g509 = clamp( ( ( ( temp_output_1_0_g509 - 1.0 ) + tex2DNode19_g509.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g509 = (float2(tex2DNode19_g509.g , tex2DNode19_g509.b));
+				float3 appendResult17_g509 = (float3(( ( saturate( ( ( ( break48_g507.z * 0.8 ) + 0.2 ) - temp_output_1_0_g509 ) ) * sin( ( clampResult13_g509 * PI ) ) ) * ( ( appendResult8_g509 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_9_0_g508 = ( appendResult17_g509 * _RippleNormalStrength );
+				float4 tex2DNode19_g510 = tex2D( _TextureSample2, ( ( ( temp_output_24_0_g507 + float2( 0.6,-0.75 ) ) * float2( 0.72,0.72 ) ) * _RippleSize1 ) );
+				float temp_output_1_0_g510 = frac( ( break47_g507.w + tex2DNode19_g510.a ) );
+				float clampResult13_g510 = clamp( ( ( ( temp_output_1_0_g510 - 1.0 ) + tex2DNode19_g510.r ) * 20.0 ) , 0.0 , 5.0 );
+				float2 appendResult8_g510 = (float2(tex2DNode19_g510.g , tex2DNode19_g510.b));
+				float3 appendResult17_g510 = (float3(( ( saturate( ( ( ( break48_g507.w * 0.8 ) + 0.2 ) - temp_output_1_0_g510 ) ) * sin( ( clampResult13_g510 * PI ) ) ) * ( ( appendResult8_g510 * float2( 2,2 ) ) - float2( 1,1 ) ) ) , 1.0));
+				float3 temp_output_10_0_g508 = ( appendResult17_g510 * _RippleNormalStrength );
+				float4 appendResult27_g508 = (float4((temp_output_7_0_g508).z , (temp_output_8_0_g508).z , (temp_output_9_0_g508).z , (temp_output_10_0_g508).z));
+				float4 lerpResult29_g508 = lerp( float4( 1,1,1,1 ) , appendResult27_g508 , temp_output_2_0_g508);
+				float4 break38_g508 = lerpResult29_g508;
+				float3 appendResult36_g508 = (float3(( ( (temp_output_7_0_g508).xy * break39_g508.x ) + ( (temp_output_8_0_g508).xy * break39_g508.y ) + ( (temp_output_9_0_g508).xy * break39_g508.z ) + ( (temp_output_10_0_g508).xy * break39_g508.w ) ) , ( break38_g508.x * break38_g508.y * break38_g508.z * break38_g508.w )));
+				float3 normalizeResult37_g508 = normalize( appendResult36_g508 );
+				float lerpResult18_g506 = lerp( 0.05733212 , 0.1 , saturate( _WindStrength ));
+				float3 break5_g506 = ase_worldPos;
+				float4 appendResult6_g506 = (float4(break5_g506.x , break5_g506.z , break5_g506.x , break5_g506.z));
+				float mulTime9_g506 = _TimeParameters.x * 0.2;
+				float4 temp_output_8_0_g506 = ( ( appendResult6_g506 * _NormalTiling ) + ( ( mulTime9_g506 * float4(0.4,-0.1,0.02,0.4) * _WindSpeed ) * _NormalTiling ) );
+				float3 tex2DNode27_g506 = UnpackNormalScale( tex2D( _WaterNormal, (temp_output_8_0_g506).xy ), 1.0f );
+				float2 appendResult19_g506 = (float2(tex2DNode27_g506.r , tex2DNode27_g506.g));
+				float3 tex2DNode29_g506 = UnpackNormalScale( tex2D( _WaterNormal1, (temp_output_8_0_g506).zw ), 1.0f );
+				float2 appendResult20_g506 = (float2(tex2DNode29_g506.r , tex2DNode29_g506.g));
+				float3 appendResult25_g506 = (float3(( lerpResult18_g506 * ( appendResult19_g506 + appendResult20_g506 ) ) , ( tex2DNode27_g506.b * tex2DNode29_g506.b )));
+				float3 appendResult14_g505 = (float3((( normalizeResult37_g508 + appendResult25_g506 )).xy , 1.0));
+				float2 lerpResult3_g505 = lerp( float2( 1E-05,0 ) , float2( 0.1,0.25 ) , _MaxPuddleSize);
+				float2 break4_g505 = lerpResult3_g505;
+				float temp_output_38_0_g502 = _Wetness;
+				float temp_output_37_0_g505 = saturate( ( ( pow( saturate( packedInput.ase_normal.y ) , 30.0 ) * ( ( 1.0 - saturate( ( ( tex2D( _TextureSample1, ( temp_output_24_0_g505 * _PuddleSize ) ).g - break4_g505.y ) / break4_g505.x ) ) ) - ( 1.0 - temp_output_38_0_g502 ) ) ) * 1.1 ) );
+				float3 lerpResult13_g505 = lerp( lerpResult12_g502 , appendResult14_g505 , temp_output_37_0_g505);
 				
-				float temp_output_42_0_g975 = _Smoothness;
-				float2 appendResult8_g976 = (float2(temp_output_42_0_g975 , _Smoothness));
-				float temp_output_6_0_g976 = saturate( ( ( saturate( temp_output_38_0_g975 ) * 0.7 ) + saturate( max( temp_output_37_0_g978 , temp_output_69_32_g975 ) ) ) );
-				float2 lerpResult10_g976 = lerp( appendResult8_g976 , float2( 0.93,0.3 ) , temp_output_6_0_g976);
-				float3 temp_cast_0 = ((lerpResult10_g976).y).xxx;
+				float temp_output_42_0_g502 = _Smoothness;
+				float2 appendResult8_g503 = (float2(temp_output_42_0_g502 , _Smoothness));
+				float temp_output_6_0_g503 = saturate( ( ( saturate( temp_output_38_0_g502 ) * 0.7 ) + saturate( max( temp_output_37_0_g505 , temp_output_91_32_g502 ) ) ) );
+				float2 lerpResult10_g503 = lerp( appendResult8_g503 , float2( 0.93,0.3 ) , temp_output_6_0_g503);
+				float3 temp_cast_0 = ((lerpResult10_g503).y).xxx;
 				
 				surfaceDescription.BaseColor = float3( 0,0,0 );
-				surfaceDescription.Normal = lerpResult13_g978;
+				surfaceDescription.Normal = lerpResult13_g505;
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
 				surfaceDescription.Metallic = 0;
@@ -5196,9 +5279,9 @@ Shader "GRIGOR/RainFull"
 				#endif
 
 				surfaceDescription.Emission = 0;
-				surfaceDescription.Smoothness = (lerpResult10_g976).x;
+				surfaceDescription.Smoothness = (lerpResult10_g503).x;
 				surfaceDescription.Occlusion = 1;
-				surfaceDescription.Alpha = 1;
+				surfaceDescription.Alpha = 0.0;
 
 				#ifdef _ALPHATEST_ON
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
@@ -5404,14 +5487,14 @@ Shader "GRIGOR/RainFull"
 
             HLSLPROGRAM
 
+			#define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
+			#define _ENERGY_CONSERVING_SPECULAR 1
 			#define _DISABLE_SSR_TRANSPARENT 1
 			#define _SPECULAR_OCCLUSION_FROM_AO 1
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
 			#define ASE_NEED_CULLFACE 1
 			#define _MATERIAL_FEATURE_SPECULAR_COLOR 1
-			#define _ENERGY_CONSERVING_SPECULAR 1
-			#define SUPPORT_BLENDMODE_PRESERVE_SPECULAR_LIGHTING
 			#define ASE_SRP_VERSION 150006
 
 
@@ -5465,8 +5548,13 @@ Shader "GRIGOR/RainFull"
 			float4 _SelectionID;
             CBUFFER_START( UnityPerMaterial )
 			float _DropSize;
-			float _Rain;
+			float _DropSpeed;
+			float _RainStrength;
+			float _RippleSize1;
+			float _RippleNormalStrength;
 			float _WindStrength;
+			float _NormalTiling;
+			float _WindSpeed;
 			float _PuddleSize;
 			float _MaxPuddleSize;
 			float _Wetness;
@@ -5802,7 +5890,7 @@ Shader "GRIGOR/RainFull"
 
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 				
-				surfaceDescription.Alpha = 1;
+				surfaceDescription.Alpha = 0.0;
 				surfaceDescription.AlphaClipThreshold =  _AlphaCutoff;
 
 
@@ -6102,31 +6190,29 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;7;0,0;Float;False;False;-1;
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;8;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;TransparentDepthPostpass;0;8;TransparentDepthPostpass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=TransparentDepthPostpass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;9;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;Forward;0;9;Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;True;2;5;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;True;_CullModeForward;False;False;False;True;True;True;True;True;0;True;_ColorMaskTransparentVelOne;False;True;True;True;True;True;0;True;_ColorMaskTransparentVelTwo;False;False;False;True;True;0;True;_StencilRef;255;False;;255;True;_StencilWriteMask;7;False;;3;False;;0;False;;0;False;;7;False;;3;False;;0;False;;0;False;;False;True;0;True;_ZWrite;True;0;True;_ZTestDepthEqualForOpaque;False;True;1;LightMode=Forward;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;10;0,0;Float;False;False;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;New Amplify Shader;53b46d85872c5b24c8f4f0a1c3fe4c87;True;ScenePickingPass;0;10;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;True;3;False;;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;3143.447,-196.9756;Float;False;True;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;GRIGOR/RainFull;53b46d85872c5b24c8f4f0a1c3fe4c87;True;GBuffer;0;0;GBuffer;34;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;True;True;0;True;_StencilRefGBuffer;255;False;;255;True;_StencilWriteMaskGBuffer;7;False;;3;False;;0;False;;0;False;;7;False;;3;False;;0;False;;0;False;;False;False;True;0;True;_ZTestGBuffer;False;True;1;LightMode=GBuffer;False;False;0;;0;0;Standard;39;Surface Type;0;638381115530881310;  Rendering Pass;1;0;  Refraction Model;0;0;    Blending Mode;0;0;    Blend Preserves Specular;1;0;  Back Then Front Rendering;0;0;  Transparent Depth Prepass;0;0;  Transparent Depth Postpass;0;0;  ZWrite;0;0;  Z Test;4;0;Double-Sided;1;638381052524728727;Alpha Clipping;0;0;  Use Shadow Threshold;0;0;Material Type,InvertActionOnDeselection;4;638383745476504419;  Energy Conserving Specular;1;0;  Transmission,InvertActionOnDeselection;0;0;Forward Only;0;0;Receive Decals;1;0;Receives SSR;1;0;Receive SSR Transparent;0;0;Motion Vectors;1;0;  Add Precomputed Velocity;0;0;Specular AA;0;0;Specular Occlusion Mode;1;0;Override Baked GI;0;0;Depth Offset;0;0;DOTS Instancing;0;0;GPU Instancing;1;0;LOD CrossFade;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position;1;0;0;11;True;True;True;True;True;True;False;False;False;True;True;False;;False;0
-Node;AmplifyShaderEditor.RangedFloatNode;185;2240.538,474.6875;Inherit;False;Property;_WindStrength;Wind Strength;0;0;Create;True;0;0;0;False;0;False;1;2;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;194;2235.862,580.4712;Inherit;False;Property;_PuddleSize;Puddle Size;1;0;Create;True;0;0;0;False;0;False;1;0;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;135;2244.931,684.5586;Inherit;False;Property;_MaxPuddleSize;Max Puddle Size;2;0;Create;True;0;0;0;False;0;False;0.5;0.5;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;268;2236.972,783.8332;Inherit;False;Property;_Wetness;Wetness;3;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;269;2244.703,282.4584;Inherit;False;Property;_Rain;Rain;4;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.Vector3Node;270;2060.277,141.1013;Inherit;False;Constant;_Vector3;Vector 3;26;0;Create;True;0;0;0;False;0;False;0,0,1;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.ColorNode;273;2003.955,-162.5955;Inherit;False;Constant;_Color1;Color 1;26;0;Create;True;0;0;0;False;0;False;0.06256139,0.05762725,0.06603771,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;271;2061.382,44.79662;Inherit;False;Property;_Smoothness;Smoothness;5;0;Create;True;0;0;0;False;0;False;0.5101905;0.5;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;399;2015.214,-305.5936;Inherit;False;Property;_DropSize;Drop Size;6;0;Create;True;0;0;0;False;0;False;1;0;0;5;0;1;FLOAT;0
-Node;AmplifyShaderEditor.FunctionNode;407;2714.24,-197.1668;Inherit;False;Rain;0;;975;ccca7ec04c8f389498d9203a0179d6ad;0;11;65;FLOAT;1;False;39;FLOAT;0;False;40;FLOAT;0;False;41;FLOAT3;0,0,0;False;42;FLOAT;0;False;32;FLOAT;1;False;33;FLOAT3;0,0,1;False;34;FLOAT;0;False;35;FLOAT;0;False;36;FLOAT;0;False;38;FLOAT;0;False;4;FLOAT3;45;FLOAT3;0;FLOAT;43;FLOAT;44
-WireConnection;0;0;407;0
-WireConnection;0;1;407;45
-WireConnection;0;5;407;43
-WireConnection;0;7;407;44
-WireConnection;407;65;399;0
-WireConnection;407;39;271;0
-WireConnection;407;40;271;0
-WireConnection;407;41;273;0
-WireConnection;407;42;271;0
-WireConnection;407;32;269;0
-WireConnection;407;33;270;0
-WireConnection;407;34;185;0
-WireConnection;407;35;194;0
-WireConnection;407;36;135;0
-WireConnection;407;38;268;0
+Node;AmplifyShaderEditor.RangedFloatNode;185;2240.538,474.6875;Inherit;False;Property;_WindStrength;Wind Strength;0;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;271;2061.382,44.79662;Inherit;False;Property;_Smoothness;Smoothness;34;0;Create;True;0;0;0;False;0;False;0.5;1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;269;2233.718,368.7776;Inherit;False;Property;_RainStrength;Rain Strength;33;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;437;2941.88,164.8206;Inherit;False;Constant;_Float0;Float 0;18;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;430;1993.441,-341.9965;Inherit;False;Property;_WindSpeed;Wind Speed;35;0;Create;True;0;0;0;False;0;False;1;0.5;0;10;0;1;FLOAT;0
+Node;AmplifyShaderEditor.Vector3Node;436;2175.795,175.999;Inherit;False;Constant;_Normal;Normal;17;0;Create;True;0;0;0;False;0;False;0,0,1;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.RangedFloatNode;268;2234.195,583.8332;Inherit;False;Property;_Wetness;Wetness;32;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;434;2043.021,-206.5798;Inherit;False;Property;_Tint;Tint;31;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;3364.447,-238.5756;Float;False;True;-1;2;Rendering.HighDefinition.LightingShaderGraphGUI;0;14;GRIGOR/RainFull;53b46d85872c5b24c8f4f0a1c3fe4c87;True;GBuffer;0;0;GBuffer;34;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;True;True;0;True;_StencilRefGBuffer;255;False;;255;True;_StencilWriteMaskGBuffer;7;False;;3;False;;0;False;;0;False;;7;False;;3;False;;0;False;;0;False;;False;False;True;0;True;_ZTestGBuffer;False;True;1;LightMode=GBuffer;False;False;0;;0;0;Standard;39;Surface Type;1;638384474923729484;  Rendering Pass;1;0;  Refraction Model;0;0;    Blending Mode;0;0;    Blend Preserves Specular;1;0;  Back Then Front Rendering;0;0;  Transparent Depth Prepass;0;0;  Transparent Depth Postpass;0;0;  ZWrite;1;638384507146096487;  Z Test;4;0;Double-Sided;1;638381052524728727;Alpha Clipping;0;0;  Use Shadow Threshold;0;0;Material Type,InvertActionOnDeselection;4;638383745476504419;  Energy Conserving Specular;1;0;  Transmission,InvertActionOnDeselection;0;0;Forward Only;0;0;Receive Decals;1;0;Receives SSR;1;0;Receive SSR Transparent;0;0;Motion Vectors;1;0;  Add Precomputed Velocity;0;0;Specular AA;0;0;Specular Occlusion Mode;1;0;Override Baked GI;0;0;Depth Offset;0;0;DOTS Instancing;0;0;GPU Instancing;1;0;LOD CrossFade;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position;1;0;0;11;True;True;True;True;True;True;False;False;False;True;True;False;;False;0
+Node;AmplifyShaderEditor.FunctionNode;477;2714.24,-197.1668;Inherit;False;Rain;1;;502;ccca7ec04c8f389498d9203a0179d6ad;0;9;75;FLOAT;1;False;39;FLOAT;0;False;40;FLOAT;0;False;41;FLOAT3;0,0,0;False;42;FLOAT;0;False;32;FLOAT;1;False;33;FLOAT3;0,0,1;False;34;FLOAT;0;False;38;FLOAT;0;False;4;FLOAT3;45;FLOAT3;0;FLOAT;43;FLOAT;44
+WireConnection;0;0;477;0
+WireConnection;0;1;477;45
+WireConnection;0;5;477;43
+WireConnection;0;7;477;44
+WireConnection;0;9;437;0
+WireConnection;477;75;430;0
+WireConnection;477;39;271;0
+WireConnection;477;40;271;0
+WireConnection;477;41;434;0
+WireConnection;477;42;271;0
+WireConnection;477;32;269;0
+WireConnection;477;33;436;0
+WireConnection;477;34;185;0
+WireConnection;477;38;268;0
 ASEEND*/
-//CHKSM=FC420FC44BA80C32FD0582F05378DF22E9530F8B
+//CHKSM=FA03DC7E0A6846FCFA4E0ECE56CA1786F19A41A1
