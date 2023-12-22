@@ -2,7 +2,7 @@
 using CardboardCore.Utilities;
 using UnityEngine;
 
-namespace Grigor.Gameplay.Rendering
+namespace Grigor.Gameplay.Weather
 {
     public class RainZoneCustomParticleCulling : MonoBehaviour
     {

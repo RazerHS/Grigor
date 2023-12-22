@@ -29,13 +29,9 @@ namespace Grigor.Gameplay.Lighting
 
         private void OnTimeChanged(int minutes, int hours)
         {
-            int totalDayMinutes = 60 * 24;
-            float currentPassedMinutes = hours * 60 + minutes;
-
-            UpdateLighting(currentPassedMinutes / totalDayMinutes);
+            UpdateLighting(timeManager.GetCurrentDayPercentage());
         }
 
-        // TO-DO: make sun rotate all 360 degrees instead of back and forth
         private void UpdateLighting(float timePercent)
         {
             if (directionalLight == null)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Grigor.Data
 {
-    [GlobalConfig, CreateAssetMenu(fileName = "Config", menuName = "Grigor/GameConfig")]
+    [GlobalConfig, CreateAssetMenu(fileName = "Config", menuName = "Grigor/Game Config")]
     public class GameConfig : GlobalConfig<GameConfig>
     {
         [SerializeField, ColoredBoxGroup("Sky and Ambience Color", true, 0.2f, 0.5f, 0.5f)] private Gradient ambientColor;

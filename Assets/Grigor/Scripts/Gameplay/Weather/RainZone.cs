@@ -3,7 +3,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Gameplay.Rendering
+namespace Grigor.Gameplay.Weather
 {
     public class RainZone : MonoBehaviour
     {

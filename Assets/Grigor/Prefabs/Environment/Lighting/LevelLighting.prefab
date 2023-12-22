@@ -98,6 +98,55 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 1fba856ad68e31d439023521a3ac579d, type: 2}
+--- !u!1 &5435625705000857435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7259113791096940503}
+  - component: {fileID: 7233701151549332287}
+  m_Layer: 0
+  m_Name: WeatherController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7259113791096940503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435625705000857435}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5510277781214765930}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7233701151549332287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435625705000857435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c7964a32574c13a089c5f2031a6a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 5781561336127218965}
+  fog: {fileID: 2956316096266647423, guid: a6d870cf5709fd340b9a347a7b6ed896, type: 2}
+  volumetricClouds: {fileID: -689740527006056725, guid: a6d870cf5709fd340b9a347a7b6ed896,
+    type: 2}
+  sharedRainMaterial: {fileID: 2100000, guid: 56bf888155e21a04b932e85c243a3c0b, type: 2}
 --- !u!1 &5568215139981967130
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +260,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1.2
+  m_VolumetricDimmer: 1.83
   m_LightUnit: 2
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
@@ -348,6 +397,7 @@ Transform:
   - {fileID: 2171274398742108569}
   - {fileID: 4324308000775597777}
   - {fileID: 5848231782100407983}
+  - {fileID: 7259113791096940503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5457188009364571631
