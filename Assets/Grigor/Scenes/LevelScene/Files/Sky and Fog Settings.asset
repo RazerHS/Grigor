@@ -60,10 +60,10 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0}
   bottomAltitude:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1500
   altitudeRange:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 2500
   fadeInMode:
     m_OverrideState: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 64
   densityCurve:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       serializedVersion: 2
       m_Curve:
@@ -140,7 +140,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.05
+        time: 0.15
         value: 1
         inSlope: 0
         outSlope: 0
@@ -149,17 +149,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -170,7 +161,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   erosionCurve:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       serializedVersion: 2
       m_Curve:
@@ -205,7 +196,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   ambientOcclusionCurve:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       serializedVersion: 2
       m_Curve:
@@ -232,7 +223,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   scatteringTint:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0.68229055, b: 1, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   powderEffectIntensity:
     m_OverrideState: 0
     m_Value: 0.25
@@ -241,33 +232,33 @@ MonoBehaviour:
     m_Value: 0.5
   densityMultiplier:
     m_OverrideState: 1
-    m_Value: 0.185
+    m_Value: 0.6705305
   shapeFactor:
     m_OverrideState: 1
-    m_Value: 0.45
+    m_Value: 0.8886527
   shapeScale:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 10
   shapeOffset:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0, z: 0}
   erosionFactor:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.52152586
   erosionScale:
     m_OverrideState: 1
-    m_Value: 75
+    m_Value: 50
   erosionNoiseType:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   microErosion:
     m_OverrideState: 0
     m_Value: 0
   microErosionFactor:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.52152586
   microErosionScale:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 300
   ambientLightProbeDimmer:
     m_OverrideState: 0
@@ -303,7 +294,7 @@ MonoBehaviour:
     m_Value: 1
   erosionSpeedMultiplier:
     m_OverrideState: 0
-    m_Value: 0.25
+    m_Value: 1
   verticalShapeWindSpeed:
     m_OverrideState: 0
     m_Value: 0
@@ -320,8 +311,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   shadows:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   shadowResolution:
     m_OverrideState: 0
     m_Value: 256
@@ -418,7 +409,7 @@ MonoBehaviour:
     m_Value: 428.1
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 100
+    m_Value: 118.37243
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1

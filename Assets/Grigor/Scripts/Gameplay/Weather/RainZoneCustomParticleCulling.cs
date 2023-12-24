@@ -9,7 +9,6 @@ namespace Grigor.Gameplay.Weather
         [SerializeField, HideInInspector] private RainZoneManager rainZoneManager;
 
         private Camera currentCamera;
-        private int logged;
 
         private CullingGroup cullingGroup;
 
@@ -62,7 +61,7 @@ namespace Grigor.Gameplay.Weather
             cullingGroup.onStateChanged += OnStateChanged;
         }
 
-        public void ResetBoundingDistance()
+        private void ResetBoundingDistance()
         {
             cullingGroup.SetBoundingDistances(new[] { rainZoneManager.CullingDistance });
         }
@@ -86,8 +85,7 @@ namespace Grigor.Gameplay.Weather
 
         private void OnStateChanged(CullingGroupEvent @event)
         {
-            logged++;
-            Log.Write(logged);
+            Log.Write("changed");
 
             Cull(@event.isVisible);
         }

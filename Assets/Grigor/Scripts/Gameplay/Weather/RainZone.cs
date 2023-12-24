@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Codice.CM.Common;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Grigor.Gameplay.Weather
         [SerializeField] private RainZoneCustomParticleCulling particleCulling;
 
         public RainZoneCustomParticleCulling ParticleCulling => particleCulling;
+        private RainZoneManager rainZoneManager;
 
         [Button(ButtonSizes.Large)]
         private void GetRainParticleSystems()
@@ -45,14 +47,34 @@ namespace Grigor.Gameplay.Weather
 
         public void Initialize(RainZoneManager rainZoneManager)
         {
+            this.rainZoneManager = rainZoneManager;
+
             particleCulling.Initialize();
             particleCulling.SetRainZoneManager(rainZoneManager);
 
             particleCulling.CullEvent += OnCull;
 
+            rainZoneManager.SetRainStrengthEvent += OnSetRainStrength;
+
             GetRenderers();
 
             DisableRain();
+        }
+
+        public void Dispose()
+        {
+            particleCulling.CullEvent -= OnCull;
+
+            rainZoneManager.SetRainStrengthEvent -= OnSetRainStrength;
+        }
+
+        private void OnSetRainStrength(float value)
+        {
+            for (int i = 0; i < rainParticleSystems.Count; i++)
+            {
+                ParticleSystem.EmissionModule emissionModule = rainParticleSystems[i].emission;
+                emissionModule.rateOverTime = value;
+            }
         }
 
         private void OnCull(bool visible)

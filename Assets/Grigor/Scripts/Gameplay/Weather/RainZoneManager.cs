@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Weather
 {
+    [Injectable]
     public class RainZoneManager : MonoBehaviour
     {
         [SerializeField] private RainZone rainZonePrefab;
@@ -19,11 +22,21 @@ namespace Grigor.Gameplay.Weather
         public float CullingDistance => cullingDistance;
         public bool DrawGizmos => drawGizmos;
 
+        public event Action<float> SetRainStrengthEvent;
+
         private void Awake()
         {
             foreach (RainZone rainZone in rainZones)
             {
                 rainZone.Initialize(this);
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (RainZone rainZone in rainZones)
+            {
+                rainZone.Dispose();
             }
         }
 
@@ -57,15 +70,6 @@ namespace Grigor.Gameplay.Weather
             }
         }
 
-        [Button(ButtonSizes.Large)]
-        private void ResetBoundingDistances()
-        {
-            foreach (RainZone rainZone in rainZones)
-            {
-                rainZone.ParticleCulling.ResetBoundingDistance();
-            }
-        }
-
         private void ClearRainZones()
         {
             for (int i = rainZones.Count - 1; i >= 0; i--)
@@ -74,6 +78,11 @@ namespace Grigor.Gameplay.Weather
             }
 
             rainZones.Clear();
+        }
+
+        public void SetRainStrength(float value)
+        {
+            SetRainStrengthEvent?.Invoke(value);
         }
     }
 }

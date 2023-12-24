@@ -2,6 +2,7 @@
 using CardboardCore.Utilities;
 using Grigor.Data;
 using Grigor.Gameplay.Time;
+using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -11,14 +12,17 @@ namespace Grigor.Gameplay.Weather
 {
     public class WeatherController : CardboardCoreBehaviour
     {
-        [SerializeField] private Volume volume;
-        [SerializeField] private Fog fog;
-        [SerializeField] private VolumetricClouds volumetricClouds;
-        [SerializeField] private Material sharedRainMaterial;
+        [SerializeField, ColoredBoxGroup("References", false, true)] private Volume skyAndFogVolume;
+        [SerializeField, ColoredBoxGroup("References")] private Volume postProcessingVolume;
+        [SerializeField, ColoredBoxGroup("References")] private Material sharedRainMaterial;
+        [SerializeField, ColoredBoxGroup("Sky and Fog Components", false, true), ReadOnly] private Fog fog;
+        [SerializeField, ColoredBoxGroup("Sky and Fog Components"), ReadOnly] private VolumetricClouds volumetricClouds;
+        [SerializeField, ColoredBoxGroup("Post-Processing Components", false, true), ReadOnly] private Exposure exposure;
 
         [Inject] private TimeManager timeManager;
+        [Inject] private RainZoneManager rainZoneManager;
 
-        private EvaluatedWeatherData currentEvaluatedWeatherData;
+        [ShowInInspector, ReadOnly] private EvaluatedWeatherData currentEvaluatedWeatherData;
 
         private static readonly int RainStrength = Shader.PropertyToID("_RainStrength");
         private static readonly int DropSpeed = Shader.PropertyToID("_DropSpeed");
@@ -30,14 +34,19 @@ namespace Grigor.Gameplay.Weather
         [Button(ButtonSizes.Large)]
         private void GetVolumeComponents()
         {
-            if (!volume.sharedProfile.TryGet(out fog))
+            if (!skyAndFogVolume.sharedProfile.TryGet(out fog))
             {
                 throw Log.Exception("Fog component not found in volume!");
             }
 
-            if (!volume.sharedProfile.TryGet(out volumetricClouds))
+            if (!skyAndFogVolume.sharedProfile.TryGet(out volumetricClouds))
             {
                 throw Log.Exception("Volumetric Clouds component not found in volume!");
+            }
+
+            if (!postProcessingVolume.sharedProfile.TryGet(out exposure))
+            {
+                throw Log.Exception("Exposure component not found in volume!");
             }
         }
 
@@ -53,16 +62,24 @@ namespace Grigor.Gameplay.Weather
 
         private void OnTimeChanged(int minutes, int hours)
         {
-            currentEvaluatedWeatherData = WeatherConfig.Instance.GetCurrentEvaluatedWeatherDataByDay(1, timeManager.GetCurrentDayPercentage());
+            currentEvaluatedWeatherData = SceneConfig.Instance.GetCurrentEvaluatedWeatherDataByDay(1, timeManager.GetCurrentDayPercentage());
 
             SetFog(currentEvaluatedWeatherData.FogAttenuationDistance);
-            SetCloudDensity( currentEvaluatedWeatherData.CloudDensity);
+            SetCloudDensity(currentEvaluatedWeatherData.CloudDensity);
             SetRainStrength(currentEvaluatedWeatherData.RainStrength);
             SetGroundRainDropSpeed(currentEvaluatedWeatherData.RainDropSpeed);
             SetWetness(currentEvaluatedWeatherData.Wetness);
             SetWindStrength(currentEvaluatedWeatherData.WindStrength);
             SetWindSpeed(currentEvaluatedWeatherData.WindSpeed);
             SetSmoothness(currentEvaluatedWeatherData.GroundSmoothness);
+
+            SetCloudShapeFactor(currentEvaluatedWeatherData.CloudShapeFactor);
+            SetCloudErosionFactor(currentEvaluatedWeatherData.CloudErosionFactor);
+            SetCloudMicroErosionFactor(currentEvaluatedWeatherData.CloudMicroErosionFactor);
+
+            SetExposure(currentEvaluatedWeatherData.Exposure);
+
+            rainZoneManager.SetRainStrength(currentEvaluatedWeatherData.RainParticleEmission);
         }
 
         private void SetFog(float value)
@@ -103,6 +120,26 @@ namespace Grigor.Gameplay.Weather
         private void SetSmoothness(float value)
         {
             sharedRainMaterial.SetFloat(Smoothness, value);
+        }
+
+        private void SetCloudShapeFactor(float value)
+        {
+            volumetricClouds.shapeFactor.value = value;
+        }
+
+        private void SetCloudErosionFactor(float value)
+        {
+            volumetricClouds.erosionFactor.value = value;
+        }
+
+        private void SetCloudMicroErosionFactor(float value)
+        {
+            volumetricClouds.microErosionFactor.value = value;
+        }
+
+        private void SetExposure(float value)
+        {
+            exposure.fixedExposure.value = value;
         }
     }
 }
