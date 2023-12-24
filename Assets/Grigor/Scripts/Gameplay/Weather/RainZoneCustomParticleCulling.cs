@@ -21,6 +21,11 @@ namespace Grigor.Gameplay.Weather
                 return;
             }
 
+            if (cullingGroup == null)
+            {
+                return;
+            }
+
             Color col = Color.yellow;
 
             if (cullingGroup != null && !cullingGroup.IsVisible(0))
@@ -66,27 +71,17 @@ namespace Grigor.Gameplay.Weather
             cullingGroup.SetBoundingDistances(new[] { rainZoneManager.CullingDistance });
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
+            cullingGroup.enabled = false;
+
             cullingGroup.onStateChanged -= OnStateChanged;
 
-            if (cullingGroup != null)
-            {
-                cullingGroup.enabled = false;
-            }
-
-            Cull(true);
-        }
-
-        private void OnDestroy()
-        {
             cullingGroup?.Dispose();
         }
 
         private void OnStateChanged(CullingGroupEvent @event)
         {
-            Log.Write("changed");
-
             Cull(@event.isVisible);
         }
 

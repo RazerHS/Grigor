@@ -32,7 +32,7 @@ namespace Grigor.Gameplay.Weather
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             foreach (RainZone rainZone in rainZones)
             {

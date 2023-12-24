@@ -66,6 +66,8 @@ namespace Grigor.Gameplay.Weather
             particleCulling.CullEvent -= OnCull;
 
             rainZoneManager.SetRainStrengthEvent -= OnSetRainStrength;
+
+            particleCulling.Dispose();
         }
 
         private void OnSetRainStrength(float value)
