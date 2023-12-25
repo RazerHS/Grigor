@@ -22,13 +22,14 @@ namespace Grigor.Gameplay.Saving
 
         public T Load<T>(string key)
         {
-            if (!ES3.KeyExists(key))
+            if (ES3.KeyExists(key))
             {
-                Log.Write($"Key {key} does not exist in the save file!");
-                return default;
+                return ES3.Load<T>(key);
             }
 
-            return ES3.Load<T>(key);
+            Log.Write($"Key {key} does not exist in the save file!");
+
+            return default;
         }
 
         public void LoadInto<T>(string key, T value) where T : class
@@ -36,6 +37,7 @@ namespace Grigor.Gameplay.Saving
             if (!ES3.KeyExists(key))
             {
                 Log.Write($"Key {key} does not exist in the save file!");
+
                 return;
             }
 

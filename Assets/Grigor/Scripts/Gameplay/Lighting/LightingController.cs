@@ -17,9 +17,13 @@ namespace Grigor.Gameplay.Lighting
 
         [Inject] private TimeManager timeManager;
 
+        private SceneConfig sceneConfig;
+
         protected override void OnInjected()
         {
             timeManager.TimeChangedEvent += OnTimeChanged;
+
+            sceneConfig = SceneConfig.Instance;
         }
 
         protected override void OnReleased()
@@ -39,22 +43,17 @@ namespace Grigor.Gameplay.Lighting
                 throw Log.Exception("No directional light set!");
             }
 
-            RenderSettings.ambientLight = SceneConfig.Instance.AmbientColor.Evaluate(timePercent);
-            RenderSettings.fogColor = SceneConfig.Instance.FogColor.Evaluate(timePercent);
+            RenderSettings.ambientLight = sceneConfig.AmbientColor.Evaluate(timePercent);
 
-            if (directionalLight == null)
-            {
-                return;
-            }
+            directionalLight.color = sceneConfig.DirectionalColor.Evaluate(timePercent);
 
-            directionalLight.color = SceneConfig.Instance.DirectionalColor.Evaluate(timePercent);
+            Vector3 newSunRotation = new Vector3((timePercent * 360f) + sunRotationDegreeOffset - 90f, 170f, 0f);
 
-            Vector3 newRotation = new Vector3((timePercent * 360f) + sunRotationDegreeOffset - 90f, 170f, 0f);
-            directionalLight.transform.DOLocalRotate(newRotation, 0.5f).SetEase(Ease.OutSine);
+            float transitionTime = sceneConfig.SmoothSunTransition ? sceneConfig.SmoothSunTransitionTime : 0f;
 
-            SceneConfig.Instance.OnSunRotationUpdated(newRotation.x);
+            directionalLight.transform.DOLocalRotate(newSunRotation, transitionTime).SetEase(Ease.OutSine);
 
-            // Log.Write($"time: {timePercent}, rotation: {newRotation}");
+            sceneConfig.OnSunRotationUpdated(newSunRotation.x);
         }
     }
 }

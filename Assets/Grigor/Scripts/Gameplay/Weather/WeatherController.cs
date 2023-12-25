@@ -24,6 +24,9 @@ namespace Grigor.Gameplay.Weather
 
         [ShowInInspector, ReadOnly] private EvaluatedWeatherData currentEvaluatedWeatherData;
 
+        private EvaluatedWeatherData initialWeatherData = new();
+        private SceneConfig sceneConfig;
+
         private static readonly int RainStrength = Shader.PropertyToID("_RainStrength");
         private static readonly int DropSpeed = Shader.PropertyToID("_DropSpeed");
         private static readonly int Wetness = Shader.PropertyToID("_Wetness");
@@ -31,7 +34,63 @@ namespace Grigor.Gameplay.Weather
         private static readonly int WindSpeed = Shader.PropertyToID("_WindSpeed");
         private static readonly int Smoothness = Shader.PropertyToID("_Smoothness");
 
-        [Button(ButtonSizes.Large)]
+        protected override void OnInjected()
+        {
+            GetVolumeComponents();
+
+            SaveInitialPermanentData();
+
+            timeManager.TimeChangedEvent += OnTimeChanged;
+        }
+
+        protected override void OnReleased()
+        {
+            LoadInitialPermanentData();
+
+            timeManager.TimeChangedEvent -= OnTimeChanged;
+        }
+
+        // NOTE: changes to permanent data, such as the volume assets and the shared rain material we edit,
+        // are saved even if changed during runtime. because this happens always, we need to avoid source control issues
+        // and reload the initial data from the assets when the scene is loaded to not constantly make changes to these assets.
+        // this also enables whoever is working on the scene to create their own initial data and not have the weather cycle
+        // affect their work.
+        private void SaveInitialPermanentData()
+        {
+            initialWeatherData.SetFogAttenuationDistance(fog.meanFreePath.value);
+            initialWeatherData.SetCloudDensity(volumetricClouds.densityMultiplier.value);
+            initialWeatherData.SetRainStrength(sharedRainMaterial.GetFloat(RainStrength));
+            initialWeatherData.SetRainDropSpeed(sharedRainMaterial.GetFloat(DropSpeed));
+            initialWeatherData.SetWetness(sharedRainMaterial.GetFloat(Wetness));
+            initialWeatherData.SetWindStrength(sharedRainMaterial.GetFloat(WindStrength));
+            initialWeatherData.SetWindSpeed(sharedRainMaterial.GetFloat(WindSpeed));
+            initialWeatherData.SetGroundSmoothness(sharedRainMaterial.GetFloat(Smoothness));
+
+            initialWeatherData.SetCloudShapeFactor(volumetricClouds.shapeFactor.value);
+            initialWeatherData.SetCloudErosionFactor(volumetricClouds.erosionFactor.value);
+            initialWeatherData.SetCloudMicroErosionFactor(volumetricClouds.microErosionFactor.value);
+
+            initialWeatherData.SetExposure(exposure.fixedExposure.value);
+        }
+
+        private void LoadInitialPermanentData()
+        {
+            SetFog(initialWeatherData.FogAttenuationDistance);
+            SetCloudDensity(initialWeatherData.CloudDensity);
+            SetRainStrength(initialWeatherData.RainStrength);
+            SetGroundRainDropSpeed(initialWeatherData.RainDropSpeed);
+            SetWetness(initialWeatherData.Wetness);
+            SetWindStrength(initialWeatherData.WindStrength);
+            SetWindSpeed(initialWeatherData.WindSpeed);
+            SetSmoothness(initialWeatherData.GroundSmoothness);
+
+            SetCloudShapeFactor(initialWeatherData.CloudShapeFactor);
+            SetCloudErosionFactor(initialWeatherData.CloudErosionFactor);
+            SetCloudMicroErosionFactor(initialWeatherData.CloudMicroErosionFactor);
+
+            SetExposure(initialWeatherData.Exposure);
+        }
+
         private void GetVolumeComponents()
         {
             if (!skyAndFogVolume.sharedProfile.TryGet(out fog))
@@ -48,16 +107,6 @@ namespace Grigor.Gameplay.Weather
             {
                 throw Log.Exception("Exposure component not found in volume!");
             }
-        }
-
-        protected override void OnInjected()
-        {
-            timeManager.TimeChangedEvent += OnTimeChanged;
-        }
-
-        protected override void OnReleased()
-        {
-            timeManager.TimeChangedEvent -= OnTimeChanged;
         }
 
         private void OnTimeChanged(int minutes, int hours)

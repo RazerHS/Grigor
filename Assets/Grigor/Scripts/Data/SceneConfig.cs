@@ -13,9 +13,10 @@ namespace Grigor.Data
     {
         [SerializeField, ColoredBoxGroup("Lighting", true, 0.2f, 0.5f, 0.5f)] private Gradient ambientColor;
         [SerializeField, ColoredBoxGroup("Lighting")] private Gradient directionalColor;
-        [SerializeField, ColoredBoxGroup("Lighting")] private Gradient fogColor;
         [SerializeField, ColoredBoxGroup("Lighting") ,Range(0, 14f)] private float daytimeExposure;
         [SerializeField, ColoredBoxGroup("Lighting"), Range(0, 14f)] private float nighttimeExposure;
+        [SerializeField, ColoredBoxGroup("Lighting")] private bool smoothSunTransition;
+        [SerializeField, ColoredBoxGroup("Lighting"), ShowIf(nameof(smoothSunTransition))] private float smoothSunTransitionTime;
 
         [PropertyTooltip("An angle smaller than 90 degrees and greater than 0 that represents the first angle of the sun's rotation in the sky when the exposure is the brightest. Also works vice-versa for nighttime.")]
         [SerializeField, ColoredBoxGroup("Lighting"), Range(1, 89)] private int exposureMinimumSunRotationAngle;
@@ -27,7 +28,7 @@ namespace Grigor.Data
         [SerializeField, ColoredBoxGroup("Time"), Range(0, 24)] private int nightStartHour = 22;
         [SerializeField, ColoredBoxGroup("Time"), Range(0, 24)] private int startHour = 8;
         [SerializeField, ColoredBoxGroup("Time")] private bool changeTimeAutomatically;
-        [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(changeTimeAutomatically))] private float timeMultiplier;
+        [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(changeTimeAutomatically)), Range(1, 15000)] private float timeMultiplier;
 
         [InfoBox("These controls affect the value of the property from 00:00 to 23:59.")]
         [SerializeField] private List<DailyWeatherData> weatherDataList;
@@ -72,13 +73,15 @@ namespace Grigor.Data
 
         public Gradient AmbientColor => ambientColor;
         public Gradient DirectionalColor => directionalColor;
-        public Gradient FogColor => fogColor;
 
         public int DayStartHour => dayStartHour;
         public int NightStartHour => nightStartHour;
         public int StartHour => startHour;
         public bool ChangeTimeAutomatically => changeTimeAutomatically;
         public float TimeMultiplier => timeMultiplier;
+
+        public bool SmoothSunTransition => smoothSunTransition;
+        public float SmoothSunTransitionTime => smoothSunTransitionTime;
 
         public EvaluatedWeatherData GetCurrentEvaluatedWeatherDataByDay(int day, float percentage)
         {
@@ -96,7 +99,7 @@ namespace Grigor.Data
             float cloudErosionFactor = weatherDataList[index].EvaluateCloudErosionFactor(percentage);
             float cloudMicroErosionFactor = weatherDataList[index].EvaluateCloudMicroErosionFactor(percentage);
 
-            float exposure = Mathf.Lerp(daytimeExposure, nighttimeExposure, CustomExposureRemap(currentSunRotation, exposureMinimumSunRotationAngle, exposureMaximumSunRotationAngle));
+            float exposure = Mathf.Lerp(nighttimeExposure, daytimeExposure, CustomExposureRemap(currentSunRotation, exposureMinimumSunRotationAngle, exposureMaximumSunRotationAngle));
 
             float rainStrength = cloudDensity > cloudDensityRainMinimumThreshold ? Mathf.Clamp01((cloudDensity - cloudDensityRainMinimumThreshold) / (1 - cloudDensityRainMinimumThreshold)) : 0f;
 
