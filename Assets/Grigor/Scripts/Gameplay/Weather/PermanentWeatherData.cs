@@ -3,11 +3,10 @@ using UnityEngine;
 
 namespace Grigor.Gameplay.Weather
 {
-    public struct EvaluatedWeatherData
+    public struct PermanentWeatherData
     {
         [ShowInInspector] private float cloudDensity;
         [ShowInInspector] private float windSpeed;
-        [ShowInInspector] private float rainParticleEmission;
         [ShowInInspector] private float windStrength;
         [ShowInInspector] private float fogAttenuationDistance;
         [ShowInInspector] private float puddleWindSpeed;
@@ -22,7 +21,6 @@ namespace Grigor.Gameplay.Weather
 
         public float CloudDensity => cloudDensity;
         public float WindSpeed => windSpeed;
-        public float RainParticleEmission => rainParticleEmission;
         public float WindStrength => windStrength;
         public float FogAttenuationDistance => fogAttenuationDistance;
         public float PuddleWindSpeed => puddleWindSpeed;
@@ -43,11 +41,6 @@ namespace Grigor.Gameplay.Weather
         public void SetWindSpeed(float windSpeed)
         {
             this.windSpeed = windSpeed;
-        }
-
-        public void SetRainParticleEmission(float rainParticleEmission)
-        {
-            this.rainParticleEmission = rainParticleEmission;
         }
 
         public void SetWindStrength(float windStrength)

@@ -54,7 +54,7 @@ namespace Grigor.Gameplay.Weather
 
             particleCulling.CullEvent += OnCull;
 
-            rainZoneManager.SetRainStrengthEvent += OnSetRainStrength;
+            rainZoneManager.SetRainParticleEmissionEvent += OnSetRainParticleEmission;
 
             GetRenderers();
 
@@ -65,12 +65,12 @@ namespace Grigor.Gameplay.Weather
         {
             particleCulling.CullEvent -= OnCull;
 
-            rainZoneManager.SetRainStrengthEvent -= OnSetRainStrength;
+            rainZoneManager.SetRainParticleEmissionEvent -= OnSetRainParticleEmission;
 
             particleCulling.Dispose();
         }
 
-        private void OnSetRainStrength(float value)
+        private void OnSetRainParticleEmission(float value)
         {
             for (int i = 0; i < rainParticleSystems.Count; i++)
             {

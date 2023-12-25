@@ -82,14 +82,14 @@ MonoBehaviour:
   nightStartHour: 20
   startHour: 8
   changeTimeAutomatically: 1
-  timeMultiplier: 9271
+  timeMultiplier: 1509
   weatherDataList:
   - cloudDensityCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0039978027
-        value: 0.75320435
+        time: 0.010822296
+        value: 0.6064148
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -97,8 +97,35 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
+        time: 0.34019443
+        value: 0.20849589
+        inSlope: -0.52996814
+        outSlope: -0.52996814
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.60650575
+        value: 0.6952123
+        inSlope: 0.37256885
+        outSlope: 0.37256885
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.8150189
+        value: 0.4864332
+        inSlope: -0.85096
+        outSlope: -0.85096
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.99279785
+        value: 0.608696
         inSlope: 2
         outSlope: 2
         tangentMode: 0
@@ -155,19 +182,19 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
-        tangentMode: 34
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
+        time: 0.87298584
+        value: 0.4951172
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -264,7 +291,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  cloudDensityRainMinimumThreshold: 0.17
+  cloudDensityRainMinimumThreshold: 0.5
   cloudShapeFactorMinimum: 0.4
   cloudShapeFactorRainMaximumThreshold: 0.6
   windSpeedBounds: {x: 100, y: 2000}

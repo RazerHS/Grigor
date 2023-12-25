@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Grigor.Gameplay.Lighting
 {
+    [Injectable]
     public class LightingController : CardboardCoreBehaviour
     {
         [SerializeField] private Light directionalLight;
@@ -18,6 +19,9 @@ namespace Grigor.Gameplay.Lighting
         [Inject] private TimeManager timeManager;
 
         private SceneConfig sceneConfig;
+        private float currentSunRotation;
+
+        public float CurrentSunRotation => currentSunRotation;
 
         protected override void OnInjected()
         {
@@ -53,7 +57,7 @@ namespace Grigor.Gameplay.Lighting
 
             directionalLight.transform.DOLocalRotate(newSunRotation, transitionTime).SetEase(Ease.OutSine);
 
-            sceneConfig.OnSunRotationUpdated(newSunRotation.x);
+            currentSunRotation = newSunRotation.x;
         }
     }
 }

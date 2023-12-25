@@ -22,7 +22,7 @@ namespace Grigor.Gameplay.Weather
         public float CullingDistance => cullingDistance;
         public bool DrawGizmos => drawGizmos;
 
-        public event Action<float> SetRainStrengthEvent;
+        public event Action<float> SetRainParticleEmissionEvent;
 
         private void Awake()
         {
@@ -80,9 +80,9 @@ namespace Grigor.Gameplay.Weather
             rainZones.Clear();
         }
 
-        public void SetRainStrength(float value)
+        public void SetRainParticleEmission(float value)
         {
-            SetRainStrengthEvent?.Invoke(value);
+            SetRainParticleEmissionEvent?.Invoke(value);
         }
     }
 }
