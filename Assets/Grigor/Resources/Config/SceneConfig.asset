@@ -82,60 +82,9 @@ MonoBehaviour:
   nightStartHour: 20
   startHour: 8
   changeTimeAutomatically: 1
-  timeMultiplier: 1509
+  timeMultiplier: 877
   weatherDataList:
-  - cloudDensityCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.010822296
-        value: 0.6064148
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.34019443
-        value: 0.20849589
-        inSlope: -0.52996814
-        outSlope: -0.52996814
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.60650575
-        value: 0.6952123
-        inSlope: 0.37256885
-        outSlope: 0.37256885
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.8150189
-        value: 0.4864332
-        inSlope: -0.85096
-        outSlope: -0.85096
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.99279785
-        value: 0.608696
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    windStrength:
+  - windStrength:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -201,26 +150,62 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    cloudShapeFactor:
+    rainStrength:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        time: 0.011146754
+        value: 0.056468636
+        inSlope: 1.6885881
+        outSlope: 1.6885881
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        time: 0.3514493
+        value: 0.63109946
+        inSlope: -0.07489494
+        outSlope: -0.07489494
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.49820352
+        value: 0.17750296
+        inSlope: -0.80152863
+        outSlope: -0.80152863
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.16615112
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6145647
+        value: 0.11140894
+        inSlope: -0.36613002
+        outSlope: -0.36613002
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6900062
+        value: -0.011250742
+        inSlope: -0.29515564
+        outSlope: -0.29515564
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.98573965
+        value: 0.057555437
+        inSlope: 0.23266283
+        outSlope: 0.23266283
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -298,8 +283,12 @@ MonoBehaviour:
   rainParticleEmissionBounds: {x: 0, y: 3000}
   cloudShapeScaleBounds: {x: 10, y: 100}
   cloudErosionScaleBounds: {x: 10, y: 100}
+  minutesBeforeRainCloudsChange: 0
   fogAttenuationDistanceBounds: {x: 12, y: 200}
-  rainDropSpeedBounds: {x: 0.5, y: 4}
+  rainDropSpeedBounds: {x: 0.1, y: 4}
   puddleWindSpeedBounds: {x: 1, y: 10}
-  minutesUntilNoLongerWet: 0
+  minutesUntilFullyDry: 90
+  minutesUntilFullyWet: 90
+  rainStrengthWetnessFactor: 0.522
+  rainStrengthLowerBound: 0
   smoothnessBounds: {x: 0.5, y: 0.7}

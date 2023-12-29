@@ -20,7 +20,9 @@ namespace Grigor.Gameplay.Time
 
         private TimeOfDay currentTimeOfDay;
         private bool canEndDay;
-        private const int TotalDayMinutes = 60 * 24;
+        private readonly int totalDayMinutes = 60 * 24;
+
+        public int TotalDayMinutes => totalDayMinutes;
 
         public event Action<int, int> TimeChangedEvent;
         public event Action ChangedToDayEvent;
@@ -263,7 +265,7 @@ namespace Grigor.Gameplay.Time
         {
             float currentPassedMinutes = hours * 60 + minutes;
 
-            return currentPassedMinutes / TotalDayMinutes;
+            return currentPassedMinutes / totalDayMinutes;
         }
     }
 }

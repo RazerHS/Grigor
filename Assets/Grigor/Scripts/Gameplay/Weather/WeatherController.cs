@@ -30,6 +30,19 @@ namespace Grigor.Gameplay.Weather
         private PermanentWeatherData initialPermanentWeatherData;
         private SceneConfig sceneConfig;
 
+        [ShowInInspector, ReadOnly] private bool isRaining;
+        [ShowInInspector, ReadOnly] private bool isWet;
+        [ShowInInspector, ReadOnly] private float wetness;
+        private bool hasRainEnded;
+
+        private float timePercentageUntilFullyDry;
+        private float timePercentageUntilFullyWet;
+        private float timePercentageWhenRainStarted;
+        private float timePercentageWhenRainEnded;
+
+        private float wetnessCarriedOverWhenRaining;
+        private float wetnessCarriedOverWhenDrying;
+
         private static readonly int RainStrength = Shader.PropertyToID("_RainStrength");
         private static readonly int DropSpeed = Shader.PropertyToID("_DropSpeed");
         private static readonly int Wetness = Shader.PropertyToID("_Wetness");
@@ -192,53 +205,38 @@ namespace Grigor.Gameplay.Weather
                 throw Log.Exception($"Day {day} is out of bounds of supported days for the weather!");
             }
 
-            float cloudDensity = sceneConfig.WeatherDataList[index].EvaluateCloudDensity(percentage);
+            float rainStrength = sceneConfig.WeatherDataList[index].EvaluateRainStrength(percentage);
+
+            isRaining = rainStrength > 0f;
+
             float windStrength = sceneConfig.WeatherDataList[index].EvaluateWindStrength(percentage);
             float fogStrength = sceneConfig.WeatherDataList[index].EvaluateFogStrength(percentage);
-            float cloudShapeFactor = sceneConfig.WeatherDataList[index].EvaluateCloudShapeFactor(percentage);
             float cloudErosionFactor = sceneConfig.WeatherDataList[index].EvaluateCloudErosionFactor(percentage);
             float cloudMicroErosionFactor = sceneConfig.WeatherDataList[index].EvaluateCloudMicroErosionFactor(percentage);
 
             float newExposure = Mathf.Lerp(sceneConfig.NighttimeExposure, sceneConfig.DaytimeExposure, CustomExposureRemap(lightingController.CurrentSunRotation, sceneConfig.ExposureMinimumSunRotationAngle, sceneConfig.ExposureMaximumSunRotationAngle));
-
-            float rainStrength = CalculateRainStrength(cloudDensity, cloudShapeFactor);
 
             SetExposure(newExposure);
 
             SetFog(Mathf.Lerp(sceneConfig.FogAttenuationDistanceBounds .x, sceneConfig.FogAttenuationDistanceBounds.y, 1 - fogStrength));
             SetRainStrength(rainStrength);
             SetGroundRainDropSpeed(Mathf.Lerp(sceneConfig.RainDropSpeedBounds.x, sceneConfig.RainDropSpeedBounds.y, rainStrength));
-            SetWetness(Mathf.Lerp(sceneConfig.SmoothnessBounds.x, sceneConfig.SmoothnessBounds.y, rainStrength));
+
+            CalculateWetness(rainStrength, percentage);
+            SetWetness(wetness);
+
             SetPuddleWindStrength(windStrength);
-            SetPuddleWindSpeed(Mathf.Lerp(sceneConfig.WindSpeedBounds.x, sceneConfig.WindSpeedBounds.y, windStrength));
+            SetPuddleWindSpeed(Mathf.Lerp(sceneConfig.PuddleWindSpeedBounds.x, sceneConfig.PuddleWindSpeedBounds.y, windStrength));
             SetGroundSmoothness(Mathf.Lerp(sceneConfig.SmoothnessBounds.x, sceneConfig.SmoothnessBounds.y, rainStrength));
 
-            SetCloudDensity(cloudDensity);
-            SetCloudShapeFactor(Mathf.Lerp(sceneConfig.CloudShapeFactorMinimum, 1, cloudShapeFactor));
+            // TO-DO: fix
+            SetCloudDensity(rainStrength);
+            SetCloudShapeFactor(Mathf.Lerp(sceneConfig.CloudShapeFactorMinimum, 1, rainStrength));
+
             SetCloudErosionFactor(cloudErosionFactor);
             SetCloudMicroErosionFactor(cloudMicroErosionFactor);
 
             rainZoneManager.SetRainParticleEmission(Mathf.Lerp(sceneConfig.RainParticleEmissionBounds.x, sceneConfig.RainParticleEmissionBounds.y, rainStrength));
-        }
-
-        private float CalculateRainStrength(float cloudDensity, float cloudShapeFactor)
-        {
-            if (cloudDensity < sceneConfig.CloudDensityRainMinimumThreshold)
-            {
-                return 0;
-            }
-
-            if (cloudShapeFactor > sceneConfig.CloudShapeFactorRainMaximumThreshold)
-            {
-                return 0;
-            }
-
-            float rainStrengthFromCloudDensity = (cloudDensity - sceneConfig.CloudDensityRainMinimumThreshold) * 2;
-            float rainStrengthFromCloudShapeFactor = 1 - (sceneConfig.CloudShapeFactorRainMaximumThreshold - cloudShapeFactor);
-
-            float rainStrength = rainStrengthFromCloudDensity * 0.7f + rainStrengthFromCloudShapeFactor * 0.3f;
-
-            return Mathf.Clamp01(rainStrength);
         }
 
         /// <summary>
@@ -271,6 +269,133 @@ namespace Grigor.Gameplay.Weather
             exposureRemap = positiveAngle is > 90f and < 270f ? Mathf.InverseLerp(maxAngle + 90f, maxAngle, positiveAngle) : Mathf.InverseLerp(-minAngle, minAngle, remappedAngle);
 
             return Mathf.Clamp01(exposureRemap);
+        }
+
+        private void CalculateWetness(float rainStrength, float currentTimePercentage)
+        {
+            if (isRaining)
+            {
+                if (hasRainEnded)
+                {
+                    CalculateTimeUntilFullyWetWhenAlreadyWet(rainStrength, currentTimePercentage);
+                }
+
+                hasRainEnded = false;
+
+                if (!isWet)
+                {
+                    CalculateTimeUntilFullyWet(rainStrength, currentTimePercentage);
+                }
+
+                if (wetness >= 1f)
+                {
+                    wetnessCarriedOverWhenRaining = 0f;
+
+                    return;
+                }
+
+                IncrementWetness(currentTimePercentage);
+
+                CheckIfWet();
+
+                return;
+            }
+
+            if (isWet && !hasRainEnded)
+            {
+                RainEnded(currentTimePercentage);
+            }
+
+            if (!isWet)
+            {
+                wetnessCarriedOverWhenDrying = 0f;
+
+                return;
+            }
+
+            DecrementWetness(currentTimePercentage);
+
+            CheckIfWet();
+        }
+
+        private void DecrementWetness(float currentTimePercentage)
+        {
+            float adjustedCurrentTimePercentageWhenNotRaining = timePercentageUntilFullyDry - currentTimePercentage > 1f ? currentTimePercentage + 1f : currentTimePercentage;
+
+            float percentageUntilFullyDry = Mathf.InverseLerp(timePercentageWhenRainEnded, timePercentageUntilFullyDry, adjustedCurrentTimePercentageWhenNotRaining);
+
+            wetness = Mathf.Lerp(1, 0, Mathf.Clamp01(percentageUntilFullyDry));
+
+            wetness -= 1 - wetnessCarriedOverWhenDrying;
+        }
+
+        private void IncrementWetness(float currentTimePercentage)
+        {
+            float percentageUntilFullyWet = Mathf.InverseLerp(timePercentageWhenRainStarted, timePercentageUntilFullyWet, CalculateAdjustedCurrentTimePercentage(currentTimePercentage));
+
+            //if the rain just started and the rain start time is the same as the current time, isWet will be set to false during CheckIfWet() because wetness will be 0 until the next minute, so we have to add a value manually to avoid this loop
+            if (!isWet)
+            {
+                percentageUntilFullyWet += 0.001f;
+            }
+
+            wetness = Mathf.Lerp(0, 1, Mathf.Clamp01(percentageUntilFullyWet));
+
+            wetness += wetnessCarriedOverWhenRaining;
+        }
+
+        private void RainEnded(float currentTimePercentage)
+        {
+            hasRainEnded = true;
+
+            timePercentageWhenRainEnded = currentTimePercentage;
+
+            float minutesUntilFullyDry = Mathf.Lerp(0, sceneConfig.MinutesUntilFullyDry, wetness);
+
+            timePercentageUntilFullyDry = (minutesUntilFullyDry / timeManager.TotalDayMinutes) + currentTimePercentage;
+
+            wetnessCarriedOverWhenDrying = wetness;
+        }
+
+        private float CalculateAdjustedCurrentTimePercentage(float currentTimePercentage)
+        {
+            float adjustedCurrentTimePercentage = timePercentageUntilFullyWet - currentTimePercentage > 1f ? currentTimePercentage + 1f : currentTimePercentage;
+
+            return adjustedCurrentTimePercentage;
+        }
+
+        private void CalculateTimeUntilFullyWet(float rainStrength, float currentTimePercentage)
+        {
+            timePercentageWhenRainStarted = currentTimePercentage;
+
+            timePercentageUntilFullyWet = (sceneConfig.MinutesUntilFullyWet / timeManager.TotalDayMinutes) + timePercentageWhenRainStarted;
+
+            AdjustTimeUntilFullyWetForRainStrength(rainStrength);
+        }
+
+        private void AdjustTimeUntilFullyWetForRainStrength(float rainStrength)
+        {
+            timePercentageUntilFullyWet = Mathf.Lerp(timePercentageUntilFullyWet, timePercentageWhenRainStarted, rainStrength * sceneConfig.RainStrengthWetnessFactor);
+        }
+
+        private void CheckIfWet()
+        {
+            wetness = Mathf.Clamp01(wetness);
+
+            isWet = wetness > 0f;
+        }
+
+        private void CalculateTimeUntilFullyWetWhenAlreadyWet(float rainStrength, float currentTimePercentage)
+        {
+            timePercentageWhenRainStarted = currentTimePercentage;
+
+            float minutesUntilFullyWet = Mathf.Lerp(sceneConfig.MinutesUntilFullyDry, 0, wetness);
+
+            timePercentageUntilFullyWet = (minutesUntilFullyWet / timeManager.TotalDayMinutes) + timePercentageWhenRainStarted;
+
+            AdjustTimeUntilFullyWetForRainStrength(rainStrength);
+
+            wetnessCarriedOverWhenRaining = wetness;
         }
     }
 }

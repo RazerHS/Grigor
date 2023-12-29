@@ -4,6 +4,7 @@ using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Grigor.Data
 {
@@ -53,6 +54,9 @@ namespace Grigor.Data
         [PropertyTooltip("The smallest and largest possible cloud erosion scale, chosen randomly between the bounds to be tweened to every hour.")]
         [SerializeField, ColoredBoxGroup("Rain and Sky")] private Vector2 cloudErosionScaleBounds;
 
+        [PropertyTooltip("The smallest and largest possible cloud erosion scale, chosen randomly between the bounds to be tweened to every hour.")]
+        [SerializeField, ColoredBoxGroup("Rain and Sky")] private float minutesBeforeRainCloudsChange;
+
         [PropertyTooltip("The strongest and weakest fog values possible.")]
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals", false, true)] private Vector2 fogAttenuationDistanceBounds;
 
@@ -63,7 +67,16 @@ namespace Grigor.Data
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private Vector2 puddleWindSpeedBounds;
 
         [PropertyTooltip("How many minutes does it take for the ground to become completely dry?")]
-        [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private float minutesUntilNoLongerWet;
+        [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private float minutesUntilFullyDry;
+
+        [PropertyTooltip("How many minutes does it take for the ground to become completely dry?")]
+        [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private float minutesUntilFullyWet;
+
+        [PropertyTooltip("How much does rain strength affect the speed of how fast the ground gets wet?")]
+        [SerializeField, ColoredBoxGroup("Wet Ground Visuals"), Range(0f, 1f)] private float rainStrengthWetnessFactor;
+
+        [PropertyTooltip("How much does rain strength affect the speed of how fast the ground gets wet?")]
+        [SerializeField, ColoredBoxGroup("Wet Ground Visuals"), Range(0f, 1f)] private float rainStrengthLowerBound;
 
         [PropertyTooltip("The lowest and highest smoothness values for when the ground is wet.")]
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private Vector2 smoothnessBounds;
@@ -92,8 +105,11 @@ namespace Grigor.Data
         public Vector2 FogAttenuationDistanceBounds => fogAttenuationDistanceBounds;
         public Vector2 RainDropSpeedBounds => rainDropSpeedBounds;
         public Vector2 PuddleWindSpeedBounds => puddleWindSpeedBounds;
-        public float MinutesUntilNoLongerWet => minutesUntilNoLongerWet;
+        public float MinutesUntilFullyDry => minutesUntilFullyDry;
         public Vector2 SmoothnessBounds => smoothnessBounds;
+        public float MinutesUntilFullyWet => minutesUntilFullyWet;
+        public float RainStrengthWetnessFactor => rainStrengthWetnessFactor;
+        public float RainStrengthLowerBound => rainStrengthLowerBound;
 
         public bool SmoothSunTransition => smoothSunTransition;
         public float SmoothSunTransitionTime => smoothSunTransitionTime;
