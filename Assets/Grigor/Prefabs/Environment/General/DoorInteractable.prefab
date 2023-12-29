@@ -479,13 +479,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  singleUse: 0
-  useTime: 0
+  removeFromChainAfterEffect: 0
+  stopsChain: 0
+  indexInChain: 0
+  hasTimeEffect: 0
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  interactionEnabled: 0
   doorTransform: {fileID: 5636241113871614574}
   rotationAngleY: 90
   rotateClockwise: 1
   rotationDuration: 1
   locked: 0
+  isClosed: 0
 --- !u!4 &8824354906872343669 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2733888954941448264, guid: 074fe82d7e4a3014996892cf2abd72fc,
