@@ -27,12 +27,14 @@ namespace Grigor.Gameplay.Interacting
 
         private bool inRange;
         private InteractWidget interactWidget;
+        private bool isPaused;
 
         public bool InRange => inRange;
         public Transform InteractPoint => interactPoint;
         public float InteractDistance => interactDistance;
         public bool InteractingEnabled => interactingEnabled;
         public InteractablesChain InteractablesChain => interactablesChain;
+        public bool IsPaused => isPaused;
 
         public event Action InteractEvent;
         public event Action<Characters.Components.Character> InRangeEvent;
@@ -172,6 +174,16 @@ namespace Grigor.Gameplay.Interacting
         public void ResetInteractable()
         {
             interactingEnabled = true;
+        }
+
+        public void PauseInteractable()
+        {
+            isPaused = true;
+        }
+
+        public void UnpauseInteractable()
+        {
+            isPaused = false;
         }
     }
 }

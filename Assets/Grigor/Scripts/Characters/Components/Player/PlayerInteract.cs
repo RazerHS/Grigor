@@ -67,6 +67,15 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
+            if (interactable.IsPaused)
+            {
+                interactable.DisableProximityEffect(Owner);
+
+                currentNearestParentInteractable = null;
+
+                return;
+            }
+
             if (currentNearestParentInteractable == null)
             {
                 interactable.EnableProximityEffect(Owner);
