@@ -12,7 +12,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Grigor.Gameplay.MindPalace.EvidenceBoard
+namespace Grigor.Gameplay.EvidenceBoard
 {
     public class EvidenceBoardManager : CardboardCoreBehaviour, IClueListener
     {

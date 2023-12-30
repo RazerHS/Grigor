@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Grigor.Gameplay.MindPalace.EvidenceBoard
+namespace Grigor.Gameplay.EvidenceBoard
 {
     public class EvidenceStickyNote : EvidenceNote
     {

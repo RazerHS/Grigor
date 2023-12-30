@@ -3,7 +3,7 @@ using Grigor.Data.Clues;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Gameplay.MindPalace.EvidenceBoard
+namespace Grigor.Gameplay.EvidenceBoard
 {
     [Serializable]
     public class ConnectionLine

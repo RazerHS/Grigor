@@ -3,7 +3,7 @@ using Grigor.Utils;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-namespace Grigor.Gameplay.MindPalace.EvidenceBoard
+namespace Grigor.Gameplay.EvidenceBoard
 {
     public class EvidencePicture : EvidenceNote
     {
