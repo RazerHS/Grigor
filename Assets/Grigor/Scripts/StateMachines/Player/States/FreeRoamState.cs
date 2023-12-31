@@ -1,6 +1,5 @@
 using CardboardCore.DI;
 using CardboardCore.StateMachines;
-using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
@@ -11,8 +10,7 @@ namespace Grigor.StateMachines.Player.States
     public class FreeRoamState : State<PlayerStateMachine>
     {
         [Inject] private UIManager uiManager;
-        [Inject] private RoomRegistry roomRegistry;
-        [Inject] private RoomManager roomManager;
+        [Inject] private LevelRegistry levelRegistry;
         [Inject] private TimeManager timeManager;
         [Inject] private PlayerInput playerInput;
 
@@ -28,10 +26,7 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
-            roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
-
             playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
-            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
         }
 
         protected override void OnExit()
@@ -42,30 +37,7 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
 
-            roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
-
             playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
-            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
-        }
-
-        private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
-        {
-            if (roomManager.CurrentRoomName == previousRoomName)
-            {
-                return;
-            }
-
-            owningStateMachine.ToState<MoveToRoomState>();
-        }
-
-        private void OnEndedDayInput()
-        {
-            if (!timeManager.TryEndDay())
-            {
-                return;
-            }
-
-            roomManager.MovePlayerToRoom(RoomName.MindPalace, owningStateMachine.Owner.transform.position);
         }
 
         private void OnInteract()

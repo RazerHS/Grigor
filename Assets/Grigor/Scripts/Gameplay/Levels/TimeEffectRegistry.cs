@@ -3,7 +3,7 @@ using CardboardCore.DI;
 using Grigor.Gameplay.Time;
 using Sirenix.OdinInspector;
 
-namespace Grigor.Gameplay.Rooms
+namespace Grigor.Gameplay.Time
 {
     [Injectable]
     public class TimeEffectRegistry : CardboardCoreBehaviour

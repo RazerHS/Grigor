@@ -1,6 +1,5 @@
 using CardboardCore.DI;
 using CardboardCore.StateMachines;
-using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
 using Grigor.UI;
 using Grigor.UI.Screens;
@@ -14,7 +13,6 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private UIManager uiManager;
         [Inject] private TimeEffectRegistry timeEffectRegistry;
         [Inject] private TimeManager timeManager;
-        [Inject] private RoomManager roomManager;
 
         private GameplayScreen gameplayScreen;
         private TimeOfDayWidget timeOfDayWidget;

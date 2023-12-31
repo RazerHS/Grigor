@@ -6,9 +6,9 @@ using Grigor.Gameplay.Time;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Gameplay.Lighting
+namespace Grigor.Gameplay.Time.Lighting
 {
-    public class LightingController : CardboardCoreBehaviour
+    public class SunController : CardboardCoreBehaviour
     {
         [SerializeField] private Light directionalLight;
 
@@ -32,11 +32,11 @@ namespace Grigor.Gameplay.Lighting
             int totalDayMinutes = 60 * 24;
             float currentPassedMinutes = hours * 60 + minutes;
 
-            UpdateLighting(currentPassedMinutes / totalDayMinutes);
+            UpdateSunPosition(currentPassedMinutes / totalDayMinutes);
         }
 
         // TO-DO: make sun rotate all 360 degrees instead of back and forth
-        private void UpdateLighting(float timePercent)
+        private void UpdateSunPosition(float timePercent)
         {
             if (directionalLight == null)
             {

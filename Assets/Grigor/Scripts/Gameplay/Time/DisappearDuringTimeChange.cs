@@ -5,7 +5,7 @@ using Grigor.Gameplay.Time;
 using RazerCore.Utils.Attributes;
 using UnityEngine;
 
-namespace Grigor.Gameplay.Rooms
+namespace Grigor.Gameplay.Time
 {
     public class DisappearDuringTimeChange : CardboardCoreBehaviour, ITimeEffect
     {
