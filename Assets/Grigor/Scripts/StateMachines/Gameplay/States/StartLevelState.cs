@@ -2,7 +2,6 @@
 using CardboardCore.StateMachines;
 using Grigor.Characters;
 using Grigor.Gameplay.Interacting;
-using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
 using Grigor.UI;
 using Grigor.UI.Widgets;
@@ -11,7 +10,7 @@ namespace Grigor.StateMachines.Gameplay.States
 {
     public class StartLevelState : State
     {
-        [Inject] private RoomRegistry roomRegistry;
+        [Inject] private LevelRegistry levelRegistry;
         [Inject] private CharacterRegistry characterRegistry;
         [Inject] private InteractablesRegistry interactablesRegistry;
         [Inject] private UIManager uiManager;
@@ -30,12 +29,12 @@ namespace Grigor.StateMachines.Gameplay.States
             messagePopupWidget = uiManager.ShowWidget<MessagePopupWidget>();
 
             interactablesRegistry.EnableInteractables();
-            roomRegistry.DisableAllRooms();
+            levelRegistry.DisableAllLevels();
 
-            Room startRoom = roomRegistry.GetRoom(RoomName.Start);
-            startRoom.EnableRoom();
+            Level startLevel = levelRegistry.GetLevel(LevelName.Chongqing);
+            startLevel.EnableLevel();
 
-            characterRegistry.Player.Movement.MovePlayerToPosition(startRoom.SpawnPoint.position);
+            characterRegistry.Player.Movement.MovePlayerToPosition(startLevel.SpawnPoint.position);
 
             owningStateMachine.ToNextState();
         }
