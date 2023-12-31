@@ -11,24 +11,23 @@ using UnityEngine.Rendering.HighDefinition;
 
 namespace Grigor.Gameplay.Weather
 {
-    [Injectable]
     public class WeatherController : MonoBehaviour
     {
-        [SerializeField, ColoredBoxGroup("References", false, true)] private Volume skyAndFogVolume;
-        [SerializeField, ColoredBoxGroup("References")] private Volume postProcessingVolume;
-        [SerializeField, ColoredBoxGroup("References")] private Material sharedRainMaterial;
+        [SerializeField, ColoredBoxGroup("References", false, true)] private Material sharedRainMaterial;
         [SerializeField, ColoredBoxGroup("Sky and Fog Components", false, true), ReadOnly] private Fog fog;
         [SerializeField, ColoredBoxGroup("Sky and Fog Components"), ReadOnly] private VolumetricClouds volumetricClouds;
         [SerializeField, ColoredBoxGroup("Post-Processing Components", false, true), ReadOnly] private Exposure exposure;
 
         [Inject] private TimeManager timeManager;
         [Inject] private RainZoneManager rainZoneManager;
-        [Inject] private LightingController lightingController;
 
         [ShowInInspector, ReadOnly, ColoredBoxGroup("Debug", true, true), HideLabel] private PermanentWeatherData currentPermanentWeatherData;
 
         private PermanentWeatherData initialPermanentWeatherData;
         private SceneConfig sceneConfig;
+        private SunController sunController;
+        private Volume skyAndFogVolume;
+        private Volume postProcessingVolume;
 
         [ShowInInspector, ReadOnly] private bool isRaining;
         [ShowInInspector, ReadOnly] private bool isWet;
@@ -50,9 +49,13 @@ namespace Grigor.Gameplay.Weather
         private static readonly int WindSpeed = Shader.PropertyToID("_WindSpeed");
         private static readonly int Smoothness = Shader.PropertyToID("_Smoothness");
 
-        public void Initialize()
+        public void Initialize(LevelLighting levelLighting)
         {
             Injector.Inject(this);
+
+            sunController = levelLighting.SunController;
+            skyAndFogVolume = levelLighting.SkyAndFogVolume;
+            postProcessingVolume = levelLighting.PostProcessingVolume;
 
             GetVolumeComponents();
 
@@ -214,7 +217,7 @@ namespace Grigor.Gameplay.Weather
             float cloudErosionFactor = sceneConfig.WeatherDataList[index].EvaluateCloudErosionFactor(percentage);
             float cloudMicroErosionFactor = sceneConfig.WeatherDataList[index].EvaluateCloudMicroErosionFactor(percentage);
 
-            float newExposure = Mathf.Lerp(sceneConfig.NighttimeExposure, sceneConfig.DaytimeExposure, CustomExposureRemap(lightingController.CurrentSunRotation, sceneConfig.ExposureMinimumSunRotationAngle, sceneConfig.ExposureMaximumSunRotationAngle));
+            float newExposure = Mathf.Lerp(sceneConfig.NighttimeExposure, sceneConfig.DaytimeExposure, CustomExposureRemap(sunController.CurrentSunRotation, sceneConfig.ExposureMinimumSunRotationAngle, sceneConfig.ExposureMaximumSunRotationAngle));
 
             SetExposure(newExposure);
 
