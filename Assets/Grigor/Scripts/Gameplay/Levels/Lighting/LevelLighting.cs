@@ -1,5 +1,4 @@
-﻿using Grigor.Gameplay.Time.Lighting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace Grigor.Gameplay.Time.Lighting
