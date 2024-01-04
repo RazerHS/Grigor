@@ -1,9 +1,10 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.Utilities;
 using DG.Tweening;
+using Grigor.Gameplay.Time;
 using UnityEngine;
 
-namespace Grigor.Gameplay.Time.Lighting
+namespace Grigor.Gameplay.Lighting
 {
     public class NightLight : CardboardCoreBehaviour, ITimeEffect
     {

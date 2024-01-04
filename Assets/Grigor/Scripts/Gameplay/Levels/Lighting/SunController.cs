@@ -2,11 +2,13 @@
 using CardboardCore.Utilities;
 using DG.Tweening;
 using Grigor.Data;
+using Grigor.Gameplay.Time;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Grigor.Gameplay.Time.Lighting
+namespace Grigor.Gameplay.Lighting
 {
+    [Injectable]
     public class SunController : CardboardCoreBehaviour
     {
         [SerializeField] private Light directionalLight;
@@ -16,9 +18,16 @@ namespace Grigor.Gameplay.Time.Lighting
 
         [Inject] private TimeManager timeManager;
 
+        private SceneConfig sceneConfig;
+        private float currentSunRotation;
+
+        public float CurrentSunRotation => currentSunRotation;
+
         protected override void OnInjected()
         {
             timeManager.TimeChangedEvent += OnTimeChanged;
+
+            sceneConfig = SceneConfig.Instance;
         }
 
         protected override void OnReleased()
@@ -28,32 +37,27 @@ namespace Grigor.Gameplay.Time.Lighting
 
         private void OnTimeChanged(int minutes, int hours)
         {
-            int totalDayMinutes = 60 * 24;
-            float currentPassedMinutes = hours * 60 + minutes;
-
-            UpdateSunPosition(currentPassedMinutes / totalDayMinutes);
+            UpdateLighting(timeManager.GetCurrentDayPercentage());
         }
 
-        // TO-DO: make sun rotate all 360 degrees instead of back and forth
-        private void UpdateSunPosition(float timePercent)
+        private void UpdateLighting(float timePercent)
         {
             if (directionalLight == null)
             {
                 throw Log.Exception("No directional light set!");
             }
 
-            RenderSettings.ambientLight = GameConfig.Instance.AmbientColor.Evaluate(timePercent);
-            RenderSettings.fogColor = GameConfig.Instance.FogColor.Evaluate(timePercent);
+            RenderSettings.ambientLight = sceneConfig.AmbientColor.Evaluate(timePercent);
 
-            if (directionalLight == null)
-            {
-                return;
-            }
+            directionalLight.color = sceneConfig.DirectionalColor.Evaluate(timePercent);
 
-            directionalLight.color = GameConfig.Instance.DirectionalColor.Evaluate(timePercent);
+            Vector3 newSunRotation = new Vector3((timePercent * 360f) + sunRotationDegreeOffset - 90f, 170f, 0f);
 
-            Vector3 newRotation = new Vector3((timePercent * 360f) + sunRotationDegreeOffset - 90f, 170f, 0f);
-            directionalLight.transform.DOLocalRotate(newRotation, 0.5f).SetEase(Ease.OutSine);
+            float transitionTime = sceneConfig.SmoothSunTransition ? sceneConfig.SmoothSunTransitionTime : 0f;
+
+            directionalLight.transform.DOLocalRotate(newSunRotation, transitionTime);
+
+            currentSunRotation = newSunRotation.x;
         }
     }
 }

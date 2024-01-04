@@ -1,5 +1,5 @@
 ﻿using CardboardCore.DI;
-using Grigor.Gameplay.Time.Lighting;
+using Grigor.Gameplay.Lighting;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Time

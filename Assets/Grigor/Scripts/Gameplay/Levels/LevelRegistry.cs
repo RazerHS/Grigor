@@ -9,6 +9,10 @@ namespace Grigor.Gameplay.Time
     {
         private Dictionary<LevelName, Level> rooms = new();
 
+        private Level currentLevel;
+
+        public Level CurrentLevel => currentLevel;
+
         public void Register(LevelName levelName, Level level)
         {
             rooms.TryAdd(levelName, level);
@@ -16,7 +20,7 @@ namespace Grigor.Gameplay.Time
 
         public void Unregister(LevelName levelName)
         {
-            if ( !rooms.ContainsKey(levelName))
+            if (!rooms.ContainsKey(levelName))
             {
                 return;
             }
@@ -40,6 +44,11 @@ namespace Grigor.Gameplay.Time
             {
                 level.DisableLevel();
             }
+        }
+
+        public void SetCurrentLevel(Level level)
+        {
+            currentLevel = level;
         }
     }
 }

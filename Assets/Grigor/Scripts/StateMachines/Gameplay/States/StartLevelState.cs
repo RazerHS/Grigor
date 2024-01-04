@@ -32,6 +32,8 @@ namespace Grigor.StateMachines.Gameplay.States
             levelRegistry.DisableAllLevels();
 
             Level startLevel = levelRegistry.GetLevel(LevelName.Chongqing);
+            levelRegistry.SetCurrentLevel(startLevel);
+
             startLevel.EnableLevel();
 
             characterRegistry.Player.Movement.MovePlayerToPosition(startLevel.SpawnPoint.position);

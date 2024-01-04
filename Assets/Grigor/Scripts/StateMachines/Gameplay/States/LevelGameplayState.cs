@@ -13,6 +13,7 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private UIManager uiManager;
         [Inject] private TimeEffectRegistry timeEffectRegistry;
         [Inject] private TimeManager timeManager;
+        [Inject] private LevelRegistry levelRegistry;
 
         private GameplayScreen gameplayScreen;
         private TimeOfDayWidget timeOfDayWidget;
@@ -23,12 +24,14 @@ namespace Grigor.StateMachines.Gameplay.States
 
             timeManager.StartTime();
 
+            levelRegistry.CurrentLevel.LevelLighting.WeatherController.Initialize(levelRegistry.CurrentLevel.LevelLighting);
+
             Cursor.visible = false;
         }
 
         protected override void OnExit()
         {
-
+            levelRegistry.CurrentLevel.LevelLighting.WeatherController.Dispose();
         }
     }
 }
