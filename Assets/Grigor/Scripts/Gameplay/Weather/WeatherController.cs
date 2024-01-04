@@ -16,6 +16,7 @@ namespace Grigor.Gameplay.Weather
         [SerializeField, ColoredBoxGroup("References", false, true)] private Material sharedRainMaterial;
         [SerializeField, ColoredBoxGroup("Sky and Fog Components", false, true), ReadOnly] private Fog fog;
         [SerializeField, ColoredBoxGroup("Sky and Fog Components"), ReadOnly] private VolumetricClouds volumetricClouds;
+        [SerializeField, ColoredBoxGroup("Sky and Fog Components"), ReadOnly] private VisualEnvironment visualEnvironment;
         [SerializeField, ColoredBoxGroup("Post-Processing Components", false, true), ReadOnly] private Exposure exposure;
 
         [Inject] private TimeManager timeManager;
@@ -24,6 +25,8 @@ namespace Grigor.Gameplay.Weather
         [ShowInInspector, ReadOnly, ColoredBoxGroup("Debug", true, true), HideLabel] private PermanentWeatherData currentPermanentWeatherData;
 
         private PermanentWeatherData initialPermanentWeatherData;
+        private RandomWeatherParameters randomWeatherParameters;
+        private RandomWeatherParameters previousRandomWeatherParameters;
         private SceneConfig sceneConfig;
         private SunController sunController;
         private Volume skyAndFogVolume;
@@ -41,6 +44,9 @@ namespace Grigor.Gameplay.Weather
 
         private float wetnessCarriedOverWhenRaining;
         private float wetnessCarriedOverWhenDrying;
+
+        private float timeUntilNextWeatherChange;
+        private float startTimeOfCurrentWeatherChange;
 
         private static readonly int RainStrength = Shader.PropertyToID("_RainStrength");
         private static readonly int DropSpeed = Shader.PropertyToID("_DropSpeed");
@@ -83,25 +89,29 @@ namespace Grigor.Gameplay.Weather
         private void SaveInitialPermanentData()
         {
             initialPermanentWeatherData.SetFogAttenuationDistance(fog.meanFreePath.value);
-            initialPermanentWeatherData.SetCloudDensity(volumetricClouds.densityMultiplier.value);
             initialPermanentWeatherData.SetRainStrength(sharedRainMaterial.GetFloat(RainStrength));
             initialPermanentWeatherData.SetRainDropSpeed(sharedRainMaterial.GetFloat(DropSpeed));
             initialPermanentWeatherData.SetWetness(sharedRainMaterial.GetFloat(Wetness));
-            initialPermanentWeatherData.SetWindStrength(sharedRainMaterial.GetFloat(WindStrength));
-            initialPermanentWeatherData.SetWindSpeed(sharedRainMaterial.GetFloat(WindSpeed));
+            initialPermanentWeatherData.SetPuddleWindStrength(sharedRainMaterial.GetFloat(WindStrength));
+            initialPermanentWeatherData.SetPuddleWindSpeed(sharedRainMaterial.GetFloat(WindSpeed));
             initialPermanentWeatherData.SetGroundSmoothness(sharedRainMaterial.GetFloat(Smoothness));
 
+            initialPermanentWeatherData.SetCloudDensity(volumetricClouds.densityMultiplier.value);
             initialPermanentWeatherData.SetCloudShapeFactor(volumetricClouds.shapeFactor.value);
             initialPermanentWeatherData.SetCloudErosionFactor(volumetricClouds.erosionFactor.value);
             initialPermanentWeatherData.SetCloudMicroErosionFactor(volumetricClouds.microErosionFactor.value);
 
+            initialPermanentWeatherData.SetCloudShapeScale(volumetricClouds.shapeScale.value);
+            initialPermanentWeatherData.SetCloudErosionScale(volumetricClouds.erosionScale.value);
+
             initialPermanentWeatherData.SetExposure(exposure.fixedExposure.value);
+            initialPermanentWeatherData.SetGlobalWindSpeed(visualEnvironment.windSpeed.value);
+            initialPermanentWeatherData.SetGlobalWindDirection(visualEnvironment.windOrientation.value);
         }
 
         private void LoadInitialPermanentData()
         {
             SetFog(initialPermanentWeatherData.FogAttenuationDistance);
-            SetCloudDensity(initialPermanentWeatherData.CloudDensity);
             SetRainStrength(initialPermanentWeatherData.RainStrength);
             SetGroundRainDropSpeed(initialPermanentWeatherData.RainDropSpeed);
             SetWetness(initialPermanentWeatherData.Wetness);
@@ -109,11 +119,17 @@ namespace Grigor.Gameplay.Weather
             SetPuddleWindSpeed(initialPermanentWeatherData.WindSpeed);
             SetGroundSmoothness(initialPermanentWeatherData.GroundSmoothness);
 
+            SetCloudDensity(initialPermanentWeatherData.CloudDensity);
             SetCloudShapeFactor(initialPermanentWeatherData.CloudShapeFactor);
             SetCloudErosionFactor(initialPermanentWeatherData.CloudErosionFactor);
             SetCloudMicroErosionFactor(initialPermanentWeatherData.CloudMicroErosionFactor);
 
+            SetCloudShapeScale(initialPermanentWeatherData.CloudShapeScale);
+            SetCloudErosionScale(initialPermanentWeatherData.CloudErosionScale);
+
             SetExposure(initialPermanentWeatherData.Exposure);
+            SetGlobalWindSpeed(initialPermanentWeatherData.GlobalWindSpeed);
+            SetGlobalWindDirection(initialPermanentWeatherData.GlobalWindDirection);
         }
 
         private void GetVolumeComponents()
@@ -132,11 +148,32 @@ namespace Grigor.Gameplay.Weather
             {
                 throw Log.Exception("Exposure component not found in volume!");
             }
+
+            if (!skyAndFogVolume.sharedProfile.TryGet(out visualEnvironment))
+            {
+                throw Log.Exception("Visual Environment component not found in volume!");
+            }
         }
 
         private void OnTimeChanged(int minutes, int hours)
         {
-            SetCurrentEvaluatedWeatherDataByDay(1, timeManager.GetCurrentDayPercentage());
+            int currentDay = GetCurrentDayBasedOnWeatherDataList();
+
+            SetCurrentEvaluatedWeatherDataByDay(currentDay, timeManager.GetCurrentDayPercentage());
+
+            sceneConfig.WeatherDataList[currentDay - 1].ChangeTimeReferenceHour(hours);
+        }
+
+        private int GetCurrentDayBasedOnWeatherDataList()
+        {
+            int day = sceneConfig.RepeatFirstDayWeather ? 1 : timeManager.Days;
+
+            if (day > sceneConfig.WeatherDataList.Count)
+            {
+                day = sceneConfig.WeatherDataList.Count;
+            }
+
+            return day;
         }
 
         private void SetFog(float value)
@@ -199,6 +236,26 @@ namespace Grigor.Gameplay.Weather
             exposure.fixedExposure.value = value;
         }
 
+        private void SetCloudShapeScale(float value)
+        {
+            volumetricClouds.shapeScale.value = value;
+        }
+
+        private void SetCloudErosionScale(float value)
+        {
+            volumetricClouds.erosionScale.value = value;
+        }
+
+        private void SetGlobalWindSpeed(float value)
+        {
+            visualEnvironment.windSpeed.value = value;
+        }
+
+        private void SetGlobalWindDirection(float value)
+        {
+            visualEnvironment.windOrientation.value = value;
+        }
+
         private void SetCurrentEvaluatedWeatherDataByDay(int day, float percentage)
         {
             int index = day - 1;
@@ -214,12 +271,15 @@ namespace Grigor.Gameplay.Weather
 
             float windStrength = sceneConfig.WeatherDataList[index].EvaluateWindStrength(percentage);
             float fogStrength = sceneConfig.WeatherDataList[index].EvaluateFogStrength(percentage);
+            float cloudDensity = sceneConfig.WeatherDataList[index].EvaluateCloudDensity(percentage);
+            float cloudShapeFactor = sceneConfig.WeatherDataList[index].EvaluateCloudShapeFactor(percentage);
             float cloudErosionFactor = sceneConfig.WeatherDataList[index].EvaluateCloudErosionFactor(percentage);
             float cloudMicroErosionFactor = sceneConfig.WeatherDataList[index].EvaluateCloudMicroErosionFactor(percentage);
 
             float newExposure = Mathf.Lerp(sceneConfig.NighttimeExposure, sceneConfig.DaytimeExposure, CustomExposureRemap(sunController.CurrentSunRotation, sceneConfig.ExposureMinimumSunRotationAngle, sceneConfig.ExposureMaximumSunRotationAngle));
 
             SetExposure(newExposure);
+            SetGlobalWindSpeed(Mathf.Lerp(sceneConfig.WindSpeedBounds.x, sceneConfig.WindSpeedBounds.y, windStrength));
 
             SetFog(Mathf.Lerp(sceneConfig.FogAttenuationDistanceBounds .x, sceneConfig.FogAttenuationDistanceBounds.y, 1 - fogStrength));
             SetRainStrength(rainStrength);
@@ -232,14 +292,93 @@ namespace Grigor.Gameplay.Weather
             SetPuddleWindSpeed(Mathf.Lerp(sceneConfig.PuddleWindSpeedBounds.x, sceneConfig.PuddleWindSpeedBounds.y, windStrength));
             SetGroundSmoothness(Mathf.Lerp(sceneConfig.SmoothnessBounds.x, sceneConfig.SmoothnessBounds.y, rainStrength));
 
-            // TO-DO: fix
-            SetCloudDensity(rainStrength);
-            SetCloudShapeFactor(Mathf.Lerp(sceneConfig.CloudShapeFactorMinimum, 1, rainStrength));
+            SetCloudDensity(cloudDensity);
+            SetCloudShapeFactor(Mathf.Lerp(1f, sceneConfig.CloudShapeFactorMinimum, 1 - cloudShapeFactor));
 
             SetCloudErosionFactor(cloudErosionFactor);
             SetCloudMicroErosionFactor(cloudMicroErosionFactor);
 
+            SetCloudShapeScale(Mathf.Lerp(sceneConfig.CloudShapeScaleBounds.x, sceneConfig.CloudShapeScaleBounds.y, windStrength));
+            SetCloudErosionScale(Mathf.Lerp(sceneConfig.CloudErosionScaleBounds.x, sceneConfig.CloudErosionScaleBounds.y, windStrength));
+
             rainZoneManager.SetRainParticleEmission(Mathf.Lerp(sceneConfig.RainParticleEmissionBounds.x, sceneConfig.RainParticleEmissionBounds.y, rainStrength));
+
+            ChangeWeatherForRandomParameters(percentage, windStrength);
+        }
+
+        private void ChangeWeatherForRandomParameters(float percentage, float windStrength)
+        {
+            if (randomWeatherParameters == null)
+            {
+                CalculateNewRandomWeatherParameters();
+                CalculateNewTimeToChangeWeatherParameters(percentage);
+            }
+
+            float adjustedCurrentTimePercentage = CalculateAdjustedCurrentTimePercentage(percentage, timeUntilNextWeatherChange);
+            float percentageUntilParametersFullyChanged = Mathf.InverseLerp(startTimeOfCurrentWeatherChange, timeUntilNextWeatherChange, adjustedCurrentTimePercentage);
+
+            float cloudShapeScale = Mathf.Lerp(previousRandomWeatherParameters.CloudShapeScale, randomWeatherParameters.CloudShapeScale, percentageUntilParametersFullyChanged);
+            float cloudErosionScale = Mathf.Lerp(previousRandomWeatherParameters.CloudErosionScale, randomWeatherParameters.CloudErosionScale, percentageUntilParametersFullyChanged);
+            float windDirection = Mathf.Lerp(previousRandomWeatherParameters.WindDirection, randomWeatherParameters.WindDirection, percentageUntilParametersFullyChanged);
+
+            SetCloudShapeScale(cloudShapeScale);
+            SetCloudErosionScale(cloudErosionScale);
+            SetGlobalWindDirection(windDirection);
+
+            rainZoneManager.SetRainParticleRotation(windDirection, windStrength, sceneConfig.MaximumRainTiltAngle);
+
+            if (percentageUntilParametersFullyChanged < 1f)
+            {
+                return;
+            }
+
+            CalculateNewRandomWeatherParameters();
+            CalculateNewTimeToChangeWeatherParameters(percentage);
+        }
+
+        private void CalculateNewTimeToChangeWeatherParameters(float percentage)
+        {
+            startTimeOfCurrentWeatherChange = percentage;
+            timeUntilNextWeatherChange = percentage + (sceneConfig.MinutesInBetweenWeatherChanges / timeManager.TotalDayMinutes);
+        }
+
+        private void CalculateNewRandomWeatherParameters()
+        {
+            if (randomWeatherParameters == null)
+            {
+                randomWeatherParameters = new RandomWeatherParameters();
+                previousRandomWeatherParameters = new RandomWeatherParameters();
+
+                previousRandomWeatherParameters.SetCloudShapeScale(initialPermanentWeatherData.CloudShapeScale);
+                previousRandomWeatherParameters.SetCloudErosionScale(initialPermanentWeatherData.CloudErosionScale);
+                previousRandomWeatherParameters.SetWindDirection(initialPermanentWeatherData.GlobalWindDirection);
+            }
+            else
+            {
+                previousRandomWeatherParameters.SetAllFromPreviousValues(randomWeatherParameters);
+            }
+
+            float random = Random.Range(0f, 1f);
+
+            if (WillParameterChangeBasedOnChance(random, sceneConfig.CloudShapeScaleChangeChance))
+            {
+                randomWeatherParameters.SetCloudShapeScale(Random.Range(sceneConfig.CloudShapeScaleBounds.x, sceneConfig.CloudShapeScaleBounds.y));
+            }
+
+            if (WillParameterChangeBasedOnChance(random, sceneConfig.CloudErosionScaleChangeChance))
+            {
+                randomWeatherParameters.SetCloudErosionScale(Random.Range(sceneConfig.CloudErosionScaleBounds.x, sceneConfig.CloudErosionScaleBounds.y));
+            }
+
+            if (WillParameterChangeBasedOnChance(random, sceneConfig.WindDirectionChangeChance))
+            {
+                randomWeatherParameters.SetWindDirection(Random.Range(0, 360));
+            }
+        }
+
+        private bool WillParameterChangeBasedOnChance(float random, float chance)
+        {
+            return random <= chance;
         }
 
         /// <summary>
@@ -334,7 +473,7 @@ namespace Grigor.Gameplay.Weather
 
         private void IncrementWetness(float currentTimePercentage)
         {
-            float percentageUntilFullyWet = Mathf.InverseLerp(timePercentageWhenRainStarted, timePercentageUntilFullyWet, CalculateAdjustedCurrentTimePercentage(currentTimePercentage));
+            float percentageUntilFullyWet = Mathf.InverseLerp(timePercentageWhenRainStarted, timePercentageUntilFullyWet, CalculateAdjustedCurrentTimePercentage(currentTimePercentage, timePercentageUntilFullyWet));
 
             //if the rain just started and the rain start time is the same as the current time, isWet will be set to false during CheckIfWet() because wetness will be 0 until the next minute, so we have to add a value manually to avoid this loop
             if (!isWet)
@@ -360,9 +499,9 @@ namespace Grigor.Gameplay.Weather
             wetnessCarriedOverWhenDrying = wetness;
         }
 
-        private float CalculateAdjustedCurrentTimePercentage(float currentTimePercentage)
+        private float CalculateAdjustedCurrentTimePercentage(float currentTimePercentage, float endTimePercentage)
         {
-            float adjustedCurrentTimePercentage = timePercentageUntilFullyWet - currentTimePercentage > 1f ? currentTimePercentage + 1f : currentTimePercentage;
+            float adjustedCurrentTimePercentage = endTimePercentage - currentTimePercentage > 1f ? currentTimePercentage + 1f : currentTimePercentage;
 
             return adjustedCurrentTimePercentage;
         }

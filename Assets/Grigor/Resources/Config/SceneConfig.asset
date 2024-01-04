@@ -74,15 +74,15 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   daytimeExposure: 10
   nighttimeExposure: 12
-  smoothSunTransition: 0
-  smoothSunTransitionTime: 0.5
+  smoothSunTransition: 1
+  smoothSunTransitionTime: 0.1
   exposureMinimumSunRotationAngle: 60
   exposureMaximumSunRotationAngle: 135
   dayStartHour: 9
   nightStartHour: 20
-  startHour: 8
+  startHour: 11
   changeTimeAutomatically: 1
-  timeMultiplier: 877
+  timeMultiplier: 15000
   weatherDataList:
   - windStrength:
       serializedVersion: 2
@@ -131,26 +131,146 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 0.5
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.87298584
-        value: 0.4951172
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        time: 1
+        value: 0.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 1
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rainStrength:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.011146754
+        value: 0.056468636
+        inSlope: 1.6885881
+        outSlope: 1.6885881
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.3514493
+        value: 0.63109946
+        inSlope: -0.07489494
+        outSlope: -0.07489494
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.49820352
+        value: 0.17750296
+        inSlope: -0.80152863
+        outSlope: -0.80152863
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.16615112
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6145647
+        value: 0.11140894
+        inSlope: -0.36613002
+        outSlope: -0.36613002
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6900062
+        value: -0.011250742
+        inSlope: -0.29515564
+        outSlope: -0.29515564
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.98573965
+        value: 0.057555437
+        inSlope: 0.23266283
+        outSlope: 0.23266283
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    rainStrength:
+    cloudDensity:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.011146754
+        value: 0.056468636
+        inSlope: 1.6885881
+        outSlope: 1.6885881
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.3514493
+        value: 0.63109946
+        inSlope: -0.07489494
+        outSlope: -0.07489494
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.49820352
+        value: 0.17750296
+        inSlope: -0.80152863
+        outSlope: -0.80152863
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.16615112
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6145647
+        value: 0.11140894
+        inSlope: -0.36613002
+        outSlope: -0.36613002
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6900062
+        value: -0.011250742
+        inSlope: -0.29515564
+        outSlope: -0.29515564
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.98573965
+        value: 0.057555437
+        inSlope: 0.23266283
+        outSlope: 0.23266283
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    cloudShapeFactor:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -276,19 +396,21 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  cloudDensityRainMinimumThreshold: 0.5
-  cloudShapeFactorMinimum: 0.4
-  cloudShapeFactorRainMaximumThreshold: 0.6
-  windSpeedBounds: {x: 100, y: 2000}
+  repeatFirstDayWeather: 0
+  cloudShapeFactorMinimum: 0.342
+  windSpeedBounds: {x: 100, y: 1000}
   rainParticleEmissionBounds: {x: 0, y: 3000}
   cloudShapeScaleBounds: {x: 10, y: 100}
   cloudErosionScaleBounds: {x: 10, y: 100}
-  minutesBeforeRainCloudsChange: 0
+  maximumRainTiltAngle: 30
   fogAttenuationDistanceBounds: {x: 12, y: 200}
   rainDropSpeedBounds: {x: 0.1, y: 4}
   puddleWindSpeedBounds: {x: 1, y: 10}
   minutesUntilFullyDry: 90
   minutesUntilFullyWet: 90
-  rainStrengthWetnessFactor: 0.522
-  rainStrengthLowerBound: 0
   smoothnessBounds: {x: 0.5, y: 0.7}
+  rainStrengthWetnessFactor: 0.522
+  minutesInBetweenWeatherChanges: 120
+  cloudShapeScaleChangeChance: 0.59
+  cloudErosionScaleChangeChance: 0.428
+  windDirectionChangeChance: 0.89

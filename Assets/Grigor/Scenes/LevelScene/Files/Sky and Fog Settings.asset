@@ -24,10 +24,10 @@ MonoBehaviour:
     m_Value: 1
   windOrientation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 212
   windSpeed:
     m_OverrideState: 1
-    m_Value: 1000
+    m_Value: 421.14737
   fogType:
     m_OverrideState: 1
     m_Value: 0
@@ -232,22 +232,22 @@ MonoBehaviour:
     m_Value: 0.5
   densityMultiplier:
     m_OverrideState: 1
-    m_Value: 0.6705305
+    m_Value: 0.44755474
   shapeFactor:
     m_OverrideState: 1
-    m_Value: 0.8886527
+    m_Value: 0.342
   shapeScale:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 18.596382
   shapeOffset:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0, z: 0}
   erosionFactor:
     m_OverrideState: 1
-    m_Value: 0.52152586
+    m_Value: 0.46804738
   erosionScale:
     m_OverrideState: 1
-    m_Value: 50
+    m_Value: 68.237915
   erosionNoiseType:
     m_OverrideState: 0
     m_Value: 1
@@ -256,7 +256,7 @@ MonoBehaviour:
     m_Value: 0
   microErosionFactor:
     m_OverrideState: 1
-    m_Value: 0.52152586
+    m_Value: 0.46804738
   microErosionScale:
     m_OverrideState: 0
     m_Value: 300
@@ -409,7 +409,7 @@ MonoBehaviour:
     m_Value: 428.1
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 118.37243
+    m_Value: 106
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1

@@ -17,8 +17,14 @@ namespace Grigor.Gameplay.Weather
         [PropertyTooltip("Evaluates to the strength of the fog at any given time. A higher fog strength means the fog will be more opaque and the sky will be less visible.")]
         [SerializeField, ColoredBoxGroup("Weather")] private AnimationCurve fogStrength;
 
-        [PropertyTooltip("Evaluates to the shape of the clouds at any given time. A higher cloud shape factor means the clouds will be more spread out and less dense.")]
+        [PropertyTooltip("Evaluates to the strength of the rain at any given time.")]
         [SerializeField, ColoredBoxGroup("Weather")] private AnimationCurve rainStrength;
+
+        [PropertyTooltip("Evaluates to the density of the clouds at any given time. A higher cloud density means the clouds will have absorbed more water and ice, making them darker and more opaque.")]
+        [SerializeField, ColoredBoxGroup("Weather")] private AnimationCurve cloudDensity;
+
+        [PropertyTooltip("Evaluates to the shape of the clouds at any given time. A higher cloud shape factor means the clouds will be more spread out and less dense.")]
+        [SerializeField, ColoredBoxGroup("Weather")] private AnimationCurve cloudShapeFactor;
 
         [PropertyTooltip("Evaluates to the erosion of the clouds at any given time. A higher cloud erosion factor will erode the edges of clouds more significantly, and lower values will make clouds smoother.")]
         [SerializeField, ColoredBoxGroup("Weather")] private AnimationCurve cloudErosionFactor;
@@ -51,23 +57,19 @@ namespace Grigor.Gameplay.Weather
             return Mathf.Clamp01(cloudMicroErosionFactor.Evaluate(percentage));
         }
 
-        public bool TryGetTimePercentageUntilNextRain(float currentTimePercentage, out float timePercentage)
+        public float EvaluateCloudDensity(float percentage)
         {
-            timePercentage = 0f;
+            return Mathf.Clamp01(cloudDensity.Evaluate(percentage));
+        }
 
-            for (float i = currentTimePercentage; i < 1; i += 0.01f)
-            {
-                if (!(EvaluateRainStrength(i) > 0))
-                {
-                    continue;
-                }
+        public float EvaluateCloudShapeFactor(float percentage)
+        {
+            return Mathf.Clamp01(cloudShapeFactor.Evaluate(percentage));
+        }
 
-                timePercentage = i;
-
-                return true;
-            }
-
-            return false;
+        public void ChangeTimeReferenceHour(int hour)
+        {
+            timeReference = hour;
         }
     }
 }

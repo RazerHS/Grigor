@@ -17,7 +17,11 @@ namespace Grigor.Gameplay.Weather
         [ShowInInspector] private float cloudShapeFactor;
         [ShowInInspector] private float cloudErosionFactor;
         [ShowInInspector] private float cloudMicroErosionFactor;
+        [ShowInInspector] private float cloudShapeScale;
+        [ShowInInspector] private float cloudErosionScale;
         [ShowInInspector] private float exposure;
+        [ShowInInspector] private float globalWindSpeed;
+        [ShowInInspector] private float globalWindDirection;
 
         public float CloudDensity => cloudDensity;
         public float WindSpeed => windSpeed;
@@ -31,19 +35,23 @@ namespace Grigor.Gameplay.Weather
         public float CloudShapeFactor => cloudShapeFactor;
         public float CloudErosionFactor => cloudErosionFactor;
         public float CloudMicroErosionFactor => cloudMicroErosionFactor;
+        public float CloudShapeScale => cloudShapeScale;
+        public float CloudErosionScale => cloudErosionScale;
         public float Exposure => exposure;
+        public float GlobalWindSpeed => globalWindSpeed;
+        public float GlobalWindDirection => globalWindDirection;
 
         public void SetCloudDensity(float cloudDensity)
         {
             this.cloudDensity = cloudDensity;
         }
 
-        public void SetWindSpeed(float windSpeed)
+        public void SetGlobalWindSpeed(float globalWindSpeed)
         {
-            this.windSpeed = windSpeed;
+            this.globalWindSpeed = globalWindSpeed;
         }
 
-        public void SetWindStrength(float windStrength)
+        public void SetPuddleWindStrength(float windStrength)
         {
             this.windStrength = windStrength;
         }
@@ -93,9 +101,24 @@ namespace Grigor.Gameplay.Weather
             this.cloudMicroErosionFactor = cloudMicroErosionFactor;
         }
 
+        public void SetCloudShapeScale(float cloudShapeScale)
+        {
+            this.cloudShapeScale = cloudShapeScale;
+        }
+
+        public void SetCloudErosionScale(float cloudErosionScale)
+        {
+            this.cloudErosionScale = cloudErosionScale;
+        }
+
         public void SetExposure(float exposure)
         {
             this.exposure = exposure;
+        }
+
+        public void SetGlobalWindDirection(float globalWindDirection)
+        {
+            this.globalWindDirection = globalWindDirection;
         }
     }
 }

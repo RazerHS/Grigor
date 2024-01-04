@@ -16,13 +16,16 @@ namespace Grigor.Gameplay.Time
         [SerializeField, Wrap(0, 60), HorizontalGroup("Time"), HideLabel] private int minutes = 0;
         [ShowInInspector, HorizontalGroup("Time", Width = 0.01f), HideLabel, DisplayAsString] private string secondSeparator = ":";
         [SerializeField, Wrap(0, 60), HorizontalGroup("Time"), HideLabel] private float seconds = 0f;
-        [SerializeField, ReadOnly] private int daysPassed;
+        [SerializeField, ReadOnly] private int days;
 
         private TimeOfDay currentTimeOfDay;
         private bool canEndDay;
         private readonly int totalDayMinutes = 60 * 24;
+        private SceneConfig sceneConfig;
+        private GameConfig gameConfig;
 
         public int TotalDayMinutes => totalDayMinutes;
+        public int Days => days;
 
         public event Action<int, int> TimeChangedEvent;
         public event Action ChangedToDayEvent;
@@ -33,16 +36,19 @@ namespace Grigor.Gameplay.Time
         private void Awake()
         {
             DontDestroyOnLoad(this);
+
+            sceneConfig = SceneConfig.Instance;
+            gameConfig = GameConfig.Instance;
         }
 
         private void Update()
         {
-            if (!SceneConfig.Instance.ChangeTimeAutomatically)
+            if (!sceneConfig.ChangeTimeAutomatically)
             {
                 return;
             }
 
-            seconds += UnityEngine.Time.deltaTime * SceneConfig.Instance.TimeMultiplier;
+            seconds += UnityEngine.Time.deltaTime * sceneConfig.TimeMultiplier;
 
             OnTimeChanged();
         }
@@ -100,7 +106,7 @@ namespace Grigor.Gameplay.Time
                     return;
                 }
 
-                daysPassed++;
+                days++;
 
                 hours -= 24;
 
@@ -115,7 +121,7 @@ namespace Grigor.Gameplay.Time
 
         private void CheckTimeOfDay()
         {
-            if (hours >= SceneConfig.Instance.DayStartHour && hours < SceneConfig.Instance.NightStartHour)
+            if (hours >= sceneConfig.DayStartHour && hours < sceneConfig.NightStartHour)
             {
                 if (currentTimeOfDay == TimeOfDay.Day)
                 {
@@ -139,7 +145,7 @@ namespace Grigor.Gameplay.Time
         {
             hours = SceneConfig.Instance.StartHour;
 
-            if (hours >= SceneConfig.Instance.DayStartHour && hours < SceneConfig.Instance.NightStartHour)
+            if (hours >= sceneConfig.DayStartHour && hours < sceneConfig.NightStartHour)
             {
                OnChangedToDay();
             }
@@ -173,7 +179,7 @@ namespace Grigor.Gameplay.Time
 
         public void ToggleTimeOfDay(float duration, Action callback)
         {
-            int targetTimeOfDay = currentTimeOfDay == TimeOfDay.Day ? SceneConfig.Instance.NightStartHour : SceneConfig.Instance.DayStartHour;
+            int targetTimeOfDay = currentTimeOfDay == TimeOfDay.Day ? sceneConfig.NightStartHour : sceneConfig.DayStartHour;
 
             DOVirtual.Int(hours, targetTimeOfDay, duration, SetTimeToHour).OnComplete(() =>
             {
@@ -192,6 +198,8 @@ namespace Grigor.Gameplay.Time
 
         public void StartTime()
         {
+            days++;
+
             CheckStartTimeOfDay();
 
             OnTimeChanged();
@@ -203,7 +211,7 @@ namespace Grigor.Gameplay.Time
 
             int previousValue = 0;
 
-            DOVirtual.Int(minutes, minutes + newMinutes, GameConfig.Instance.TimePassTweenDuration, value =>
+            DOVirtual.Int(minutes, minutes + newMinutes, gameConfig.TimePassTweenDuration, value =>
             {
                 if (previousValue == 0)
                 {
@@ -225,12 +233,12 @@ namespace Grigor.Gameplay.Time
 
         public void SetTimeToNight()
         {
-            SetTimeToHour(SceneConfig.Instance.NightStartHour);
+            SetTimeToHour(sceneConfig.NightStartHour);
         }
 
         public void SetTimeToDay()
         {
-            SetTimeToHour(SceneConfig.Instance.DayStartHour);
+            SetTimeToHour(sceneConfig.DayStartHour);
         }
 
         public void OnDayStarted()

@@ -23,6 +23,7 @@ namespace Grigor.Gameplay.Weather
         public bool DrawGizmos => drawGizmos;
 
         public event Action<float> SetRainParticleEmissionEvent;
+        public event Action<float, float, float> SetRainParticleRotationEvent;
 
         private void Awake()
         {
@@ -83,6 +84,11 @@ namespace Grigor.Gameplay.Weather
         public void SetRainParticleEmission(float value)
         {
             SetRainParticleEmissionEvent?.Invoke(value);
+        }
+
+        public void SetRainParticleRotation(float value, float windStrength, float maxAngle)
+        {
+            SetRainParticleRotationEvent?.Invoke(value, windStrength, maxAngle);
         }
     }
 }

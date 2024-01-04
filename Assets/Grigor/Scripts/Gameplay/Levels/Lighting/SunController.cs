@@ -55,7 +55,7 @@ namespace Grigor.Gameplay.Lighting
 
             float transitionTime = sceneConfig.SmoothSunTransition ? sceneConfig.SmoothSunTransitionTime : 0f;
 
-            directionalLight.transform.DOLocalRotate(newSunRotation, transitionTime).SetEase(Ease.OutSine);
+            directionalLight.transform.DOLocalRotate(newSunRotation, transitionTime);
 
             currentSunRotation = newSunRotation.x;
         }

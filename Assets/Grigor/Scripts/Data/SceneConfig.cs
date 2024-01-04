@@ -18,10 +18,10 @@ namespace Grigor.Data
         [SerializeField, ColoredBoxGroup("Lighting")] private bool smoothSunTransition;
         [SerializeField, ColoredBoxGroup("Lighting"), ShowIf(nameof(smoothSunTransition))] private float smoothSunTransitionTime;
 
-        [PropertyTooltip("An angle smaller than 90 degrees and greater than 0 that represents the first angle of the sun's rotation in the sky when the exposure is the brightest. Also works vice-versa for nighttime.")]
+        [Tooltip("An angle smaller than 90 degrees and greater than 0 that represents the first angle of the sun's rotation in the sky when the exposure is the brightest. Also works vice-versa for nighttime.")]
         [SerializeField, ColoredBoxGroup("Lighting"), Range(1, 89)] private int exposureMinimumSunRotationAngle;
 
-        [PropertyTooltip("An angle greater than 90 degrees and smaller than 180 that represents the last angle of the sun's rotation in the sky when the exposure is the brightest. Also works vice-versa for nighttime.")]
+        [Tooltip("An angle greater than 90 degrees and smaller than 180 that represents the last angle of the sun's rotation in the sky when the exposure is the brightest. Also works vice-versa for nighttime.")]
         [SerializeField, ColoredBoxGroup("Lighting"), Range(91, 179)] private int exposureMaximumSunRotationAngle;
 
         [SerializeField, ColoredBoxGroup("Time", false, true), Range(0, 24)] private int dayStartHour = 8;
@@ -31,55 +31,59 @@ namespace Grigor.Data
         [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(changeTimeAutomatically)), Range(1, 15000)] private float timeMultiplier;
 
         [InfoBox("These controls affect the value of the property from 00:00 to 23:59.")]
-        [SerializeField] private List<DailyWeatherData> weatherDataList;
+        [SerializeField, ColoredBoxGroup("Daily Weather", false, true)] private List<DailyWeatherData> weatherDataList;
+        [SerializeField, ColoredBoxGroup("Daily Weather")] private bool repeatFirstDayWeather;
 
-        [PropertyTooltip("The minimum cloud density for rain to start.")]
-        [SerializeField, ColoredBoxGroup("Rain and Sky", false, true), Range(0f, 1f)] private float cloudDensityRainMinimumThreshold = 0.5f;
+        [Tooltip("The smallest the cloud shape factor can be.")]
+        [SerializeField, ColoredBoxGroup("Rain and Sky", false, true), Range(0f, 1f)] private float cloudShapeFactorMinimum;
 
-        [PropertyTooltip("The smallest the cloud shape factor can be.")]
-        [SerializeField, ColoredBoxGroup("Rain and Sky"), Range(0f, 1f)] private float cloudShapeFactorMinimum;
-
-        [PropertyTooltip("The maximum value the cloud shape factor can reach before rain stops.")]
-        [SerializeField, ColoredBoxGroup("Rain and Sky"), Range(0f, 1f)] private float cloudShapeFactorRainMaximumThreshold;
-
-        [PropertyTooltip("The slowest and fastest wind speeds possible.")]
+        [Tooltip("The slowest and fastest wind speeds possible.")]
         [SerializeField, ColoredBoxGroup("Rain and Sky")] private Vector2 windSpeedBounds;
 
-        [PropertyTooltip("The least and most rain particle emission possible.")]
+        [Tooltip("The least and most rain particle emission possible.")]
         [SerializeField, ColoredBoxGroup("Rain and Sky")] private Vector2 rainParticleEmissionBounds;
 
-        [PropertyTooltip("The smallest and largest possible cloud shape scale, chosen randomly between the bounds to be tweened to every hour.")]
+        [Tooltip("The smallest and largest possible cloud shape scale, chosen randomly between the bounds to be tweened to every hour.")]
         [SerializeField, ColoredBoxGroup("Rain and Sky")] private Vector2 cloudShapeScaleBounds;
 
-        [PropertyTooltip("The smallest and largest possible cloud erosion scale, chosen randomly between the bounds to be tweened to every hour.")]
+        [Tooltip("The smallest and largest possible cloud erosion scale, chosen randomly between the bounds to be tweened to every hour.")]
         [SerializeField, ColoredBoxGroup("Rain and Sky")] private Vector2 cloudErosionScaleBounds;
 
-        [PropertyTooltip("The smallest and largest possible cloud erosion scale, chosen randomly between the bounds to be tweened to every hour.")]
-        [SerializeField, ColoredBoxGroup("Rain and Sky")] private float minutesBeforeRainCloudsChange;
+        [Tooltip("The largest possible angle at which the rain can tilt according to the wind direction.")]
+        [SerializeField, ColoredBoxGroup("Rain and Sky"), Range(0f, 90f)] private float maximumRainTiltAngle;
 
-        [PropertyTooltip("The strongest and weakest fog values possible.")]
+        [Tooltip("The strongest and weakest fog values possible.")]
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals", false, true)] private Vector2 fogAttenuationDistanceBounds;
 
-        [PropertyTooltip("The slowest and fastest speeds at which rain drops spawn and disappear on the ground.")]
+        [Tooltip("The slowest and fastest speeds at which rain drops spawn and disappear on the ground.")]
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private Vector2 rainDropSpeedBounds;
 
-        [PropertyTooltip("The slowest and fastest wind speeds for the normals puddles on the ground to be affected by.")]
+        [Tooltip("The slowest and fastest wind speeds for the normals puddles on the ground to be affected by.")]
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private Vector2 puddleWindSpeedBounds;
 
-        [PropertyTooltip("How many minutes does it take for the ground to become completely dry?")]
+        [Tooltip("How many minutes does it take for the ground to become completely dry?")]
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private float minutesUntilFullyDry;
 
-        [PropertyTooltip("How many minutes does it take for the ground to become completely dry?")]
+        [Tooltip("How many minutes does it take for the ground to become completely dry?")]
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private float minutesUntilFullyWet;
 
-        [PropertyTooltip("How much does rain strength affect the speed of how fast the ground gets wet?")]
+        [Tooltip("The lowest and highest smoothness values for when the ground is wet.")]
+        [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private Vector2 smoothnessBounds;
+
+        [Tooltip("How much does rain strength affect the speed of how fast the ground gets wet?")]
         [SerializeField, ColoredBoxGroup("Wet Ground Visuals"), Range(0f, 1f)] private float rainStrengthWetnessFactor;
 
-        [PropertyTooltip("How much does rain strength affect the speed of how fast the ground gets wet?")]
-        [SerializeField, ColoredBoxGroup("Wet Ground Visuals"), Range(0f, 1f)] private float rainStrengthLowerBound;
+        [Tooltip("The amount of time in minutes until a new random number is chosen for the values below.")]
+        [SerializeField, ColoredBoxGroup("Random Weather Changes", false, true), Range(0f, 1440f)] private float minutesInBetweenWeatherChanges;
 
-        [PropertyTooltip("The lowest and highest smoothness values for when the ground is wet.")]
-        [SerializeField, ColoredBoxGroup("Wet Ground Visuals")] private Vector2 smoothnessBounds;
+        [Tooltip("The chance that the cloud shape scale will change when the weather changes.")]
+        [SerializeField, ColoredBoxGroup("Random Weather Changes"), Range(0f, 1f)] private float cloudShapeScaleChangeChance;
+
+        [Tooltip("The chance that the cloud erosion scale will change when the weather changes.")]
+        [SerializeField, ColoredBoxGroup("Random Weather Changes"), Range(0f, 1f)] private float cloudErosionScaleChangeChance;
+
+        [Tooltip("The chance that the wind speed will change when the weather changes.")]
+        [SerializeField, ColoredBoxGroup("Random Weather Changes"), Range(0f, 1f)] private float windDirectionChangeChance;
 
         public Gradient AmbientColor => ambientColor;
         public Gradient DirectionalColor => directionalColor;
@@ -95,9 +99,8 @@ namespace Grigor.Data
         public float TimeMultiplier => timeMultiplier;
 
         public List<DailyWeatherData> WeatherDataList => weatherDataList;
-        public float CloudDensityRainMinimumThreshold => cloudDensityRainMinimumThreshold;
+        public bool RepeatFirstDayWeather => repeatFirstDayWeather;
         public float CloudShapeFactorMinimum => cloudShapeFactorMinimum;
-        public float CloudShapeFactorRainMaximumThreshold => cloudShapeFactorRainMaximumThreshold;
         public Vector2 WindSpeedBounds => windSpeedBounds;
         public Vector2 RainParticleEmissionBounds => rainParticleEmissionBounds;
         public Vector2 CloudShapeScaleBounds => cloudShapeScaleBounds;
@@ -109,9 +112,14 @@ namespace Grigor.Data
         public Vector2 SmoothnessBounds => smoothnessBounds;
         public float MinutesUntilFullyWet => minutesUntilFullyWet;
         public float RainStrengthWetnessFactor => rainStrengthWetnessFactor;
-        public float RainStrengthLowerBound => rainStrengthLowerBound;
+        public float MaximumRainTiltAngle => maximumRainTiltAngle;
 
         public bool SmoothSunTransition => smoothSunTransition;
         public float SmoothSunTransitionTime => smoothSunTransitionTime;
+
+        public float MinutesInBetweenWeatherChanges => minutesInBetweenWeatherChanges;
+        public float CloudShapeScaleChangeChance => cloudShapeScaleChangeChance;
+        public float CloudErosionScaleChangeChance => cloudErosionScaleChangeChance;
+        public float WindDirectionChangeChance => windDirectionChangeChance;
     }
 }

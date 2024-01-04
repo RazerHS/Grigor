@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Codice.CM.Common;
+using DG.Tweening;
+using Grigor.Data;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Weather
@@ -55,6 +60,7 @@ namespace Grigor.Gameplay.Weather
             particleCulling.CullEvent += OnCull;
 
             rainZoneManager.SetRainParticleEmissionEvent += OnSetRainParticleEmission;
+            rainZoneManager.SetRainParticleRotationEvent += OnSetRainParticleRotation;
 
             GetRenderers();
 
@@ -66,6 +72,7 @@ namespace Grigor.Gameplay.Weather
             particleCulling.CullEvent -= OnCull;
 
             rainZoneManager.SetRainParticleEmissionEvent -= OnSetRainParticleEmission;
+            rainZoneManager.SetRainParticleRotationEvent -= OnSetRainParticleRotation;
 
             particleCulling.Dispose();
         }
@@ -77,6 +84,19 @@ namespace Grigor.Gameplay.Weather
                 ParticleSystem.EmissionModule emissionModule = rainParticleSystems[i].emission;
                 emissionModule.rateOverTime = value;
             }
+        }
+
+        private void OnSetRainParticleRotation(float value, float windStrength, float maxAngle)
+        {
+            float xRotationPercentage = Mathf.Cos(value * Mathf.PI / 180f);
+            float zRotationPercentage = Mathf.Sin(value * Mathf.PI / 180f);
+
+            float xRotation = xRotationPercentage * windStrength * maxAngle;
+            float zRotation = zRotationPercentage * windStrength * maxAngle;
+
+            Vector3 newRotation = new Vector3(xRotation, 30f, zRotation);
+
+            transform.DOLocalRotate(newRotation, 0f);
         }
 
         private void OnCull(bool visible)
