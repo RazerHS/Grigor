@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using UnityEngine;
 
 namespace Grigor.Gameplay.Weather
 {

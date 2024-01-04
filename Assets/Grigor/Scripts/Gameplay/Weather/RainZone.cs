@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Codice.CM.Common;
 using DG.Tweening;
-using Grigor.Data;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Weather

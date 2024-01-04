@@ -4,7 +4,6 @@ using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Data
 {
