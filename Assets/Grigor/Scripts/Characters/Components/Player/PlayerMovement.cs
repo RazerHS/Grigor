@@ -19,11 +19,14 @@ namespace Grigor.Characters.Components.Player
         [SerializeField, ColoredBoxGroup("References")] private Transform moveTransform;
 
         [ColoredBoxGroup("Debugging", true, 0.5f, 0.1f, 0.9f), ShowInInspector, ReadOnly] private bool isGrounded;
+
         private bool jump;
         private bool isMovementEnabled = true;
         private Vector3 moveDirection;
         private Vector3 verticalVelocity;
         private CharacterController characterController;
+
+        public Transform GroundCheckTransform => groundCheckTransform;
 
         protected override void OnInitialized()
         {

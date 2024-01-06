@@ -476,17 +476,17 @@ PrefabInstance:
     - target: {fileID: 8475032777802215821, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.59703285
       objectReference: {fileID: 0}
     - target: {fileID: 8475032777802215821, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.283
+      value: 1.0906503
       objectReference: {fileID: 0}
     - target: {fileID: 8475032777802215821, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.66
+      value: -7.92
       objectReference: {fileID: 0}
     - target: {fileID: 8475032777802215821, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
@@ -536,6 +536,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 640077730484838505}
+    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5414630635585153052}
   m_SourcePrefab: {fileID: 100100000, guid: 074fe82d7e4a3014996892cf2abd72fc, type: 3}
 --- !u!4 &2979257459337640276 stripped
 Transform:
@@ -576,11 +580,36 @@ MonoBehaviour:
   moveCatY: 0.2
   rotateCatZ: 99
   rotateCatY: 12
+  catSpeed: 2
+  drawCatnipRadiusGizmo: 0
   wheelTransforms:
   - {fileID: 5162531544210865150}
   - {fileID: 7929074688086980660}
   - {fileID: 6811402663871272113}
   - {fileID: 8367113553452138309}
+  navMeshAgent: {fileID: 5414630635585153052}
+--- !u!195 &5414630635585153052
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9096205613487966950}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5
+  m_Acceleration: 10
+  avoidancePriority: 50
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0.5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &4518412245305191348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -666,8 +695,40 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5712929000787242190}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 056196598731d1640a97f4858cf8266a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7072447485633834206}
   m_SourcePrefab: {fileID: 100100000, guid: 056196598731d1640a97f4858cf8266a, type: 3}
+--- !u!1 &3636082954725086949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 056196598731d1640a97f4858cf8266a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4518412245305191348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &7072447485633834206
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636082954725086949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!4 &4124776649051704415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 056196598731d1640a97f4858cf8266a,
