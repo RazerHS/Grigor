@@ -2,11 +2,13 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters.Components;
+using Grigor.Data.Tasks;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Grigor.Gameplay.Interacting.Components
 {
@@ -33,10 +35,13 @@ namespace Grigor.Gameplay.Interacting.Components
         [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 60)] protected int minutesToPass = 1;
         [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 24)] protected int hoursToPass = 1;
 
+        [SerializeField, ColoredBoxGroup("Tasks", false, true)] protected bool stopChainIfTaskNotStarted;
+        [SerializeField, ColoredBoxGroup("Tasks"), ShowIf(nameof(stopChainIfTaskNotStarted))] protected TaskData taskToListenTo;
+
         [SerializeField, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactionEnabled;
         [ShowInInspector, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactedWithInCurrentChain;
 
-        [Inject] protected TimeManager timeManager;
+        [Inject] private TimeManager baseTimeManager;
         [Inject] private PlayerInput playerInput;
 
         protected Interactable parentInteractable;
@@ -52,6 +57,8 @@ namespace Grigor.Gameplay.Interacting.Components
         public Interactable ParentInteractable => parentInteractable;
         public bool InteractionEnabled => interactionEnabled;
         public bool InteractedWithInCurrentChain => interactedWithInCurrentChain;
+        public TaskData TaskToListenTo => taskToListenTo;
+        public bool StopChainIfTaskNotStarted => stopChainIfTaskNotStarted;
 
         public event Action BeginInteractionEvent;
         public event Action EndInteractionEvent;
@@ -86,8 +93,8 @@ namespace Grigor.Gameplay.Interacting.Components
 
             if (hasTimeEffect)
             {
-                timeManager.ChangedToDayEvent += OnChangedToDay;
-                timeManager.ChangedToNightEvent += OnChangedToNight;
+                baseTimeManager.ChangedToDayEvent += OnChangedToDay;
+                baseTimeManager.ChangedToNightEvent += OnChangedToNight;
 
                 Log.Write($"Registering to time manager: {name}");
             }
@@ -107,8 +114,8 @@ namespace Grigor.Gameplay.Interacting.Components
 
             if (hasTimeEffect)
             {
-                timeManager.ChangedToDayEvent -= OnChangedToDay;
-                timeManager.ChangedToNightEvent -= OnChangedToNight;
+                baseTimeManager.ChangedToDayEvent -= OnChangedToDay;
+                baseTimeManager.ChangedToNightEvent -= OnChangedToNight;
             }
 
             OnDisposed();
@@ -161,7 +168,7 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             if (timePassesOnInteract)
             {
-                timeManager.PassTime(minutesToPass, hoursToPass);
+                baseTimeManager.PassTime(minutesToPass, hoursToPass);
             }
 
             if (parentInteractable.InRange)
@@ -238,5 +245,23 @@ namespace Grigor.Gameplay.Interacting.Components
         /// </summary>
         protected virtual void OnSkipInputDuringInteraction() { }
 
+        public bool StopChainIfRequiredTaskNotStarted()
+        {
+            if (!stopChainIfTaskNotStarted)
+            {
+                return false;
+            }
+
+            if (taskToListenTo.Started)
+            {
+                EnableInteraction();
+
+                return false;
+            }
+
+            DisableInteraction();
+
+            return true;
+        }
     }
 }

@@ -76,6 +76,8 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
+
+            //this is the main enable proximity effect so that it only happens once
             if (currentNearestParentInteractable == null)
             {
                 interactable.EnableProximityEffect(Owner);
@@ -101,6 +103,8 @@ namespace Grigor.Characters.Components.Player
 
                 if (interactableComponent == null)
                 {
+                    currentNearestParentInteractable.DisableProximityEffect(Owner);
+
                     return;
                 }
 
@@ -111,6 +115,13 @@ namespace Grigor.Characters.Components.Player
                 }
 
                 currentNearestParentInteractable.DisableInteractable();
+
+                return;
+            }
+
+            if (interactableComponent.StopChainIfRequiredTaskNotStarted())
+            {
+                currentNearestParentInteractable.DisableProximityEffect(Owner);
 
                 return;
             }
@@ -139,6 +150,11 @@ namespace Grigor.Characters.Components.Player
             }
 
             if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out previousInteraction))
+            {
+                return;
+            }
+
+            if (previousInteraction.StopChainIfRequiredTaskNotStarted())
             {
                 return;
             }

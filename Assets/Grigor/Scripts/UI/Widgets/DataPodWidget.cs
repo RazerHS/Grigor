@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
@@ -32,8 +33,9 @@ public class DataPodWidget : UIWidget, IClueListener
 
     protected override void OnShow()
     {
-        InsertCredentials();
         RegisterClueListener();
+
+        InsertCredentials();
 
         OnToggleDataPod();
 
@@ -60,18 +62,6 @@ public class DataPodWidget : UIWidget, IClueListener
         foreach (CredentialEntry credential in criminalCredentialWallet.CredentialEntries)
         {
             AddNewCredential(credential.CredentialType);
-        }
-    }
-
-    private void InsertExistingClues()
-    {
-        foreach (ClueData clueData in dataRegistry.ClueData)
-        {
-            ClueUIDisplay clueUIDisplay = Instantiate(clueDisplayPrefab, clueDisplayParent);
-            clueUIDisplay.SetClueData(clueData);
-            clueUIDisplay.SetClueText(clueData.ClueHeading);
-
-            displayedClues.Add(clueUIDisplay);
         }
     }
 
