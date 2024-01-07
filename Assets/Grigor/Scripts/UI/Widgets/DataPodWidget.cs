@@ -37,7 +37,7 @@ public class DataPodWidget : UIWidget, IClueListener
 
         InsertCredentials();
 
-        OnToggleDataPod();
+        HideDataPod();
 
         messagePopupWidget = uiManager.GetWidget<MessagePopupWidget>();
     }
@@ -65,9 +65,14 @@ public class DataPodWidget : UIWidget, IClueListener
         }
     }
 
-    public void OnToggleDataPod()
+    public void ShowDataPod()
     {
-        dataPodView.SetActive(!dataPodView.activeSelf);
+        dataPodView.SetActive(true);
+    }
+
+    public void HideDataPod()
+    {
+        dataPodView.SetActive(false);
     }
 
     private void AddNewCredential(CredentialType credentialType)

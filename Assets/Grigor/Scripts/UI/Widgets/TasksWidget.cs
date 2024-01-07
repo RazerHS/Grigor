@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Grigor.UI.Widgets
 {
-    public class TaskWidget : UIWidget
+    public class TasksWidget : UIWidget
     {
         [SerializeField] private TaskUIDisplay taskUIDisplayPrefab;
         [SerializeField] private Transform taskUIDisplayParent;

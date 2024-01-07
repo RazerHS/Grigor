@@ -75,7 +75,7 @@ namespace Grigor.Input
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DataPod"",
+                    ""name"": ""Phone"",
                     ""type"": ""Button"",
                     ""id"": ""a1da777e-64de-45fe-b116-45b4a25f73bc"",
                     ""expectedControlType"": ""Button"",
@@ -288,7 +288,7 @@ namespace Grigor.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DataPod"",
+                    ""action"": ""Phone"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -881,7 +881,7 @@ namespace Grigor.Input
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
-            m_Player_DataPod = m_Player.FindAction("DataPod", throwIfNotFound: true);
+            m_Player_Phone = m_Player.FindAction("Phone", throwIfNotFound: true);
             m_Player_EndDay = m_Player.FindAction("EndDay", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -961,7 +961,7 @@ namespace Grigor.Input
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Skip;
-        private readonly InputAction m_Player_DataPod;
+        private readonly InputAction m_Player_Phone;
         private readonly InputAction m_Player_EndDay;
         public struct PlayerActions
         {
@@ -972,7 +972,7 @@ namespace Grigor.Input
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Skip => m_Wrapper.m_Player_Skip;
-            public InputAction @DataPod => m_Wrapper.m_Player_DataPod;
+            public InputAction @Phone => m_Wrapper.m_Player_Phone;
             public InputAction @EndDay => m_Wrapper.m_Player_EndDay;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -998,9 +998,9 @@ namespace Grigor.Input
                 @Skip.started += instance.OnSkip;
                 @Skip.performed += instance.OnSkip;
                 @Skip.canceled += instance.OnSkip;
-                @DataPod.started += instance.OnDataPod;
-                @DataPod.performed += instance.OnDataPod;
-                @DataPod.canceled += instance.OnDataPod;
+                @Phone.started += instance.OnPhone;
+                @Phone.performed += instance.OnPhone;
+                @Phone.canceled += instance.OnPhone;
                 @EndDay.started += instance.OnEndDay;
                 @EndDay.performed += instance.OnEndDay;
                 @EndDay.canceled += instance.OnEndDay;
@@ -1023,9 +1023,9 @@ namespace Grigor.Input
                 @Skip.started -= instance.OnSkip;
                 @Skip.performed -= instance.OnSkip;
                 @Skip.canceled -= instance.OnSkip;
-                @DataPod.started -= instance.OnDataPod;
-                @DataPod.performed -= instance.OnDataPod;
-                @DataPod.canceled -= instance.OnDataPod;
+                @Phone.started -= instance.OnPhone;
+                @Phone.performed -= instance.OnPhone;
+                @Phone.canceled -= instance.OnPhone;
                 @EndDay.started -= instance.OnEndDay;
                 @EndDay.performed -= instance.OnEndDay;
                 @EndDay.canceled -= instance.OnEndDay;
@@ -1216,7 +1216,7 @@ namespace Grigor.Input
             void OnLook(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnSkip(InputAction.CallbackContext context);
-            void OnDataPod(InputAction.CallbackContext context);
+            void OnPhone(InputAction.CallbackContext context);
             void OnEndDay(InputAction.CallbackContext context);
         }
         public interface IUIActions

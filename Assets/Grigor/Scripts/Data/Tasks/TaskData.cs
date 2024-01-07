@@ -11,7 +11,7 @@ namespace Grigor.Data.Tasks
         [SerializeField, ColoredBoxGroup("Task Data", false, true), LabelText("Name")] private string taskName;
         [SerializeField, ColoredBoxGroup("Task Data"), LabelText("Description")] private string taskDescription;
 
-        [ShowInInspector, ColoredBoxGroup("Completion"), OnValueChanged(nameof(ToggleStartTask))] private bool started;
+        [ShowInInspector, ColoredBoxGroup("Completion", false, true), OnValueChanged(nameof(ToggleStartTask))] private bool started;
         [ShowInInspector, ColoredBoxGroup("Completion"), OnValueChanged(nameof(ToggleCompleteTask))] private bool isCompleted;
 
         public string TaskName => taskName;

@@ -15,11 +15,11 @@ namespace Grigor.Gameplay.Tasks
         [Inject] private DataRegistry dataRegistry;
 
         [ShowInInspector, ReadOnly] private List<TaskData> currentTasks = new List<TaskData>();
-        private TaskWidget taskWidget;
+        private TasksWidget tasksWidget;
 
         protected override void OnInjected()
         {
-            taskWidget = uiManager.GetWidget<TaskWidget>();
+            tasksWidget = uiManager.GetWidget<TasksWidget>();
 
             dataRegistry.TaskData.ForEach(taskData => taskData.ResetTask());
 
@@ -54,7 +54,7 @@ namespace Grigor.Gameplay.Tasks
             currentTasks.Remove(taskData);
 
             taskData.CompleteTask();
-            taskWidget.OnTaskCompleted(taskData);
+            tasksWidget.OnTaskCompleted(taskData);
         }
 
         public void StartTask(TaskData taskData)
@@ -72,7 +72,7 @@ namespace Grigor.Gameplay.Tasks
             currentTasks.Add(taskData);
 
             taskData.StartTask();
-            taskWidget.OnTaskStarted(taskData);
+            tasksWidget.OnTaskStarted(taskData);
         }
 
         private void OnTaskStartedInEditor(TaskData taskData)
