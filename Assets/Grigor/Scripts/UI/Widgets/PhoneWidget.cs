@@ -14,6 +14,7 @@ namespace Grigor.UI.Widgets
 
         private DataPodWidget dataPodWidget;
         private TasksWidget tasksWidget;
+        private MessagesWidget messagesWidget;
 
         protected override void OnShow()
         {
@@ -23,6 +24,7 @@ namespace Grigor.UI.Widgets
 
             dataPodWidget = uiManager.GetWidget<DataPodWidget>();
             tasksWidget = uiManager.GetWidget<TasksWidget>();
+            messagesWidget = uiManager.GetWidget<MessagesWidget>();
         }
 
         protected override void OnHide()
@@ -49,12 +51,15 @@ namespace Grigor.UI.Widgets
         private void OnMessagesButtonClicked()
         {
             HideAll();
+
+            messagesWidget.Show();
         }
 
         private void HideAll()
         {
             dataPodWidget.HideDataPod();
             tasksWidget.Hide();
+            messagesWidget.Hide();
         }
 
         public void TogglePhone()
