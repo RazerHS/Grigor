@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 7929074688086980660}
   - component: {fileID: 2414231956319174955}
   - component: {fileID: 8267547451175963233}
-  - component: {fileID: 6248444174287989114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6248444174287989114
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842410165516161677}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2435278387247124673
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5712929000787242190}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,8 +129,7 @@ GameObject:
   - component: {fileID: 8367113553452138309}
   - component: {fileID: 5692719603097622131}
   - component: {fileID: 5702841313085060483}
-  - component: {fileID: 6864232794594625550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheel (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,27 +201,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6864232794594625550
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6473728005770248085}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7105642903679500004
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,8 +212,7 @@ GameObject:
   - component: {fileID: 5162531544210865150}
   - component: {fileID: 5978293079922838789}
   - component: {fileID: 6865185279584221630}
-  - component: {fileID: 1803742389206358564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,27 +284,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1803742389206358564
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7105642903679500004}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8948923917610205062
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,8 +295,7 @@ GameObject:
   - component: {fileID: 6811402663871272113}
   - component: {fileID: 1283016796690179658}
   - component: {fileID: 9099841890544936280}
-  - component: {fileID: 7354339188606949307}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheel (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,27 +367,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7354339188606949307
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8948923917610205062}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &912202515454794012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -468,10 +380,25 @@ PrefabInstance:
       propertyPath: interactDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5448619533357236517, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377776607238552706, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_Name
       value: Interactable_Cat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8475032777802215821, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
@@ -573,6 +500,8 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   catTransform: {fileID: 2979257459337640276}
   timeItTakesToRoll: 0.9
@@ -688,6 +617,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 056196598731d1640a97f4858cf8266a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180640845926911598, guid: 056196598731d1640a97f4858cf8266a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -699,7 +638,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 056196598731d1640a97f4858cf8266a,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7072447485633834206}
+      addedObject: {fileID: 6483084135496766277}
   m_SourcePrefab: {fileID: 100100000, guid: 056196598731d1640a97f4858cf8266a, type: 3}
 --- !u!1 &3636082954725086949 stripped
 GameObject:
@@ -707,8 +646,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4518412245305191348}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &7072447485633834206
-MeshCollider:
+--- !u!135 &6483084135496766277
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -725,10 +664,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Radius: 15
+  m_Center: {x: 0, y: 0, z: 15}
 --- !u!4 &4124776649051704415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 056196598731d1640a97f4858cf8266a,

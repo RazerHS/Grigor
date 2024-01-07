@@ -139,6 +139,10 @@ namespace Grigor.Characters.Components.Player
 
         public void MovePlayerToPosition(Vector3 position)
         {
+            float playerGroundOffset = transform.position.y - groundCheckTransform.position.y;
+
+            position.y += playerGroundOffset;
+
             transform.DOMove(position, 0.1f);
         }
     }
