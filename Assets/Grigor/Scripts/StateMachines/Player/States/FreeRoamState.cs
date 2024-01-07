@@ -4,6 +4,7 @@ using Grigor.Gameplay.Cats;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
+using Grigor.UI.Widgets;
 using UnityEngine;
 
 namespace Grigor.StateMachines.Player.States
@@ -16,11 +17,11 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private PlayerInput playerInput;
         [Inject] private CatManager catManager;
 
-        private DataPodWidget dataPodWidget;
+        private PhoneWidget phoneWidget;
 
         protected override void OnEnter()
         {
-            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
+            phoneWidget = uiManager.GetWidget<PhoneWidget>();
 
             owningStateMachine.Owner.Movement.EnableMovement();
             owningStateMachine.Owner.Look.EnableLook();
@@ -28,7 +29,7 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
-            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
+            playerInput.PhoneInputStartedEvent += OnPhoneInputStarted;
             playerInput.CatnipInputStartedEvent += OnCatnipInputStarted;
         }
 
@@ -40,7 +41,7 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
 
-            playerInput.DataPodInputStartedEvent -= OnDataPodInputStarted;
+            playerInput.PhoneInputStartedEvent -= OnPhoneInputStarted;
             playerInput.CatnipInputStartedEvent -= OnCatnipInputStarted;
         }
 
@@ -49,9 +50,9 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.ToNextState();
         }
 
-        private void OnDataPodInputStarted()
+        private void OnPhoneInputStarted()
         {
-            dataPodWidget.OnToggleDataPod();
+            phoneWidget.TogglePhone();
 
             Cursor.visible = !Cursor.visible;
         }

@@ -112,6 +112,11 @@ namespace Grigor.Gameplay.Interacting
 
         private bool ContinueCurrentChain(InteractableComponent nextInChain)
         {
+            // if (StopChainIfRequiredTaskNotStarted(nextInChain))
+            // {
+            //     return false;
+            // }
+
             if (!nextInChain.InteractedWithInCurrentChain)
             {
                 return true;
