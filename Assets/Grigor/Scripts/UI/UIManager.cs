@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Linq;
 using CardboardCore.Utilities;
 using Sirenix.OdinInspector;
-using UnityEngine.Serialization;
 
 namespace Grigor.UI
 {

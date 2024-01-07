@@ -1,5 +1,4 @@
-﻿using System;
-using Grigor.Data.Tasks;
+﻿using Grigor.Data.Tasks;
 using TMPro;
 using UnityEngine;
 

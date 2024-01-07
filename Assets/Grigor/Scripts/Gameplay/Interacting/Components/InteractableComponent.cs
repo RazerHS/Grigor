@@ -8,7 +8,6 @@ using Grigor.Input;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Grigor.Gameplay.Interacting.Components
 {
