@@ -1,5 +1,6 @@
 using CardboardCore.DI;
 using CardboardCore.StateMachines;
+using Grigor.Gameplay.Cats;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
@@ -14,6 +15,7 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private LevelRegistry levelRegistry;
         [Inject] private TimeManager timeManager;
         [Inject] private PlayerInput playerInput;
+        [Inject] private CatManager catManager;
 
         private PhoneWidget phoneWidget;
 
@@ -28,6 +30,7 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
             playerInput.PhoneInputStartedEvent += OnPhoneInputStarted;
+            playerInput.CatnipInputStartedEvent += OnCatnipInputStarted;
         }
 
         protected override void OnExit()
@@ -38,7 +41,8 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
 
-            playerInput.PhoneInputStartedEvent += OnPhoneInputStarted;
+            playerInput.PhoneInputStartedEvent -= OnPhoneInputStarted;
+            playerInput.CatnipInputStartedEvent -= OnCatnipInputStarted;
         }
 
         private void OnInteract()
@@ -51,6 +55,20 @@ namespace Grigor.StateMachines.Player.States
             phoneWidget.TogglePhone();
 
             Cursor.visible = !Cursor.visible;
+        }
+
+        private void OnCatnipInputStarted()
+        {
+            if (catManager.IsCatnipPlaced)
+            {
+                catManager.OnCatnipRemoved();
+
+                return;
+            }
+
+            Vector3 catnipPosition = owningStateMachine.Owner.Movement.GroundCheckTransform.position;
+
+            catManager.OnCatnipPlaced(catnipPosition, owningStateMachine.Owner.Look.LookTransform.forward);
         }
     }
 }

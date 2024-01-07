@@ -38,6 +38,9 @@ namespace Grigor.Input
 
         public event Action EndDayInputStartedEvent;
 
+        public event Action CatnipInputStartedEvent;
+        public event Action CatnipInputCanceledEvent;
+
         private void Awake()
         {
             playerInputActions = new PlayerInputActions();
@@ -65,6 +68,9 @@ namespace Grigor.Input
             playerInputActions.Player.Phone.started += OnPhoneInputStarted;
 
             playerInputActions.Player.EndDay.started += OnEndDayInputStarted;
+
+            playerInputActions.Player.Catnip.started += OnCatnipInputStarted;
+            playerInputActions.Player.Catnip.canceled += OnCatnipInputCanceled;
         }
 
         private void OnDisable()
@@ -170,6 +176,16 @@ namespace Grigor.Input
         private void OnEndDayInputStarted(InputAction.CallbackContext context)
         {
             EndDayInputStartedEvent?.Invoke();
+        }
+
+        private void OnCatnipInputStarted(InputAction.CallbackContext context)
+        {
+            CatnipInputStartedEvent?.Invoke();
+        }
+
+        private void OnCatnipInputCanceled(InputAction.CallbackContext context)
+        {
+            CatnipInputCanceledEvent?.Invoke();
         }
     }
 }

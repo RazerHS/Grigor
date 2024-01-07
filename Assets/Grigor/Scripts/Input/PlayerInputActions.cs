@@ -91,6 +91,15 @@ namespace Grigor.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Catnip"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e3a9b84-644c-408c-9c8a-57705b0a5afc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,17 @@ namespace Grigor.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Phone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e970adbd-4434-43b0-9665-380f81061697"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Catnip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -883,6 +903,7 @@ namespace Grigor.Input
             m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
             m_Player_Phone = m_Player.FindAction("Phone", throwIfNotFound: true);
             m_Player_EndDay = m_Player.FindAction("EndDay", throwIfNotFound: true);
+            m_Player_Catnip = m_Player.FindAction("Catnip", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -963,6 +984,7 @@ namespace Grigor.Input
         private readonly InputAction m_Player_Skip;
         private readonly InputAction m_Player_Phone;
         private readonly InputAction m_Player_EndDay;
+        private readonly InputAction m_Player_Catnip;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -974,6 +996,7 @@ namespace Grigor.Input
             public InputAction @Skip => m_Wrapper.m_Player_Skip;
             public InputAction @Phone => m_Wrapper.m_Player_Phone;
             public InputAction @EndDay => m_Wrapper.m_Player_EndDay;
+            public InputAction @Catnip => m_Wrapper.m_Player_Catnip;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1004,6 +1027,9 @@ namespace Grigor.Input
                 @EndDay.started += instance.OnEndDay;
                 @EndDay.performed += instance.OnEndDay;
                 @EndDay.canceled += instance.OnEndDay;
+                @Catnip.started += instance.OnCatnip;
+                @Catnip.performed += instance.OnCatnip;
+                @Catnip.canceled += instance.OnCatnip;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1029,6 +1055,9 @@ namespace Grigor.Input
                 @EndDay.started -= instance.OnEndDay;
                 @EndDay.performed -= instance.OnEndDay;
                 @EndDay.canceled -= instance.OnEndDay;
+                @Catnip.started -= instance.OnCatnip;
+                @Catnip.performed -= instance.OnCatnip;
+                @Catnip.canceled -= instance.OnCatnip;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1218,6 +1247,7 @@ namespace Grigor.Input
             void OnSkip(InputAction.CallbackContext context);
             void OnPhone(InputAction.CallbackContext context);
             void OnEndDay(InputAction.CallbackContext context);
+            void OnCatnip(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

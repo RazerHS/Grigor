@@ -82,7 +82,7 @@ MonoBehaviour:
   nightStartHour: 20
   startHour: 11
   changeTimeAutomatically: 1
-  timeMultiplier: 15000
+  timeMultiplier: 689
   weatherDataList:
   - windStrength:
       serializedVersion: 2
@@ -130,17 +130,17 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
+        time: -0.2100288
+        value: 0.064498544
+        inSlope: -Infinity
+        outSlope: -Infinity
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 0.5
+        time: 0.78997123
+        value: 0.064498544
         inSlope: 0
         outSlope: 0
         tangentMode: 34
