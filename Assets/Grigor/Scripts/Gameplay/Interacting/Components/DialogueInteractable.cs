@@ -3,6 +3,7 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Gameplay.Dialogue;
+using Grigor.Gameplay.Time;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
 using Grigor.Utils.StoryGraph.Runtime;
 using RazerCore.Utils.Attributes;
@@ -19,6 +20,7 @@ namespace Grigor.Gameplay.Interacting.Components
         [SerializeField, ColoredBoxGroup("Dialogue"), Range(0, 24)] private int hoursToPassPerNode = 0;
 
         [Inject] private DialogueController dialogueController;
+        [Inject] private TimeManager timeManager;
 
         private DialogueNodeData startNode;
 

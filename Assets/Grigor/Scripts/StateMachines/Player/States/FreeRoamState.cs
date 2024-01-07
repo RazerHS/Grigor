@@ -3,6 +3,7 @@ using CardboardCore.StateMachines;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
+using Grigor.UI.Widgets;
 using UnityEngine;
 
 namespace Grigor.StateMachines.Player.States
@@ -14,11 +15,11 @@ namespace Grigor.StateMachines.Player.States
         [Inject] private TimeManager timeManager;
         [Inject] private PlayerInput playerInput;
 
-        private DataPodWidget dataPodWidget;
+        private PhoneWidget phoneWidget;
 
         protected override void OnEnter()
         {
-            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
+            phoneWidget = uiManager.GetWidget<PhoneWidget>();
 
             owningStateMachine.Owner.Movement.EnableMovement();
             owningStateMachine.Owner.Look.EnableLook();
@@ -26,7 +27,7 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
-            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
+            playerInput.PhoneInputStartedEvent += OnPhoneInputStarted;
         }
 
         protected override void OnExit()
@@ -37,7 +38,7 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
 
-            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
+            playerInput.PhoneInputStartedEvent += OnPhoneInputStarted;
         }
 
         private void OnInteract()
@@ -45,9 +46,9 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.ToNextState();
         }
 
-        private void OnDataPodInputStarted()
+        private void OnPhoneInputStarted()
         {
-            dataPodWidget.OnToggleDataPod();
+            phoneWidget.TogglePhone();
 
             Cursor.visible = !Cursor.visible;
         }

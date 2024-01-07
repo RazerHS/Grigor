@@ -34,7 +34,7 @@ namespace Grigor.Input
         public event Action SkipInputStartedEvent;
         public event Action SkipInputCanceledEvent;
 
-        public event Action DataPodInputStartedEvent;
+        public event Action PhoneInputStartedEvent;
 
         public event Action EndDayInputStartedEvent;
 
@@ -62,7 +62,7 @@ namespace Grigor.Input
             playerInputActions.Player.Skip.started += OnSkipInputStarted;
             playerInputActions.Player.Skip.canceled += OnSkipInputCanceled;
 
-            playerInputActions.Player.DataPod.started += OnDataPodInputStarted;
+            playerInputActions.Player.Phone.started += OnPhoneInputStarted;
 
             playerInputActions.Player.EndDay.started += OnEndDayInputStarted;
         }
@@ -83,6 +83,10 @@ namespace Grigor.Input
 
             playerInputActions.Player.Skip.started -= OnSkipInputStarted;
             playerInputActions.Player.Skip.canceled -= OnSkipInputCanceled;
+
+            playerInputActions.Player.Phone.started -= OnPhoneInputStarted;
+
+            playerInputActions.Player.EndDay.started -= OnEndDayInputStarted;
         }
 
         private void Update()
@@ -158,9 +162,9 @@ namespace Grigor.Input
             SkipInputCanceledEvent?.Invoke();
         }
 
-        private void OnDataPodInputStarted(InputAction.CallbackContext context)
+        private void OnPhoneInputStarted(InputAction.CallbackContext context)
         {
-            DataPodInputStartedEvent?.Invoke();
+            PhoneInputStartedEvent?.Invoke();
         }
 
         private void OnEndDayInputStarted(InputAction.CallbackContext context)

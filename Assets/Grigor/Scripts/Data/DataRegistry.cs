@@ -5,6 +5,7 @@ using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Data.Clues;
 using Grigor.Data.Credentials;
+using Grigor.Data.Tasks;
 using UnityEngine;
 
 namespace Grigor.Data
@@ -16,6 +17,7 @@ namespace Grigor.Data
 
         public List<CharacterData> CharacterData => dataStorage.CharacterData;
         public List<ClueData> ClueData => dataStorage.ClueData;
+        public List<TaskData> TaskData => dataStorage.TaskData;
 
         private void Awake()
         {
