@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 85906679681664318}
   - component: {fileID: 6529778133930099127}
   - component: {fileID: 6890679603495393768}
+  - component: {fileID: 2118299434567047036}
   m_Layer: 0
-  m_Name: Cube (6)
+  m_Name: FlapModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +250,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1675
+  m_VersionIndex: 1678
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -380,6 +381,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5170971, y: 2.0027049, z: 0.51333237}
   m_Center: {x: 0.75854856, y: 1.0013524, z: -0.25666618}
+--- !u!114 &2118299434567047036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562583881749163387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d215ad996d49c48e8445510c2ece62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useLayerMask: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &984670088505534488
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +506,7 @@ PrefabInstance:
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.082
+      value: 2.714
       objectReference: {fileID: 0}
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
@@ -614,10 +631,14 @@ MonoBehaviour:
   stopChainIfTaskNotStarted: 0
   taskToListenTo: {fileID: 0}
   interactionEnabled: 0
-  canFitThroughFlap: 0
+  canFitThroughFlap: 1
   enterTeleportTarget: {fileID: 1251782462251557035}
   exitTeleportTarget: {fileID: 1596716624785773337}
   teleportDelay: 0.9
+  collisionData: {fileID: 2118299434567047036}
+  flapRigidbody: {fileID: 6529778133930099127}
+  flapForce: {x: 5, y: 25, z: 5}
+  flapTorque: {x: 5, y: 5, z: 5}
 --- !u!4 &3789121116566787042 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
