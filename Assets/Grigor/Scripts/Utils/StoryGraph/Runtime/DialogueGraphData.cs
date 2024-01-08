@@ -63,7 +63,7 @@ namespace Grigor.Utils.StoryGraph.Runtime
 
         public List<string> GetStartNodes()
         {
-            return dialogueNodeData.Where(node => node.NodeType == NodeType.START).Select(node => node.NodeName).ToList();
+            return dialogueNodeData.Where(node => node.NodeType == NodeType.START).Select(node => node.DialogueText).ToList();
         }
 
         public DialogueNodeData ValidateStartNode(string startNodeName)
