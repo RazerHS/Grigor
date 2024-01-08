@@ -2,6 +2,7 @@
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters.Components;
+using Grigor.Data.Tasks;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using RazerCore.Utils.Attributes;
@@ -12,31 +13,34 @@ namespace Grigor.Gameplay.Interacting.Components
 {
     public class InteractableComponent : MonoBehaviour
     {
-        [PropertyTooltip("Should this component be triggered when the player is in range?")]
+        [Tooltip("Should this component be triggered when the player is in range?")]
         [SerializeField, ColoredBoxGroup("Config", false, true)] protected bool interactInRange;
 
-        [PropertyTooltip("Will this component remove itself from the chain so that it cannot be interacted with again after the first interaction?")]
+        [Tooltip("Will this component remove itself from the chain so that it cannot be interacted with again after the first interaction?")]
         [SerializeField, ColoredBoxGroup("Chain", false, true), InfoBox("Stays in chain and also stops the chain!", InfoMessageType.Warning, nameof(CheckConfig))] protected bool removeFromChainAfterEffect;
 
-        [PropertyTooltip("Should this interaction stop the interaction chain and let the player roam?")]
+        [Tooltip("Should this interaction stop the interaction chain and let the player roam?")]
         [SerializeField, ColoredBoxGroup("Chain"), HideIf(nameof(IsOnlyInteractableInChain))] protected bool stopsChain;
 
-        [PropertyTooltip("The element index of this component in the parent interactable chain. You can change this index by clicking the arrows to the right of each element in the chain.")]
+        [Tooltip("The element index of this component in the parent interactable chain. You can change this index by clicking the arrows to the right of each element in the chain.")]
         [SerializeField, ColoredBoxGroup("Chain"), HideIf(nameof(IsOnlyInteractableInChain)), ReadOnly] protected int indexInChain;
 
-        [PropertyTooltip("Does this component have an effect when the time of day changes to day and night?")]
+        [Tooltip("Does this component have an effect when the time of day changes to day and night?")]
         [SerializeField, ColoredBoxGroup("Time", false, true)] protected bool hasTimeEffect;
 
-        [PropertyTooltip("Should time pass after this interaction triggers?")]
+        [Tooltip("Should time pass after this interaction triggers?")]
         [SerializeField, ColoredBoxGroup("Time")] protected bool timePassesOnInteract;
 
         [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 60)] protected int minutesToPass = 1;
         [SerializeField, ColoredBoxGroup("Time"), ShowIf(nameof(timePassesOnInteract)), Range(0, 24)] protected int hoursToPass = 1;
 
+        [SerializeField, ColoredBoxGroup("Tasks", false, true)] protected bool stopChainIfTaskNotStarted;
+        [SerializeField, ColoredBoxGroup("Tasks"), ShowIf(nameof(stopChainIfTaskNotStarted))] protected TaskData taskToListenTo;
+
         [SerializeField, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactionEnabled;
         [ShowInInspector, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactedWithInCurrentChain;
 
-        [Inject] protected TimeManager timeManager;
+        [Inject] private TimeManager baseTimeManager;
         [Inject] private PlayerInput playerInput;
 
         protected Interactable parentInteractable;
@@ -52,6 +56,8 @@ namespace Grigor.Gameplay.Interacting.Components
         public Interactable ParentInteractable => parentInteractable;
         public bool InteractionEnabled => interactionEnabled;
         public bool InteractedWithInCurrentChain => interactedWithInCurrentChain;
+        public TaskData TaskToListenTo => taskToListenTo;
+        public bool StopChainIfTaskNotStarted => stopChainIfTaskNotStarted;
 
         public event Action BeginInteractionEvent;
         public event Action EndInteractionEvent;
@@ -86,8 +92,8 @@ namespace Grigor.Gameplay.Interacting.Components
 
             if (hasTimeEffect)
             {
-                timeManager.ChangedToDayEvent += OnChangedToDay;
-                timeManager.ChangedToNightEvent += OnChangedToNight;
+                baseTimeManager.ChangedToDayEvent += OnChangedToDay;
+                baseTimeManager.ChangedToNightEvent += OnChangedToNight;
 
                 Log.Write($"Registering to time manager: {name}");
             }
@@ -107,8 +113,8 @@ namespace Grigor.Gameplay.Interacting.Components
 
             if (hasTimeEffect)
             {
-                timeManager.ChangedToDayEvent -= OnChangedToDay;
-                timeManager.ChangedToNightEvent -= OnChangedToNight;
+                baseTimeManager.ChangedToDayEvent -= OnChangedToDay;
+                baseTimeManager.ChangedToNightEvent -= OnChangedToNight;
             }
 
             OnDisposed();
@@ -161,7 +167,7 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             if (timePassesOnInteract)
             {
-                timeManager.PassTime(minutesToPass, hoursToPass);
+                baseTimeManager.PassTime(minutesToPass, hoursToPass);
             }
 
             if (parentInteractable.InRange)
@@ -238,5 +244,23 @@ namespace Grigor.Gameplay.Interacting.Components
         /// </summary>
         protected virtual void OnSkipInputDuringInteraction() { }
 
+        public bool StopChainIfRequiredTaskNotStarted()
+        {
+            if (!stopChainIfTaskNotStarted)
+            {
+                return false;
+            }
+
+            if (taskToListenTo.Started)
+            {
+                EnableInteraction();
+
+                return false;
+            }
+
+            DisableInteraction();
+
+            return true;
+        }
     }
 }

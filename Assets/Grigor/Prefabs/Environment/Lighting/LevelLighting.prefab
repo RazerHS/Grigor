@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778826485407434901}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5410147, y: -3.6901054, z: -6.0534706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98,6 +98,57 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 1fba856ad68e31d439023521a3ac579d, type: 2}
+--- !u!1 &5435625705000857435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7259113791096940503}
+  - component: {fileID: 7233701151549332287}
+  m_Layer: 0
+  m_Name: WeatherController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7259113791096940503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435625705000857435}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5510277781214765930}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7233701151549332287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435625705000857435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c7964a32574c13a089c5f2031a6a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedRainMaterial: {fileID: 2100000, guid: 56bf888155e21a04b932e85c243a3c0b, type: 2}
+  fog: {fileID: 2956316096266647423, guid: a6d870cf5709fd340b9a347a7b6ed896, type: 2}
+  volumetricClouds: {fileID: -689740527006056725, guid: a6d870cf5709fd340b9a347a7b6ed896,
+    type: 2}
+  visualEnvironment: {fileID: 0}
+  exposure: {fileID: -2742342216774104872, guid: 1fba856ad68e31d439023521a3ac579d,
+    type: 2}
 --- !u!1 &5568215139981967130
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,13 +175,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5568215139981967130}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.034054507, y: 0.9170021, z: -0.38924423, w: 0.080227405}
+  m_LocalRotation: {x: 0.03335311, y: 0.9203639, z: -0.3812272, w: 0.08052153}
   m_LocalPosition: {x: -1.5410147, y: -3.6901054, z: -6.0534706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5510277781214765930}
-  m_LocalEulerAnglesHint: {x: 46, y: 170, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 170, z: 0}
 --- !u!108 &3559015173649410856
 Light:
   m_ObjectHideFlags: 0
@@ -211,7 +262,7 @@ MonoBehaviour:
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1.2
+  m_VolumetricDimmer: 1.83
   m_LightUnit: 2
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
@@ -324,6 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5510277781214765930}
+  - component: {fileID: 5641577491563715085}
   - component: {fileID: 5457188009364571631}
   m_Layer: 0
   m_Name: LevelLighting
@@ -346,10 +398,27 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2171274398742108569}
+  - {fileID: 7259113791096940503}
   - {fileID: 4324308000775597777}
   - {fileID: 5848231782100407983}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5641577491563715085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8189579886822197011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582a712cfcc24df8813c9186e95498d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sunController: {fileID: 5457188009364571631}
+  weatherController: {fileID: 7233701151549332287}
+  skyAndFogVolume: {fileID: 5781561336127218965}
+  postProcessingVolume: {fileID: 143324210228368813}
 --- !u!114 &5457188009364571631
 MonoBehaviour:
   m_ObjectHideFlags: 0

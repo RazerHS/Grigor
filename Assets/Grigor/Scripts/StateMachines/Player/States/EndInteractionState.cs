@@ -35,6 +35,13 @@ namespace Grigor.StateMachines.Player.States
                     return;
                 }
 
+                if (nextInChain.StopChainIfRequiredTaskNotStarted())
+                {
+                    owningStateMachine.ToState<FreeRoamState>();
+
+                    return;
+                }
+
                 currentInteractable.DisableInteraction();
 
                 nextInChain.EnableInteraction();
@@ -49,6 +56,13 @@ namespace Grigor.StateMachines.Player.States
             bool chainEnded = !chain.TryGetNextInChain(out nextInChain);
 
             if (chainEnded)
+            {
+                owningStateMachine.ToState<FreeRoamState>();
+
+                return;
+            }
+
+            if (nextInChain.StopChainIfRequiredTaskNotStarted())
             {
                 owningStateMachine.ToState<FreeRoamState>();
 

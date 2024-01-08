@@ -75,7 +75,7 @@ namespace Grigor.Input
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DataPod"",
+                    ""name"": ""Phone"",
                     ""type"": ""Button"",
                     ""id"": ""a1da777e-64de-45fe-b116-45b4a25f73bc"",
                     ""expectedControlType"": ""Button"",
@@ -87,6 +87,15 @@ namespace Grigor.Input
                     ""name"": ""EndDay"",
                     ""type"": ""Button"",
                     ""id"": ""b728625b-aea4-4471-b6d8-4a93eca47b22"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Catnip"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e3a9b84-644c-408c-9c8a-57705b0a5afc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -288,18 +297,18 @@ namespace Grigor.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DataPod"",
+                    ""action"": ""Phone"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7694106e-4cc5-4150-a781-289e52b4c929"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""id"": ""e970adbd-4434-43b0-9665-380f81061697"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""EndDay"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Catnip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -892,8 +901,9 @@ namespace Grigor.Input
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
-            m_Player_DataPod = m_Player.FindAction("DataPod", throwIfNotFound: true);
+            m_Player_Phone = m_Player.FindAction("Phone", throwIfNotFound: true);
             m_Player_EndDay = m_Player.FindAction("EndDay", throwIfNotFound: true);
+            m_Player_Catnip = m_Player.FindAction("Catnip", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -972,8 +982,9 @@ namespace Grigor.Input
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Skip;
-        private readonly InputAction m_Player_DataPod;
+        private readonly InputAction m_Player_Phone;
         private readonly InputAction m_Player_EndDay;
+        private readonly InputAction m_Player_Catnip;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -983,8 +994,9 @@ namespace Grigor.Input
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Skip => m_Wrapper.m_Player_Skip;
-            public InputAction @DataPod => m_Wrapper.m_Player_DataPod;
+            public InputAction @Phone => m_Wrapper.m_Player_Phone;
             public InputAction @EndDay => m_Wrapper.m_Player_EndDay;
+            public InputAction @Catnip => m_Wrapper.m_Player_Catnip;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1009,12 +1021,15 @@ namespace Grigor.Input
                 @Skip.started += instance.OnSkip;
                 @Skip.performed += instance.OnSkip;
                 @Skip.canceled += instance.OnSkip;
-                @DataPod.started += instance.OnDataPod;
-                @DataPod.performed += instance.OnDataPod;
-                @DataPod.canceled += instance.OnDataPod;
+                @Phone.started += instance.OnPhone;
+                @Phone.performed += instance.OnPhone;
+                @Phone.canceled += instance.OnPhone;
                 @EndDay.started += instance.OnEndDay;
                 @EndDay.performed += instance.OnEndDay;
                 @EndDay.canceled += instance.OnEndDay;
+                @Catnip.started += instance.OnCatnip;
+                @Catnip.performed += instance.OnCatnip;
+                @Catnip.canceled += instance.OnCatnip;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1034,12 +1049,15 @@ namespace Grigor.Input
                 @Skip.started -= instance.OnSkip;
                 @Skip.performed -= instance.OnSkip;
                 @Skip.canceled -= instance.OnSkip;
-                @DataPod.started -= instance.OnDataPod;
-                @DataPod.performed -= instance.OnDataPod;
-                @DataPod.canceled -= instance.OnDataPod;
+                @Phone.started -= instance.OnPhone;
+                @Phone.performed -= instance.OnPhone;
+                @Phone.canceled -= instance.OnPhone;
                 @EndDay.started -= instance.OnEndDay;
                 @EndDay.performed -= instance.OnEndDay;
                 @EndDay.canceled -= instance.OnEndDay;
+                @Catnip.started -= instance.OnCatnip;
+                @Catnip.performed -= instance.OnCatnip;
+                @Catnip.canceled -= instance.OnCatnip;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1227,8 +1245,9 @@ namespace Grigor.Input
             void OnLook(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnSkip(InputAction.CallbackContext context);
-            void OnDataPod(InputAction.CallbackContext context);
+            void OnPhone(InputAction.CallbackContext context);
             void OnEndDay(InputAction.CallbackContext context);
+            void OnCatnip(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

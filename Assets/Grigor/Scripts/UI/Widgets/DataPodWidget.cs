@@ -32,10 +32,11 @@ public class DataPodWidget : UIWidget, IClueListener
 
     protected override void OnShow()
     {
-        InsertCredentials();
         RegisterClueListener();
 
-        OnToggleDataPod();
+        InsertCredentials();
+
+        HideDataPod();
 
         messagePopupWidget = uiManager.GetWidget<MessagePopupWidget>();
     }
@@ -63,21 +64,14 @@ public class DataPodWidget : UIWidget, IClueListener
         }
     }
 
-    private void InsertExistingClues()
+    public void ShowDataPod()
     {
-        foreach (ClueData clueData in dataRegistry.ClueData)
-        {
-            ClueUIDisplay clueUIDisplay = Instantiate(clueDisplayPrefab, clueDisplayParent);
-            clueUIDisplay.SetClueData(clueData);
-            clueUIDisplay.SetClueText(clueData.ClueHeading);
-
-            displayedClues.Add(clueUIDisplay);
-        }
+        dataPodView.SetActive(true);
     }
 
-    public void OnToggleDataPod()
+    public void HideDataPod()
     {
-        dataPodView.SetActive(!dataPodView.activeSelf);
+        dataPodView.SetActive(false);
     }
 
     private void AddNewCredential(CredentialType credentialType)
