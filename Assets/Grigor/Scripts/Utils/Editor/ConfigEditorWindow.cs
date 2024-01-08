@@ -1,4 +1,6 @@
-﻿using Sirenix.OdinInspector.Editor;
+﻿#if UNITY_EDITOR
+
+using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,7 +8,7 @@ namespace RazerCore.Utils.Editor
 {
     public class ConfigEditorWindow : OdinMenuEditorWindow
     {
-        private static string dataAssetsPath => "Grigor/Resources/Config";
+        private static string dataAssetsPath => "Resources/Config";
 
         [MenuItem("Grigor/Config")]
         protected static void OpenWindow()
@@ -32,3 +34,5 @@ namespace RazerCore.Utils.Editor
         }
     }
 }
+
+#endif

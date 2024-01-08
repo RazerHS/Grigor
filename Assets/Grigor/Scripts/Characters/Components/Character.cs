@@ -12,7 +12,6 @@ namespace Grigor.Characters.Components
     {
         [SerializeField] private CharacterData characterData;
 
-        [Inject] private DataRegistry dataRegistry;
         [Inject] private TimeEffectRegistry timeEffectRegistry;
 
         private readonly List<CharacterComponent> characterComponents = new();

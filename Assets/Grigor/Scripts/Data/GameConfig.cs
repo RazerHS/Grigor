@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Grigor.Data
 {
-    [GlobalConfig, CreateAssetMenu(fileName = "Config", menuName = "Grigor/Game Config")]
+    [GlobalConfig("Assets/Resources/Config/"), CreateAssetMenu(fileName = "Config", menuName = "Grigor/Game Config")]
     public class GameConfig : GlobalConfig<GameConfig>
     {
         [SerializeField, ColoredBoxGroup("Gameplay", true, true)] private int correctCluesBeforeLock = 3;
