@@ -40,7 +40,7 @@ namespace Grigor.Gameplay.Interacting.Components
         [SerializeField, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactionEnabled;
         [ShowInInspector, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactedWithInCurrentChain;
 
-        [Inject] private TimeManager baseTimeManager;
+        [Inject] private TimeManager timeManager;
         [Inject] private PlayerInput playerInput;
 
         protected Interactable parentInteractable;
@@ -58,6 +58,8 @@ namespace Grigor.Gameplay.Interacting.Components
         public bool InteractedWithInCurrentChain => interactedWithInCurrentChain;
         public TaskData TaskToListenTo => taskToListenTo;
         public bool StopChainIfTaskNotStarted => stopChainIfTaskNotStarted;
+
+        public TimeManager TimeManager => timeManager;
 
         public event Action BeginInteractionEvent;
         public event Action EndInteractionEvent;
@@ -92,8 +94,8 @@ namespace Grigor.Gameplay.Interacting.Components
 
             if (hasTimeEffect)
             {
-                baseTimeManager.ChangedToDayEvent += OnChangedToDay;
-                baseTimeManager.ChangedToNightEvent += OnChangedToNight;
+                timeManager.ChangedToDayEvent += OnChangedToDay;
+                timeManager.ChangedToNightEvent += OnChangedToNight;
 
                 Log.Write($"Registering to time manager: {name}");
             }
@@ -113,8 +115,8 @@ namespace Grigor.Gameplay.Interacting.Components
 
             if (hasTimeEffect)
             {
-                baseTimeManager.ChangedToDayEvent -= OnChangedToDay;
-                baseTimeManager.ChangedToNightEvent -= OnChangedToNight;
+                timeManager.ChangedToDayEvent -= OnChangedToDay;
+                timeManager.ChangedToNightEvent -= OnChangedToNight;
             }
 
             OnDisposed();
@@ -167,7 +169,7 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             if (timePassesOnInteract)
             {
-                baseTimeManager.PassTime(minutesToPass, hoursToPass);
+                timeManager.PassTime(minutesToPass, hoursToPass);
             }
 
             if (parentInteractable.InRange)

@@ -34,20 +34,7 @@ namespace Grigor.Gameplay.EvidenceBoard
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void SpawnAllClues() => SpawnAllCluesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void ClearAllClues() => RemoveAllCluesFromBoard();
 
-        [SerializeField, HideInInspector] private DataStorage dataStorage;
-
         [Inject] ClueRegistry clueRegistry;
-
-#if UNITY_EDITOR
-        [OnInspectorInit]
-        private void OnInspectorInit()
-        {
-            if (dataStorage == null)
-            {
-                dataStorage = Helper.LoadAsset("DataStorage", dataStorage);
-            }
-        }
-#endif
 
         protected override void OnInjected()
         {
@@ -178,12 +165,7 @@ namespace Grigor.Gameplay.EvidenceBoard
 
         private void SpawnAllCluesOnBoard()
         {
-            if (dataStorage == null)
-            {
-                return;
-            }
-
-            foreach (ClueData clueData in dataStorage.ClueData)
+            foreach (ClueData clueData in DataStorage.Instance.ClueData)
             {
                 if (notes.Any(note => note.ClueData == clueData))
                 {

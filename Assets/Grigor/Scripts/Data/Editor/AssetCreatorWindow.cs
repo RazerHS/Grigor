@@ -2,7 +2,6 @@
 
 using System;
 using CardboardCore.Utilities;
-using Grigor.Utils;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
@@ -43,6 +42,8 @@ namespace Grigor.Data.Editor
                     SelectedColorDarkSkin = new Color(0.877f, 0.095f, 0.454f, 0.192f),
                 }
             };
+
+            dataStorage = DataStorage.Instance;
 
             newData = new NewData(dataAssetsPath);
             newData.NewDataCreatedEvent += OnNewDataCreated;
@@ -152,11 +153,6 @@ namespace Grigor.Data.Editor
 
         private void UpdateDataStorage()
         {
-            if (dataStorage == null)
-            {
-                dataStorage = Helper.LoadAsset("DataStorage", dataStorage);
-            }
-
             dataStorage.UpdateData();
         }
 
