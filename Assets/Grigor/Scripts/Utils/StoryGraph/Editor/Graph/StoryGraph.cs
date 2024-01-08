@@ -66,8 +66,13 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             fileNameTextField.MarkDirtyRepaint();
             fileNameTextField.RegisterValueChangedCallback(@event => fileName = @event.newValue);
 
-            toolbar.Add(new Button(() => RequestDataOperation(DataOperationType.Save)) {text = "Save Data"});
-            toolbar.Add(new Button(() => RequestDataOperation(DataOperationType.Load)) {text = "Load Data"});
+            Button saveButton = new Button(() => RequestDataOperation(DataOperationType.Save)) {text = "Save Data"};
+            Button loadButton = new Button(() => RequestDataOperation(DataOperationType.Load)) {text = "Load Data"};
+
+            toolbar.Add(saveButton);
+            toolbar.Add(loadButton);
+
+            loadButton.style.marginRight = 50;
 
             ObjectField speaker = new ObjectField() { objectType = typeof(CharacterData), value = defaultSpeaker };
             speaker.RegisterValueChangedCallback(@event =>
@@ -75,6 +80,8 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 defaultSpeaker = @event.newValue as CharacterData;
                 graphView.SetDefaultSpeaker(defaultSpeaker);
             });
+
+            speaker.style.marginRight = 50;
 
             ObjectField dialogueAsset = new ObjectField() { objectType = typeof(DialogueGraphData), value = dialogueGraphData };
             dialogueAsset.RegisterValueChangedCallback(@event =>
@@ -87,10 +94,18 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 }
             });
 
+            TextField currentGraphTextField = new TextField() { value = "Current Graph -> ", isReadOnly = true };
+            TextField defaultSpeakerTextField = new TextField() { value = "Default Speaker -> ", isReadOnly = true };
+
+            currentGraphTextField.style.opacity = 0.5f;
+            defaultSpeakerTextField.style.opacity = 0.5f;
+
+            toolbar.Add(currentGraphTextField);
             toolbar.Add(dialogueAsset);
+            toolbar.Add(defaultSpeakerTextField);
             toolbar.Add(speaker);
 
-            toolbar.Add(new Button(() =>
+            Button createNewButton = new Button(() =>
             {
                 if (dialogueGraphData != null)
                 {
@@ -102,9 +117,10 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                 dialogueAsset.value = dialogueGraphData;
             })
             {
-                text = "Create New"
-            });
+                text = "Create New",
+            };
 
+            toolbar.Add(createNewButton);
             toolbar.Add(fileNameTextField);
 
             rootVisualElement.Add(toolbar);
@@ -186,6 +202,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             Vector2 worldPosition = Event.current.mousePosition;
 
             Vector2 graphMousePosition = graphView.ConvertWorldPositionToLocalPosition(worldPosition);
+            Vector2 inputNodePosition = new Vector2(graphMousePosition.x - 15f, graphMousePosition.y - 54f);
 
             switch (@event.keyCode)
             {
@@ -196,11 +213,11 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
                     break;
                 }
                 case KeyCode.Space:
-                    graphView.CreateNewDialogueNode(graphMousePosition);
+                    graphView.CreateNewDialogueNode(inputNodePosition);
                     break;
 
                 case KeyCode.Tab:
-                    graphView.CreateNewDialogueNode(graphMousePosition);
+                    graphView.CreateNewDialogueNode(inputNodePosition);
                     break;
 
                 case KeyCode.S:
