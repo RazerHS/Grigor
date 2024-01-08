@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+
+using System;
 using CardboardCore.Utilities;
 using Grigor.Utils;
 using Sirenix.OdinInspector;
@@ -201,3 +203,5 @@ namespace Grigor.Data.Editor
         }
     }
 }
+
+#endif

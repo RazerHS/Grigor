@@ -25,6 +25,7 @@ namespace Grigor.Data
 
         public event Action OnDataRefreshed;
 
+#if UNITY_EDITOR
         public void UpdateData()
         {
             Helper.UpdateData(characterData, characterDataPath);
@@ -33,5 +34,6 @@ namespace Grigor.Data
 
             OnDataRefreshed?.Invoke();
         }
+#endif
     }
 }

@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace Grigor.Data.Editor
+namespace Grigor.Data
 {
     public class ScriptableObjectData : ScriptableObject
     {
@@ -19,7 +19,9 @@ namespace Grigor.Data.Editor
         {
             nameLocked = true;
 
-            AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(this), assetName);
+#if UNITY_EDITOR
+        AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(this), assetName);
+#endif
         }
 
         private void UnlockAssetName()
