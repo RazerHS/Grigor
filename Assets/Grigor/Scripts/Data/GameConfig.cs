@@ -1,4 +1,7 @@
-﻿using Grigor.Gameplay.Cats;
+﻿using System.Collections.Generic;
+using System.Linq;
+using FMODUnity;
+using Grigor.Gameplay.Cats;
 using Grigor.Gameplay.Interacting;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -25,6 +28,8 @@ namespace Grigor.Data
         [SerializeField, ColoredBoxGroup("Story Graph")] private Color endNodeColor;
         [SerializeField, ColoredBoxGroup("Story Graph")] private Color noSpeakerColor;
 
+        [SerializeField, ColoredBoxGroup("Audio", false, true), AssetSelector, LabelText("FMOD Event Cache")] private EventCache fmodEventCache;
+
         public int CorrectCluesBeforeLock => correctCluesBeforeLock;
         public float TimePassTweenDuration => timePassTweenDuration;
 
@@ -39,5 +44,10 @@ namespace Grigor.Data
         public Color DefaultNodeColor => defaultNodeColor;
         public Color EndNodeColor => endNodeColor;
         public Color NoSpeakerColor => noSpeakerColor;
+
+        public List<string> GetAudioEvents()
+        {
+            return fmodEventCache.EditorEvents.Select(e => e.Path.Replace("event:/", "")).ToList();
+        }
     }
 }
