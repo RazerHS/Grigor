@@ -19,6 +19,8 @@ namespace Grigor.Characters.Components.Player
         private Vector2 lookDirection;
         private bool lookEnabled;
 
+        public Transform LookTransform => lookTransform;
+
         protected override void OnInitialized()
         {
             playerInput.LookInputStartedEvent += OnLookInputStarted;

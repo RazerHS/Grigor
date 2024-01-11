@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using CardboardCore.Utilities;
 using Grigor.Data.Credentials;
-using Grigor.Data.Editor;
-using Grigor.Gameplay.MindPalace.EvidenceBoard;
+using Grigor.Gameplay.EvidenceBoard;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;

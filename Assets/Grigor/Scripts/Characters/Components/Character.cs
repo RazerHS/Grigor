@@ -3,7 +3,6 @@ using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Data;
-using Grigor.Gameplay.Rooms;
 using Grigor.Gameplay.Time;
 using UnityEngine;
 
@@ -13,7 +12,6 @@ namespace Grigor.Characters.Components
     {
         [SerializeField] private CharacterData characterData;
 
-        [Inject] private DataRegistry dataRegistry;
         [Inject] private TimeEffectRegistry timeEffectRegistry;
 
         private readonly List<CharacterComponent> characterComponents = new();

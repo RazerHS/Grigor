@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Data;
 using Grigor.Utils.StoryGraph.Editor.Nodes;
@@ -24,8 +25,6 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
         public List<ExposedProperty> ExposedProperties { get; private set; } = new List<ExposedProperty>();
 
-        private NodeSearchWindow searchWindow;
-
         public StoryGraphView(StoryGraph editorWindow)
         {
             styleSheets.Add(Resources.Load<StyleSheet>("StoryGraph"));
@@ -40,16 +39,6 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
             Insert(0, grid);
             grid.StretchToParentSize();
-
-            AddSearchWindow(editorWindow);
-        }
-
-        private void AddSearchWindow(StoryGraph editorWindow)
-        {
-            searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
-            searchWindow.Configure(editorWindow, this);
-
-            nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
         }
 
         public void ClearBlackboardAndExposedProperties()
@@ -164,7 +153,7 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
 
             DialogueNode dialogueNode = new DialogueNode
             {
-                title = dialogueNodeData.NodeName,
+                title = "Dialogue Node",
                 Data = dialogueNodeData,
             };
 
@@ -323,19 +312,21 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             TextField dialogueTextField = new TextField("")
             {
                 multiline = true,
+                doubleClickSelectsWord = true,
                 style =
                 {
-                    whiteSpace = WhiteSpace.Normal
-                }
+                    whiteSpace = WhiteSpace.Normal,
+                    flexWrap = Wrap.Wrap,
+                    maxWidth = DefaultNodeSize.y * 2
+                },
             };
 
             dialogueTextField.RegisterValueChangedCallback(@event =>
             {
                 dialogueNode.Data.SetDialogueText(@event.newValue);
-                dialogueNode.Data.SetNodeName(@event.newValue);
             });
 
-            dialogueTextField.SetValueWithoutNotify(dialogueNode.title);
+            dialogueTextField.SetValueWithoutNotify(dialogueNode.Data.DialogueText);
 
             dialogueNode.mainContainer.Add(dialogueTextField);
 
@@ -348,6 +339,9 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             {
                 text = "Add Choice"
             };
+
+            createChoicePortButton.style.left = 20;
+
 
             dialogueNode.titleButtonContainer.Add(createChoicePortButton);
 
@@ -429,8 +423,9 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             textField.AddToClassList("DialogueChoiceTextField");
 
             textField.pickingMode = PickingMode.Ignore;
-            textField.style.minWidth = 60;
-            textField.style.maxWidth = 100;
+            textField.style.width = 200;
+            textField.style.left = 10;
+            textField.style.marginLeft = -5;
 
             generatedPort.contentContainer.Add(new Label("   "));
             generatedPort.contentContainer.Add(textField);
@@ -474,8 +469,29 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
         public void OnDropOutsidePort(Edge edge, Vector2 position)
         {
             DialogueNode inputNode = CreateNewDialogueNode(ConvertWorldPositionToLocalPosition(position));
+            DialogueNode outputNode = edge.output.node as DialogueNode;
 
-            // TO-DO: connect new edge to input node correctly
+            if (outputNode == null)
+            {
+                throw Log.Exception("Output node on the edge is null!");
+            }
+
+            Edge newEdge = new Edge
+            {
+                output = inputNode.outputContainer.Q<Port>("input"),
+                input = outputNode.outputContainer.Q<Port>("output")
+            };
+
+            newEdge.input.Connect(newEdge);
+            newEdge.output.Connect(newEdge);
+
+            // Add the new edge to the graph
+            AddElement(newEdge);
+
+            inputNode.RefreshPorts();
+            outputNode.RefreshPorts();
+            inputNode.RefreshExpandedState();
+            outputNode.RefreshExpandedState();
         }
 
         public void OnDrop(GraphView graphView, Edge edge)

@@ -1,9 +1,10 @@
 using CardboardCore.DI;
 using CardboardCore.StateMachines;
-using Grigor.Gameplay.Rooms;
+using Grigor.Gameplay.Cats;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
+using Grigor.UI.Widgets;
 using UnityEngine;
 
 namespace Grigor.StateMachines.Player.States
@@ -11,16 +12,16 @@ namespace Grigor.StateMachines.Player.States
     public class FreeRoamState : State<PlayerStateMachine>
     {
         [Inject] private UIManager uiManager;
-        [Inject] private RoomRegistry roomRegistry;
-        [Inject] private RoomManager roomManager;
+        [Inject] private LevelRegistry levelRegistry;
         [Inject] private TimeManager timeManager;
         [Inject] private PlayerInput playerInput;
+        [Inject] private CatManager catManager;
 
-        private DataPodWidget dataPodWidget;
+        private PhoneWidget phoneWidget;
 
         protected override void OnEnter()
         {
-            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
+            phoneWidget = uiManager.GetWidget<PhoneWidget>();
 
             owningStateMachine.Owner.Movement.EnableMovement();
             owningStateMachine.Owner.Look.EnableLook();
@@ -28,10 +29,8 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent += OnInteract;
 
-            roomManager.MovePlayerToRoomEvent += OnMovePlayerToRoom;
-
-            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
-            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
+            playerInput.PhoneInputStartedEvent += OnPhoneInputStarted;
+            playerInput.CatnipInputStartedEvent += OnCatnipInputStarted;
         }
 
         protected override void OnExit()
@@ -42,30 +41,8 @@ namespace Grigor.StateMachines.Player.States
 
             owningStateMachine.Owner.Interact.InteractEvent -= OnInteract;
 
-            roomManager.MovePlayerToRoomEvent -= OnMovePlayerToRoom;
-
-            playerInput.DataPodInputStartedEvent += OnDataPodInputStarted;
-            playerInput.EndDayInputStartedEvent += OnEndedDayInput;
-        }
-
-        private void OnMovePlayerToRoom(RoomName previousRoomName, RoomName currentRoomName)
-        {
-            if (roomManager.CurrentRoomName == previousRoomName)
-            {
-                return;
-            }
-
-            owningStateMachine.ToState<MoveToRoomState>();
-        }
-
-        private void OnEndedDayInput()
-        {
-            if (!timeManager.TryEndDay())
-            {
-                return;
-            }
-
-            roomManager.MovePlayerToRoom(RoomName.MindPalace, owningStateMachine.Owner.transform.position);
+            playerInput.PhoneInputStartedEvent -= OnPhoneInputStarted;
+            playerInput.CatnipInputStartedEvent -= OnCatnipInputStarted;
         }
 
         private void OnInteract()
@@ -73,11 +50,25 @@ namespace Grigor.StateMachines.Player.States
             owningStateMachine.ToNextState();
         }
 
-        private void OnDataPodInputStarted()
+        private void OnPhoneInputStarted()
         {
-            dataPodWidget.OnToggleDataPod();
+            phoneWidget.TogglePhone();
 
             Cursor.visible = !Cursor.visible;
+        }
+
+        private void OnCatnipInputStarted()
+        {
+            if (catManager.IsCatnipPlaced)
+            {
+                catManager.OnCatnipRemoved();
+
+                return;
+            }
+
+            Vector3 catnipPosition = owningStateMachine.Owner.Movement.GroundCheckTransform.position;
+
+            catManager.OnCatnipPlaced(catnipPosition, owningStateMachine.Owner.Look.LookTransform.forward);
         }
     }
 }

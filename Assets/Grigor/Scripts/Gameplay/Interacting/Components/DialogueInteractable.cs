@@ -3,7 +3,7 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Gameplay.Dialogue;
-using Grigor.Utils.StoryGraph.Editor.Nodes;
+using Grigor.Gameplay.Time;
 using Grigor.Utils.StoryGraph.Runtime;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -44,7 +44,7 @@ namespace Grigor.Gameplay.Interacting.Components
                 return;
             }
 
-            timeManager.PassTime(minutesToPassPerNode, hoursToPassPerNode);
+            TimeManager.PassTime(minutesToPassPerNode, hoursToPassPerNode);
         }
 
         private void OnDialogueEnded()

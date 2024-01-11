@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DataPod",
+                    "name": "Phone",
                     "type": "Button",
                     "id": "a1da777e-64de-45fe-b116-45b4a25f73bc",
                     "expectedControlType": "Button",
@@ -63,6 +63,15 @@
                     "name": "EndDay",
                     "type": "Button",
                     "id": "b728625b-aea4-4471-b6d8-4a93eca47b22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Catnip",
+                    "type": "Button",
+                    "id": "3e3a9b84-644c-408c-9c8a-57705b0a5afc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -264,7 +273,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DataPod",
+                    "action": "Phone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e970adbd-4434-43b0-9665-380f81061697",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Catnip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

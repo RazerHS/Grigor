@@ -70,7 +70,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 9.46102
+    m_Value: 10
   compensation:
     m_OverrideState: 0
     m_Value: 0
@@ -211,13 +211,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   quality:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 2
   enabled:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   enabledTransparent:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   tracing:
     m_OverrideState: 0
@@ -229,11 +229,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0.9
   reflectSky:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   usedAlgorithm:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   depthBufferThickness:
     m_OverrideState: 0
     m_Value: 0.01
@@ -265,8 +265,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   m_RayMaxIterations:
-    m_OverrideState: 0
-    m_Value: 32
+    m_OverrideState: 1
+    m_Value: 64
   rayMiss:
     m_OverrideState: 0
     m_Value: 3

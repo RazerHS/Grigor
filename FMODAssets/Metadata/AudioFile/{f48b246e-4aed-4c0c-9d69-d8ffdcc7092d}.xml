@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f48b246e-4aed-4c0c-9d69-d8ffdcc7092d}">
+		<property name="assetPath">
+			<value>Yours Truly - Heartsleeve [Custom Instrumental].mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>285.50400000000002</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{856fc1bf-9706-49f6-abd0-f5bb6fbfbaec}</destination>
+		</relationship>
+	</object>
+</objects>

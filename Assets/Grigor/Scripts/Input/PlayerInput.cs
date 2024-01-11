@@ -34,9 +34,12 @@ namespace Grigor.Input
         public event Action SkipInputStartedEvent;
         public event Action SkipInputCanceledEvent;
 
-        public event Action DataPodInputStartedEvent;
+        public event Action PhoneInputStartedEvent;
 
         public event Action EndDayInputStartedEvent;
+
+        public event Action CatnipInputStartedEvent;
+        public event Action CatnipInputCanceledEvent;
 
         private void Awake()
         {
@@ -62,9 +65,12 @@ namespace Grigor.Input
             playerInputActions.Player.Skip.started += OnSkipInputStarted;
             playerInputActions.Player.Skip.canceled += OnSkipInputCanceled;
 
-            playerInputActions.Player.DataPod.started += OnDataPodInputStarted;
+            playerInputActions.Player.Phone.started += OnPhoneInputStarted;
 
             playerInputActions.Player.EndDay.started += OnEndDayInputStarted;
+
+            playerInputActions.Player.Catnip.started += OnCatnipInputStarted;
+            playerInputActions.Player.Catnip.canceled += OnCatnipInputCanceled;
         }
 
         private void OnDisable()
@@ -83,6 +89,10 @@ namespace Grigor.Input
 
             playerInputActions.Player.Skip.started -= OnSkipInputStarted;
             playerInputActions.Player.Skip.canceled -= OnSkipInputCanceled;
+
+            playerInputActions.Player.Phone.started -= OnPhoneInputStarted;
+
+            playerInputActions.Player.EndDay.started -= OnEndDayInputStarted;
         }
 
         private void Update()
@@ -158,14 +168,24 @@ namespace Grigor.Input
             SkipInputCanceledEvent?.Invoke();
         }
 
-        private void OnDataPodInputStarted(InputAction.CallbackContext context)
+        private void OnPhoneInputStarted(InputAction.CallbackContext context)
         {
-            DataPodInputStartedEvent?.Invoke();
+            PhoneInputStartedEvent?.Invoke();
         }
 
         private void OnEndDayInputStarted(InputAction.CallbackContext context)
         {
             EndDayInputStartedEvent?.Invoke();
+        }
+
+        private void OnCatnipInputStarted(InputAction.CallbackContext context)
+        {
+            CatnipInputStartedEvent?.Invoke();
+        }
+
+        private void OnCatnipInputCanceled(InputAction.CallbackContext context)
+        {
+            CatnipInputCanceledEvent?.Invoke();
         }
     }
 }

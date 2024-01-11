@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.Utilities;
-using Grigor.Utils.StoryGraph.Editor.Nodes;
 using UnityEngine;
 
 namespace Grigor.Utils.StoryGraph.Runtime
@@ -63,7 +62,7 @@ namespace Grigor.Utils.StoryGraph.Runtime
 
         public List<string> GetStartNodes()
         {
-            return dialogueNodeData.Where(node => node.NodeType == NodeType.START).Select(node => node.NodeName).ToList();
+            return dialogueNodeData.Where(node => node.NodeType == NodeType.START).Select(node => node.DialogueText).ToList();
         }
 
         public DialogueNodeData ValidateStartNode(string startNodeName)
