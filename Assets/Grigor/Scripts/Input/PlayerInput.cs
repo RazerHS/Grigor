@@ -41,6 +41,8 @@ namespace Grigor.Input
         public event Action CatnipInputStartedEvent;
         public event Action CatnipInputCanceledEvent;
 
+        public event Action<float> ScrollInputStartedEvent;
+
         private void Awake()
         {
             playerInputActions = new PlayerInputActions();
@@ -70,7 +72,8 @@ namespace Grigor.Input
             playerInputActions.Player.EndDay.started += OnEndDayInputStarted;
 
             playerInputActions.Player.Catnip.started += OnCatnipInputStarted;
-            playerInputActions.Player.Catnip.canceled += OnCatnipInputCanceled;
+
+            playerInputActions.Player.Scroll.started += OnScrollInputStarted;
         }
 
         private void OnDisable()
@@ -93,6 +96,10 @@ namespace Grigor.Input
             playerInputActions.Player.Phone.started -= OnPhoneInputStarted;
 
             playerInputActions.Player.EndDay.started -= OnEndDayInputStarted;
+
+            playerInputActions.Player.Catnip.started -= OnCatnipInputStarted;
+
+            playerInputActions.Player.Scroll.started -= OnScrollInputStarted;
         }
 
         private void Update()
@@ -186,6 +193,11 @@ namespace Grigor.Input
         private void OnCatnipInputCanceled(InputAction.CallbackContext context)
         {
             CatnipInputCanceledEvent?.Invoke();
+        }
+
+        private void OnScrollInputStarted(InputAction.CallbackContext context)
+        {
+            ScrollInputStartedEvent?.Invoke(context.ReadValue<float>());
         }
     }
 }
