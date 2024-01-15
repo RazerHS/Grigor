@@ -1,6 +1,5 @@
 ﻿using CardboardCore.DI;
 using Grigor.StateMachines.Player;
-using UnityEngine;
 
 namespace Grigor.Characters.Components.Player
 {

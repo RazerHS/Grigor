@@ -4,7 +4,6 @@ using Grigor.Gameplay.Cameras;
 using Grigor.Gameplay.EvidenceBoard;
 using Grigor.UI;
 using Grigor.UI.Widgets;
-using UnityEngine;
 
 namespace Grigor.StateMachines.EvidenceBoard.States
 {
