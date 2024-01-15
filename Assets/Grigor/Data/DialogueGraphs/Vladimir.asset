@@ -24,6 +24,11 @@ MonoBehaviour:
     OutputNodeGuid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
     InputNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
   - OutportPortChoiceIndex: 0
+    OutputPortName: Did you see anyone suspicious afterwards?
+    InputPortName: 
+    OutputNodeGuid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
+    InputNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
+  - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
     OutputNodeGuid: 5d6d10d0-7fb8-47c8-b894-aa32fde8d01a
@@ -58,11 +63,6 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: bc77f22e-4a57-4e33-8302-2e481f0a86f4
     InputNodeGuid: 85482e75-a71e-4c78-bce0-a19a17231dcd
-  - OutportPortChoiceIndex: 0
-    OutputPortName: Did you see anyone suspicious afterwards?
-    InputPortName: 
-    OutputNodeGuid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21
-    InputNodeGuid: b33405ff-20f7-4c62-bf42-3603035002ac
   dialogueNodeData:
   - nodeName: (intimidately)
     guid: 5d15ce33-6ddc-4af8-888b-7334bbc2fd21

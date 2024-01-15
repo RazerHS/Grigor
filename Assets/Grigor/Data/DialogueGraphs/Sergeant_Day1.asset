@@ -1,0 +1,380 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Sergeant_Day1
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 5cf9a705-7593-4785-885a-ba1078272162
+    InputNodeGuid: df06ea81-1e3a-4ab5-95d1-3ed7f7ac6de5
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: df06ea81-1e3a-4ab5-95d1-3ed7f7ac6de5
+    InputNodeGuid: 190e9c67-f8c2-41b9-91db-b2fc7979ccdd
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 190e9c67-f8c2-41b9-91db-b2fc7979ccdd
+    InputNodeGuid: 844cfd4a-9ac8-4d65-97f8-01ce830cc7f4
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 844cfd4a-9ac8-4d65-97f8-01ce830cc7f4
+    InputNodeGuid: fbcdd23e-9316-4497-8838-0ffec73a7bc7
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: fbcdd23e-9316-4497-8838-0ffec73a7bc7
+    InputNodeGuid: ca27657c-5dc6-433a-a19f-4d0389ce47c7
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: ca27657c-5dc6-433a-a19f-4d0389ce47c7
+    InputNodeGuid: 4cb91179-4584-447d-a8dc-ce2c37a3fe42
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: e3e462de-cabf-49e8-8faf-cd5dfff02631
+    InputNodeGuid: 8607f384-1f5c-4d1a-bf3f-3e68f76b2ec4
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 8bdceaaf-16ba-4f71-8e09-89d536f8c895
+    InputNodeGuid: 0bcc9897-3be3-472a-a3f0-cac5d0f0b0da
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 0bcc9897-3be3-472a-a3f0-cac5d0f0b0da
+    InputNodeGuid: b9cebd65-92fd-4c17-ae8e-24ae98ea8f90
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
+    InputNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Sorry, sir. I'll get going now.
+    InputPortName: 
+    OutputNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
+    InputNodeGuid: e3e462de-cabf-49e8-8faf-cd5dfff02631
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Just tell me.
+    InputPortName: 
+    OutputNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
+    InputNodeGuid: c74979e2-fdde-47b9-94a5-835ea2a7c18f
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: c74979e2-fdde-47b9-94a5-835ea2a7c18f
+    InputNodeGuid: 8bdceaaf-16ba-4f71-8e09-89d536f8c895
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 5edf8ef3-c474-4b70-a490-3de59d41df51
+    InputNodeGuid: b8530569-db6e-432d-9410-7b1fe0a44ddb
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Yes, all clear.
+    InputPortName: 
+    OutputNodeGuid: e270497b-e0d8-425e-aef9-27c8cf0d7c3a
+    InputNodeGuid: 5edf8ef3-c474-4b70-a490-3de59d41df51
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Can you explain all that again?
+    InputPortName: 
+    OutputNodeGuid: e270497b-e0d8-425e-aef9-27c8cf0d7c3a
+    InputNodeGuid: 6485b254-59a0-4c46-b375-c7312b108c78
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: a6f2cbef-01d2-47ea-8477-5956e7a838b8
+    InputNodeGuid: e270497b-e0d8-425e-aef9-27c8cf0d7c3a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 6485b254-59a0-4c46-b375-c7312b108c78
+    InputNodeGuid: f377adc8-f559-4108-a4c9-16a693087915
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: f377adc8-f559-4108-a4c9-16a693087915
+    InputNodeGuid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 0b592403-6c0a-4d32-a5bf-c8b4b80caeb0
+    InputNodeGuid: a6f2cbef-01d2-47ea-8477-5956e7a838b8
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 0b6682aa-a36a-41b1-9a0a-60836b6446e7
+    InputNodeGuid: 0b592403-6c0a-4d32-a5bf-c8b4b80caeb0
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: b9cebd65-92fd-4c17-ae8e-24ae98ea8f90
+    InputNodeGuid: 798741b0-9d19-47ac-9aac-4c68dd3ccb47
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 798741b0-9d19-47ac-9aac-4c68dd3ccb47
+    InputNodeGuid: d2e7c120-3162-4867-8e9d-b1dfcde3028f
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 4cb91179-4584-447d-a8dc-ce2c37a3fe42
+    InputNodeGuid: 0b6682aa-a36a-41b1-9a0a-60836b6446e7
+  dialogueNodeData:
+  - nodeName: 
+    guid: 5cf9a705-7593-4785-885a-ba1078272162
+    position: {x: 111, y: 197}
+    dialogueText: Alright, listen up, rookie.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: df06ea81-1e3a-4ab5-95d1-3ed7f7ac6de5
+  - nodeName: 
+    guid: df06ea81-1e3a-4ab5-95d1-3ed7f7ac6de5
+    position: {x: 534, y: 197}
+    dialogueText: I'm giving you your first big case. So, you can stop gifting me
+      your cookie baskets. My wife's complaining about my growing belly. And now,
+      she's threatening to hide my beer from me and that ain't happening.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 190e9c67-f8c2-41b9-91db-b2fc7979ccdd
+  - nodeName: 
+    guid: 190e9c67-f8c2-41b9-91db-b2fc7979ccdd
+    position: {x: 942, y: 196}
+    dialogueText: Anyway.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 844cfd4a-9ac8-4d65-97f8-01ce830cc7f4
+  - nodeName: 
+    guid: 844cfd4a-9ac8-4d65-97f8-01ce830cc7f4
+    position: {x: 1344, y: 196}
+    dialogueText: Last morning, a construction worker was murdered at his job. We've
+      already ruled out his coworkers as suspects, so we're leaving all the dirty
+      work for you.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: fbcdd23e-9316-4497-8838-0ffec73a7bc7
+  - nodeName: 
+    guid: fbcdd23e-9316-4497-8838-0ffec73a7bc7
+    position: {x: 1735, y: 196}
+    dialogueText: Have fun with it.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: ca27657c-5dc6-433a-a19f-4d0389ce47c7
+  - nodeName: 
+    guid: ca27657c-5dc6-433a-a19f-4d0389ce47c7
+    position: {x: 2133, y: 197}
+    dialogueText: Dumbass.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 4cb91179-4584-447d-a8dc-ce2c37a3fe42
+  - nodeName: 
+    guid: e3e462de-cabf-49e8-8faf-cd5dfff02631
+    position: {x: 6384, y: -95}
+    dialogueText: Sorry, sir. I'll get going now.
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 8607f384-1f5c-4d1a-bf3f-3e68f76b2ec4
+  - nodeName: 
+    guid: 8607f384-1f5c-4d1a-bf3f-3e68f76b2ec4
+    position: {x: 6719, y: -95}
+    dialogueText: Waste of my time.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: 8bdceaaf-16ba-4f71-8e09-89d536f8c895
+    position: {x: 6725, y: 35}
+    dialogueText: Alright, I see how it is.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 0bcc9897-3be3-472a-a3f0-cac5d0f0b0da
+  - nodeName: 
+    guid: 0bcc9897-3be3-472a-a3f0-cac5d0f0b0da
+    position: {x: 7127, y: 21}
+    dialogueText: 1. You will have a datapod that you must fill out with the CORRECT
+      evidence. You do so by either dragging in appropriate information or simply
+      by typing it in.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: b9cebd65-92fd-4c17-ae8e-24ae98ea8f90
+  - nodeName: 
+    guid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
+    position: {x: 5519, y: 137}
+    dialogueText: Don't make me repeat myself.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
+  - nodeName: 
+    guid: 2994933d-0510-464a-8813-c6befcc620ff
+    position: {x: 5931, y: 112}
+    dialogueText: Dumbass.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: Sorry, sir. I'll get going now.
+      nextNodeGuid: e3e462de-cabf-49e8-8faf-cd5dfff02631
+    - text: Just tell me.
+      nextNodeGuid: c74979e2-fdde-47b9-94a5-835ea2a7c18f
+  - nodeName: 
+    guid: c74979e2-fdde-47b9-94a5-835ea2a7c18f
+    position: {x: 6388, y: 36}
+    dialogueText: Cut me some slack and tell me. You said yourself it's dirty work
+      that nobody else wants to do. You have your job and I have mine so be a good
+      tutorial and comply to my request.
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 8bdceaaf-16ba-4f71-8e09-89d536f8c895
+  - nodeName: 
+    guid: 5edf8ef3-c474-4b70-a490-3de59d41df51
+    position: {x: 4773, y: -20}
+    dialogueText: Yes, all clear.
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: b8530569-db6e-432d-9410-7b1fe0a44ddb
+  - nodeName: 
+    guid: b8530569-db6e-432d-9410-7b1fe0a44ddb
+    position: {x: 5107, y: -20}
+    dialogueText: Don't fuck this up.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: e270497b-e0d8-425e-aef9-27c8cf0d7c3a
+    position: {x: 4377, y: 163}
+    dialogueText: Capiche? Do you comprende the words coming out of my mouth?
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: Yes, all clear.
+      nextNodeGuid: 5edf8ef3-c474-4b70-a490-3de59d41df51
+    - text: Can you explain all that again?
+      nextNodeGuid: 6485b254-59a0-4c46-b375-c7312b108c78
+  - nodeName: 
+    guid: a6f2cbef-01d2-47ea-8477-5956e7a838b8
+    position: {x: 3915, y: 184}
+    dialogueText: The first lead on the list is Granny Olena. Just start there and
+      see where it takes you.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: e270497b-e0d8-425e-aef9-27c8cf0d7c3a
+  - nodeName: 
+    guid: 6485b254-59a0-4c46-b375-c7312b108c78
+    position: {x: 4799, y: 136}
+    dialogueText: Could you explain that again?
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: f377adc8-f559-4108-a4c9-16a693087915
+  - nodeName: 
+    guid: f377adc8-f559-4108-a4c9-16a693087915
+    position: {x: 5138, y: 136}
+    dialogueText: Am I talking to a wall? Are you snoozing during your own brief??
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
+  - nodeName: 
+    guid: 0b592403-6c0a-4d32-a5bf-c8b4b80caeb0
+    position: {x: 3533, y: 185}
+    dialogueText: 'We need you to gather witness statements and uncover who this
+      good-for-nothing perp is. You''re not a local so you might get some weird looks
+      but I''d get used to it if I were you. '
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a6f2cbef-01d2-47ea-8477-5956e7a838b8
+  - nodeName: 
+    guid: 0b6682aa-a36a-41b1-9a0a-60836b6446e7
+    position: {x: 3024, y: 188}
+    dialogueText: On the right of the screen you will see all the possible evidence
+      you gather during the investigation. On the left, you will have to either drag
+      in or type in what you deduce to be the true credential of the criminal. Naturally,
+      you can't guess your way out of this because the law requires cold hard evidence.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 0b592403-6c0a-4d32-a5bf-c8b4b80caeb0
+  - nodeName: 
+    guid: b9cebd65-92fd-4c17-ae8e-24ae98ea8f90
+    position: {x: 7536, y: 20}
+    dialogueText: '2. You need to go around and ask witnesses what they saw and if
+      anything suspicious comes up, you make note of it. '
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 798741b0-9d19-47ac-9aac-4c68dd3ccb47
+  - nodeName: 
+    guid: 798741b0-9d19-47ac-9aac-4c68dd3ccb47
+    position: {x: 7940, y: 20}
+    dialogueText: 3. The first such witness will be Grandma Olena. Once you leave
+      the station, go look for her and talk to her.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: d2e7c120-3162-4867-8e9d-b1dfcde3028f
+  - nodeName: 
+    guid: d2e7c120-3162-4867-8e9d-b1dfcde3028f
+    position: {x: 8352, y: 19}
+    dialogueText: Now, stop twindling your thumbs and go do detective things for
+      beer's sake!
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: 4cb91179-4584-447d-a8dc-ce2c37a3fe42
+    position: {x: 2563, y: 198}
+    dialogueText: You're going to receive a police-issued <b>DATAPOD<b> which you
+      must fill out with all the hard evidence you can find. This way, we keep all
+      our work digitized, organized, and secure.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 0b6682aa-a36a-41b1-9a0a-60836b6446e7
+  exposedProperties: []
+  commentBlockData: []
