@@ -1,5 +1,8 @@
-﻿using CardboardCore.Utilities;
+﻿using System;
+using CardboardCore.Utilities;
+using Cinemachine;
 using Grigor.Data.Clues;
+using Grigor.Gameplay.Time;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -18,10 +21,14 @@ namespace Grigor.Gameplay.EvidenceBoard
         [SerializeField, ColoredBoxGroup("Note Settings", false, true)] private EvidenceBoardNoteType noteType;
         [SerializeField, ColoredBoxGroup("Note Settings")] private EvidenceNote evidenceNote;
 
+        [SerializeField, ColoredBoxGroup("Zooming", false, true)] private CollisionData collisionData;
+        [SerializeField, ColoredBoxGroup("Zooming", false, true)] private CinemachineVirtualCamera noteVirtualCamera;
+
         [SerializeField, ReadOnly, ColoredBoxGroup("Debug", true, true)] private bool isRevealed;
 
         [SerializeField, HideInInspector] private ClueData clueData;
         [SerializeField, HideInInspector] private float clueHeadingDefaultFontSize;
+        [SerializeField, HideInInspector] private EvidenceBoardManager evidenceBoardManager;
 
         [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void Highlight() => HighlightNote();
         [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void Unhighlight() => UnhighlightNote();
@@ -32,9 +39,14 @@ namespace Grigor.Gameplay.EvidenceBoard
         public ClueData ClueData => clueData;
         public bool IsRevealed => isRevealed;
 
-        public void Initialize(ClueData clueData)
+        public CinemachineVirtualCamera NoteVirtualCamera => noteVirtualCamera;
+
+        public event Action<EvidenceBoardNote> NoteSelectedEvent;
+
+        public void Initialize(ClueData clueData, EvidenceBoardManager evidenceBoardManager)
         {
             this.clueData = clueData;
+            this.evidenceBoardManager = evidenceBoardManager;
 
             if (evidenceNote == null)
             {
@@ -46,6 +58,13 @@ namespace Grigor.Gameplay.EvidenceBoard
             InitializeNoteContents();
 
             UnhighlightNote();
+        }
+
+        public void Dispose()
+        {
+            collisionData.MouseEnterEvent -= OnNoteHover;
+            collisionData.MouseExitEvent -= OnNoteUnhover;
+            collisionData.MouseDownEvent -= OnNoteClick;
         }
 
         public void ScaleContents(Vector3 scale, float upscaleFactor, float aspect)
@@ -81,6 +100,10 @@ namespace Grigor.Gameplay.EvidenceBoard
             SetHeadingText(clueData.ClueHeading);
 
             evidenceNote.OnInitializeContents(this);
+
+            collisionData.MouseEnterEvent += OnNoteHover;
+            collisionData.MouseExitEvent += OnNoteUnhover;
+            collisionData.MouseDownEvent += OnNoteClick;
         }
 
         public void HighlightNote()
@@ -110,6 +133,32 @@ namespace Grigor.Gameplay.EvidenceBoard
         public void RefreshContents()
         {
             InitializeNoteContents();
+        }
+
+        private void OnNoteHover()
+        {
+            if (!evidenceBoardManager.CanSelectNote)
+            {
+                return;
+            }
+        }
+
+        private void OnNoteUnhover()
+        {
+            if (!evidenceBoardManager.CanSelectNote)
+            {
+                return;
+            }
+        }
+
+        private void OnNoteClick()
+        {
+            if (!evidenceBoardManager.CanSelectNote)
+            {
+                return;
+            }
+
+            NoteSelectedEvent?.Invoke(this);
         }
     }
 }

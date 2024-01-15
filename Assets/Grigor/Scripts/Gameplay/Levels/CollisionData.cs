@@ -1,4 +1,5 @@
 ﻿using System;
+using CardboardCore.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ namespace Grigor.Gameplay.Time
         [SerializeField, ShowIf(nameof(useLayerMask))] private LayerMask layerMask;
 
         public event Action<Collision> CollisionEvent;
+        public event Action MouseEnterEvent;
+        public event Action MouseExitEvent;
+        public event Action MouseDownEvent;
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -22,6 +26,21 @@ namespace Grigor.Gameplay.Time
             }
 
             CollisionEvent?.Invoke(collision);
+        }
+
+        private void OnMouseEnter()
+        {
+            MouseEnterEvent?.Invoke();
+        }
+
+        private void OnMouseExit()
+        {
+            MouseExitEvent?.Invoke();
+        }
+
+        private void OnMouseDown()
+        {
+            MouseDownEvent?.Invoke();
         }
     }
 }

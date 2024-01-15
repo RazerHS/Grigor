@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
+using Cinemachine;
 using Grigor.Data;
 using Grigor.Data.Clues;
 using Grigor.Gameplay.Clues;
+using Grigor.StateMachines.EvidenceBoard;
 using Grigor.Utils;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -14,6 +16,7 @@ using Random = UnityEngine.Random;
 
 namespace Grigor.Gameplay.EvidenceBoard
 {
+    [Injectable]
     public class EvidenceBoardManager : CardboardCoreBehaviour, IClueListener
     {
         [SerializeField, ColoredBoxGroup("Board", false, true)] private List<EvidenceBoardNote> notes;
@@ -26,6 +29,14 @@ namespace Grigor.Gameplay.EvidenceBoard
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidenceStickyNotePrefab;
         [SerializeField, ColoredBoxGroup("References")] private EvidenceBoardNote evidencePicturePrefab;
 
+        [SerializeField, ColoredBoxGroup("Zooming", false, true)] private float scrollIncrement;
+        [SerializeField, ColoredBoxGroup("Zooming")] private float maxFOV;
+        [SerializeField, ColoredBoxGroup("Zooming")] private float minFOV;
+
+        [SerializeField, HideInInspector] private DataStorage dataStorage;
+
+        [Inject] ClueRegistry clueRegistry;
+
         [ColoredBoxGroup("Creating", false, true), Button(ButtonSizes.Large)] private void HideAllClues() => HideAllElementsOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void RevealAllClues() => RevealAllCluesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large)] private void ConnectAllClues() => ConnectAllCluesOnBoard();
@@ -34,9 +45,21 @@ namespace Grigor.Gameplay.EvidenceBoard
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void SpawnAllClues() => SpawnAllCluesOnBoard();
         [ColoredBoxGroup("Creating"), Button(ButtonSizes.Large), GUIColor(1f, 0f, 0f)] private void ClearAllClues() => RemoveAllCluesFromBoard();
 
-        [SerializeField, HideInInspector] private DataStorage dataStorage;
+        private EvidenceBoardNote currentlySelectedNote;
+        private bool canSelectNote;
+        private EvidenceBoardStateMachine evidenceBoardStateMachine;
+        private CinemachineVirtualCamera evidenceBoardVirtualCamera;
 
-        [Inject] ClueRegistry clueRegistry;
+        public List<EvidenceBoardNote> Notes => notes;
+        public float ScrollIncrement => scrollIncrement;
+        public float MaxFOV => maxFOV;
+        public float MinFOV => minFOV;
+        public EvidenceBoardNote CurrentlySelectedNote => currentlySelectedNote;
+        public bool CanSelectNote => canSelectNote;
+        public CinemachineVirtualCamera EvidenceBoardVirtualCamera => evidenceBoardVirtualCamera;
+
+        public event Action InteractWithBoardEvent;
+        public event Action LeaveBoardEvent;
 
 #if UNITY_EDITOR
         [OnInspectorInit]
@@ -53,14 +76,25 @@ namespace Grigor.Gameplay.EvidenceBoard
         {
             RegisterClueListener();
 
-            notes.ForEach(note => note.InitializeNoteContents());
+            notes.ForEach(note =>
+            {
+                note.InitializeNoteContents();
+            });
 
-            HideAllElementsOnBoard();
+            evidenceBoardStateMachine = new EvidenceBoardStateMachine(true);
+            evidenceBoardStateMachine.Start();
+
+            // HideAllElementsOnBoard();
         }
 
         protected override void OnReleased()
         {
+            notes.ForEach(note =>
+            {
+                note.Dispose();
+            });
 
+            evidenceBoardStateMachine.Stop();
         }
 
         private void AddClue(EvidenceBoardNote note)
@@ -123,7 +157,7 @@ namespace Grigor.Gameplay.EvidenceBoard
 
             EvidenceBoardNote note = SpawnClueOnBoard(clueData.EvidenceBoardNoteType, position);
 
-            note.Initialize(clueData);
+            note.Initialize(clueData, this);
             note.RevealNote();
 
             AddClue(note);
@@ -312,6 +346,41 @@ namespace Grigor.Gameplay.EvidenceBoard
             }
 
             return false;
+        }
+
+        public void OnInteractWithBoard()
+        {
+            InteractWithBoardEvent?.Invoke();
+        }
+
+        public void SelectNote(EvidenceBoardNote note)
+        {
+             currentlySelectedNote = note;
+        }
+
+        public void DeselectNote()
+        {
+            currentlySelectedNote = null;
+        }
+
+        public void EnableNoteSelection()
+        {
+            canSelectNote = true;
+        }
+
+        public void DisableNoteSelection()
+        {
+            canSelectNote = false;
+        }
+
+        public void LeaveBoard()
+        {
+            LeaveBoardEvent?.Invoke();
+        }
+
+        public void SetEvidenceBoardVirtualCamera(CinemachineVirtualCamera virtualCamera)
+        {
+            evidenceBoardVirtualCamera = virtualCamera;
         }
     }
 }
