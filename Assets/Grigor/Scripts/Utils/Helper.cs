@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CardboardCore.Utilities;
-using Grigor.Data.Editor;
+using Grigor.Data;
 using JetBrains.Annotations;
 using MEC;
 using UnityEditor;
@@ -20,6 +20,19 @@ namespace Grigor.Utils
             callback?.Invoke();
         }
 
+        public static Vector3 GetScaleBasedOnTextureSize(float width, float height, float upscaleFactor = 1f)
+        {
+            float aspect = width / height;
+
+            return new Vector3(aspect, 1, 1) * upscaleFactor;
+        }
+
+        public static void Delay(float delay, Action callback)
+        {
+            Timing.RunCoroutine(DelayCoroutine(delay, callback));
+        }
+
+#if UNITY_EDITOR
         public static T LoadAsset<T>(string assetName, T asset) where T : ScriptableObject
         {
             if (asset != null)
@@ -27,7 +40,7 @@ namespace Grigor.Utils
                 return asset;
             }
 
-            string path = $"Assets/Grigor/Resources/{assetName}.asset";
+            string path = $"Assets/Resources/{assetName}.asset";
 
             T newAsset = AssetDatabase.LoadAssetAtPath<T>(path);
 
@@ -39,12 +52,6 @@ namespace Grigor.Utils
             return newAsset;
         }
 
-        public static void Delay(float delay, Action callback)
-        {
-            Timing.RunCoroutine(DelayCoroutine(delay, callback));
-        }
-
-#if UNITY_EDITOR
         public static void UpdateData<T>([NotNull] List<T> list, string dataPath) where T : ScriptableObjectData
         {
             float startTime = Time.time;
@@ -74,16 +81,7 @@ namespace Grigor.Utils
 
             Log.Write($"Data updated in {Time.time - startTime} seconds!");
         }
-#endif
 
-        public static Vector3 GetScaleBasedOnTextureSize(float width, float height, float upscaleFactor = 1f)
-        {
-            float aspect = width / height;
-
-            return new Vector3(aspect, 1, 1) * upscaleFactor;
-        }
-
-#if UNITY_EDITOR
         public static bool GetKeyPressed(out KeyCode keyCode)
         {
             keyCode = KeyCode.None;

@@ -1,4 +1,6 @@
-﻿using Grigor.Data.Tasks;
+﻿#if UNITY_EDITOR
+
+using Grigor.Data.Tasks;
 using UnityEditor;
 
 namespace Grigor.Data.Editor
@@ -15,3 +17,5 @@ namespace Grigor.Data.Editor
         }
     }
 }
+
+#endif

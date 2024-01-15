@@ -1,4 +1,6 @@
 ﻿using CardboardCore.DI;
+using Cinemachine;
+using Grigor.Gameplay.Cameras;
 using Grigor.Input;
 using RazerCore.Utils.Attributes;
 using UnityEngine;
@@ -12,8 +14,10 @@ namespace Grigor.Characters.Components.Player
         [SerializeField, ColoredBoxGroup("Values")] private float lookClampX = 85f;
         [SerializeField, ColoredBoxGroup("References", false, 0.1f, 0.1f, 0.9f)] private Transform lookTransform;
         [SerializeField, ColoredBoxGroup("References")] private Transform lookCameraTransform;
+        [SerializeField, ColoredBoxGroup("References")] private CinemachineVirtualCamera virtualCamera;
 
         [Inject] private PlayerInput playerInput;
+        [Inject] private CameraManager cameraManager;
 
         private float lookRotationX;
         private Vector2 lookDirection;
@@ -25,6 +29,8 @@ namespace Grigor.Characters.Components.Player
         {
             playerInput.LookInputStartedEvent += OnLookInputStarted;
             playerInput.LookInputCanceledEvent += OnLookInputCanceled;
+
+            cameraManager.SetActiveVirtualCamera(virtualCamera);
         }
 
         protected override void OnDisposed()

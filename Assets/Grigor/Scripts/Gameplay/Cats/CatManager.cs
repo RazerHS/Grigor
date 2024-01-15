@@ -64,6 +64,11 @@ namespace Grigor.Gameplay.Cats
 
         private void AlertCatsWithCatnip(Vector3 position, Vector3 lookDirection)
         {
+            if (currentCatnip == null)
+            {
+                return;
+            }
+
             TrySpawnNewCatBehindPlayer(position, lookDirection);
 
             allCats.ForEach(cat => cat.OnCatnipPlaced(currentCatnip.transform));

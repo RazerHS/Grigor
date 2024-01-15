@@ -1,6 +1,6 @@
 ﻿using System;
+using Grigor.Data;
 using Grigor.Data.Credentials;
-using Grigor.Data.Editor;
 using Grigor.Utils.StoryGraph.Runtime;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;

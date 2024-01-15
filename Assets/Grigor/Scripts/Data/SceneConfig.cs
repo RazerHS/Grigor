@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Grigor.Data
 {
-    [GlobalConfig, CreateAssetMenu(fileName = "SceneConfig", menuName = "Grigor/Scene Config")]
+    [GlobalConfig("Assets/Resources/Config/"), CreateAssetMenu(fileName = "SceneConfig", menuName = "Grigor/Scene Config")]
     public class SceneConfig : GlobalConfig<SceneConfig>
     {
         [SerializeField, ColoredBoxGroup("Lighting", true, 0.2f, 0.5f, 0.5f)] private Gradient ambientColor;

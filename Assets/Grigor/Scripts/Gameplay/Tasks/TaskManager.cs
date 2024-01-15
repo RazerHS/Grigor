@@ -12,7 +12,6 @@ namespace Grigor.Gameplay.Tasks
     public class TaskManager : CardboardCoreBehaviour
     {
         [Inject] private UIManager uiManager;
-        [Inject] private DataRegistry dataRegistry;
 
         [ShowInInspector, ReadOnly] private List<TaskData> currentTasks = new List<TaskData>();
         private TasksWidget tasksWidget;
@@ -21,10 +20,10 @@ namespace Grigor.Gameplay.Tasks
         {
             tasksWidget = uiManager.GetWidget<TasksWidget>();
 
-            dataRegistry.TaskData.ForEach(taskData => taskData.ResetTask());
-
-            dataRegistry.TaskData.ForEach(taskData =>
+            DataStorage.Instance.TaskData.ForEach(taskData =>
             {
+                taskData.ResetTask();
+
                 taskData.TaskStartedInEditorEvent += OnTaskStartedInEditor;
                 taskData.TaskCompletedInEditorEvent += OnTaskCompletedInEditor;
             });
@@ -32,7 +31,7 @@ namespace Grigor.Gameplay.Tasks
 
         protected override void OnReleased()
         {
-            dataRegistry.TaskData.ForEach(taskData =>
+            DataStorage.Instance.TaskData.ForEach(taskData =>
             {
                 taskData.TaskStartedInEditorEvent -= OnTaskStartedInEditor;
                 taskData.TaskCompletedInEditorEvent -= OnTaskCompletedInEditor;
