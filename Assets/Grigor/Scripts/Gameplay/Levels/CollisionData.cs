@@ -1,5 +1,4 @@
 ﻿using System;
-using CardboardCore.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
