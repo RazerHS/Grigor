@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.DI;
@@ -212,12 +212,7 @@ namespace Grigor.Gameplay.EvidenceBoard
 
         private void SpawnAllCluesOnBoard()
         {
-            if (dataStorage == null)
-            {
-                return;
-            }
-
-            foreach (ClueData clueData in dataStorage.ClueData)
+            foreach (ClueData clueData in DataStorage.Instance.ClueData)
             {
                 if (notes.Any(note => note.ClueData == clueData))
                 {

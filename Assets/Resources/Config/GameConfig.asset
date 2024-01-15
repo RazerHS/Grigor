@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c3e432ef4244e4bd1e3dea925272c2, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  correctCluesBeforeLock: 3
+  timePassTweenDuration: 1
+  catPrefab: {fileID: 1026710629887091460, guid: 01a8b4c5112640d44bef271b0ab590be,
+    type: 3}
+  catnipPrefab: {fileID: -4596192783066776673, guid: 0a7f63b21c5b3334aa10bfd4feb5a497,
+    type: 3}
+  catnipRadius: 10
+  chanceForCatToSpawnNearCatnip: 0.5
+  catnipUpwardsForceWhenThrown: 4
+  catnipReactionDelay: 1
+  startNodeColor: {r: 0.8113208, g: 0.76252675, b: 0.095674604, a: 0.7607843}
+  defaultNodeColor: {r: 1, g: 1, b: 1, a: 0.7607843}
+  endNodeColor: {r: 0.8396226, g: 0.08317016, b: 0.08317016, a: 0.7607843}
+  noSpeakerColor: {r: 0, g: 0, b: 0, a: 0.7607843}
+  fmodEventCache: {fileID: 11400000, guid: 1bb9c6522cd378a44a8b443be81a8bd3, type: 2}

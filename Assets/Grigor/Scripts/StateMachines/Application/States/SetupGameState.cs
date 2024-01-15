@@ -1,7 +1,7 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using RazerCore.Utils.Addressables;
-using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine;
 
 namespace Grigor.StateMachines.Application.States
 {
@@ -9,9 +9,13 @@ namespace Grigor.StateMachines.Application.States
     {
         [Inject] private AddressablesLoader addressablesLoader;
 
+        private const int ObjectsToLoad = 2;
+        private int objectsLoaded;
+
         protected override void OnEnter()
         {
-            addressablesLoader.LoadSceneAsync("SetupGameScene", OnSetupSceneLoaded);
+            addressablesLoader.LoadAssetAsync<GameObject>("PlayerCharacter", OnPlayerCharacterLoaded);
+            addressablesLoader.LoadAssetAsync<GameObject>("MainCamera", OnMainCameraLoaded);
         }
 
         protected override void OnExit()
@@ -19,13 +23,31 @@ namespace Grigor.StateMachines.Application.States
 
         }
 
-        private void OnSetupSceneLoaded(SceneInstance sceneInstance)
+        private void OnPlayerCharacterLoaded(GameObject gameObject)
         {
-            addressablesLoader.UnloadSceneAsync("SetupGameScene", OnSetupSceneUnloaded);
+            GameObject playerCharacter = Object.Instantiate(gameObject);
+            playerCharacter.name = "PlayerCharacter";
+
+            CheckObjectsLoadedCount();
         }
 
-        private void OnSetupSceneUnloaded()
+        private void OnMainCameraLoaded(GameObject gameObject)
         {
+            GameObject mainCamera = Object.Instantiate(gameObject);
+            mainCamera.name = "MainCamera";
+
+            CheckObjectsLoadedCount();
+        }
+
+        private void CheckObjectsLoadedCount()
+        {
+            objectsLoaded++;
+
+            if (objectsLoaded < ObjectsToLoad)
+            {
+                return;
+            }
+
             owningStateMachine.ToNextState();
         }
     }
