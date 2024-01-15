@@ -73,7 +73,7 @@ namespace Grigor.Utils.StoryGraph.Runtime
                 throw Log.Exception("Start node name is empty!");
             }
 
-            DialogueNodeData startNodeData = dialogueNodeData.Find(dialogueNode => dialogueNode.NodeName == startNodeName);
+            DialogueNodeData startNodeData = dialogueNodeData.Find(dialogueNode => dialogueNode.DialogueText == startNodeName);
 
             if (startNodeData == null)
             {
