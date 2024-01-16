@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: Location
+  m_Name: medical_condition_correct
   m_EditorClassIdentifier: 
-  assetName: Location
-  credentialType: 1
+  assetName: medical_condition_correct
+  credentialType: 5
+  appearsInDataPod: 1
   evidenceBoardNoteType: 0
-  clueHeading: Liquor Store
+  clueHeading: Cyber-Alzheimers (CAZ)
   evidenceText: 
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}

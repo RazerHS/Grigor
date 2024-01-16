@@ -289,6 +289,8 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: 'Here''s a little tease. It happened at 19:58pm. '
@@ -314,6 +316,8 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: 'I saw you giving your data away on the cameras. For some shortcut?  '
@@ -340,6 +344,8 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: ~SHIFT'S UP MAN, BACK TO THE STATION. STAT~.
@@ -365,5 +371,7 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
-  clueToFind: {fileID: 11400000, guid: a8465ed3ceb73e54093b2f7dadaa23bb, type: 2}
+  clueToFind: {fileID: 11400000, guid: e6567abd359e0ea4697523f5df08add5, type: 2}

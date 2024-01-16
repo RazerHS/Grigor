@@ -262,5 +262,7 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
-  clueToFind: {fileID: 11400000, guid: 01821621952d70e498691b13acffa5ed, type: 2}
+  clueToFind: {fileID: 11400000, guid: c9f45a8e856dc5e4f828b110432f97ca, type: 2}
