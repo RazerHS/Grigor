@@ -101,7 +101,7 @@ PrefabInstance:
         type: 3}
       propertyPath: characterData
       value: 
-      objectReference: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371,
+      objectReference: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5,
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -112,12 +112,12 @@ PrefabInstance:
         type: 3}
       propertyPath: characterData
       value: 
-      objectReference: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371,
+      objectReference: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5,
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: startNodeName
-      value: Hello, I am god, I murdered that man.
+      value: Well, hi there, owner of peepeepoopoo@pants.com.
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -137,7 +137,7 @@ PrefabInstance:
     - target: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: m_Name
-      value: NPC_PrivateVladimir
+      value: NPC_Privacy
       objectReference: {fileID: 0}
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -289,6 +289,8 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: 'Here''s a little tease. It happened at 19:58pm. '
@@ -314,6 +316,8 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: 'I saw you giving your data away on the cameras. For some shortcut?  '
@@ -340,6 +344,8 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: ~SHIFT'S UP MAN, BACK TO THE STATION. STAT~.
@@ -365,5 +371,7 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   clueToFind: {fileID: 11400000, guid: a8465ed3ceb73e54093b2f7dadaa23bb, type: 2}

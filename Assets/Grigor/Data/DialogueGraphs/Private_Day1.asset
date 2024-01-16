@@ -21,6 +21,11 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
+    OutputNodeGuid: 09087a28-73d3-423d-a9e6-a75b59beaf4e
+    InputNodeGuid: 10e4125e-ba3b-4d2d-82ee-209479ee777e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
     OutputNodeGuid: 6b1da29e-699d-4d87-8c87-1b25e9590e09
     InputNodeGuid: b039645d-1a6f-4ccd-b577-62362664eb14
   - OutportPortChoiceIndex: 0
@@ -56,108 +61,8 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 09087a28-73d3-423d-a9e6-a75b59beaf4e
-    InputNodeGuid: 10e4125e-ba3b-4d2d-82ee-209479ee777e
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: a7bbd35d-71cd-40ed-98d2-b56c2ae4b442
-    InputNodeGuid: 6751fd6a-891b-41c2-a42d-92b6f2862250
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 10e4125e-ba3b-4d2d-82ee-209479ee777e
-    InputNodeGuid: b1f27883-4319-45af-925d-fd101d42ca5a
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: b1f27883-4319-45af-925d-fd101d42ca5a
-    InputNodeGuid: b38d7b31-a82d-4327-b380-11a822ac8c12
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: b38d7b31-a82d-4327-b380-11a822ac8c12
-    InputNodeGuid: 5a1a4237-4beb-4119-9dc6-a6df3f935452
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 5a1a4237-4beb-4119-9dc6-a6df3f935452
-    InputNodeGuid: 9107c10f-7d97-4f12-a0e7-02f76fed5f36
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 9107c10f-7d97-4f12-a0e7-02f76fed5f36
-    InputNodeGuid: a0d6bc50-6b7f-4e10-9183-a4c73e328a9a
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: a0d6bc50-6b7f-4e10-9183-a4c73e328a9a
-    InputNodeGuid: a7bbd35d-71cd-40ed-98d2-b56c2ae4b442
-  - OutportPortChoiceIndex: 0
-    OutputPortName: Can I please just ask you some questions?
-    InputPortName: 
-    OutputNodeGuid: 817f8c98-497e-497a-abeb-d5be44dfe416
-    InputNodeGuid: e1f83137-c145-4b70-9ba6-e8d130905cfa
-  - OutportPortChoiceIndex: 0
-    OutputPortName: I understand my mistake but there's a murderer out there.
-    InputPortName: 
-    OutputNodeGuid: 817f8c98-497e-497a-abeb-d5be44dfe416
-    InputNodeGuid: e1f83137-c145-4b70-9ba6-e8d130905cfa
-  - OutportPortChoiceIndex: 0
-    OutputPortName: If you care about your safety you'll help me.
-    InputPortName: 
-    OutputNodeGuid: 817f8c98-497e-497a-abeb-d5be44dfe416
-    InputNodeGuid: e1f83137-c145-4b70-9ba6-e8d130905cfa
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: e1f83137-c145-4b70-9ba6-e8d130905cfa
-    InputNodeGuid: 82316932-2547-4728-84a8-2c73dd7564bd
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 82316932-2547-4728-84a8-2c73dd7564bd
-    InputNodeGuid: 2b1cc7a0-86af-470b-afb7-c4d39687af34
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 2b1cc7a0-86af-470b-afb7-c4d39687af34
-    InputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
-    InputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
-  - OutportPortChoiceIndex: 0
-    OutputPortName: OK
-    InputPortName: 
-    OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
-    InputNodeGuid: 075846fc-cb28-4b5e-a7d2-66ecf9514339
-  - OutportPortChoiceIndex: 0
-    OutputPortName: Why don't you just do it yourself?
-    InputPortName: 
-    OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
-    InputNodeGuid: 3288a9e0-3390-4fec-8145-baeb301d632d
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 075846fc-cb28-4b5e-a7d2-66ecf9514339
-    InputNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 3288a9e0-3390-4fec-8145-baeb301d632d
-    InputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
-    InputNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
-    InputNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+    OutputNodeGuid: 638a443f-c9da-4a3b-966f-c3bdae6b9a3b
+    InputNodeGuid: 848dc6d0-b3b7-4728-ae92-333c58c5acbb
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -166,13 +71,13 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 8bca76ad-0125-481d-8a22-a2d552d671a2
-    InputNodeGuid: 2546556c-aab9-4ab4-843c-fdbe0563d642
+    OutputNodeGuid: 10e4125e-ba3b-4d2d-82ee-209479ee777e
+    InputNodeGuid: b38d7b31-a82d-4327-b380-11a822ac8c12
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 94339c20-76a1-4b02-8492-1f9dfb139d84
-    InputNodeGuid: 54680a1a-b866-4ad8-ab50-4f5164e84dab
+    OutputNodeGuid: 8bca76ad-0125-481d-8a22-a2d552d671a2
+    InputNodeGuid: 2546556c-aab9-4ab4-843c-fdbe0563d642
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -186,23 +91,18 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 3e261c7c-5991-447a-a03f-a4e076e4bf09
-    InputNodeGuid: ab609094-9991-4f9b-97b4-8581083ea71a
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
     OutputNodeGuid: ab609094-9991-4f9b-97b4-8581083ea71a
     InputNodeGuid: 7cb22cb0-6cd2-47f2-a1b0-3e26f3b68063
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
     OutputNodeGuid: 7cb22cb0-6cd2-47f2-a1b0-3e26f3b68063
-    InputNodeGuid: 94339c20-76a1-4b02-8492-1f9dfb139d84
+    InputNodeGuid: 54680a1a-b866-4ad8-ab50-4f5164e84dab
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 638a443f-c9da-4a3b-966f-c3bdae6b9a3b
-    InputNodeGuid: 848dc6d0-b3b7-4728-ae92-333c58c5acbb
+    OutputNodeGuid: 3e261c7c-5991-447a-a03f-a4e076e4bf09
+    InputNodeGuid: ab609094-9991-4f9b-97b4-8581083ea71a
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -211,52 +111,27 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
+    OutputNodeGuid: 9d334ecd-10a2-4302-8c11-a4b3e6e22bcd
+    InputNodeGuid: f3f2f34d-f7b7-45d0-9f65-376ce15d8ef9
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
     OutputNodeGuid: 848dc6d0-b3b7-4728-ae92-333c58c5acbb
     InputNodeGuid: 15f2266d-f459-4bcc-aab9-64b7a1f67437
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 9d334ecd-10a2-4302-8c11-a4b3e6e22bcd
-    InputNodeGuid: c1cbfb93-afc1-4a95-ace7-ae1e6b4ee6de
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: c1cbfb93-afc1-4a95-ace7-ae1e6b4ee6de
-    InputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
-  - OutportPortChoiceIndex: 0
-    OutputPortName: There has been a murder
-    InputPortName: 
-    OutputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
-    InputNodeGuid: a3a3ca33-0942-4117-825b-e32fc3a402ef
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: a3a3ca33-0942-4117-825b-e32fc3a402ef
-    InputNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
-    InputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
     OutputNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
     InputNodeGuid: afc9e05a-a1d6-4ac6-8051-ae36e75f6707
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: There has been a murder
     InputPortName: 
-    OutputNodeGuid: afc9e05a-a1d6-4ac6-8051-ae36e75f6707
-    InputNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
+    OutputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
+    InputNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
   - OutportPortChoiceIndex: 0
     OutputPortName: I heard you have security footage
     InputPortName: 
     OutputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
-    InputNodeGuid: 80d54bbd-266d-4c55-a9cd-a0271cbd1578
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 80d54bbd-266d-4c55-a9cd-a0271cbd1578
     InputNodeGuid: 46c22fa7-a368-4e0a-88be-b4905b1bf014
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
@@ -266,53 +141,238 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
+    OutputNodeGuid: afc9e05a-a1d6-4ac6-8051-ae36e75f6707
+    InputNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
+    InputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
     OutputNodeGuid: c77c8dcb-3d36-4365-8b02-dcefd20a1d6e
-    InputNodeGuid: 34be37c2-56de-46ee-b5ea-586fef970ad2
+    InputNodeGuid: 77f3323d-19b1-45ac-a47a-90d134abc3e9
   - OutportPortChoiceIndex: 0
-    OutputPortName: I don't have time for this
+    OutputPortName: Can I please just ask you some questions?
     InputPortName: 
-    OutputNodeGuid: 34be37c2-56de-46ee-b5ea-586fef970ad2
-    InputNodeGuid: 7095c1f9-2013-45bf-b326-3fe8c7c7c836
+    OutputNodeGuid: 817f8c98-497e-497a-abeb-d5be44dfe416
+    InputNodeGuid: 9d821ef6-1a90-46ad-9cf1-bbc8e02b6403
   - OutportPortChoiceIndex: 0
-    OutputPortName: What would you like me to do?
+    OutputPortName: If you care about your safety you'll help me.
     InputPortName: 
-    OutputNodeGuid: 34be37c2-56de-46ee-b5ea-586fef970ad2
-    InputNodeGuid: f2119eb6-dbe9-42d1-8b78-d3563b7c0632
+    OutputNodeGuid: 817f8c98-497e-497a-abeb-d5be44dfe416
+    InputNodeGuid: 20623209-f53e-4324-bdbe-33812acc206b
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: There's a killer on the loose
     InputPortName: 
-    OutputNodeGuid: 7095c1f9-2013-45bf-b326-3fe8c7c7c836
-    InputNodeGuid: ebc3bc81-0c62-485a-90c0-795b6d9ce445
+    OutputNodeGuid: 20623209-f53e-4324-bdbe-33812acc206b
+    InputNodeGuid: 032df068-dcb4-4f69-878e-380b02b9183f
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: 'I''ll just break all of your machines '
     InputPortName: 
-    OutputNodeGuid: ebc3bc81-0c62-485a-90c0-795b6d9ce445
-    InputNodeGuid: 78f39813-a3a5-4fb8-8184-122e0dda4e21
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 78f39813-a3a5-4fb8-8184-122e0dda4e21
-    InputNodeGuid: 1acca0dd-b2b1-4c77-80b9-21678611c117
+    OutputNodeGuid: 20623209-f53e-4324-bdbe-33812acc206b
+    InputNodeGuid: 4946e484-7b87-47f4-adbd-c066b649eb8e
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 1acca0dd-b2b1-4c77-80b9-21678611c117
-    InputNodeGuid: 3c0409c9-2398-4205-a9ad-3dd64e5745da
+    OutputNodeGuid: 032df068-dcb4-4f69-878e-380b02b9183f
+    InputNodeGuid: 97f9b5f9-2b88-4093-aa48-98f2720e98f4
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 3c0409c9-2398-4205-a9ad-3dd64e5745da
-    InputNodeGuid: 6d31f32a-ef96-41df-a646-3e760ffcabe6
+    OutputNodeGuid: 4946e484-7b87-47f4-adbd-c066b649eb8e
+    InputNodeGuid: 84ba5c41-04d5-4b6c-b900-049642c49a7a
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 6d31f32a-ef96-41df-a646-3e760ffcabe6
-    InputNodeGuid: f2119eb6-dbe9-42d1-8b78-d3563b7c0632
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: f2119eb6-dbe9-42d1-8b78-d3563b7c0632
+    OutputNodeGuid: 789e76a3-f897-43ff-8276-8061edcebe5d
     InputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 84ba5c41-04d5-4b6c-b900-049642c49a7a
+    InputNodeGuid: 789e76a3-f897-43ff-8276-8061edcebe5d
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 97f9b5f9-2b88-4093-aa48-98f2720e98f4
+    InputNodeGuid: a4b12460-7096-40be-a735-e3a681795acf
+  - OutportPortChoiceIndex: 0
+    OutputPortName: And you're just a spoiled kid
+    InputPortName: 
+    OutputNodeGuid: 9d821ef6-1a90-46ad-9cf1-bbc8e02b6403
+    InputNodeGuid: 80298b01-278d-4ffb-9755-1a4b6d488b93
+  - OutportPortChoiceIndex: 0
+    OutputPortName: How can I get you to comply?
+    InputPortName: 
+    OutputNodeGuid: 9d821ef6-1a90-46ad-9cf1-bbc8e02b6403
+    InputNodeGuid: c83fea6d-c445-444a-9d59-e65744fb3a36
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 80298b01-278d-4ffb-9755-1a4b6d488b93
+    InputNodeGuid: 130166dd-54dc-486f-bdb1-045680edd65c
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 130166dd-54dc-486f-bdb1-045680edd65c
+    InputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: c83fea6d-c445-444a-9d59-e65744fb3a36
+    InputNodeGuid: 97f9b5f9-2b88-4093-aa48-98f2720e98f4
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: f3f2f34d-f7b7-45d0-9f65-376ce15d8ef9
+    InputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Why not?
+    InputPortName: 
+    OutputNodeGuid: 77f3323d-19b1-45ac-a47a-90d134abc3e9
+    InputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 'I''m a cop you have to '
+    InputPortName: 
+    OutputNodeGuid: 77f3323d-19b1-45ac-a47a-90d134abc3e9
+    InputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
+  - OutportPortChoiceIndex: 0
+    OutputPortName: My boss told me to come to you
+    InputPortName: 
+    OutputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
+    InputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I lost it on the way here
+    InputPortName: 
+    OutputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
+    InputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+    InputNodeGuid: aa68e2a1-0c16-4a67-9d5c-b983548a9839
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: c4514295-e0eb-4055-a5a4-a8b2eea3b1d0
+    InputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: a4b12460-7096-40be-a735-e3a681795acf
+    InputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
+    InputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
+  - OutportPortChoiceIndex: 0
+    OutputPortName: OK
+    InputPortName: 
+    OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
+    InputNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Why don't you just do it yourself?
+    InputPortName: 
+    OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
+    InputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
+    InputNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Sure, ok
+    InputPortName: 
+    OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+    InputNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+  - OutportPortChoiceIndex: 0
+    OutputPortName: If you're dyslexic, how are you writing a wiki?
+    InputPortName: 
+    OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+    InputNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
+    InputNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: aa68e2a1-0c16-4a67-9d5c-b983548a9839
+    InputNodeGuid: c4514295-e0eb-4055-a5a4-a8b2eea3b1d0
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: b38d7b31-a82d-4327-b380-11a822ac8c12
+    InputNodeGuid: 9107c10f-7d97-4f12-a0e7-02f76fed5f36
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: a0d6bc50-6b7f-4e10-9183-a4c73e328a9a
+    InputNodeGuid: a7bbd35d-71cd-40ed-98d2-b56c2ae4b442
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: a7bbd35d-71cd-40ed-98d2-b56c2ae4b442
+    InputNodeGuid: 6751fd6a-891b-41c2-a42d-92b6f2862250
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 9107c10f-7d97-4f12-a0e7-02f76fed5f36
+    InputNodeGuid: a0d6bc50-6b7f-4e10-9183-a4c73e328a9a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 41118508-181f-4138-9416-470279d89848
+    InputNodeGuid: 8a294586-55b8-4ccb-a8ae-154c1620fa20
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 8a294586-55b8-4ccb-a8ae-154c1620fa20
+    InputNodeGuid: a834b9a4-128d-44d5-b905-82eddefd4c10
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: d2be895d-5ed6-4942-8fdd-544176e78983
+    InputNodeGuid: 4b267a0b-717a-4b3b-bdcd-86975651b813
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 4b267a0b-717a-4b3b-bdcd-86975651b813
+    InputNodeGuid: ce44a4b5-f837-4e15-b747-fc47b832aa4a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: ce44a4b5-f837-4e15-b747-fc47b832aa4a
+    InputNodeGuid: cf956748-8100-4c43-9d5d-56b29aa18d2b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: cf956748-8100-4c43-9d5d-56b29aa18d2b
+    InputNodeGuid: 6b967f79-d9aa-46a1-9feb-caadc01b4289
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 6b967f79-d9aa-46a1-9feb-caadc01b4289
+    InputNodeGuid: c439fca4-4fad-4ee6-b53e-a5795b888bfb
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: c439fca4-4fad-4ee6-b53e-a5795b888bfb
+    InputNodeGuid: 4bd171ea-7e87-4a1b-815c-d32e5f5a42b5
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 4bd171ea-7e87-4a1b-815c-d32e5f5a42b5
+    InputNodeGuid: 09475b96-709d-480a-b708-950ea825249d
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 09475b96-709d-480a-b708-950ea825249d
+    InputNodeGuid: 39f584aa-bec2-4d50-a740-827878b948b6
   dialogueNodeData:
   - nodeName: 
     guid: d07249cc-6fe0-4eff-8cf4-c0e6b04d850e
@@ -422,172 +482,7 @@ MonoBehaviour:
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: b1f27883-4319-45af-925d-fd101d42ca5a
-  - nodeName: 
-    guid: b1f27883-4319-45af-925d-fd101d42ca5a
-    position: {x: 767, y: -107}
-    dialogueText: ha
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
       nextNodeGuid: b38d7b31-a82d-4327-b380-11a822ac8c12
-  - nodeName: 
-    guid: b38d7b31-a82d-4327-b380-11a822ac8c12
-    position: {x: 1176, y: -108}
-    dialogueText: ha
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 5a1a4237-4beb-4119-9dc6-a6df3f935452
-  - nodeName: 
-    guid: 5a1a4237-4beb-4119-9dc6-a6df3f935452
-    position: {x: 1587, y: -109}
-    dialogueText: ha
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 9107c10f-7d97-4f12-a0e7-02f76fed5f36
-  - nodeName: 
-    guid: 9107c10f-7d97-4f12-a0e7-02f76fed5f36
-    position: {x: 2002, y: -110}
-    dialogueText: Tell me... Ya like jazz?
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: a0d6bc50-6b7f-4e10-9183-a4c73e328a9a
-  - nodeName: 
-    guid: a0d6bc50-6b7f-4e10-9183-a4c73e328a9a
-    position: {x: 2416, y: -109}
-    dialogueText: Ok this isn't funny anymore.
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: a7bbd35d-71cd-40ed-98d2-b56c2ae4b442
-  - nodeName: 
-    guid: a7bbd35d-71cd-40ed-98d2-b56c2ae4b442
-    position: {x: 2753, y: -107}
-    dialogueText: No, indeed it is not!!
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 6751fd6a-891b-41c2-a42d-92b6f2862250
-  - nodeName: 
-    guid: 817f8c98-497e-497a-abeb-d5be44dfe416
-    position: {x: 3202, y: -369}
-    dialogueText: You absolute buffoon.
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: Can I please just ask you some questions?
-      nextNodeGuid: e1f83137-c145-4b70-9ba6-e8d130905cfa
-    - text: I understand my mistake but there's a murderer out there.
-      nextNodeGuid: e1f83137-c145-4b70-9ba6-e8d130905cfa
-    - text: If you care about your safety you'll help me.
-      nextNodeGuid: e1f83137-c145-4b70-9ba6-e8d130905cfa
-  - nodeName: 
-    guid: e1f83137-c145-4b70-9ba6-e8d130905cfa
-    position: {x: 3635, y: -341}
-    dialogueText: None of the answers you choose will save you.
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 82316932-2547-4728-84a8-2c73dd7564bd
-  - nodeName: 
-    guid: 82316932-2547-4728-84a8-2c73dd7564bd
-    position: {x: 4047, y: -351}
-    dialogueText: I know all about your little investigation and I don't need help
-      from a lousy bastard like you. Your job is to protect people but you only run
-      around chasing your own tail.
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 2b1cc7a0-86af-470b-afb7-c4d39687af34
-  - nodeName: 
-    guid: 2b1cc7a0-86af-470b-afb7-c4d39687af34
-    position: {x: 4451, y: -350}
-    dialogueText: 'I''ll give you a fetch quest to entertain myself so I don''t have
-      to get up from my lazy ass. '
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
-  - nodeName: 
-    guid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
-    position: {x: 4859, y: -351}
-    dialogueText: 'One of my favorite passtime activities is writing GrigorPedia
-      articles. I''m currently working on the <b>AI COLA<b> one. '
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
-  - nodeName: 
-    guid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
-    position: {x: 5266, y: -364}
-    dialogueText: If you buy me one and present the list of ingredients on the back
-      of it to me, I'll give you some juicy footage which will instantly lead to
-      a "case closed" scenario.
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: OK
-      nextNodeGuid: 075846fc-cb28-4b5e-a7d2-66ecf9514339
-    - text: Why don't you just do it yourself?
-      nextNodeGuid: 3288a9e0-3390-4fec-8145-baeb301d632d
-  - nodeName: 
-    guid: 075846fc-cb28-4b5e-a7d2-66ecf9514339
-    position: {x: 5668, y: -407}
-    dialogueText: OK
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
-  - nodeName: 
-    guid: 3288a9e0-3390-4fec-8145-baeb301d632d
-    position: {x: 5670, y: -287}
-    dialogueText: Why don't you just do it yourself?
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
-  - nodeName: 
-    guid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
-    position: {x: 6000, y: -422}
-    dialogueText: I'm doing this out of the goodness of my cold cold heart for you.
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
-  - nodeName: 
-    guid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
-    position: {x: 6002, y: -277}
-    dialogueText: 'I''m dyslexic. All that text is too much of a hassle. '
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
-  - nodeName: 
-    guid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
-    position: {x: 6439, y: -339}
-    dialogueText: Begone now, dummy!
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 
   - nodeName: 
     guid: 8bca76ad-0125-481d-8a22-a2d552d671a2
     position: {x: 424, y: 89}
@@ -634,20 +529,11 @@ MonoBehaviour:
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 94339c20-76a1-4b02-8492-1f9dfb139d84
-  - nodeName: 
-    guid: 94339c20-76a1-4b02-8492-1f9dfb139d84
-    position: {x: 2799, y: 87}
-    dialogueText: Anyone you share these things with can do that.
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
       nextNodeGuid: 54680a1a-b866-4ad8-ab50-4f5164e84dab
   - nodeName: 
     guid: 3e261c7c-5991-447a-a03f-a4e076e4bf09
     position: {x: 1564, y: 86}
-    dialogueText: <i>I<i> did NOTHING. It was all YOU!
+    dialogueText: <i>I</i> did NOTHING. It was all YOU!
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 0
     choices:
@@ -670,7 +556,7 @@ MonoBehaviour:
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: c1cbfb93-afc1-4a95-ace7-ae1e6b4ee6de
+      nextNodeGuid: f3f2f34d-f7b7-45d0-9f65-376ce15d8ef9
   - nodeName: 
     guid: 848dc6d0-b3b7-4728-ae92-333c58c5acbb
     position: {x: 462, y: 276}
@@ -681,47 +567,8 @@ MonoBehaviour:
     - text: 1
       nextNodeGuid: 15f2266d-f459-4bcc-aab9-64b7a1f67437
   - nodeName: 
-    guid: c1cbfb93-afc1-4a95-ace7-ae1e6b4ee6de
-    position: {x: 1627, y: 276}
-    dialogueText: I am a GOD lurking in the shadows while Kanye distracts you in
-      the spotlight.
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
-  - nodeName: 
-    guid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
-    position: {x: 2045, y: 329}
-    dialogueText: So, officer... How can I (not) help you today?
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: There has been a murder
-      nextNodeGuid: a3a3ca33-0942-4117-825b-e32fc3a402ef
-    - text: I heard you have security footage
-      nextNodeGuid: 80d54bbd-266d-4c55-a9cd-a0271cbd1578
-  - nodeName: 
-    guid: a3a3ca33-0942-4117-825b-e32fc3a402ef
-    position: {x: 2515, y: 274}
-    dialogueText: There has been a murder.
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
-  - nodeName: 
-    guid: 80d54bbd-266d-4c55-a9cd-a0271cbd1578
-    position: {x: 2484, y: 411}
-    dialogueText: I heard you have some security footage that could help my investigation.
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 46c22fa7-a368-4e0a-88be-b4905b1bf014
-  - nodeName: 
     guid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
-    position: {x: 2865, y: 272}
+    position: {x: 2498, y: 287}
     dialogueText: Amuse me with something I don't know
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 0
@@ -729,8 +576,28 @@ MonoBehaviour:
     - text: 1
       nextNodeGuid: afc9e05a-a1d6-4ac6-8051-ae36e75f6707
   - nodeName: 
+    guid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
+    position: {x: 2045, y: 299}
+    dialogueText: So, officer... How can I (not) help you today?
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: There has been a murder
+      nextNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
+    - text: I heard you have security footage
+      nextNodeGuid: 46c22fa7-a368-4e0a-88be-b4905b1bf014
+  - nodeName: 
+    guid: 46c22fa7-a368-4e0a-88be-b4905b1bf014
+    position: {x: 2500, y: 423}
+    dialogueText: I do.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: c77c8dcb-3d36-4365-8b02-dcefd20a1d6e
+  - nodeName: 
     guid: afc9e05a-a1d6-4ac6-8051-ae36e75f6707
-    position: {x: 3293, y: 272}
+    position: {x: 2933, y: 268}
     dialogueText: 'If you knew about it, then why didn''t you contact the police? '
     speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
     nodeType: 0
@@ -739,7 +606,7 @@ MonoBehaviour:
       nextNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
   - nodeName: 
     guid: a77ea54e-3ee5-46c0-80e9-17caf759e897
-    position: {x: 3626, y: 276}
+    position: {x: 3273, y: 277}
     dialogueText: I like live true crime.
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 0
@@ -747,98 +614,390 @@ MonoBehaviour:
     - text: 1
       nextNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
   - nodeName: 
-    guid: 46c22fa7-a368-4e0a-88be-b4905b1bf014
-    position: {x: 2819, y: 413}
-    dialogueText: I do.
-    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: c77c8dcb-3d36-4365-8b02-dcefd20a1d6e
-  - nodeName: 
     guid: c77c8dcb-3d36-4365-8b02-dcefd20a1d6e
-    position: {x: 3224, y: 415}
+    position: {x: 2911, y: 423}
     dialogueText: Can I see?
     speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 34be37c2-56de-46ee-b5ea-586fef970ad2
+      nextNodeGuid: 77f3323d-19b1-45ac-a47a-90d134abc3e9
   - nodeName: 
-    guid: 7095c1f9-2013-45bf-b326-3fe8c7c7c836
-    position: {x: 3970, y: 403}
-    dialogueText: This is ridiculous. I don't have time for this.
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: ebc3bc81-0c62-485a-90c0-795b6d9ce445
-  - nodeName: 
-    guid: 34be37c2-56de-46ee-b5ea-586fef970ad2
-    position: {x: 3555, y: 458}
-    dialogueText: Only if you do something for me first.
+    guid: 817f8c98-497e-497a-abeb-d5be44dfe416
+    position: {x: 3207, y: -365}
+    dialogueText: You absolute buffoon.
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 0
     choices:
-    - text: I don't have time for this
-      nextNodeGuid: 7095c1f9-2013-45bf-b326-3fe8c7c7c836
-    - text: What would you like me to do?
-      nextNodeGuid: f2119eb6-dbe9-42d1-8b78-d3563b7c0632
+    - text: Can I please just ask you some questions?
+      nextNodeGuid: 9d821ef6-1a90-46ad-9cf1-bbc8e02b6403
+    - text: If you care about your safety you'll help me.
+      nextNodeGuid: 20623209-f53e-4324-bdbe-33812acc206b
   - nodeName: 
-    guid: f2119eb6-dbe9-42d1-8b78-d3563b7c0632
-    position: {x: 3964, y: 545}
-    dialogueText: What would you like me to do?
+    guid: 20623209-f53e-4324-bdbe-33812acc206b
+    position: {x: 3628, y: -369}
+    dialogueText: Oh yeah? And how is my safety on the line?
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: There's a killer on the loose
+      nextNodeGuid: 032df068-dcb4-4f69-878e-380b02b9183f
+    - text: 'I''ll just break all of your machines '
+      nextNodeGuid: 4946e484-7b87-47f4-adbd-c066b649eb8e
+  - nodeName: 
+    guid: 032df068-dcb4-4f69-878e-380b02b9183f
+    position: {x: 4059, y: -400}
+    dialogueText: Well, maybe I have a bunker.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 97f9b5f9-2b88-4093-aa48-98f2720e98f4
+  - nodeName: 
+    guid: 4946e484-7b87-47f4-adbd-c066b649eb8e
+    position: {x: 4062, y: -270}
+    dialogueText: OK OK I'll help just please don't touch my stuff!
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 84ba5c41-04d5-4b6c-b900-049642c49a7a
+  - nodeName: 
+    guid: 789e76a3-f897-43ff-8276-8061edcebe5d
+    position: {x: 4941, y: -276}
+    dialogueText: Fine.
     speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
     nodeType: 0
     choices:
     - text: 1
       nextNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
   - nodeName: 
-    guid: 1acca0dd-b2b1-4c77-80b9-21678611c117
-    position: {x: 5047, y: 406}
-    dialogueText: All in good time.
+    guid: 84ba5c41-04d5-4b6c-b900-049642c49a7a
+    position: {x: 4489, y: -271}
+    dialogueText: BUT! Only if you do something for me first.
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 3c0409c9-2398-4205-a9ad-3dd64e5745da
+      nextNodeGuid: 789e76a3-f897-43ff-8276-8061edcebe5d
   - nodeName: 
-    guid: 3c0409c9-2398-4205-a9ad-3dd64e5745da
-    position: {x: 5462, y: 402}
-    dialogueText: You're sick.
+    guid: 97f9b5f9-2b88-4093-aa48-98f2720e98f4
+    position: {x: 4459, y: -409}
+    dialogueText: ...OK fine I'll help you. But only if I get something out of it
+      too!
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a4b12460-7096-40be-a735-e3a681795acf
+  - nodeName: 
+    guid: 9d821ef6-1a90-46ad-9cf1-bbc8e02b6403
+    position: {x: 3636, y: -537}
+    dialogueText: Lol no. You're a big dummy.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: And you're just a spoiled kid
+      nextNodeGuid: 80298b01-278d-4ffb-9755-1a4b6d488b93
+    - text: How can I get you to comply?
+      nextNodeGuid: c83fea6d-c445-444a-9d59-e65744fb3a36
+  - nodeName: 
+    guid: 80298b01-278d-4ffb-9755-1a4b6d488b93
+    position: {x: 4065, y: -535}
+    dialogueText: You do something for me, I do something for you.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 130166dd-54dc-486f-bdb1-045680edd65c
+  - nodeName: 
+    guid: 130166dd-54dc-486f-bdb1-045680edd65c
+    position: {x: 4477, y: -536}
+    dialogueText: Alright, I'm listening.
     speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 6d31f32a-ef96-41df-a646-3e760ffcabe6
+      nextNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
   - nodeName: 
-    guid: ebc3bc81-0c62-485a-90c0-795b6d9ce445
-    position: {x: 4289, y: 396}
-    dialogueText: Yes, you do. Trust me, your little criminal is by no means an immediate
-      threat to society?
+    guid: c83fea6d-c445-444a-9d59-e65744fb3a36
+    position: {x: 4067, y: -668}
+    dialogueText: And I take pride in it!
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 78f39813-a3a5-4fb8-8184-122e0dda4e21
+      nextNodeGuid: 97f9b5f9-2b88-4093-aa48-98f2720e98f4
   - nodeName: 
-    guid: 78f39813-a3a5-4fb8-8184-122e0dda4e21
-    position: {x: 4693, y: 401}
-    dialogueText: You know the identity of the murderer???
+    guid: f3f2f34d-f7b7-45d0-9f65-376ce15d8ef9
+    position: {x: 1620, y: 288}
+    dialogueText: I see all and know all.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
+  - nodeName: 
+    guid: 77f3323d-19b1-45ac-a47a-90d134abc3e9
+    position: {x: 3251, y: 421}
+    dialogueText: Nope.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: Why not?
+      nextNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
+    - text: 'I''m a cop you have to '
+      nextNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
+  - nodeName: 
+    guid: a25a18cb-bb57-4578-b92e-933505ea9201
+    position: {x: 3669, y: 420}
+    dialogueText: 'You don''t have a warrant. '
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: My boss told me to come to you
+      nextNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+    - text: I lost it on the way here
+      nextNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+  - nodeName: 
+    guid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+    position: {x: 4080, y: 426}
+    dialogueText: Do I look like I care?
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: aa68e2a1-0c16-4a67-9d5c-b983548a9839
+  - nodeName: 
+    guid: c4514295-e0eb-4055-a5a4-a8b2eea3b1d0
+    position: {x: 4899, y: 427}
+    dialogueText: Ok what do you want me to do?
     speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 1acca0dd-b2b1-4c77-80b9-21678611c117
+      nextNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
   - nodeName: 
-    guid: 6d31f32a-ef96-41df-a646-3e760ffcabe6
-    position: {x: 5808, y: 399}
-    dialogueText: Thanks;)
+    guid: a4b12460-7096-40be-a735-e3a681795acf
+    position: {x: 4862, y: -403}
+    dialogueText: Fine, what do you want?
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
+  - nodeName: 
+    guid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
+    position: {x: 5441, y: -353}
+    dialogueText: 'One of my favorite passtime activities is writing GrigorPedia
+      articles. I''m currently working on the <b>AI COLA</b> one. '
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: f2119eb6-dbe9-42d1-8b78-d3563b7c0632
+      nextNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
+  - nodeName: 
+    guid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
+    position: {x: 5843, y: -354}
+    dialogueText: If you present me the list of ingredients on the back of it, I'll
+      give you some juicy footage which will instantly lead to a "case closed" scenario.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: OK
+      nextNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
+    - text: Why don't you just do it yourself?
+      nextNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+  - nodeName: 
+    guid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
+    position: {x: 6254, y: -420}
+    dialogueText: Pleasure doing business.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+  - nodeName: 
+    guid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+    position: {x: 6256, y: -275}
+    dialogueText: 'I''m dyslexic. All that text is too much of a hassle. '
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: Sure, ok
+      nextNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+    - text: If you're dyslexic, how are you writing a wiki?
+      nextNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
+  - nodeName: 
+    guid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+    position: {x: 7193, y: -412}
+    dialogueText: ~HEY, ROOKIE! IT'S THE END OF YOUR SHIFT!~
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
+    position: {x: 6713, y: -239}
+    dialogueText: Voice-to-text.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+  - nodeName: 
+    guid: aa68e2a1-0c16-4a67-9d5c-b983548a9839
+    position: {x: 4482, y: 427}
+    dialogueText: I operate on trade offer only.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: c4514295-e0eb-4055-a5a4-a8b2eea3b1d0
+  - nodeName: 
+    guid: b38d7b31-a82d-4327-b380-11a822ac8c12
+    position: {x: 804, y: -106}
+    dialogueText: ha. ha. ha.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 9107c10f-7d97-4f12-a0e7-02f76fed5f36
+  - nodeName: 
+    guid: a0d6bc50-6b7f-4e10-9183-a4c73e328a9a
+    position: {x: 1638, y: -103}
+    dialogueText: Ok this isn't funny anymore.
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a7bbd35d-71cd-40ed-98d2-b56c2ae4b442
+  - nodeName: 
+    guid: a7bbd35d-71cd-40ed-98d2-b56c2ae4b442
+    position: {x: 1975, y: -101}
+    dialogueText: No, indeed it is not!!
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 6751fd6a-891b-41c2-a42d-92b6f2862250
+  - nodeName: 
+    guid: 9107c10f-7d97-4f12-a0e7-02f76fed5f36
+    position: {x: 1217, y: -107}
+    dialogueText: Tell me... Ya like jazz?
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a0d6bc50-6b7f-4e10-9183-a4c73e328a9a
+  - nodeName: 
+    guid: d2be895d-5ed6-4942-8fdd-544176e78983
+    position: {x: 21, y: 692}
+    dialogueText: Do you have what I asked for?
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 4b267a0b-717a-4b3b-bdcd-86975651b813
+  - nodeName: 
+    guid: 41118508-181f-4138-9416-470279d89848
+    position: {x: 23, y: 1094}
+    dialogueText: Did you get the <b>AI COLA</b>?
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 8a294586-55b8-4ccb-a8ae-154c1620fa20
+  - nodeName: 
+    guid: 8a294586-55b8-4ccb-a8ae-154c1620fa20
+    position: {x: 432, y: 1093}
+    dialogueText: No.
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a834b9a4-128d-44d5-b905-82eddefd4c10
+  - nodeName: 
+    guid: a834b9a4-128d-44d5-b905-82eddefd4c10
+    position: {x: 771, y: 1094}
+    dialogueText: Then what are you doing here?
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
+  - nodeName: 
+    guid: 4b267a0b-717a-4b3b-bdcd-86975651b813
+    position: {x: 440, y: 692}
+    dialogueText: Yes, here you go.
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: ce44a4b5-f837-4e15-b747-fc47b832aa4a
+  - nodeName: 
+    guid: ce44a4b5-f837-4e15-b747-fc47b832aa4a
+    position: {x: 771, y: 691}
+    dialogueText: (You give him the <b>AI COLA</b> can and a list of ingredients)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: cf956748-8100-4c43-9d5d-56b29aa18d2b
+  - nodeName: 
+    guid: cf956748-8100-4c43-9d5d-56b29aa18d2b
+    position: {x: 1093, y: 691}
+    dialogueText: 'Alright, seems legit. '
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 6b967f79-d9aa-46a1-9feb-caadc01b4289
+  - nodeName: 
+    guid: 6b967f79-d9aa-46a1-9feb-caadc01b4289
+    position: {x: 1501, y: 691}
+    dialogueText: Here's the security footage you want.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: c439fca4-4fad-4ee6-b53e-a5795b888bfb
+  - nodeName: 
+    guid: c439fca4-4fad-4ee6-b53e-a5795b888bfb
+    position: {x: 1900, y: 690}
+    dialogueText: (The surveillance cameras show the criminal in big <b>HEADPHONES</b>
+      carrying a bag of <b>CAT FOOD</b>)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 4bd171ea-7e87-4a1b-815c-d32e5f5a42b5
+  - nodeName: 
+    guid: 4bd171ea-7e87-4a1b-815c-d32e5f5a42b5
+    position: {x: 2227, y: 690}
+    dialogueText: Satisfied?
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 09475b96-709d-480a-b708-950ea825249d
+  - nodeName: 
+    guid: 09475b96-709d-480a-b708-950ea825249d
+    position: {x: 2635, y: 692}
+    dialogueText: Yeah. It was a displeasure doing business with you.
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 39f584aa-bec2-4d50-a740-827878b948b6
+  - nodeName: 
+    guid: 39f584aa-bec2-4d50-a740-827878b948b6
+    position: {x: 2967, y: 693}
+    dialogueText: Likewise.
+    speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
   exposedProperties: []
   commentBlockData:
   - ChildNodes: []
@@ -853,3 +1012,15 @@ MonoBehaviour:
   - ChildNodes: []
     Position: {x: -199.23453, y: 106.46124}
     Title: BOTH GIVEN
+  - ChildNodes: []
+    Position: {x: -434.97006, y: 9.12526}
+    Title: DAY 1
+  - ChildNodes: []
+    Position: {x: -441.97952, y: 911.0702}
+    Title: DAY 2
+  - ChildNodes: []
+    Position: {x: -263.17767, y: 708.86005}
+    Title: YOU GOT SODA
+  - ChildNodes: []
+    Position: {x: -312.11008, y: 1108.255}
+    Title: YOU DON'T GOT SODA
