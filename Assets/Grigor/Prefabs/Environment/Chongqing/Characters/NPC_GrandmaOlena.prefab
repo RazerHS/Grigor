@@ -18,12 +18,12 @@ PrefabInstance:
         type: 3}
       propertyPath: characterData
       value: 
-      objectReference: {fileID: 11400000, guid: 3bb09286f7f62f041bfacdf12a476533,
+      objectReference: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f,
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: startNodeName
-      value: (You find the witness).
+      value: (You're pretty sure this is the grandma you're looking for)
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -43,7 +43,7 @@ PrefabInstance:
     - target: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: m_Name
-      value: NPC_Nanna
+      value: NPC_GrandmaOlena
       objectReference: {fileID: 0}
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -141,6 +141,8 @@ MonoBehaviour:
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
   interactionEnabled: 0
   clueToFind: {fileID: 11400000, guid: 12d453f811c333c45ba4d04faa8271a4, type: 2}
 --- !u!1001 &9050013210496466153

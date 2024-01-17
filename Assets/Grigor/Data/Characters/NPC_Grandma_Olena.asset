@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 352aaa2b8e4e4f9aab7594f461fbb441, type: 3}
-  m_Name: Clerk_Igor
+  m_Name: NPC_Grandma_Olena
   m_EditorClassIdentifier: 
-  assetName: NPC_Petshop_Lady
+  assetName: NPC_Grandma_Olena
   characterType: 2
   credentialWallet:
     credentialEntries: []
-  characterDialogue: {fileID: 11400000, guid: 204607ff70dc026479250787996efdd7, type: 2}
-  speakerColor: {r: 0.983321, g: 0.504717, b: 1, a: 0.79607844}
+  characterDialogue: {fileID: 11400000, guid: a36a633a1ad2599458afc03066a06f48, type: 2}
+  speakerColor: {r: 0.47958246, g: 0.1647059, b: 0.9254902, a: 0.92156863}
