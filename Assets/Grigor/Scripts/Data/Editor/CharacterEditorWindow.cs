@@ -1,4 +1,6 @@
-﻿using Grigor.Characters;
+﻿#if UNITY_EDITOR
+
+using Grigor.Characters;
 using Grigor.Data.Editor;
 using UnityEditor;
 
@@ -16,3 +18,5 @@ namespace RazerCore.Utils.Editor
         }
     }
 }
+
+#endif

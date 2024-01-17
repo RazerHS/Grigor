@@ -1,8 +1,10 @@
 ﻿using System;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
+using FMODUnity;
 using Grigor.Characters.Components;
 using Grigor.Data.Tasks;
+using Grigor.Gameplay.Audio;
 using Grigor.Gameplay.Time;
 using Grigor.Input;
 using RazerCore.Utils.Attributes;
@@ -37,10 +39,16 @@ namespace Grigor.Gameplay.Interacting.Components
         [SerializeField, ColoredBoxGroup("Tasks", false, true)] protected bool stopChainIfTaskNotStarted;
         [SerializeField, ColoredBoxGroup("Tasks"), ShowIf(nameof(stopChainIfTaskNotStarted))] protected TaskData taskToListenTo;
 
+        [SerializeField, ColoredBoxGroup("Audio", false, true)] protected bool playAudio;
+        [SerializeField, ColoredBoxGroup("Audio"), ShowIf(nameof(playAudio))] protected bool playAmbienceAudio;
+        [SerializeField, ColoredBoxGroup("Audio"), ShowIf(nameof(playAudio)), ValueDropdown("@GameConfig.Instance.GetAudioEvents()")] protected string interactAudio;
+        [SerializeField, ColoredBoxGroup("Audio"), ShowIf("@playAudio && playAmbienceAudio"), ValueDropdown("@GameConfig.Instance.GetAudioEvents()")] protected string ambienceAudio;
+
         [SerializeField, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactionEnabled;
         [ShowInInspector, ColoredBoxGroup("Debug", false, true), ReadOnly] private bool interactedWithInCurrentChain;
 
-        [Inject] private TimeManager baseTimeManager;
+        [Inject] private TimeManager timeManager;
+        [Inject] private AudioController audioController;
         [Inject] private PlayerInput playerInput;
 
         protected Interactable parentInteractable;
@@ -58,6 +66,10 @@ namespace Grigor.Gameplay.Interacting.Components
         public bool InteractedWithInCurrentChain => interactedWithInCurrentChain;
         public TaskData TaskToListenTo => taskToListenTo;
         public bool StopChainIfTaskNotStarted => stopChainIfTaskNotStarted;
+
+        // NOTE: necessary because DI does not support inheritance, so this is a workaround to not inject the same object twice into children
+        public TimeManager TimeManager => timeManager;
+        public AudioController AudioController => audioController;
 
         public event Action BeginInteractionEvent;
         public event Action EndInteractionEvent;
@@ -92,10 +104,15 @@ namespace Grigor.Gameplay.Interacting.Components
 
             if (hasTimeEffect)
             {
-                baseTimeManager.ChangedToDayEvent += OnChangedToDay;
-                baseTimeManager.ChangedToNightEvent += OnChangedToNight;
+                timeManager.ChangedToDayEvent += OnChangedToDay;
+                timeManager.ChangedToNightEvent += OnChangedToNight;
 
                 Log.Write($"Registering to time manager: {name}");
+            }
+
+            if (playAudio && playAmbienceAudio)
+            {
+                audioController.PlaySound3D(ambienceAudio, transform);
             }
 
             OnInitialized();
@@ -113,8 +130,8 @@ namespace Grigor.Gameplay.Interacting.Components
 
             if (hasTimeEffect)
             {
-                baseTimeManager.ChangedToDayEvent -= OnChangedToDay;
-                baseTimeManager.ChangedToNightEvent -= OnChangedToNight;
+                timeManager.ChangedToDayEvent -= OnChangedToDay;
+                timeManager.ChangedToNightEvent -= OnChangedToNight;
             }
 
             OnDisposed();
@@ -158,6 +175,11 @@ namespace Grigor.Gameplay.Interacting.Components
 
             EnableSkipInput();
 
+            if (playAudio)
+            {
+                audioController.PlaySound3D(interactAudio, transform);
+            }
+
             OnInteractEffect();
         }
 
@@ -167,7 +189,7 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             if (timePassesOnInteract)
             {
-                baseTimeManager.PassTime(minutesToPass, hoursToPass);
+                timeManager.PassTime(minutesToPass, hoursToPass);
             }
 
             if (parentInteractable.InRange)

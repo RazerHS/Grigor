@@ -100,6 +100,15 @@ namespace Grigor.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""02badf0d-e28d-41e3-b026-a474c338fc82"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -309,6 +318,28 @@ namespace Grigor.Input
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Catnip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b69e924-f9a5-45e0-b0fe-4c08a0970efe"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e943bf53-7efb-4360-931c-883604110715"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -904,6 +935,7 @@ namespace Grigor.Input
             m_Player_Phone = m_Player.FindAction("Phone", throwIfNotFound: true);
             m_Player_EndDay = m_Player.FindAction("EndDay", throwIfNotFound: true);
             m_Player_Catnip = m_Player.FindAction("Catnip", throwIfNotFound: true);
+            m_Player_Scroll = m_Player.FindAction("Scroll", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -985,6 +1017,7 @@ namespace Grigor.Input
         private readonly InputAction m_Player_Phone;
         private readonly InputAction m_Player_EndDay;
         private readonly InputAction m_Player_Catnip;
+        private readonly InputAction m_Player_Scroll;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -997,6 +1030,7 @@ namespace Grigor.Input
             public InputAction @Phone => m_Wrapper.m_Player_Phone;
             public InputAction @EndDay => m_Wrapper.m_Player_EndDay;
             public InputAction @Catnip => m_Wrapper.m_Player_Catnip;
+            public InputAction @Scroll => m_Wrapper.m_Player_Scroll;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1030,6 +1064,9 @@ namespace Grigor.Input
                 @Catnip.started += instance.OnCatnip;
                 @Catnip.performed += instance.OnCatnip;
                 @Catnip.canceled += instance.OnCatnip;
+                @Scroll.started += instance.OnScroll;
+                @Scroll.performed += instance.OnScroll;
+                @Scroll.canceled += instance.OnScroll;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1058,6 +1095,9 @@ namespace Grigor.Input
                 @Catnip.started -= instance.OnCatnip;
                 @Catnip.performed -= instance.OnCatnip;
                 @Catnip.canceled -= instance.OnCatnip;
+                @Scroll.started -= instance.OnScroll;
+                @Scroll.performed -= instance.OnScroll;
+                @Scroll.canceled -= instance.OnScroll;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1248,6 +1288,7 @@ namespace Grigor.Input
             void OnPhone(InputAction.CallbackContext context);
             void OnEndDay(InputAction.CallbackContext context);
             void OnCatnip(InputAction.CallbackContext context);
+            void OnScroll(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

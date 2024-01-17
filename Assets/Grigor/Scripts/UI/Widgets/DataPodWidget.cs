@@ -20,7 +20,6 @@ public class DataPodWidget : UIWidget, IClueListener
     [SerializeField] private Transform clueDisplayParent;
 
     [Inject] private ClueRegistry clueRegistry;
-    [Inject] private DataRegistry dataRegistry;
     [Inject] private UIManager uiManager;
 
     [ShowInInspector] private readonly Dictionary<CredentialType, CredentialUIDisplay> displayedCredentials = new();
@@ -56,7 +55,7 @@ public class DataPodWidget : UIWidget, IClueListener
 
     private void InsertCredentials()
     {
-        criminalCredentialWallet = dataRegistry.GetCriminalCredentials();
+        criminalCredentialWallet = DataStorage.Instance.GetCriminalCredentials();
 
         foreach (CredentialEntry credential in criminalCredentialWallet.CredentialEntries)
         {

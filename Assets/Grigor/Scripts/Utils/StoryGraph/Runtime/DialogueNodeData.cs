@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Grigor.Characters;
-using Grigor.Utils.StoryGraph.Editor.Nodes;
 using UnityEngine;
 
 namespace Grigor.Utils.StoryGraph.Runtime
