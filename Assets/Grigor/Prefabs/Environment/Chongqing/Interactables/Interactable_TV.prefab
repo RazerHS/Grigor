@@ -719,7 +719,10 @@ MonoBehaviour:
   bleepButtonOnColor: {r: 0, g: 0.76483583, b: 1, a: 1}
   bleepButtonOffColor: {r: 1, g: 0, b: 0, a: 1}
   bleepButtonIntensity: 20
-  videoToPlay: {fileID: 32900000, guid: 66427a30fd3c4bd4a98e000a6ca58df3, type: 3}
+  defaultVideo: {fileID: 32900000, guid: 66427a30fd3c4bd4a98e000a6ca58df3, type: 3}
+  switchVideosInsteadOfTurningOff: 1
+  videos:
+  - {fileID: 32900000, guid: 66427a30fd3c4bd4a98e000a6ca58df3, type: 3}
 --- !u!328 &3235111243860735490
 VideoPlayer:
   m_ObjectHideFlags: 0
