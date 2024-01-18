@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6499470698694440041}
   - component: {fileID: 732771311425796943}
   - component: {fileID: 6615233780805317055}
-  m_Layer: 0
+  - component: {fileID: 7330444716432026272}
+  m_Layer: 3
   m_Name: Prefab_LC_mHouse8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,3 +84,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7330444716432026272
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5944445498552307396}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6161186241036459957, guid: 85bfe0c847a05a143bbc587852da51f1, type: 3}
