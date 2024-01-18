@@ -30,8 +30,7 @@ namespace Grigor.Gameplay.Time
         public event Action<int, int> TimeChangedEvent;
         public event Action ChangedToDayEvent;
         public event Action ChangedToNightEvent;
-        public event Action DayStartedEvent;
-        public event Action DayEndedEvent;
+        public event Action NewDayEvent;
 
         private void Awake()
         {
@@ -107,6 +106,8 @@ namespace Grigor.Gameplay.Time
                 }
 
                 days++;
+
+                NewDayEvent?.Invoke();
 
                 hours -= 24;
 
@@ -246,8 +247,6 @@ namespace Grigor.Gameplay.Time
             canEndDay = true;
 
             SetTimeToDay();
-
-            DayStartedEvent?.Invoke();
         }
 
         public bool TryEndDay()
@@ -257,7 +256,7 @@ namespace Grigor.Gameplay.Time
                 return false;
             }
 
-            DayEndedEvent?.Invoke();
+            NewDayEvent?.Invoke();
 
             canEndDay = false;
 
