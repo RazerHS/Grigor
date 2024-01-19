@@ -291,6 +291,10 @@ MonoBehaviour:
   hoursToPass: 1
   stopChainIfTaskNotStarted: 0
   taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: 'Here''s a little tease. It happened at 19:58pm. '
@@ -318,6 +322,10 @@ MonoBehaviour:
   hoursToPass: 1
   stopChainIfTaskNotStarted: 0
   taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: 'I saw you giving your data away on the cameras. For some shortcut?  '
@@ -346,6 +354,10 @@ MonoBehaviour:
   hoursToPass: 1
   stopChainIfTaskNotStarted: 0
   taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
   startNodeName: ~SHIFT'S UP MAN, BACK TO THE STATION. STAT~.
@@ -373,5 +385,9 @@ MonoBehaviour:
   hoursToPass: 1
   stopChainIfTaskNotStarted: 0
   taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
   interactionEnabled: 0
-  clueToFind: {fileID: 11400000, guid: e6567abd359e0ea4697523f5df08add5, type: 2}
+  clueToFind: {fileID: 11400000, guid: 0fac35746fe942644b33daa2f8f548a0, type: 2}

@@ -143,8 +143,12 @@ MonoBehaviour:
   hoursToPass: 1
   stopChainIfTaskNotStarted: 0
   taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
   interactionEnabled: 0
-  clueToFind: {fileID: 11400000, guid: 12d453f811c333c45ba4d04faa8271a4, type: 2}
+  clueToFind: {fileID: 11400000, guid: b550a5de6af2c4d439987ef8b6e35524, type: 2}
 --- !u!1001 &9050013210496466153
 PrefabInstance:
   m_ObjectHideFlags: 0
