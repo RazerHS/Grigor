@@ -98,6 +98,8 @@ public class DataPodWidget : UIWidget, IClueListener
 
         clueUIDisplay.ClueDragStartedEvent += OnClueDetached;
 
+        credentialUIDisplay.SnapClueToHolder();
+
         CheckCurrentClueMatches();
     }
 
@@ -164,8 +166,6 @@ public class DataPodWidget : UIWidget, IClueListener
 
             credentialUIDisplay.DisableDrop();
             clueUIDisplay.DisableDrag();
-
-            credentialUIDisplay.SnapClueToHolder();
 
             Log.Write($"Clue {clueUIDisplay.ClueData.CredentialType.ToString()} locked in as correct!");
 

@@ -32,6 +32,8 @@ namespace Grigor.Gameplay.Interacting.Components
             }
 
             clueRegistry.RegisterClue(clueToFind);
+
+            FindClue();
         }
 
         protected override void OnInteractEffect()

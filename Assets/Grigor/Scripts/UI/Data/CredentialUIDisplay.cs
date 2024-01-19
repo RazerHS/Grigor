@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Grigor.UI.Data
 {
@@ -18,6 +19,7 @@ namespace Grigor.UI.Data
 
         private CredentialType credentialType;
         private bool ignoreFirstEndDrag = true;
+        private Color defaultColor;
 
         public CredentialType CredentialType => credentialType;
         public ClueUIDisplay AttachedClueUIDisplay => attachedClueUIDisplay;
@@ -28,6 +30,8 @@ namespace Grigor.UI.Data
         public void Initialize()
         {
             clueDroppable.OnDropEvent += OnDrop;
+
+            defaultColor = clueDroppable.GetComponent<Image>().color;
         }
 
         public void Dispose()
