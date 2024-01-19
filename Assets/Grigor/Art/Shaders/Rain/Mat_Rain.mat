@@ -91,7 +91,7 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DropSize: 0.19
-    - _DropSpeed: 0.1
+    - _DropSpeed: 0.22123018
     - _DropsNormalStrength: 1
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 1
@@ -107,7 +107,7 @@ Material:
     - _PuddleNormalStrength: 1.42
     - _PuddleSize: 0.057
     - _Rain: 0
-    - _RainStrength: 0
+    - _RainStrength: 0.03108466
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RenderQueueType: 4
@@ -117,7 +117,7 @@ Material:
     - _RippleSize: 0.32
     - _RippleSize1: 0.32
     - _RipplesIntensity: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.50621694
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 0
@@ -137,10 +137,10 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 1
     - _UseShadowThreshold: 0
-    - _Wetness: 0.94444466
+    - _Wetness: 1
     - _Wetness1: 1
-    - _WindSpeed: 4.4857354
-    - _WindStrength: 0.38730395
+    - _WindSpeed: 2.93115
+    - _WindStrength: 0.21457222
     - _WindTiling: 1
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4

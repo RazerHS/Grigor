@@ -1,4 +1,5 @@
-﻿using CardboardCore.Utilities;
+﻿using System.Collections.Generic;
+using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting.Components;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -20,19 +21,23 @@ namespace Grigor.Gameplay.World.Components
         [SerializeField, ColoredBoxGroup("TV Color and View", false, true)] private Color bleepButtonOnColor;
         [SerializeField, ColoredBoxGroup("TV Color and View")] private Color bleepButtonOffColor;
         [SerializeField, ColoredBoxGroup("TV Color and View"), Range(0f, 50f)] private float bleepButtonIntensity;
-        [SerializeField, ColoredBoxGroup("TV Color and View")] private VideoClip videoToPlay;
+        [SerializeField, ColoredBoxGroup("TV Color and View")] private VideoClip defaultVideo;
+
+        [SerializeField, ColoredBoxGroup("TV Control", false, true)] private bool switchVideosInsteadOfTurningOff;
+        [SerializeField, ColoredBoxGroup("TV Control"), ShowIf(nameof(switchVideosInsteadOfTurningOff))] private List<VideoClip> videos;
 
         [ShowInInspector, ColoredBoxGroup("Debug"), ReadOnly] private bool screenActive;
 
         private RenderTexture renderTexture;
         private Material screenMaterial;
         private Material bleepButtonMaterial;
+        private int currentVideoIndex;
 
         private static readonly int EmissiveColor = Shader.PropertyToID("_EmissiveColor");
 
         protected override void OnInitialized()
         {
-            if (videoToPlay == null)
+            if (defaultVideo == null && !switchVideosInsteadOfTurningOff)
             {
                 throw Log.Exception($"No video clip assigned to {name}!");
             }
@@ -48,13 +53,42 @@ namespace Grigor.Gameplay.World.Components
             bleepButtonRenderer.material = bleepButtonMaterial;
 
             videoPlayer.targetTexture = renderTexture;
-            videoPlayer.clip = videoToPlay;
+            videoPlayer.clip = defaultVideo;
 
             TurnScreenOff();
+
+            if (!switchVideosInsteadOfTurningOff)
+            {
+                return;
+            }
+
+            if (videos.Count == 0)
+            {
+                throw Log.Exception($"No videos assigned to {name}!");
+            }
+
+            videoPlayer.clip = videos[currentVideoIndex];
+
+            TurnScreenOn();
         }
 
         protected override void OnInteractEffect()
         {
+            if (switchVideosInsteadOfTurningOff)
+            {
+                videoPlayer.Stop();
+
+                currentVideoIndex = (currentVideoIndex + 1) % videos.Count;
+
+                videoPlayer.clip = videos[currentVideoIndex];
+
+                videoPlayer.Play();
+
+                EndInteract();
+
+                return;
+            }
+
             screenActive = !screenActive;
 
             if (screenActive)
