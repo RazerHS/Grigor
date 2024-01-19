@@ -2,8 +2,13 @@
 {
     public enum CredentialType
     {
-        Addiction,
-        Location,
-        Time
+        Age,
+        Name,
+        BachelorDegree,
+        PetColor,
+        BloodType,
+        MedicalCondition,
+        FavoriteDrink,
+        MusicTaste
     }
 }

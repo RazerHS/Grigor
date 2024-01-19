@@ -17,10 +17,20 @@ MonoBehaviour:
   credentialWallet:
     credentialEntries:
     - credentialType: 0
-      matchingClue: {fileID: 11400000, guid: 01821621952d70e498691b13acffa5ed, type: 2}
+      matchingClue: {fileID: 11400000, guid: 69990c11972080443ac583da55c7cc4a, type: 2}
     - credentialType: 1
-      matchingClue: {fileID: 11400000, guid: 12d453f811c333c45ba4d04faa8271a4, type: 2}
+      matchingClue: {fileID: 11400000, guid: c9f45a8e856dc5e4f828b110432f97ca, type: 2}
     - credentialType: 2
-      matchingClue: {fileID: 11400000, guid: a8465ed3ceb73e54093b2f7dadaa23bb, type: 2}
+      matchingClue: {fileID: 11400000, guid: 3ec2bb62e7a358d498e568ae93f13e79, type: 2}
+    - credentialType: 3
+      matchingClue: {fileID: 11400000, guid: 0b49229b775168a45a9d94c4e597dcc1, type: 2}
+    - credentialType: 4
+      matchingClue: {fileID: 11400000, guid: 06beb2adb55840946b3d742cfb8fbd0d, type: 2}
+    - credentialType: 5
+      matchingClue: {fileID: 11400000, guid: e6567abd359e0ea4697523f5df08add5, type: 2}
+    - credentialType: 6
+      matchingClue: {fileID: 11400000, guid: b0a367bc233600846b52258dbcb1cd8c, type: 2}
+    - credentialType: 7
+      matchingClue: {fileID: 11400000, guid: 4fc972f34fc938e4aa00dc1606c049b1, type: 2}
   characterDialogue: {fileID: 0}
   speakerColor: {r: 0.3207547, g: 0.0015129976, b: 0.0048811566, a: 0.8}

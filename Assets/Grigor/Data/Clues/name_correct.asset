@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: Addiction
+  m_Name: name_correct
   m_EditorClassIdentifier: 
-  assetName: Addiction
-  credentialType: 0
+  assetName: name_correct
+  credentialType: 1
+  appearsInDataPod: 1
+  typed: 1
   evidenceBoardNoteType: 0
-  clueHeading: Alcoholism
+  clueHeading: Sergey
   evidenceText: 
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}
