@@ -5,7 +5,7 @@
 			<value>hazy_v0.2.0</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{1586f8e7-f766-4a14-bfc9-009a0b2e86b9}</destination>
@@ -113,6 +113,7 @@
 	<object class="MixerBusEffectChain" id="{978bb4da-aba0-4c0b-a6a5-cab3b15bd520}">
 		<relationship name="effects">
 			<destination>{2fb571ae-7ff8-46fa-a931-280ca5e3a65a}</destination>
+			<destination>{801f5521-fa0f-424c-9c02-32e2e51267a1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{f957ac02-a503-4a36-bd86-7966eed2c782}" />
@@ -124,5 +125,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{4a93a166-a474-4168-9992-c5410bfb20e7}" />
 	<object class="MixerBusFader" id="{2fb571ae-7ff8-46fa-a931-280ca5e3a65a}" />
+	<object class="SpatialiserEffect" id="{801f5521-fa0f-424c-9c02-32e2e51267a1}" />
 	<object class="MixerBusFader" id="{6886cbf2-81ae-4aa3-9e5d-d2a0fd49baa8}" />
 </objects>

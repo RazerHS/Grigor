@@ -5,7 +5,7 @@
 			<value>Yours Truly - Heartsleeve [Custom Instrumental]</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{1586f8e7-f766-4a14-bfc9-009a0b2e86b9}</destination>
@@ -116,6 +116,7 @@
 	<object class="MixerBusEffectChain" id="{3306c355-ea3e-4cc5-808e-90f109e56ceb}">
 		<relationship name="effects">
 			<destination>{a20ebd0a-576b-43fb-bfab-91f440b7ce5a}</destination>
+			<destination>{fae35217-d9f3-4390-8d89-3e6e6f993e11}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1a0f4c34-3798-412d-9e5b-b193171ace02}" />
@@ -127,5 +128,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{1dd09a9e-3cab-4660-9e81-3ca551e0a4fa}" />
 	<object class="MixerBusFader" id="{a20ebd0a-576b-43fb-bfab-91f440b7ce5a}" />
+	<object class="SpatialiserEffect" id="{fae35217-d9f3-4390-8d89-3e6e6f993e11}" />
 	<object class="MixerBusFader" id="{c57a2a58-1a73-4055-b8da-d3e6302daef4}" />
 </objects>

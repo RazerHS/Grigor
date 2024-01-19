@@ -24,10 +24,6 @@ namespace Grigor.StateMachines.Gameplay.States
         {
             characterRegistry.Player.StartStateMachine();
 
-            dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
-            timeOfDayWidget = uiManager.ShowWidget<TimeOfDayWidget>();
-            messagePopupWidget = uiManager.ShowWidget<MessagePopupWidget>();
-
             interactablesRegistry.EnableInteractables();
             levelRegistry.DisableAllLevels();
 
@@ -37,6 +33,10 @@ namespace Grigor.StateMachines.Gameplay.States
             startLevel.EnableLevel();
 
             characterRegistry.Player.Movement.MovePlayerToPosition(startLevel.SpawnPoint.position);
+
+            dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
+            timeOfDayWidget = uiManager.ShowWidget<TimeOfDayWidget>();
+            messagePopupWidget = uiManager.ShowWidget<MessagePopupWidget>();
 
             owningStateMachine.ToNextState();
         }
