@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: 56be4310360bff34f8605c4aaa6449f3
+guid: 272e4b5e9abe1b547a3b5bf56ed5ba0e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: base
+    second: {fileID: 2100000, guid: b3a610c54c89484438686f576d057ea2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cells
+    second: {fileID: 2100000, guid: 2d748a1ddd1813749858cafeb51d9755, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal
+    second: {fileID: 2100000, guid: 1a30e681c1a81de47b9273cd40a7ece8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roofs
+    second: {fileID: 2100000, guid: c0db295329b4dae4799e4a810c0cbc50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: widnows
+    second: {fileID: 2100000, guid: fbd154fc559d11348ae54af238a21aaa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
