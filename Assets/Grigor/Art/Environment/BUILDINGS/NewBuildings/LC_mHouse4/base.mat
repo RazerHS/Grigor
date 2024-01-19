@@ -35,7 +35,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: 18e0d92b7c23914489c6ae67f05e6a94, type: 3}
+        m_Texture: {fileID: 2800000, guid: f8d9477b2f8ec434f870f588191ce8a1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
@@ -83,11 +83,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic:
-        m_Texture: {fileID: 2800000, guid: 14239ab144dbdf842b58bd12064ae7db, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4a04344ea3b5d2f4ca577be2e98c665b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 5b23e47ceac5eaa4a9a2081574e05e4a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 49afaee79bee68f4f9a2dae944302dc8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
@@ -295,7 +295,7 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &1489435862884543847
+--- !u!114 &3532137526894242709
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
