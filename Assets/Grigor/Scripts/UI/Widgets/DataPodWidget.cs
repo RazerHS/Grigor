@@ -82,13 +82,19 @@ public class DataPodWidget : UIWidget, IClueListener
         }
 
         CredentialUIDisplay credentialUIDisplay = Instantiate(credentialDisplayPrefab, credentialDisplayParent);
-        credentialUIDisplay.Initialize();
+        credentialUIDisplay.Initialize(criminalCredentialWallet);
         credentialUIDisplay.StoreCredentialType(credentialType);
         credentialUIDisplay.SetCredentialDisplay(credentialType.ToString(), false);
 
         displayedCredentials.Add(credentialType, credentialUIDisplay);
 
         credentialUIDisplay.CheckDroppedClueEvent += OnClueAttached;
+        credentialUIDisplay.CheckInputClueStringEvent += OnClueTyped;
+    }
+
+    private void OnClueTyped(CredentialUIDisplay credentialUIDisplay, string clueString)
+    {
+        CheckCurrentClueMatches();
     }
 
     private void OnClueAttached(CredentialUIDisplay credentialUIDisplay, ClueUIDisplay clueUIDisplay)
@@ -97,6 +103,8 @@ public class DataPodWidget : UIWidget, IClueListener
         clueUIDisplay.transform.SetParent(credentialUIDisplay.ClueHolderTransform);
 
         clueUIDisplay.ClueDragStartedEvent += OnClueDetached;
+
+        credentialUIDisplay.SnapClueToHolder();
 
         CheckCurrentClueMatches();
     }
@@ -118,6 +126,25 @@ public class DataPodWidget : UIWidget, IClueListener
 
         foreach (CredentialUIDisplay credentialUIDisplay in displayedCredentials.Values)
         {
+            if (credentialUIDisplay.Typed)
+            {
+                string clueString = criminalCredentialWallet.GetMatchingClue(credentialUIDisplay.CredentialType).ClueHeading;
+
+                if (credentialUIDisplay.ClueInput != clueString)
+                {
+                    continue;
+                }
+
+                if (correctMatches.ContainsKey(credentialUIDisplay))
+                {
+                    continue;
+                }
+
+                currentCorrectMatches.Add(credentialUIDisplay, null);
+
+                continue;
+            }
+
             ClueUIDisplay clueUIDisplay = credentialUIDisplay.AttachedClueUIDisplay;
 
             if (clueUIDisplay == null)
@@ -160,12 +187,21 @@ public class DataPodWidget : UIWidget, IClueListener
             CredentialUIDisplay credentialUIDisplay = keyValuePair.Key;
             ClueUIDisplay clueUIDisplay = keyValuePair.Value;
 
+            if (credentialUIDisplay.Typed)
+            {
+                matchedClues.Add(criminalCredentialWallet.GetMatchingClue(credentialUIDisplay.CredentialType));
+
+                correctMatches.Add(credentialUIDisplay, null);
+
+                credentialUIDisplay.SoftDisableInputField();
+
+                continue;
+            }
+
             matchedClues.Add(clueUIDisplay.ClueData);
 
             credentialUIDisplay.DisableDrop();
             clueUIDisplay.DisableDrag();
-
-            credentialUIDisplay.SnapClueToHolder();
 
             Log.Write($"Clue {clueUIDisplay.ClueData.CredentialType.ToString()} locked in as correct!");
 
@@ -177,6 +213,16 @@ public class DataPodWidget : UIWidget, IClueListener
 
     public void OnClueFound(ClueData clueData)
     {
+        if (!clueData.AppearsInDataPod)
+        {
+            return;
+        }
+
+        if (clueData.Typed)
+        {
+            return;
+        }
+
         ClueUIDisplay clueUIDisplay = Instantiate(clueDisplayPrefab, clueDisplayParent);
         clueUIDisplay.Initialize();
         clueUIDisplay.SetClueData(clueData);
