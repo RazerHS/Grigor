@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using CardboardCore.DI;
+using CardboardCore.Utilities;
 using Grigor.Data.Clues;
+using Grigor.Data.Credentials;
 using UnityEngine;
 
 namespace Grigor.Gameplay.Clues
@@ -74,12 +76,29 @@ namespace Grigor.Gameplay.Clues
             clueListeners.Remove(listener);
         }
 
-        public void RegisterMatchedClues(List<ClueData> matchesClues)
+        public void RegisterMatchedClues(List<ClueData> matchedClues)
         {
             foreach (IClueListener listener in clueListeners)
             {
-                listener.OnMatchedClues(matchesClues);
+                listener.OnMatchedClues(matchedClues);
             }
+        }
+
+        public ClueData GetClueDataFromCredential(CredentialType credentialType)
+        {
+            foreach (ClueData clueData in clues)
+            {
+                if (clueData.CredentialType != credentialType)
+                {
+                    continue;
+                }
+
+                return clueData;
+            }
+
+            Log.Error($"Clue with credential type {credentialType} not found!");
+
+            return null;
         }
     }
 }
