@@ -84,7 +84,7 @@ namespace Grigor.Gameplay.EvidenceBoard
             evidenceBoardStateMachine = new EvidenceBoardStateMachine(true);
             evidenceBoardStateMachine.Start();
 
-            // HideAllElementsOnBoard();
+            HideAllElementsOnBoard();
         }
 
         protected override void OnReleased()
