@@ -1,0 +1,232 @@
+﻿using System.Linq;
+using CardboardCore.Utilities;
+using Grigor.Characters;
+using Grigor.Utils.StoryGraph.Runtime;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace Grigor.Utils.StoryGraph.Editor.Graph
+{
+    public class StoryGraph : EditorWindow
+    {
+        private string fileName = "New Story Graph";
+
+        private StoryGraphView graphView;
+        private DialogueGraphData dialogueGraphData;
+        private CharacterData defaultSpeaker;
+
+        public CharacterData DefaultSpeaker => defaultSpeaker;
+
+        [MenuItem("Grigor/Story Graph")]
+        public static void CreateGraphViewWindow()
+        {
+            StoryGraph window = GetWindow<StoryGraph>();
+            window.titleContent = new GUIContent("Story Graph");
+        }
+
+        private void OnEnable()
+        {
+            ConstructGraphView();
+            GenerateToolbar();
+            GenerateMiniMap();
+            // GenerateBlackboard();
+
+            rootVisualElement.RegisterCallback<KeyDownEvent>(OnKeyDown);
+        }
+
+        private void OnDisable()
+        {
+            rootVisualElement.Remove(graphView);
+        }
+
+        private void ConstructGraphView()
+        {
+            graphView = new StoryGraphView(this)
+            {
+                name = "Story Graph",
+            };
+
+            graphView.StretchToParentSize();
+
+            graphView.SetDefaultSpeaker(defaultSpeaker);
+
+            rootVisualElement.Add(graphView);
+        }
+
+        private void GenerateToolbar()
+        {
+            Toolbar toolbar = new Toolbar();
+
+            TextField fileNameTextField = new TextField("");
+
+            fileNameTextField.SetValueWithoutNotify(fileName);
+            fileNameTextField.MarkDirtyRepaint();
+            fileNameTextField.RegisterValueChangedCallback(@event => fileName = @event.newValue);
+
+            Button saveButton = new Button(() => RequestDataOperation(DataOperationType.Save)) {text = "Save Data"};
+            Button loadButton = new Button(() => RequestDataOperation(DataOperationType.Load)) {text = "Load Data"};
+
+            toolbar.Add(saveButton);
+            toolbar.Add(loadButton);
+
+            loadButton.style.marginRight = 50;
+
+            ObjectField speaker = new ObjectField() { objectType = typeof(CharacterData), value = defaultSpeaker };
+            speaker.RegisterValueChangedCallback(@event =>
+            {
+                defaultSpeaker = @event.newValue as CharacterData;
+                graphView.SetDefaultSpeaker(defaultSpeaker);
+            });
+
+            speaker.style.marginRight = 50;
+
+            ObjectField dialogueAsset = new ObjectField() { objectType = typeof(DialogueGraphData), value = dialogueGraphData };
+            dialogueAsset.RegisterValueChangedCallback(@event =>
+            {
+                dialogueGraphData = @event.newValue as DialogueGraphData;
+
+                if (dialogueGraphData != null)
+                {
+                    RequestDataOperation(DataOperationType.Load);
+                }
+            });
+
+            TextField currentGraphTextField = new TextField() { value = "Current Graph -> ", isReadOnly = true };
+            TextField defaultSpeakerTextField = new TextField() { value = "Default Speaker -> ", isReadOnly = true };
+
+            currentGraphTextField.style.opacity = 0.5f;
+            defaultSpeakerTextField.style.opacity = 0.5f;
+
+            toolbar.Add(currentGraphTextField);
+            toolbar.Add(dialogueAsset);
+            toolbar.Add(defaultSpeakerTextField);
+            toolbar.Add(speaker);
+
+            Button createNewButton = new Button(() =>
+            {
+                if (dialogueGraphData != null)
+                {
+                    RequestDataOperation(DataOperationType.Save);
+                }
+
+                RequestDataOperation(DataOperationType.Create);
+
+                dialogueAsset.value = dialogueGraphData;
+            })
+            {
+                text = "Create New",
+            };
+
+            toolbar.Add(createNewButton);
+            toolbar.Add(fileNameTextField);
+
+            rootVisualElement.Add(toolbar);
+        }
+
+        private void RequestDataOperation(DataOperationType dataOperationType)
+        {
+            GraphSaveUtility saveUtility = GraphSaveUtility.GetInstance(graphView);
+
+            switch (dataOperationType)
+            {
+                case DataOperationType.Create:
+                    DialogueGraphData newDialogueGraphData = saveUtility.CreateNewGraphAsset(fileName);
+                    dialogueGraphData = newDialogueGraphData;
+                    break;
+
+                case DataOperationType.Save:
+                    saveUtility.SaveGraph(dialogueGraphData);
+                    break;
+
+                case DataOperationType.Load:
+                    saveUtility.LoadGraph(dialogueGraphData);
+                    break;
+
+                default:
+                    throw Log.Exception($"Data operation {dataOperationType} is not supported!");
+            }
+        }
+
+        private void GenerateMiniMap()
+        {
+            MiniMap miniMap = new MiniMap
+            {
+                anchored = true
+            };
+
+            miniMap.SetPosition(new Rect(10, 30, 200, 140));
+
+            graphView.Add(miniMap);
+        }
+
+        private void GenerateBlackboard()
+        {
+            Blackboard blackboard = new Blackboard(graphView);
+
+            blackboard.Add(new BlackboardSection {title = "Exposed Variables"});
+
+            blackboard.addItemRequested = blackboard =>
+            {
+                graphView.AddPropertyToBlackboard(ExposedProperty.CreateInstance(), false);
+            };
+
+            blackboard.editTextRequested = (blackboard, element, newValue) => {
+
+                BlackboardField property = (BlackboardField)element;
+
+                string oldPropertyName = property.text;
+
+                if (graphView.ExposedProperties.Any(exposedProperty => exposedProperty.PropertyName == newValue))
+                {
+                    EditorUtility.DisplayDialog("Error", "This property name already exists, please chose another one.", "OK");
+                    return;
+                }
+
+                int targetIndex = graphView.ExposedProperties.FindIndex(exposedProperty => exposedProperty.PropertyName == oldPropertyName);
+
+                graphView.ExposedProperties[targetIndex].PropertyName = newValue;
+                property.text = newValue;
+            };
+
+            blackboard.SetPosition(new Rect(10, 30, 200, 300));
+
+            graphView.Add(blackboard);
+            graphView.Blackboard = blackboard;
+        }
+
+        private void OnKeyDown(KeyDownEvent @event)
+        {
+            Vector2 worldPosition = Event.current.mousePosition;
+
+            Vector2 graphMousePosition = graphView.ConvertWorldPositionToLocalPosition(worldPosition);
+            Vector2 inputNodePosition = new Vector2(graphMousePosition.x - 15f, graphMousePosition.y - 54f);
+
+            switch (@event.keyCode)
+            {
+                case KeyCode.C:
+                {
+                    Rect rect = new Rect(graphMousePosition, graphView.DefaultCommentBlockSize);
+                    graphView.CreateCommentBlock(rect);
+                    break;
+                }
+                case KeyCode.Space:
+                    graphView.CreateNewDialogueNode(inputNodePosition);
+                    break;
+
+                case KeyCode.Tab:
+                    graphView.CreateNewDialogueNode(inputNodePosition);
+                    break;
+
+                case KeyCode.S:
+                    if (Event.current.control)
+                    {
+                        RequestDataOperation(DataOperationType.Save);
+                    }
+                    break;
+            }
+        }
+    }
+}
