@@ -4,32 +4,35 @@ using System.IO;
 using System.Linq;
 using CardboardCore.Utilities;
 using Grigor.Utils;
-using JetBrains.Annotations;
+using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
 namespace RazerCore.Utils.AssetImporter.Editor
 {
     public class AssetImporterEditorWindow : OdinEditorWindow
     {
-        [SerializeField] private List<Texture2D> textures;
-        [SerializeField] private List<Material> materials;
-        [SerializeField, ListDrawerSettings(DraggableItems = false)] private List<ShaderPropertySelector> propertySelector = new();
-        [SerializeField] private Shader shader;
-        [SerializeField, ValueDropdown(nameof(GetShaderPropertyList))] private string property;
-        [SerializeField] private Object model;
+        [SerializeField, HorizontalGroup("Selection", Width = 0.5f), ColoredBoxGroup("Selection/Selection", false, true), LabelWidth(60), InlineButton("@shader = null", SdfIconType.BootstrapReboot, "")] private Shader shader;
+        [SerializeField, HorizontalGroup("Selection"), ColoredBoxGroup("Selection/Selection"), LabelWidth(60), InlineButton(nameof(ResetModel), SdfIconType.BootstrapReboot, "")] private Object model;
+        [SerializeField, HorizontalGroup("Selection/Right"), ColoredBoxGroup("Selection/Right/Config", false, true), LabelWidth(220)] private bool automaticallyFindTexturesFolder = true;
+        [SerializeField, HorizontalGroup("Selection/Right"), ColoredBoxGroup("Selection/Right/Config", false, true), LabelWidth(220)] private bool showDebug;
+        // [SerializeField, HorizontalGroup("Selection/Right"), ColoredBoxGroup("Selection/Right/Config", false, true), LabelWidth(220)] private bool generatePrefab;
+        [SerializeField, HorizontalGroup("Selection"), ColoredBoxGroup("Selection/Selection"), HideIf(nameof(automaticallyFindTexturesFolder))] private Object texturesFolder;
 
-        [SerializeField] private List<ModelAssetData> modelAssetData;
+        [SerializeField, HorizontalGroup("Debug", Width = 0.5f), ListDrawerSettings(DraggableItems = false, ShowFoldout = false), ShowIf(nameof(showDebug)), ReadOnly] private List<Texture2D> textures;
+        [SerializeField, HorizontalGroup("Debug"), ListDrawerSettings(DraggableItems = false, ShowFoldout = false), ShowIf(nameof(showDebug)), ReadOnly] private List<Material> materials;
 
-        [Button("Revalidate Model", ButtonSizes.Large)]
-        public void ValidateModel()
+        [SerializeField, HorizontalGroup("Selectors", Width = 0.3f), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, ShowFoldout = false, HideAddButton = true, HideRemoveButton = true), LabelText("Textures from Shader"), HideIf("@shader == null")] private List<ShaderPropertySelector> propertySelector = new();
+        [SerializeField, HorizontalGroup("Selectors/Right"), ListDrawerSettings(DraggableItems = false, HideAddButton = true, HideRemoveButton = true), HideIf("@model == null")] private List<ModelAssetData> modelAssetData;
+
+        [MenuItem("Grigor/Asset Importer")]
+        protected static void OpenWindow()
         {
-            OnValidateModel(model);
+            GetWindow<AssetImporterEditorWindow>().Show();
         }
 
         [OnInspectorGUI]
@@ -48,13 +51,95 @@ namespace RazerCore.Utils.AssetImporter.Editor
             Refresh();
         }
 
+        [OnInspectorDispose]
+        private void OnInspectorDispose()
+        {
+            ResetModel();
+        }
+
+        private void ResetModel()
+        {
+            model = null;
+            modelAssetData = null;
+
+            materials.Clear();
+            textures.Clear();
+        }
+
+        [Button("Extract Materials and Textures", ButtonSizes.Large), DisableIf("@model == null || shader == null")] private void Extract() => ExtractMaterialsAndTextures();
+        private void ExtractMaterialsAndTextures()
+        {
+            string modelPath = AssetDatabase.GetAssetPath(model);
+
+            string modelDirectory = Path.GetDirectoryName(modelPath);
+
+            if (string.IsNullOrEmpty(modelDirectory))
+            {
+                return;
+            }
+
+            if (!modelPath.EndsWith(".fbx"))
+            {
+                model = null;
+
+                throw Log.Exception("Object is not an .fbx file!");
+            }
+
+            string texturesPath = Path.Combine(modelDirectory, "Textures");
+
+            if (!automaticallyFindTexturesFolder)
+            {
+                texturesPath = AssetDatabase.GetAssetPath(texturesFolder);
+            }
+
+            textures = LoadAllAssetsAtPath<Texture2D>(texturesPath);
+
+            materials = ExtractMaterials(modelPath);
+
+            Refresh();
+        }
+
         private void Refresh()
         {
-            Log.Write("refresh!");
-
             RefreshShaderProperties();
             LoadModelAssetData();
+            ApplyTexturesToMaterials();
+            // FindPrefabAndReplaceModel();
         }
+
+        // private void FindPrefabAndReplaceModel()
+        // {
+        //     if (!generatePrefab)
+        //     {
+        //         return;
+        //     }
+        //
+        //     string modelPath = AssetDatabase.GetAssetPath(model);
+        //     string modelDirectory = Path.GetDirectoryName(modelPath);
+        //
+        //     if (string.IsNullOrEmpty(modelDirectory))
+        //     {
+        //         return;
+        //     }
+        //
+        //     string prefabPath = Path.Combine(modelDirectory, $"{model.name}.prefab");
+        //
+        //     GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        //
+        //     if (prefab == null)
+        //     {
+        //         return;
+        //     }
+        //
+        //     GameObject modelGameObject = (GameObject)model;
+        //
+        //     GameObject newPrefab = PrefabUtility.ReplacePrefab(modelGameObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
+        //
+        //     if (newPrefab == null)
+        //     {
+        //         throw Log.Exception("Failed to replace prefab!");
+        //     }
+        // }
 
         private void RefreshShaderProperties()
         {
@@ -82,39 +167,24 @@ namespace RazerCore.Utils.AssetImporter.Editor
             }
         }
 
-        [MenuItem("Grigor/Asset Importer")]
-        protected static void OpenWindow()
+        private void ApplyTexturesToMaterials()
         {
-            GetWindow<AssetImporterEditorWindow>().Show();
-        }
-
-        private bool OnValidateModel(Object value)
-        {
-            string modelPath = AssetDatabase.GetAssetPath(model);
-
-            string modelDirectory = Path.GetDirectoryName(modelPath);
-
-            if (string.IsNullOrEmpty(modelDirectory))
+            for (int i = 0; i < modelAssetData.Count; i++)
             {
-                return false;
+                Material material = modelAssetData[i].Material;
+
+                material.shader = shader;
+
+                for (int j = 0; j < modelAssetData[i].MaterialAssets.Count; j++)
+                {
+                    material.SetTexture(modelAssetData[i].MaterialAssets[j].Property, modelAssetData[i].MaterialAssets[j].Texture);
+                }
+
+                EditorUtility.SetDirty(material);
             }
 
-            if (!modelPath.EndsWith(".fbx"))
-            {
-                model = null;
-
-                throw Log.Exception("Object is not an .fbx file!");
-            }
-
-            string texturesPath = Path.Combine(modelDirectory, "Textures");
-
-            textures = LoadAllAssetsAtPath<Texture2D>(texturesPath);
-
-            materials = ExtractMaterials(modelPath);
-
-            LoadModelAssetData();
-
-            return true;
+            AssetDatabase.Refresh();
+            AssetDatabase.SaveAssets();
         }
 
         private void LoadModelAssetData()
@@ -196,6 +266,11 @@ namespace RazerCore.Utils.AssetImporter.Editor
                     continue;
                 }
 
+                if (shader.GetPropertyType(i) != ShaderPropertyType.Texture)
+                {
+                    continue;
+                }
+
                 properties.Add(shader.GetPropertyName(i));
             }
 
@@ -242,10 +317,12 @@ namespace RazerCore.Utils.AssetImporter.Editor
 
             List<Material> extractedMaterials = LoadAllAssetsAtPath<Material>(Path.GetDirectoryName(modelPath));
 
-            if (result != extractedMaterials.Count)
+            if (result == 0 && extractedMaterials.Count != 0)
             {
-                throw Log.Exception("Other materials from the model directory were also loaded!");
+                Log.Write("Materials already extracted.");
             }
+
+            Log.Write($"Loaded <b>{extractedMaterials.Count}</b> materials from the model's directory!");
 
             return extractedMaterials;
         }

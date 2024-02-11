@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace RazerCore.Utils.AssetImporter.Editor
@@ -7,10 +8,11 @@ namespace RazerCore.Utils.AssetImporter.Editor
     [Serializable]
     public class ModelAssetData
     {
-        [SerializeField] private Material material;
-        [SerializeField] private List<MaterialAssets> materialAssets;
+        [SerializeField, HideLabel] private Material material;
+        [SerializeField, ListDrawerSettings(DraggableItems = false, HideAddButton = true, HideRemoveButton = true)] private List<MaterialAssets> materialAssets;
 
         public Material Material => material;
+        public List<MaterialAssets> MaterialAssets => materialAssets;
 
         public void SetMaterial(Material material)
         {

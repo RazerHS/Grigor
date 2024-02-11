@@ -7,8 +7,8 @@ namespace RazerCore.Utils.AssetImporter.Editor
     [Serializable]
     public class ShaderPropertySelector
     {
-        [SerializeField, HorizontalGroup("property", Width = 0.9f), HideLabel, ReadOnly] private string property;
-        [SerializeField, HorizontalGroup("property", Width = 0.1f), HideLabel] private bool enable = true;
+        [SerializeField, HorizontalGroup("property", Width = 0.9f), HideLabel, ReadOnly, DisplayAsString(EnableRichText = true, FontSize = 15)] private string property;
+        [SerializeField, HorizontalGroup("property"), VerticalGroup("property/vertical", PaddingTop = 2), HideLabel] private bool enable = true;
 
         public string Property => property;
         public bool Enable => enable;
@@ -20,7 +20,7 @@ namespace RazerCore.Utils.AssetImporter.Editor
 
         public void SetProperty(string property)
         {
-            this.property = property;
+            this.property = $"<b>{property}</b>";
         }
 
         public void SetEnabled(bool enable)
