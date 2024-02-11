@@ -18,8 +18,10 @@ namespace RazerCore.Utils.AssetImporter.Editor
     {
         [SerializeField, HorizontalGroup("Selection", Width = 0.5f), ColoredBoxGroup("Selection/Selection", false, true), LabelWidth(60), InlineButton("@shader = null", SdfIconType.BootstrapReboot, "")] private Shader shader;
         [SerializeField, HorizontalGroup("Selection"), ColoredBoxGroup("Selection/Selection"), LabelWidth(60), InlineButton(nameof(ResetModel), SdfIconType.BootstrapReboot, "")] private Object model;
+
         [SerializeField, HorizontalGroup("Selection/Right"), ColoredBoxGroup("Selection/Right/Config", false, true), LabelWidth(220)] private bool automaticallyFindTexturesFolder = true;
         [SerializeField, HorizontalGroup("Selection/Right"), ColoredBoxGroup("Selection/Right/Config", false, true), LabelWidth(220)] private bool showDebug;
+        [SerializeField, HorizontalGroup("Selection/Right"), ColoredBoxGroup("Selection/Right/Config", false, true), LabelWidth(220)] private bool resetBaseColor;
         // [SerializeField, HorizontalGroup("Selection/Right"), ColoredBoxGroup("Selection/Right/Config", false, true), LabelWidth(220)] private bool generatePrefab;
         [SerializeField, HorizontalGroup("Selection"), ColoredBoxGroup("Selection/Selection"), HideIf(nameof(automaticallyFindTexturesFolder))] private Object texturesFolder;
 
@@ -28,6 +30,10 @@ namespace RazerCore.Utils.AssetImporter.Editor
 
         [SerializeField, HorizontalGroup("Selectors", Width = 0.3f), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, ShowFoldout = false, HideAddButton = true, HideRemoveButton = true), LabelText("Textures from Shader"), HideIf("@shader == null")] private List<ShaderPropertySelector> propertySelector = new();
         [SerializeField, HorizontalGroup("Selectors/Right"), ListDrawerSettings(DraggableItems = false, HideAddButton = true, HideRemoveButton = true), HideIf("@model == null")] private List<ModelAssetData> modelAssetData;
+
+        [Button("Extract Materials and Textures", ButtonSizes.Large), ColoredBoxGroup("Selection/Selection"), DisableIf("@model == null || shader == null"), VerticalGroup("Selection/Selection/vert", PaddingTop = 5)] private void Extract() => ExtractMaterialsAndTextures();
+
+        private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
 
         [MenuItem("Grigor/Asset Importer")]
         protected static void OpenWindow()
@@ -66,7 +72,6 @@ namespace RazerCore.Utils.AssetImporter.Editor
             textures.Clear();
         }
 
-        [Button("Extract Materials and Textures", ButtonSizes.Large), DisableIf("@model == null || shader == null")] private void Extract() => ExtractMaterialsAndTextures();
         private void ExtractMaterialsAndTextures()
         {
             string modelPath = AssetDatabase.GetAssetPath(model);
@@ -174,6 +179,11 @@ namespace RazerCore.Utils.AssetImporter.Editor
                 Material material = modelAssetData[i].Material;
 
                 material.shader = shader;
+
+                if (resetBaseColor)
+                {
+                    material.SetColor(BaseColor, Color.white);
+                }
 
                 for (int j = 0; j < modelAssetData[i].MaterialAssets.Count; j++)
                 {
