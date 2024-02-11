@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 using MEC;
 using UnityEditor;
 using UnityEngine;
+using EventType = UnityEngine.EventType;
 
 namespace Grigor.Utils
 {
@@ -85,7 +86,12 @@ namespace Grigor.Utils
         public static bool GetKeyPressed(out KeyCode keyCode)
         {
             keyCode = KeyCode.None;
-            var @event = Event.current;
+            Event @event = Event.current;
+
+            if (@event == null)
+            {
+                return false;
+            }
 
             if (!@event.isKey)
             {

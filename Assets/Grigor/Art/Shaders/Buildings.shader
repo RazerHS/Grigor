@@ -5,11 +5,11 @@ Shader "GRIGOR/Buildings"
 	Properties
 	{
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
-		_BaseColor("Base Color", 2D) = "white" {}
+		_Albedo("Albedo", 2D) = "white" {}
 		_Normal("Normal", 2D) = "white" {}
 		_Smoothness("Smoothness", Range( 0 , 1)) = 0.5
 		_Metallic("Metallic", Range( 0 , 1)) = 0.5
-		_TintColor("Tint Color", Color) = (1,1,1,1)
+		_BaseColor("Base Color", Color) = (1,1,1,1)
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 		[HideInInspector] _RenderQueueType("Render Queue Type", Float) = 1
@@ -373,8 +373,8 @@ Shader "GRIGOR/Buildings"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float4 _TintColor;
-			float4 _BaseColor_ST;
+			float4 _BaseColor;
+			float4 _Albedo_ST;
 			float4 _Normal_ST;
 			float _Metallic;
 			float _Smoothness;
@@ -440,7 +440,7 @@ Shader "GRIGOR/Buildings"
 			int _PassValue;
             #endif
 
-			sampler2D _BaseColor;
+			sampler2D _Albedo;
 			sampler2D _Normal;
 
 
@@ -885,11 +885,11 @@ Shader "GRIGOR/Buildings"
 				BuiltinData builtinData;
 
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float2 uv_BaseColor = packedInput.ase_texcoord5.xy * _BaseColor_ST.xy + _BaseColor_ST.zw;
+				float2 uv_Albedo = packedInput.ase_texcoord5.xy * _Albedo_ST.xy + _Albedo_ST.zw;
 				
 				float2 uv_Normal = packedInput.ase_texcoord5.xy * _Normal_ST.xy + _Normal_ST.zw;
 				
-				surfaceDescription.BaseColor = ( _TintColor * tex2D( _BaseColor, uv_BaseColor ) ).rgb;
+				surfaceDescription.BaseColor = ( _BaseColor * tex2D( _Albedo, uv_Albedo ) ).rgb;
 				surfaceDescription.Normal = UnpackNormalScale( tex2D( _Normal, uv_Normal ), 1.0f );
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
@@ -1057,8 +1057,8 @@ Shader "GRIGOR/Buildings"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float4 _TintColor;
-			float4 _BaseColor_ST;
+			float4 _BaseColor;
+			float4 _Albedo_ST;
 			float4 _Normal_ST;
 			float _Metallic;
 			float _Smoothness;
@@ -1124,7 +1124,7 @@ Shader "GRIGOR/Buildings"
 			int _PassValue;
             #endif
 
-			sampler2D _BaseColor;
+			sampler2D _Albedo;
 			sampler2D _Normal;
 
 
@@ -1545,11 +1545,11 @@ Shader "GRIGOR/Buildings"
 				SurfaceData surfaceData;
 				BuiltinData builtinData;
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float2 uv_BaseColor = packedInput.ase_texcoord2.xy * _BaseColor_ST.xy + _BaseColor_ST.zw;
+				float2 uv_Albedo = packedInput.ase_texcoord2.xy * _Albedo_ST.xy + _Albedo_ST.zw;
 				
 				float2 uv_Normal = packedInput.ase_texcoord2.xy * _Normal_ST.xy + _Normal_ST.zw;
 				
-				surfaceDescription.BaseColor = ( _TintColor * tex2D( _BaseColor, uv_BaseColor ) ).rgb;
+				surfaceDescription.BaseColor = ( _BaseColor * tex2D( _Albedo, uv_Albedo ) ).rgb;
 				surfaceDescription.Normal = UnpackNormalScale( tex2D( _Normal, uv_Normal ), 1.0f );
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
@@ -1720,8 +1720,8 @@ Shader "GRIGOR/Buildings"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float4 _TintColor;
-			float4 _BaseColor_ST;
+			float4 _BaseColor;
+			float4 _Albedo_ST;
 			float4 _Normal_ST;
 			float _Metallic;
 			float _Smoothness;
@@ -2292,8 +2292,8 @@ Shader "GRIGOR/Buildings"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float4 _TintColor;
-			float4 _BaseColor_ST;
+			float4 _BaseColor;
+			float4 _Albedo_ST;
 			float4 _Normal_ST;
 			float _Metallic;
 			float _Smoothness;
@@ -2827,8 +2827,8 @@ Shader "GRIGOR/Buildings"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float4 _TintColor;
-			float4 _BaseColor_ST;
+			float4 _BaseColor;
+			float4 _Albedo_ST;
 			float4 _Normal_ST;
 			float _Metallic;
 			float _Smoothness;
@@ -3434,8 +3434,8 @@ Shader "GRIGOR/Buildings"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float4 _TintColor;
-			float4 _BaseColor_ST;
+			float4 _BaseColor;
+			float4 _Albedo_ST;
 			float4 _Normal_ST;
 			float _Metallic;
 			float _Smoothness;
@@ -4125,8 +4125,8 @@ Shader "GRIGOR/Buildings"
 			#endif
 
 			CBUFFER_START( UnityPerMaterial )
-			float4 _TintColor;
-			float4 _BaseColor_ST;
+			float4 _BaseColor;
+			float4 _Albedo_ST;
 			float4 _Normal_ST;
 			float _Metallic;
 			float _Smoothness;
@@ -4192,7 +4192,7 @@ Shader "GRIGOR/Buildings"
 			int _PassValue;
             #endif
 
-			sampler2D _BaseColor;
+			sampler2D _Albedo;
 			sampler2D _Normal;
 
 
@@ -4734,11 +4734,11 @@ Shader "GRIGOR/Buildings"
 				float3 V = GetWorldSpaceNormalizeViewDir(input.positionRWS);
 
 				GlobalSurfaceDescription surfaceDescription = (GlobalSurfaceDescription)0;
-				float2 uv_BaseColor = packedInput.ase_texcoord7.xy * _BaseColor_ST.xy + _BaseColor_ST.zw;
+				float2 uv_Albedo = packedInput.ase_texcoord7.xy * _Albedo_ST.xy + _Albedo_ST.zw;
 				
 				float2 uv_Normal = packedInput.ase_texcoord7.xy * _Normal_ST.xy + _Normal_ST.zw;
 				
-				surfaceDescription.BaseColor = ( _TintColor * tex2D( _BaseColor, uv_BaseColor ) ).rgb;
+				surfaceDescription.BaseColor = ( _BaseColor * tex2D( _Albedo, uv_Albedo ) ).rgb;
 				surfaceDescription.Normal = UnpackNormalScale( tex2D( _Normal, uv_Normal ), 1.0f );
 				surfaceDescription.BentNormal = float3( 0, 0, 1 );
 				surfaceDescription.CoatMask = 0;
@@ -5012,8 +5012,8 @@ Shader "GRIGOR/Buildings"
 
 			float4 _SelectionID;
             CBUFFER_START( UnityPerMaterial )
-			float4 _TintColor;
-			float4 _BaseColor_ST;
+			float4 _BaseColor;
+			float4 _Albedo_ST;
 			float4 _Normal_ST;
 			float _Metallic;
 			float _Smoothness;
@@ -5656,8 +5656,8 @@ Node;AmplifyShaderEditor.SamplerNode;13;-829.7036,280.7897;Inherit;True;Property
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;22;-359.4536,-109.1477;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.RangedFloatNode;19;-375.3964,262.1328;Inherit;False;Property;_Metallic;Metallic;5;0;Create;True;0;0;0;False;0;False;0.5;0;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;12;-828.1805,74.34095;Inherit;True;Property;_Normal;Normal;1;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;True;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.ColorNode;24;-784.4536,-329.1477;Inherit;False;Property;_TintColor;Tint Color;6;0;Create;True;0;0;0;False;0;False;1,1,1,1;1,1,1,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SamplerNode;11;-830.1711,-132.7922;Inherit;True;Property;_BaseColor;Base Color;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;24;-785.4536,-331.1477;Inherit;False;Property;_BaseColor;Base Color;6;0;Create;True;0;0;0;False;0;False;1,1,1,1;1,1,1,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;11;-828.1694,-134.7933;Inherit;True;Property;_Albedo;Albedo;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 WireConnection;0;0;22;0
 WireConnection;0;1;12;0
 WireConnection;0;4;19;0
@@ -5666,4 +5666,4 @@ WireConnection;16;0;14;0
 WireConnection;22;0;24;0
 WireConnection;22;1;11;0
 ASEEND*/
-//CHKSM=0E26FC34F39C95889A56998434789A7759238D90
+//CHKSM=5E555567A94B273BDAA6DFDD944336C81982931F
