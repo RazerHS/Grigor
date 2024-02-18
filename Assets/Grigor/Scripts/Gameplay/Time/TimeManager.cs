@@ -247,25 +247,6 @@ namespace Grigor.Gameplay.Time
             SetTimeToDay();
         }
 
-        public bool TryEndDay()
-        {
-            if (!canEndDay)
-            {
-                return false;
-            }
-
-            NewDayEvent?.Invoke();
-
-            canEndDay = false;
-
-            if (currentTimeOfDay == TimeOfDay.Day)
-            {
-                SetTimeToNight();
-            }
-
-            return true;
-        }
-
         public float GetCurrentDayPercentage()
         {
             float currentPassedMinutes = hours * 60 + minutes;

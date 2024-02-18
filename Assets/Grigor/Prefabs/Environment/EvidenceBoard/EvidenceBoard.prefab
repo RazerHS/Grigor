@@ -15417,13 +15417,13 @@ PrefabInstance:
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
       value: 
-      objectReference: {fileID: 949563621135402696}
+      objectReference: {fileID: 8111129435152307821}
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
@@ -15433,7 +15433,12 @@ PrefabInstance:
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[2]'
       value: 
-      objectReference: {fileID: 8111129435152307821}
+      objectReference: {fileID: 949563621135402696}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
+      value: 
+      objectReference: {fileID: 5475070671223700831}
     - target: {fileID: 2733888954941448264, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15537,6 +15542,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8111129435152307821}
+    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5475070671223700831}
   m_SourcePrefab: {fileID: 100100000, guid: 074fe82d7e4a3014996892cf2abd72fc, type: 3}
 --- !u!4 &1439408928120728056 stripped
 Transform:
@@ -15565,7 +15574,7 @@ MonoBehaviour:
   interactInRange: 0
   removeFromChainAfterEffect: 0
   stopsChain: 0
-  indexInChain: 0
+  indexInChain: 2
   hasTimeEffect: 0
   lockedBeforeCertainDay: 0
   unlockedOnDay: 1
@@ -15665,7 +15674,7 @@ MonoBehaviour:
   interactInRange: 1
   removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 2
+  indexInChain: 0
   hasTimeEffect: 0
   lockedBeforeCertainDay: 0
   unlockedOnDay: 1
@@ -15681,6 +15690,39 @@ MonoBehaviour:
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
   startNodeName: ~NOW THAT YOU'VE ANALYZED SOME EVIDENCE, OPEN UP YOUR CRIMINAL DATAPOD.~
+  minutesToPassPerNode: 0
+  hoursToPassPerNode: 0
+--- !u!114 &5475070671223700831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944260639707404874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 3
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  characterData: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+  startNodeName: ~DAMN. DID YOU JUST BREAK INTO HIS HOUSE?~
   minutesToPassPerNode: 0
   hoursToPassPerNode: 0
 --- !u!1001 &5630026291696603412
