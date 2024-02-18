@@ -33,7 +33,7 @@ PrefabInstance:
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: minutesToPassPerNode
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -201,6 +201,8 @@ MonoBehaviour:
   stopsChain: 0
   indexInChain: 2
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
@@ -229,6 +231,8 @@ MonoBehaviour:
   stopsChain: 0
   indexInChain: 3
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
@@ -253,10 +257,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  removeFromChainAfterEffect: 0
+  removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 4
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
@@ -289,6 +295,8 @@ MonoBehaviour:
   stopsChain: 0
   indexInChain: 5
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
@@ -317,6 +325,8 @@ MonoBehaviour:
   stopsChain: 0
   indexInChain: 1
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
