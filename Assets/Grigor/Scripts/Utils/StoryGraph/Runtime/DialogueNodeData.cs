@@ -163,7 +163,5 @@ namespace Grigor.Utils.StoryGraph.Runtime
         {
             return speaker == null ? "None" : speaker.name;
         }
-
-
     }
 }

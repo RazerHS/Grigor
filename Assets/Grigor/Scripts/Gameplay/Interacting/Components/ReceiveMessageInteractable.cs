@@ -26,13 +26,13 @@ namespace Grigor.Gameplay.Interacting.Components
         protected override void OnInteractEffect()
         {
             Helper.Delay(delay, ReceiveMessage);
+
+            EndInteract();
         }
 
         private void ReceiveMessage()
         {
             messagesWidget.OnMessageReceived(message);
-
-            EndInteract();
         }
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeLinks:
   - OutportPortChoiceIndex: 0
-    OutputPortName: Uhhh... I think we got off the wrong foot here
+    OutputPortName: Uhhh... I think we got off the wrong foot here.
     InputPortName: 
     OutputNodeGuid: 5d864169-e8a1-4448-b58d-307cc75b0e82
     InputNodeGuid: 30dd326f-9ef3-4a52-890d-fbafaf481d42
@@ -33,16 +33,6 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: 64ab28f4-a233-4ffd-9d3e-0baa2a0331cc
     InputNodeGuid: bd821570-aa0a-4cb6-8f70-6b0a653b9763
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 2edb4a33-e278-4194-bab8-dac7a88794ea
-    InputNodeGuid: 1a4faec1-af6c-405e-a43a-362cdff7de68
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: debe1545-c88f-4a42-b26f-f87c9f1698df
-    InputNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
   - OutportPortChoiceIndex: 0
     OutputPortName: Ok, I don't care, lady. Did you see a murder or not?
     InputPortName: 
@@ -126,17 +116,8 @@ MonoBehaviour:
     OutputNodeGuid: b40ecf6b-1d6a-48f2-aacb-dde3fd812017
     InputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
   - OutportPortChoiceIndex: 0
-    OutputPortName: 'Have you ever heard of the triangle of trust? '
-    InputPortName: 
-    OutputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
-    InputNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
-  - OutportPortChoiceIndex: 0
-    OutputPortName: Do you know what issuers and verifiers are?
-    InputPortName: 
-    OutputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
-    InputNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
-  - OutportPortChoiceIndex: 0
-    OutputPortName: I saw a data vault across the street. I can check it for you.
+    OutputPortName: Tell you what - I saw a data vault across the street. I can check
+      it for you.
     InputPortName: 
     OutputNodeGuid: e0cc0dff-0275-4196-aa94-1337e1013db4
     InputNodeGuid: 2edb4a33-e278-4194-bab8-dac7a88794ea
@@ -150,11 +131,6 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: 1a4faec1-af6c-405e-a43a-362cdff7de68
     InputNodeGuid: f47de58d-9125-44bc-89a5-a325fd17ac4d
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: f47de58d-9125-44bc-89a5-a325fd17ac4d
-    InputNodeGuid: debe1545-c88f-4a42-b26f-f87c9f1698df
   - OutportPortChoiceIndex: 0
     OutputPortName: Interesting...
     InputPortName: 
@@ -176,11 +152,6 @@ MonoBehaviour:
     OutputNodeGuid: 9477d90b-ce09-4ccc-83dc-5e9047d76759
     InputNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
   - OutportPortChoiceIndex: 0
-    OutputPortName: It's self-sovereign identities.
-    InputPortName: 
-    OutputNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
-    InputNodeGuid: b566f403-0cb0-41a9-aa50-099e145568df
-  - OutportPortChoiceIndex: 0
     OutputPortName: I will, but I must get back to work.
     InputPortName: 
     OutputNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
@@ -200,6 +171,32 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: bd821570-aa0a-4cb6-8f70-6b0a653b9763
     InputNodeGuid: a674a851-1aea-402d-a588-b65acbec02fc
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 'Have you ever heard of the triangle of trust? '
+    InputPortName: 
+    OutputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+    InputNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Do you know what issuers and verifiers are?
+    InputPortName: 
+    OutputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+    InputNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 2edb4a33-e278-4194-bab8-dac7a88794ea
+    InputNodeGuid: 1a4faec1-af6c-405e-a43a-362cdff7de68
+  - OutportPortChoiceIndex: 0
+    OutputPortName: A construction worker was killed last morning at around 6 AM.
+      Were you nearby?
+    InputPortName: 
+    OutputNodeGuid: f47de58d-9125-44bc-89a5-a325fd17ac4d
+    InputNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+  - OutportPortChoiceIndex: 0
+    OutputPortName: It's self-sovereign identities.
+    InputPortName: 
+    OutputNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
+    InputNodeGuid: b35f9518-5ecc-47a9-b5d7-725288e1e9db
   dialogueNodeData:
   - nodeName: 
     guid: 5d864169-e8a1-4448-b58d-307cc75b0e82
@@ -208,7 +205,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
     nodeType: 0
     choices:
-    - text: Uhhh... I think we got off the wrong foot here
+    - text: Uhhh... I think we got off the wrong foot here.
       nextNodeGuid: 30dd326f-9ef3-4a52-890d-fbafaf481d42
     - text: Oh, thanks.
       nextNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
@@ -232,25 +229,6 @@ MonoBehaviour:
     choices:
     - text: 1
       nextNodeGuid: bd821570-aa0a-4cb6-8f70-6b0a653b9763
-  - nodeName: 
-    guid: 2edb4a33-e278-4194-bab8-dac7a88794ea
-    position: {x: 12757, y: 2}
-    dialogueText: Please don't forget.
-    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 1a4faec1-af6c-405e-a43a-362cdff7de68
-  - nodeName: 
-    guid: debe1545-c88f-4a42-b26f-f87c9f1698df
-    position: {x: 13827, y: 4}
-    dialogueText: A construction worker was killed last morning at around 6 AM. Were
-      you nearby?
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
   - nodeName: 
     guid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
     position: {x: 14172, y: -20}
@@ -351,7 +329,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
     nodeType: 0
     choices:
-    - text: I saw a data vault across the street. I can check it for you.
+    - text: Tell you what - I saw a data vault across the street. I can check it
+        for you.
       nextNodeGuid: 2edb4a33-e278-4194-bab8-dac7a88794ea
   - nodeName: 
     guid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
@@ -371,15 +350,6 @@ MonoBehaviour:
     choices:
     - text: 1
       nextNodeGuid: f47de58d-9125-44bc-89a5-a325fd17ac4d
-  - nodeName: 
-    guid: f47de58d-9125-44bc-89a5-a325fd17ac4d
-    position: {x: 13492, y: 4}
-    dialogueText: (You're done with her shenanigans.)
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: debe1545-c88f-4a42-b26f-f87c9f1698df
   - nodeName: 
     guid: c1108348-32db-43aa-97c5-4a6560be8ac8
     position: {x: 14606, y: 186}
@@ -419,13 +389,6 @@ MonoBehaviour:
     - text: Alright, thank you for your time.
       nextNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
   - nodeName: 
-    guid: b566f403-0cb0-41a9-aa50-099e145568df
-    position: {x: 16181, y: -4}
-    dialogueText: Working hard or hardly working, you know what they say!
-    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
-    nodeType: 2
-    choices: []
-  - nodeName: 
     guid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
     position: {x: 15689, y: -4}
     dialogueText: Please do come by to help me with those Self Soviet Identities!
@@ -434,7 +397,7 @@ MonoBehaviour:
     nodeType: 0
     choices:
     - text: It's self-sovereign identities.
-      nextNodeGuid: b566f403-0cb0-41a9-aa50-099e145568df
+      nextNodeGuid: b35f9518-5ecc-47a9-b5d7-725288e1e9db
     - text: I will, but I must get back to work.
       nextNodeGuid: b566f403-0cb0-41a9-aa50-099e145568df
   - nodeName: 
@@ -472,5 +435,40 @@ MonoBehaviour:
       nextNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
     - text: Do you know what issuers and verifiers are?
       nextNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+  - nodeName: 
+    guid: 2edb4a33-e278-4194-bab8-dac7a88794ea
+    position: {x: 12757, y: 2}
+    dialogueText: Thank you. Please don't forget.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 1a4faec1-af6c-405e-a43a-362cdff7de68
+  - nodeName: 
+    guid: f47de58d-9125-44bc-89a5-a325fd17ac4d
+    position: {x: 13526, y: -5}
+    dialogueText: (You're done with her shenanigans.)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: A construction worker was killed last morning at around 6 AM. Were you
+        nearby?
+      nextNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+  - nodeName: 
+    guid: b566f403-0cb0-41a9-aa50-099e145568df
+    position: {x: 16167, y: 56}
+    dialogueText: Working hard or hardly working, you know what they say!
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: b35f9518-5ecc-47a9-b5d7-725288e1e9db
+    position: {x: 16167, y: -96}
+    dialogueText: Whatever...
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
   exposedProperties: []
   commentBlockData: []

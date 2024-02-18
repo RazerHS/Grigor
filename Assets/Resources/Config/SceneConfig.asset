@@ -80,9 +80,9 @@ MonoBehaviour:
   exposureMaximumSunRotationAngle: 135
   dayStartHour: 9
   nightStartHour: 20
-  startHour: 11
+  startHour: 10
   changeTimeAutomatically: 1
-  timeMultiplier: 100
+  timeMultiplier: 10
   weatherDataList:
   - windStrength:
       serializedVersion: 2
