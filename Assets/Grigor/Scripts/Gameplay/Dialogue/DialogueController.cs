@@ -120,5 +120,14 @@ namespace Grigor.Gameplay.Dialogue
             dialogueWidget.SetDialogueText(currentNode.DialogueText);
             dialogueWidget.SetSpeakerText(currentNode.GetSpeakerName());
         }
+
+        public void RefreshCurrentDialogue()
+        {
+            dialogueWidget.RemoveAllChoices();
+
+            dialogueWidget.ChoiceSelectedEvent -= OnChoiceSelected;
+
+            OnNextNodeEntered(currentDialogueGraph.GetNodeByGuid(currentNode.Guid));
+        }
     }
 }

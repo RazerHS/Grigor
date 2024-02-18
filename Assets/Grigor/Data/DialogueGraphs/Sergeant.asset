@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
-  m_Name: Sergeant_Day1
+  m_Name: Sergeant
   m_EditorClassIdentifier: 
   nodeLinks:
   - OutportPortChoiceIndex: 0
@@ -64,17 +64,12 @@ MonoBehaviour:
     OutputNodeGuid: f377adc8-f559-4108-a4c9-16a693087915
     InputNodeGuid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
-    InputNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
-  - OutportPortChoiceIndex: 0
     OutputPortName: Sorry, sir. I'll get going now.
     InputPortName: 
     OutputNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
     InputNodeGuid: 8bdceaaf-16ba-4f71-8e09-89d536f8c895
   - OutportPortChoiceIndex: 0
-    OutputPortName: If you want me to do my job properly you'll repeat the insrtuctions.
+    OutputPortName: If you want me to do my job properly...
     InputPortName: 
     OutputNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
     InputNodeGuid: 6d9a19a0-5d5c-4234-a272-524d0fb3c93a
@@ -84,7 +79,7 @@ MonoBehaviour:
     OutputNodeGuid: 8a0d0333-c233-44fc-b190-3e61394609d6
     InputNodeGuid: e270497b-e0d8-425e-aef9-27c8cf0d7c3a
   - OutportPortChoiceIndex: 0
-    OutputPortName: Yes, all clear.
+    OutputPortName: Yes, tall building with the yellow roof.
     InputPortName: 
     OutputNodeGuid: e270497b-e0d8-425e-aef9-27c8cf0d7c3a
     InputNodeGuid: b8530569-db6e-432d-9410-7b1fe0a44ddb
@@ -96,13 +91,33 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 6d9a19a0-5d5c-4234-a272-524d0fb3c93a
-    InputNodeGuid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
+    OutputNodeGuid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
+    InputNodeGuid: 4f30eb37-4ba0-4c81-be32-aa51f0ce023a
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
-    InputNodeGuid: 4f30eb37-4ba0-4c81-be32-aa51f0ce023a
+    OutputNodeGuid: 7f468bf4-cea1-4af3-8089-0959eefdd610
+    InputNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
+    InputNodeGuid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 220c176f-7859-4ecc-8b1b-c6eea22f0daa
+    InputNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
+    InputNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
+    InputNodeGuid: 2dbc78b4-266c-41bf-9527-d1795e72e94e
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -176,28 +191,13 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
-    InputNodeGuid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
+    OutputNodeGuid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
+    InputNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 7f468bf4-cea1-4af3-8089-0959eefdd610
-    InputNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 220c176f-7859-4ecc-8b1b-c6eea22f0daa
-    InputNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
-    InputNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
-    InputNodeGuid: 2dbc78b4-266c-41bf-9527-d1795e72e94e
+    OutputNodeGuid: 6d9a19a0-5d5c-4234-a272-524d0fb3c93a
+    InputNodeGuid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
   dialogueNodeData:
   - nodeName: 
     guid: 5cf9a705-7593-4785-885a-ba1078272162
@@ -211,8 +211,7 @@ MonoBehaviour:
   - nodeName: 
     guid: df06ea81-1e3a-4ab5-95d1-3ed7f7ac6de5
     position: {x: 534, y: 197}
-    dialogueText: 'I''m giving you your first big case. So, you can stop gifting
-      me your cookie baskets. '
+    dialogueText: I'm giving you your first big case.
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 0
     choices:
@@ -221,8 +220,8 @@ MonoBehaviour:
   - nodeName: 
     guid: 74eeeaeb-beff-4521-b167-5dc86742e65b
     position: {x: 931, y: 196}
-    dialogueText: My wife's complaining about my growing belly. And now, she's threatening
-      to hide my beer from me and that ain't happening.
+    dialogueText: My wife's complaining about my growing belly and threatening to
+      hide my beer from me.
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 0
     choices:
@@ -286,14 +285,6 @@ MonoBehaviour:
     - text: 1
       nextNodeGuid: a6f2cbef-01d2-47ea-8477-5956e7a838b8
   - nodeName: 
-    guid: b8530569-db6e-432d-9410-7b1fe0a44ddb
-    position: {x: 4595, y: 103}
-    dialogueText: Now, stop twindling your thumbs and go do detective things for
-      beer's sake!
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 2
-    choices: []
-  - nodeName: 
     guid: f377adc8-f559-4108-a4c9-16a693087915
     position: {x: 4587, y: 242}
     dialogueText: Am I talking to a wall? Are you snoozing during your own brief??
@@ -303,15 +294,6 @@ MonoBehaviour:
     - text: 1
       nextNodeGuid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
   - nodeName: 
-    guid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
-    position: {x: 5027, y: 237}
-    dialogueText: Don't make me repeat myself.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
-  - nodeName: 
     guid: 2994933d-0510-464a-8813-c6befcc620ff
     position: {x: 5439, y: 212}
     dialogueText: Dumbass.
@@ -320,13 +302,13 @@ MonoBehaviour:
     choices:
     - text: Sorry, sir. I'll get going now.
       nextNodeGuid: 8bdceaaf-16ba-4f71-8e09-89d536f8c895
-    - text: If you want me to do my job properly you'll repeat the insrtuctions.
+    - text: If you want me to do my job properly...
       nextNodeGuid: 6d9a19a0-5d5c-4234-a272-524d0fb3c93a
   - nodeName: 
     guid: 8a0d0333-c233-44fc-b190-3e61394609d6
     position: {x: 3705, y: 202}
-    dialogueText: If you feel lost just find the building with the big yellow thing
-      on top.
+    dialogueText: If you feel lost, just find the tall building with the big yellow
+      roof. You can see it if you step outside.
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 0
     choices:
@@ -339,7 +321,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 0
     choices:
-    - text: Yes, all clear.
+    - text: Yes, tall building with the yellow roof.
       nextNodeGuid: b8530569-db6e-432d-9410-7b1fe0a44ddb
     - text: Can you explain all that again?
       nextNodeGuid: f377adc8-f559-4108-a4c9-16a693087915
@@ -351,31 +333,14 @@ MonoBehaviour:
     nodeType: 2
     choices: []
   - nodeName: 
-    guid: 6d9a19a0-5d5c-4234-a272-524d0fb3c93a
-    position: {x: 5857, y: 284}
-    dialogueText: (sigh) Talk to people and find out what they know. Start with Grandma
-      Olena.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
-  - nodeName: 
     guid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
     position: {x: 6247, y: 288}
-    dialogueText: 'If you''re lost, go to the building with the yellow thing. '
+    dialogueText: If you're lost, go to the tall building with the yellow roof.
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 0
     choices:
     - text: 1
       nextNodeGuid: 4f30eb37-4ba0-4c81-be32-aa51f0ce023a
-  - nodeName: 
-    guid: 4f30eb37-4ba0-4c81-be32-aa51f0ce023a
-    position: {x: 6638, y: 293}
-    dialogueText: Now, quit wasting my time and go.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 2
-    choices: []
   - nodeName: 
     guid: 7f468bf4-cea1-4af3-8089-0959eefdd610
     position: {x: 220, y: 482}
@@ -400,9 +365,7 @@ MonoBehaviour:
     dialogueText: ~HEAD ON OVER TO THAT BIG EVIDENCE BOARD OVER THERE.~
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 
+    choices: []
   - nodeName: 
     guid: 220c176f-7859-4ecc-8b1b-c6eea22f0daa
     position: {x: 227, y: 681}
@@ -440,9 +403,7 @@ MonoBehaviour:
       LAW REQUIRES COLD HARD EVIDENCE.~
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 
+    choices: []
   - nodeName: 
     guid: 66b34256-666b-4ccc-92d9-bc1e1568a7f8
     position: {x: 130, y: 952}
@@ -551,9 +512,7 @@ MonoBehaviour:
     dialogueText: ~NOW GO GET SOME SHUTEYE~
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 
+    choices: []
   - nodeName: 
     guid: eadd9141-020e-490f-a2a6-f19cbb000586
     position: {x: 124, y: 1507}
@@ -597,9 +556,41 @@ MonoBehaviour:
     dialogueText: Now, go to the SSI busyness office and catch yourself a perp!
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: b8530569-db6e-432d-9410-7b1fe0a44ddb
+    position: {x: 4587, y: 101}
+    dialogueText: Now, stop twindling your thumbs and go do detective things for
+      beer's sake!
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: 2af68665-131e-43ed-97a5-cd0db3d7c09b
+    position: {x: 5027, y: 237}
+    dialogueText: Don't make me repeat myself.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
     choices:
     - text: 1
-      nextNodeGuid: 
+      nextNodeGuid: 2994933d-0510-464a-8813-c6befcc620ff
+  - nodeName: 
+    guid: 6d9a19a0-5d5c-4234-a272-524d0fb3c93a
+    position: {x: 5857, y: 284}
+    dialogueText: <b>(sigh)</b> Talk to citizens and find out what they know. Start
+      with Grandma Olena.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
+  - nodeName: 
+    guid: 4f30eb37-4ba0-4c81-be32-aa51f0ce023a
+    position: {x: 6645, y: 284}
+    dialogueText: Now, quit wasting my time and go.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 2
+    choices: []
   exposedProperties: []
   commentBlockData:
   - ChildNodes: []

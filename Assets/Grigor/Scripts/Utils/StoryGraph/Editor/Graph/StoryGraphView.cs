@@ -312,13 +312,16 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             TextField dialogueTextField = new TextField("")
             {
                 multiline = true,
+                selectAllOnFocus = false,
                 doubleClickSelectsWord = true,
+                selectAllOnMouseUp = false,
                 style =
                 {
                     whiteSpace = WhiteSpace.Normal,
                     flexWrap = Wrap.Wrap,
                     maxWidth = DefaultNodeSize.y * 2
                 },
+
             };
 
             dialogueTextField.RegisterValueChangedCallback(@event =>
@@ -423,9 +426,15 @@ namespace Grigor.Utils.StoryGraph.Editor.Graph
             textField.AddToClassList("DialogueChoiceTextField");
 
             textField.pickingMode = PickingMode.Ignore;
-            textField.style.width = 200;
+            textField.style.flexWrap = Wrap.Wrap;
+            textField.style.maxWidth = 200;
             textField.style.left = 10;
             textField.style.marginLeft = -5;
+
+            textField.multiline = true;
+            textField.selectAllOnFocus = false;
+            textField.doubleClickSelectsWord = true;
+            textField.selectAllOnMouseUp = false;
 
             generatedPort.contentContainer.Add(new Label("   "));
             generatedPort.contentContainer.Add(textField);

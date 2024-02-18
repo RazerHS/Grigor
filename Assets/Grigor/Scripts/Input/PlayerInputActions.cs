@@ -48,6 +48,15 @@ namespace Grigor.Input
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Refresh"",
+                    ""type"": ""Button"",
+                    ""id"": ""6526e8c5-03a0-4bc0-a0f0-6ae58715ce3e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""4cbeb1c2-a00d-4b7e-8dda-f1f5710c4de5"",
@@ -340,6 +349,17 @@ namespace Grigor.Input
                     ""processors"": ""Invert"",
                     ""groups"": """",
                     ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18fb4d95-2f9a-4fb2-852c-2cb940406d81"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Refresh"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -929,6 +949,7 @@ namespace Grigor.Input
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_Refresh = m_Player.FindAction("Refresh", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
@@ -1011,6 +1032,7 @@ namespace Grigor.Input
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_Refresh;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Skip;
@@ -1024,6 +1046,7 @@ namespace Grigor.Input
             public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            public InputAction @Refresh => m_Wrapper.m_Player_Refresh;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Skip => m_Wrapper.m_Player_Skip;
@@ -1046,6 +1069,9 @@ namespace Grigor.Input
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Refresh.started += instance.OnRefresh;
+                @Refresh.performed += instance.OnRefresh;
+                @Refresh.canceled += instance.OnRefresh;
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
@@ -1077,6 +1103,9 @@ namespace Grigor.Input
                 @Interact.started -= instance.OnInteract;
                 @Interact.performed -= instance.OnInteract;
                 @Interact.canceled -= instance.OnInteract;
+                @Refresh.started -= instance.OnRefresh;
+                @Refresh.performed -= instance.OnRefresh;
+                @Refresh.canceled -= instance.OnRefresh;
                 @Look.started -= instance.OnLook;
                 @Look.performed -= instance.OnLook;
                 @Look.canceled -= instance.OnLook;
@@ -1282,6 +1311,7 @@ namespace Grigor.Input
         {
             void OnMove(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnRefresh(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnSkip(InputAction.CallbackContext context);

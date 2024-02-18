@@ -73,6 +73,7 @@ namespace Grigor.Gameplay.Interacting.Components
         // NOTE: necessary because DI does not support inheritance, so this is a workaround to not inject the same object twice into children
         public TimeManager TimeManager => timeManager;
         public AudioController AudioController => audioController;
+        public PlayerInput PlayerInput => playerInput;
 
         public event Action BeginInteractionEvent;
         public event Action EndInteractionEvent;
