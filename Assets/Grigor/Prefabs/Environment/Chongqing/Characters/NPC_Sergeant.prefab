@@ -98,7 +98,7 @@ PrefabInstance:
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -110,6 +110,16 @@ PrefabInstance:
       propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
       value: 
       objectReference: {fileID: 8876510878466529342}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[2]'
+      value: 
+      objectReference: {fileID: 3618705460943493624}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1838805773132138876}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5013664492449861485, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
@@ -123,6 +133,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8876510878466529342}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3618705460943493624}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1838805773132138876}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 603188957914493178}
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
 --- !u!114 &3037959173025414781 stripped
 MonoBehaviour:
@@ -178,6 +200,99 @@ MonoBehaviour:
   ambienceAudio: 
   interactionEnabled: 0
   taskToBegin: {fileID: 11400000, guid: 34410987a9e591044a9b39e8824aec02, type: 2}
+--- !u!114 &3618705460943493624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 1
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 2
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: 25a3abe52facec145acfe58e6e658bcf, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  characterData: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+  startNodeName: Alright, rookie. You got through day one somehow.
+  minutesToPassPerNode: 1
+  hoursToPassPerNode: 0
+--- !u!114 &1838805773132138876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22417bd54084b7fafe88c91ae3fe63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 3
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: 25a3abe52facec145acfe58e6e658bcf, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskData: {fileID: 11400000, guid: 557ceb4ab9ddfa64ba552e6f0ee64b92, type: 2}
+--- !u!114 &603188957914493178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69fd1dfe51448539e40a2dad67f0373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 0
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: 25a3abe52facec145acfe58e6e658bcf, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskToBegin: {fileID: 11400000, guid: ec717dbdf540c2d4e94e8b529b7432a8, type: 2}
 --- !u!1001 &8855978769746800381
 PrefabInstance:
   m_ObjectHideFlags: 0
