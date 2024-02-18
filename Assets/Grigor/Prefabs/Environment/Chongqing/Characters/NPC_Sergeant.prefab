@@ -98,7 +98,7 @@ PrefabInstance:
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -120,6 +120,11 @@ PrefabInstance:
       propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
       value: 
       objectReference: {fileID: 1838805773132138876}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[4]'
+      value: 
+      objectReference: {fileID: 603188957914493178}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5013664492449861485, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
@@ -230,7 +235,7 @@ MonoBehaviour:
   ambienceAudio: 
   interactionEnabled: 0
   characterData: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-  startNodeName: Alright, rookie. You got through day one somehow.
+  startNodeName: Well done - you came back pretty fast.
   minutesToPassPerNode: 1
   hoursToPassPerNode: 0
 --- !u!114 &1838805773132138876
@@ -277,8 +282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactInRange: 0
   removeFromChainAfterEffect: 1
-  stopsChain: 0
-  indexInChain: 0
+  stopsChain: 1
+  indexInChain: 4
   hasTimeEffect: 0
   lockedBeforeCertainDay: 0
   unlockedOnDay: 1

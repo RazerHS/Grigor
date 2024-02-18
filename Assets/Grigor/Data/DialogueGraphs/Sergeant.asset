@@ -94,65 +94,10 @@ MonoBehaviour:
     OutputNodeGuid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
     InputNodeGuid: 4f30eb37-4ba0-4c81-be32-aa51f0ce023a
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: Alright, will do.
     InputPortName: 
-    OutputNodeGuid: 7f468bf4-cea1-4af3-8089-0959eefdd610
-    InputNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
-    InputNodeGuid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 220c176f-7859-4ecc-8b1b-c6eea22f0daa
-    InputNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
-    InputNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
-    InputNodeGuid: 2dbc78b4-266c-41bf-9527-d1795e72e94e
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 66b34256-666b-4ccc-92d9-bc1e1568a7f8
-    InputNodeGuid: 691727bd-0c7f-45b5-9ae2-bdd536465060
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 691727bd-0c7f-45b5-9ae2-bdd536465060
-    InputNodeGuid: a2e8156a-165a-45b4-9747-2158093602f3
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: a2e8156a-165a-45b4-9747-2158093602f3
-    InputNodeGuid: bb669c8e-0580-42b0-8422-040a165c508d
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: bb669c8e-0580-42b0-8422-040a165c508d
-    InputNodeGuid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
-    InputNodeGuid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
-    InputNodeGuid: 7bfbb4c1-ee3a-40ed-b45f-572f876e035a
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 7bfbb4c1-ee3a-40ed-b45f-572f876e035a
-    InputNodeGuid: b598ba48-a658-4033-9f91-474c2cb3b85a
+    OutputNodeGuid: 2dbc78b4-266c-41bf-9527-d1795e72e94e
+    InputNodeGuid: a56c2eb2-858b-4587-983b-2b67bbf22758
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -198,6 +143,86 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: 6d9a19a0-5d5c-4234-a272-524d0fb3c93a
     InputNodeGuid: bbf44a62-adc6-4a79-aa0c-ea868e3fbfbc
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 66b34256-666b-4ccc-92d9-bc1e1568a7f8
+    InputNodeGuid: 691727bd-0c7f-45b5-9ae2-bdd536465060
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
+    InputNodeGuid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
+    InputNodeGuid: 7bfbb4c1-ee3a-40ed-b45f-572f876e035a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 7bfbb4c1-ee3a-40ed-b45f-572f876e035a
+    InputNodeGuid: b598ba48-a658-4033-9f91-474c2cb3b85a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
+    InputNodeGuid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 7f468bf4-cea1-4af3-8089-0959eefdd610
+    InputNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Wow, that's crazy!
+    InputPortName: 
+    OutputNodeGuid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
+    InputNodeGuid: ad6cf7d7-6742-4647-8782-3f4b8bb7274b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 220c176f-7859-4ecc-8b1b-c6eea22f0daa
+    InputNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Why can you talk?
+    InputPortName: 
+    OutputNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
+    InputNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Anything else I should know, oh evidence master?
+    InputPortName: 
+    OutputNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
+    InputNodeGuid: 2dbc78b4-266c-41bf-9527-d1795e72e94e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 691727bd-0c7f-45b5-9ae2-bdd536465060
+    InputNodeGuid: a2e8156a-165a-45b4-9747-2158093602f3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: a2e8156a-165a-45b4-9747-2158093602f3
+    InputNodeGuid: bb669c8e-0580-42b0-8422-040a165c508d
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: bb669c8e-0580-42b0-8422-040a165c508d
+    InputNodeGuid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 856533c6-3859-4b47-96f4-adc2ebe6efdd
+    InputNodeGuid: 27a6debb-aa68-435c-aefa-bc4602f3c560
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I am pretty sleepy...
+    InputPortName: 
+    OutputNodeGuid: 27a6debb-aa68-435c-aefa-bc4602f3c560
+    InputNodeGuid: e5cce949-6dff-4da8-96d4-1f4472269a12
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Good night sweetheart <3
+    InputPortName: 
+    OutputNodeGuid: e5cce949-6dff-4da8-96d4-1f4472269a12
+    InputNodeGuid: 94b3e1bb-e7dc-4bdd-a594-f0004c7090ab
   dialogueNodeData:
   - nodeName: 
     guid: 5cf9a705-7593-4785-885a-ba1078272162
@@ -342,143 +367,16 @@ MonoBehaviour:
     - text: 1
       nextNodeGuid: 4f30eb37-4ba0-4c81-be32-aa51f0ce023a
   - nodeName: 
-    guid: 7f468bf4-cea1-4af3-8089-0959eefdd610
-    position: {x: 220, y: 482}
-    dialogueText: ~WELCOME TO THE MIND PALACE.~
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 1
-    choices:
-    - text: 1
-      nextNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
-  - nodeName: 
-    guid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
-    position: {x: 630, y: 485}
-    dialogueText: ~THIS IS WHERE THE CRUX OF INVESTIGATING HAPPENS.~
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
-  - nodeName: 
-    guid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
-    position: {x: 1041, y: 485}
-    dialogueText: ~HEAD ON OVER TO THAT BIG EVIDENCE BOARD OVER THERE.~
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 2
-    choices: []
-  - nodeName: 
-    guid: 220c176f-7859-4ecc-8b1b-c6eea22f0daa
-    position: {x: 227, y: 681}
-    dialogueText: ~NOW THAT YOU'VE ANALYZED SOME EVIDENCE, OPEN UP YOUR CRIMINAL
-      DATAPOD.~
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 1
-    choices:
-    - text: 1
-      nextNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
-  - nodeName: 
-    guid: d97a0971-ecc8-4982-b321-67644f8d46f7
-    position: {x: 629, y: 682}
-    dialogueText: ~ON THE RIGHT OF THE SCREEN, YOU WILL SEE ALL THE POSSIBLE EVIDENCE
-      YOU GATHER DURING THE INVESTIGATION.~
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
-  - nodeName: 
-    guid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
-    position: {x: 1032, y: 683}
-    dialogueText: ~ON THE LEFT, YOU WILL HAVE TO DRAG OR TYPE IN WHAT YOU DEDUCE
-      TO BE THE TRUE CREDENTIAL OF THE CRIMINAL.~
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 2dbc78b4-266c-41bf-9527-d1795e72e94e
-  - nodeName: 
     guid: 2dbc78b4-266c-41bf-9527-d1795e72e94e
     position: {x: 1427, y: 683}
-    dialogueText: ~NATURALLY, YOU CAN'T JUST GUESS YOUR WAY OUT OF THIS BECAUSE THE
-      LAW REQUIRES COLD HARD EVIDENCE.~
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 2
-    choices: []
-  - nodeName: 
-    guid: 66b34256-666b-4ccc-92d9-bc1e1568a7f8
-    position: {x: 130, y: 952}
-    dialogueText: Alright, rookie. You got through day one somehow.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 1
-    choices:
-    - text: 1
-      nextNodeGuid: 691727bd-0c7f-45b5-9ae2-bdd536465060
-  - nodeName: 
-    guid: 691727bd-0c7f-45b5-9ae2-bdd536465060
-    position: {x: 531, y: 953}
-    dialogueText: The barricades from yesterday are clear now so you have more of
-      the city to explore for the investigation.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    dialogueText: 'After checking the evidence board, press <b>[TAB]</b> to open
+      your data pod. Fill out the information you have gathered by typing in the
+      fields. '
+    speaker: {fileID: 11400000, guid: f8aed56a633be8f489d8d235a8d123a8, type: 2}
     nodeType: 0
     choices:
-    - text: 1
-      nextNodeGuid: a2e8156a-165a-45b4-9747-2158093602f3
-  - nodeName: 
-    guid: a2e8156a-165a-45b4-9747-2158093602f3
-    position: {x: 926, y: 954}
-    dialogueText: The newly accessible area is the shopping street so you can find
-      that <b>AI COLA</b> for the <b>PRIVATE</b>.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: bb669c8e-0580-42b0-8422-040a165c508d
-  - nodeName: 
-    guid: bb669c8e-0580-42b0-8422-040a165c508d
-    position: {x: 1343, y: 960}
-    dialogueText: I highly encourage you to pester some shopkeeps, too. Don't be
-      a lazy ass.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
-  - nodeName: 
-    guid: b598ba48-a658-4033-9f91-474c2cb3b85a
-    position: {x: 2945, y: 967}
-    dialogueText: Don't fuck this up, rookie.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 2
-    choices: []
-  - nodeName: 
-    guid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
-    position: {x: 1763, y: 960}
-    dialogueText: 'Also, today is "bring your cat to work day" (don''t ask about
-      other animals). '
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
-  - nodeName: 
-    guid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
-    position: {x: 2157, y: 963}
-    dialogueText: So you'll receive some complementary catnip to attract the little
-      fluffballs.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 7bfbb4c1-ee3a-40ed-b45f-572f876e035a
-  - nodeName: 
-    guid: 7bfbb4c1-ee3a-40ed-b45f-572f876e035a
-    position: {x: 2554, y: 967}
-    dialogueText: Make sure to pet the cats as well. Otherwise, you're fired.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: b598ba48-a658-4033-9f91-474c2cb3b85a
+    - text: Alright, will do.
+      nextNodeGuid: a56c2eb2-858b-4587-983b-2b67bbf22758
   - nodeName: 
     guid: d1c1adfc-6111-4101-9e22-964b54af8bee
     position: {x: 125, y: 1254}
@@ -513,15 +411,6 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 2
     choices: []
-  - nodeName: 
-    guid: eadd9141-020e-490f-a2a6-f19cbb000586
-    position: {x: 124, y: 1507}
-    dialogueText: You've solved the case, kid.
-    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
-    nodeType: 1
-    choices:
-    - text: 1
-      nextNodeGuid: ee2c78a4-6711-4573-85b8-7efe45865668
   - nodeName: 
     guid: ee2c78a4-6711-4573-85b8-7efe45865668
     position: {x: 516, y: 1507}
@@ -591,6 +480,199 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 2
     choices: []
+  - nodeName: 
+    guid: 66b34256-666b-4ccc-92d9-bc1e1568a7f8
+    position: {x: 130, y: 952}
+    dialogueText: Alright, rookie. You got through day one somehow.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 691727bd-0c7f-45b5-9ae2-bdd536465060
+  - nodeName: 
+    guid: b598ba48-a658-4033-9f91-474c2cb3b85a
+    position: {x: 2945, y: 967}
+    dialogueText: Don't fuck this up, rookie.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
+    position: {x: 1763, y: 960}
+    dialogueText: 'Also, today is "bring your cat to work day" (don''t ask about
+      other animals). '
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
+  - nodeName: 
+    guid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
+    position: {x: 2157, y: 963}
+    dialogueText: So you'll receive some complementary catnip to attract the little
+      fluffballs.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 7bfbb4c1-ee3a-40ed-b45f-572f876e035a
+  - nodeName: 
+    guid: 7bfbb4c1-ee3a-40ed-b45f-572f876e035a
+    position: {x: 2554, y: 967}
+    dialogueText: Make sure to pet the cats as well. Otherwise, you're fired.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: b598ba48-a658-4033-9f91-474c2cb3b85a
+  - nodeName: 
+    guid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
+    position: {x: 620, y: 479}
+    dialogueText: I will now teach you how to use the evidence board.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
+  - nodeName: 
+    guid: 7f468bf4-cea1-4af3-8089-0959eefdd610
+    position: {x: 189, y: 485}
+    dialogueText: Well done - you came back pretty fast.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 3eec1fbf-e751-4a64-ae56-933ef686acf3
+  - nodeName: 
+    guid: ad6cf7d7-6742-4647-8782-3f4b8bb7274b
+    position: {x: 1545, y: 479}
+    dialogueText: Go walk up to it - it's just inside on the wall.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: 7e41cd20-12d3-4980-9afb-eae4a10b5e53
+    position: {x: 1102, y: 479}
+    dialogueText: Just kidding, it can talk.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: Wow, that's crazy!
+      nextNodeGuid: ad6cf7d7-6742-4647-8782-3f4b8bb7274b
+  - nodeName: 
+    guid: 220c176f-7859-4ecc-8b1b-c6eea22f0daa
+    position: {x: 183, y: 683}
+    dialogueText: The evidence board shows the clues and characters you have found
+      so far.
+    speaker: {fileID: 11400000, guid: f8aed56a633be8f489d8d235a8d123a8, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: d97a0971-ecc8-4982-b321-67644f8d46f7
+  - nodeName: 
+    guid: d97a0971-ecc8-4982-b321-67644f8d46f7
+    position: {x: 610, y: 683}
+    dialogueText: Click on a sticky note to focus on it, and then use the <b>[Scroll
+      Wheel]</b> to zoom in and out and read small details.
+    speaker: {fileID: 11400000, guid: f8aed56a633be8f489d8d235a8d123a8, type: 2}
+    nodeType: 0
+    choices:
+    - text: Why can you talk?
+      nextNodeGuid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
+  - nodeName: 
+    guid: a56c2eb2-858b-4587-983b-2b67bbf22758
+    position: {x: 1849, y: 683}
+    dialogueText: Good luck!
+    speaker: {fileID: 11400000, guid: f8aed56a633be8f489d8d235a8d123a8, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: b4cc9ee1-8ebf-4a24-bac7-514e810586df
+    position: {x: 1032, y: 683}
+    dialogueText: If I didn't, you would not know how to go away from it. To do this,
+      click on the back button in the bottom right corner of the screen.
+    speaker: {fileID: 11400000, guid: f8aed56a633be8f489d8d235a8d123a8, type: 2}
+    nodeType: 0
+    choices:
+    - text: Anything else I should know, oh evidence master?
+      nextNodeGuid: 2dbc78b4-266c-41bf-9527-d1795e72e94e
+  - nodeName: 
+    guid: 691727bd-0c7f-45b5-9ae2-bdd536465060
+    position: {x: 531, y: 953}
+    dialogueText: The barricades from yesterday are clear now so you have more of
+      the city to explore for the investigation.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a2e8156a-165a-45b4-9747-2158093602f3
+  - nodeName: 
+    guid: a2e8156a-165a-45b4-9747-2158093602f3
+    position: {x: 926, y: 954}
+    dialogueText: The newly accessible area is the shopping street so you can find
+      that <b>AI COLA</b> for the <b>PRIVATE</b>.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: bb669c8e-0580-42b0-8422-040a165c508d
+  - nodeName: 
+    guid: bb669c8e-0580-42b0-8422-040a165c508d
+    position: {x: 1343, y: 960}
+    dialogueText: I highly encourage you to pester some shopkeeps, too. Don't be
+      a lazy ass.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
+  - nodeName: 
+    guid: eadd9141-020e-490f-a2a6-f19cbb000586
+    position: {x: 100, y: 1489}
+    dialogueText: You've solved the case, kid.
+    speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: ee2c78a4-6711-4573-85b8-7efe45865668
+  - nodeName: 
+    guid: 856533c6-3859-4b47-96f4-adc2ebe6efdd
+    position: {x: 78, y: 1703}
+    dialogueText: Good job. You can always open the evidence board again by walking
+      up to it and pressing <b>[E]</b>.
+    speaker: {fileID: 11400000, guid: f8aed56a633be8f489d8d235a8d123a8, type: 2}
+    nodeType: 1
+    choices:
+    - text: 1
+      nextNodeGuid: 27a6debb-aa68-435c-aefa-bc4602f3c560
+  - nodeName: 
+    guid: 27a6debb-aa68-435c-aefa-bc4602f3c560
+    position: {x: 496, y: 1703}
+    dialogueText: Oh ~ would look at the time! You must be tired!
+    speaker: {fileID: 11400000, guid: f8aed56a633be8f489d8d235a8d123a8, type: 2}
+    nodeType: 0
+    choices:
+    - text: I am pretty sleepy...
+      nextNodeGuid: e5cce949-6dff-4da8-96d4-1f4472269a12
+  - nodeName: 
+    guid: e5cce949-6dff-4da8-96d4-1f4472269a12
+    position: {x: 902, y: 1703}
+    dialogueText: Go get some rest, champ! You can sleep at the bed to the right
+      of me (your right in case you get confused). Sweet dreams!
+    speaker: {fileID: 11400000, guid: f8aed56a633be8f489d8d235a8d123a8, type: 2}
+    nodeType: 0
+    choices:
+    - text: Good night sweetheart <3
+      nextNodeGuid: 94b3e1bb-e7dc-4bdd-a594-f0004c7090ab
+  - nodeName: 
+    guid: 94b3e1bb-e7dc-4bdd-a594-f0004c7090ab
+    position: {x: 1314, y: 1703}
+    dialogueText: (Sleeping will end the current day and continue to the next).
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
   exposedProperties: []
   commentBlockData:
   - ChildNodes: []
@@ -598,10 +680,10 @@ MonoBehaviour:
     Title: DAY 1 INTRO
   - ChildNodes: []
     Position: {x: -272.5287, y: 511.14758}
-    Title: DAY 1 EVIDENCE BOARD TUTORIAL
+    Title: DAY 1 EVIDENCE BOARD INTRO
   - ChildNodes: []
-    Position: {x: -189.06615, y: 707.745}
-    Title: DAY 1 DATAPOD TUTORIAL
+    Position: {x: -309.1227, y: 717.59076}
+    Title: DAY 1 EVIDENCE BOARD TUTORIAL
   - ChildNodes: []
     Position: {x: -116.541626, y: 965.1299}
     Title: DAY 2 INTRO
@@ -611,3 +693,6 @@ MonoBehaviour:
   - ChildNodes: []
     Position: {x: -77.400024, y: 1514.5002}
     Title: DAY 3
+  - ChildNodes: []
+    Position: {x: -155.12926, y: 1701.8591}
+    Title: Ending Day
