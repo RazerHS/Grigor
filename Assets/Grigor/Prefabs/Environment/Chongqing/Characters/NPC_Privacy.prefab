@@ -203,22 +203,22 @@ PrefabInstance:
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
       value: 
-      objectReference: {fileID: 6609351950633042639}
+      objectReference: {fileID: 5150798662974202617}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[2]'
       value: 
-      objectReference: {fileID: 4065817600435948234}
+      objectReference: {fileID: 8040994047838145611}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
       value: 
-      objectReference: {fileID: 1173650392565169737}
+      objectReference: {fileID: 6201098724111674094}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[4]'
       value: 
-      objectReference: {fileID: 8040994047838145611}
+      objectReference: {fileID: 2036610436064816596}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5013664492449861485, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
@@ -231,19 +231,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4065817600435948234}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6609351950633042639}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1173650392565169737}
-    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8040994047838145611}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6201098724111674094}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5150798662974202617}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2036610436064816596}
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
 --- !u!114 &3037959173025414781 stripped
 MonoBehaviour:
@@ -269,7 +269,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6884255806786864598}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4065817600435948234
+--- !u!114 &8040994047838145611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8983358424966616776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
@@ -296,11 +296,8 @@ MonoBehaviour:
   interactAudio: 
   ambienceAudio: 
   interactionEnabled: 0
-  characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
-  startNodeName: 'Here''s a little tease. It happened at 19:58pm. '
-  minutesToPassPerNode: 30
-  hoursToPassPerNode: 0
---- !u!114 &6609351950633042639
+  clueToFind: {fileID: 11400000, guid: 0fac35746fe942644b33daa2f8f548a0, type: 2}
+--- !u!114 &6201098724111674094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,39 +306,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8983358424966616776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81ae2e9c0c3b4a2caa62187bfd99c2d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactInRange: 0
-  removeFromChainAfterEffect: 1
-  stopsChain: 0
-  indexInChain: 1
-  hasTimeEffect: 0
-  timePassesOnInteract: 0
-  minutesToPass: 1
-  hoursToPass: 1
-  stopChainIfTaskNotStarted: 0
-  taskToListenTo: {fileID: 0}
-  playAudio: 0
-  playAmbienceAudio: 0
-  interactAudio: 
-  ambienceAudio: 
-  interactionEnabled: 0
-  characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
-  startNodeName: 'I saw you giving your data away on the cameras. For some shortcut?  '
-  minutesToPassPerNode: 30
-  hoursToPassPerNode: 0
-  dataInteractable: {fileID: 0}
---- !u!114 &1173650392565169737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8983358424966616776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
+  m_Script: {fileID: 11500000, guid: aa9a028af1e74ba0833526faba54e707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
@@ -359,11 +324,12 @@ MonoBehaviour:
   interactAudio: 
   ambienceAudio: 
   interactionEnabled: 0
-  characterData: {fileID: 11400000, guid: 19719c1c4ac7f3443bf63b1b603b5371, type: 2}
-  startNodeName: ~SHIFT'S UP MAN, BACK TO THE STATION. STAT~.
-  minutesToPassPerNode: 15
-  hoursToPassPerNode: 0
---- !u!114 &8040994047838145611
+  message:
+    sender: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    title: Return to the Station
+    message: SHIFTS UP MAN COME BACK TO POLIZEI STATION!
+  delay: 4
+--- !u!114 &5150798662974202617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -372,7 +338,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 8983358424966616776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Script: {fileID: 11500000, guid: a22417bd54084b7fafe88c91ae3fe63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 1
+  hasTimeEffect: 0
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskData: {fileID: 11400000, guid: 580937b7441f3b9419bdbbe48a49faf8, type: 2}
+--- !u!114 &2036610436064816596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69fd1dfe51448539e40a2dad67f0373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
@@ -390,4 +384,4 @@ MonoBehaviour:
   interactAudio: 
   ambienceAudio: 
   interactionEnabled: 0
-  clueToFind: {fileID: 11400000, guid: 0fac35746fe942644b33daa2f8f548a0, type: 2}
+  taskToBegin: {fileID: 11400000, guid: 25a3abe52facec145acfe58e6e658bcf, type: 2}
