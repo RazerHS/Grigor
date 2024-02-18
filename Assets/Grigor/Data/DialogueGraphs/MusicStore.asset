@@ -24,12 +24,12 @@ MonoBehaviour:
     OutputNodeGuid: 50034f5b-2291-4b83-889a-c67a192ea590
     InputNodeGuid: 9e25fb65-7f8b-40e0-bc45-534a8690c1f2
   - OutportPortChoiceIndex: 0
-    OutputPortName: What's your jazz collection like?
+    OutputPortName: I have some questions about a potential customer
     InputPortName: 
     OutputNodeGuid: 9e25fb65-7f8b-40e0-bc45-534a8690c1f2
     InputNodeGuid: 49b3c60a-1e26-4d08-afb8-c780a6ff4182
   - OutportPortChoiceIndex: 0
-    OutputPortName: I have some questions about a potential customer
+    OutputPortName: What's your jazz collection like?
     InputPortName: 
     OutputNodeGuid: 9e25fb65-7f8b-40e0-bc45-534a8690c1f2
     InputNodeGuid: 526b4591-a984-4311-90af-a8c59ab6c8d2
@@ -61,15 +61,20 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: He wears a green jacket and weird hat
     InputPortName: 
-    OutputNodeGuid: a12fd0b0-f45c-4fb5-94be-650d4789d499
+    OutputNodeGuid: 83a2a032-90d9-4014-85c5-c277c114c184
     InputNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
   - OutportPortChoiceIndex: 0
     OutputPortName: He drinks a lot of AI COLA
     InputPortName: 
+    OutputNodeGuid: 83a2a032-90d9-4014-85c5-c277c114c184
+    InputNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: He wears a green jacket and weird hat
+    InputPortName: 
     OutputNodeGuid: a12fd0b0-f45c-4fb5-94be-650d4789d499
     InputNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
   - OutportPortChoiceIndex: 0
-    OutputPortName: He's really into cats
+    OutputPortName: He drinks a lot of AI COLA
     InputPortName: 
     OutputNodeGuid: a12fd0b0-f45c-4fb5-94be-650d4789d499
     InputNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
@@ -79,17 +84,17 @@ MonoBehaviour:
     OutputNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
     InputNodeGuid: 5f926182-2d35-4132-97c2-09fd096d517b
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: The world is an unpredictable place.
     InputPortName: 
     OutputNodeGuid: 5f926182-2d35-4132-97c2-09fd096d517b
     InputNodeGuid: e8150c7a-4944-4907-a7be-f6d842b918c8
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: Do you know anything about him?
     InputPortName: 
     OutputNodeGuid: e8150c7a-4944-4907-a7be-f6d842b918c8
     InputNodeGuid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: What kind of music does he like?
     InputPortName: 
     OutputNodeGuid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
     InputNodeGuid: c3405e7d-bb22-4f41-9df5-af051f241b7c
@@ -99,30 +104,10 @@ MonoBehaviour:
     OutputNodeGuid: c3405e7d-bb22-4f41-9df5-af051f241b7c
     InputNodeGuid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
   - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
-    InputNodeGuid: 5c64c2fb-5af2-4a52-96c4-e7b6b20be7b5
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 5c64c2fb-5af2-4a52-96c4-e7b6b20be7b5
-    InputNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
+    OutputPortName: Nope, thanks for answering my questions.
     InputPortName: 
     OutputNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
     InputNodeGuid: 9cfb0ca5-7e3b-471e-98ea-7b0c8e2095cd
-  - OutportPortChoiceIndex: 0
-    OutputPortName: He wears a green jacket and weird hat
-    InputPortName: 
-    OutputNodeGuid: 83a2a032-90d9-4014-85c5-c277c114c184
-    InputNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
-  - OutportPortChoiceIndex: 0
-    OutputPortName: He drinks a lot of AI COLA
-    InputPortName: 
-    OutputNodeGuid: 83a2a032-90d9-4014-85c5-c277c114c184
-    InputNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
   - OutportPortChoiceIndex: 0
     OutputPortName: He wears big headphones with loud music
     InputPortName: 
@@ -133,6 +118,81 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: 39b95ef8-c868-4ea0-9330-47490297b3c0
     InputNodeGuid: 83a2a032-90d9-4014-85c5-c277c114c184
+  - OutportPortChoiceIndex: 0
+    OutputPortName: He's really into cats
+    InputPortName: 
+    OutputNodeGuid: a12fd0b0-f45c-4fb5-94be-650d4789d499
+    InputNodeGuid: 83a2a032-90d9-4014-85c5-c277c114c184
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Do you know anything about him?
+    InputPortName: 
+    OutputNodeGuid: 5f926182-2d35-4132-97c2-09fd096d517b
+    InputNodeGuid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Did he leave anything in your store?
+    InputPortName: 
+    OutputNodeGuid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
+    InputNodeGuid: c6e58be2-4645-4306-9b41-b3fde7d9c408
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: c6e58be2-4645-4306-9b41-b3fde7d9c408
+    InputNodeGuid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I'm not sure...
+    InputPortName: 
+    OutputNodeGuid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
+    InputNodeGuid: f1ef2b65-f7c2-4098-bc1e-53e70dcfc67e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Is it a popular genre around here?
+    InputPortName: 
+    OutputNodeGuid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
+    InputNodeGuid: 5c64c2fb-5af2-4a52-96c4-e7b6b20be7b5
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 5c64c2fb-5af2-4a52-96c4-e7b6b20be7b5
+    InputNodeGuid: f1ef2b65-f7c2-4098-bc1e-53e70dcfc67e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: How's business?
+    InputPortName: 
+    OutputNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
+    InputNodeGuid: 4fd0eb1f-5f61-4c20-9798-27f1ff48af32
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 4fd0eb1f-5f61-4c20-9798-27f1ff48af32
+    InputNodeGuid: ea20097f-94f8-423f-97dc-c77c1c422c46
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I'd rather just have a conversation.
+    InputPortName: 
+    OutputNodeGuid: ea20097f-94f8-423f-97dc-c77c1c422c46
+    InputNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Sounds really convenient.
+    InputPortName: 
+    OutputNodeGuid: ea20097f-94f8-423f-97dc-c77c1c422c46
+    InputNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
+  - OutportPortChoiceIndex: 0
+    OutputPortName: You might be onto something...
+    InputPortName: 
+    OutputNodeGuid: f1ef2b65-f7c2-4098-bc1e-53e70dcfc67e
+    InputNodeGuid: 55914e1a-9bb6-45f6-9324-26fda249a54d
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 55914e1a-9bb6-45f6-9324-26fda249a54d
+    InputNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
+  - OutportPortChoiceIndex: 0
+    OutputPortName: That's dumb.
+    InputPortName: 
+    OutputNodeGuid: f1ef2b65-f7c2-4098-bc1e-53e70dcfc67e
+    InputNodeGuid: d8493120-4e81-4efb-8cef-3bca5dfa7157
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: d8493120-4e81-4efb-8cef-3bca5dfa7157
+    InputNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
   dialogueNodeData:
   - nodeName: 
     guid: 50034f5b-2291-4b83-889a-c67a192ea590
@@ -153,9 +213,9 @@ MonoBehaviour:
     nodeType: 0
     choices:
     - text: I have some questions about a potential customer
-      nextNodeGuid: 526b4591-a984-4311-90af-a8c59ab6c8d2
-    - text: What's your jazz collection like?
       nextNodeGuid: 49b3c60a-1e26-4d08-afb8-c780a6ff4182
+    - text: What's your jazz collection like?
+      nextNodeGuid: 526b4591-a984-4311-90af-a8c59ab6c8d2
   - nodeName: 
     guid: 49b3c60a-1e26-4d08-afb8-c780a6ff4182
     position: {x: 5663, y: 413}
@@ -220,7 +280,7 @@ MonoBehaviour:
     - text: He drinks a lot of AI COLA
       nextNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
     - text: He's really into cats
-      nextNodeGuid: df5fefa8-29bb-4901-b50b-bcd50d41544a
+      nextNodeGuid: 83a2a032-90d9-4014-85c5-c277c114c184
   - nodeName: 
     guid: df5fefa8-29bb-4901-b50b-bcd50d41544a
     position: {x: 6445, y: 23}
@@ -230,80 +290,6 @@ MonoBehaviour:
     choices:
     - text: 1
       nextNodeGuid: 5f926182-2d35-4132-97c2-09fd096d517b
-  - nodeName: 
-    guid: 5f926182-2d35-4132-97c2-09fd096d517b
-    position: {x: 6815, y: 21}
-    dialogueText: He's weird but I never would've pinned him for a killer...
-    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: e8150c7a-4944-4907-a7be-f6d842b918c8
-  - nodeName: 
-    guid: e8150c7a-4944-4907-a7be-f6d842b918c8
-    position: {x: 7183, y: 24}
-    dialogueText: The world is an unpredictable place.
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
-  - nodeName: 
-    guid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
-    position: {x: 7513, y: 25}
-    dialogueText: Would you happen to remember what his taste profile is?
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: c3405e7d-bb22-4f41-9df5-af051f241b7c
-  - nodeName: 
-    guid: c3405e7d-bb22-4f41-9df5-af051f241b7c
-    position: {x: 7837, y: 24}
-    dialogueText: Oh yeah. That guy comes here on the <i>daily</i>. Always buys the
-      <i>EXACT</i> same thing.
-    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
-  - nodeName: 
-    guid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
-    position: {x: 8202, y: 25}
-    dialogueText: '<b>GANGNAM STYLE</b>. '
-    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 5c64c2fb-5af2-4a52-96c4-e7b6b20be7b5
-  - nodeName: 
-    guid: 5c64c2fb-5af2-4a52-96c4-e7b6b20be7b5
-    position: {x: 8568, y: 26}
-    dialogueText: 'Yup, I wouldn''t believe me either. Dude seems obsessed with it
-      though. '
-    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
-  - nodeName: 
-    guid: a12919c6-1dee-43e8-adf9-69642e81e851
-    position: {x: 8937, y: 27}
-    dialogueText: Guess he wants to keep the 2010s alive.
-    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 9cfb0ca5-7e3b-471e-98ea-7b0c8e2095cd
-  - nodeName: 
-    guid: 9cfb0ca5-7e3b-471e-98ea-7b0c8e2095cd
-    position: {x: 9323, y: 27}
-    dialogueText: How retro...
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 
   - nodeName: 
     guid: 39b95ef8-c868-4ea0-9330-47490297b3c0
     position: {x: 6694, y: 413}
@@ -315,5 +301,146 @@ MonoBehaviour:
       nextNodeGuid: a12fd0b0-f45c-4fb5-94be-650d4789d499
     - text: He usually carries around a lot of cat food
       nextNodeGuid: 83a2a032-90d9-4014-85c5-c277c114c184
+  - nodeName: 
+    guid: 5f926182-2d35-4132-97c2-09fd096d517b
+    position: {x: 6815, y: 21}
+    dialogueText: He's weird but I never would've pinned him for a killer...
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: The world is an unpredictable place.
+      nextNodeGuid: e8150c7a-4944-4907-a7be-f6d842b918c8
+    - text: Do you know anything about him?
+      nextNodeGuid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
+  - nodeName: 
+    guid: e8150c7a-4944-4907-a7be-f6d842b918c8
+    position: {x: 7175, y: -134}
+    dialogueText: Sure is.
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: Do you know anything about him?
+      nextNodeGuid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
+  - nodeName: 
+    guid: 4513fa67-a455-4c39-960a-e9ea3fc9948d
+    position: {x: 7469, y: 37}
+    dialogueText: What do you want to know?
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: What kind of music does he like?
+      nextNodeGuid: c3405e7d-bb22-4f41-9df5-af051f241b7c
+    - text: Did he leave anything in your store?
+      nextNodeGuid: c6e58be2-4645-4306-9b41-b3fde7d9c408
+  - nodeName: 
+    guid: c3405e7d-bb22-4f41-9df5-af051f241b7c
+    position: {x: 7837, y: 24}
+    dialogueText: That guy comes here on the <i>daily</i>. Always buys the <i>EXACT</i>
+      same thing.
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
+  - nodeName: 
+    guid: c6e58be2-4645-4306-9b41-b3fde7d9c408
+    position: {x: 7837, y: 209}
+    dialogueText: Nope. He just comes here on the <i>daily</i>. Always buys the <i>EXACT</i>
+      same thing.
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
+  - nodeName: 
+    guid: 47dd7e9d-a7b0-497f-b192-0aa434e496e7
+    position: {x: 8266, y: 24}
+    dialogueText: <b>Alt-Jazz Albums</b>.  Does that help?
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: I'm not sure...
+      nextNodeGuid: f1ef2b65-f7c2-4098-bc1e-53e70dcfc67e
+    - text: Is it a popular genre around here?
+      nextNodeGuid: 5c64c2fb-5af2-4a52-96c4-e7b6b20be7b5
+  - nodeName: 
+    guid: f1ef2b65-f7c2-4098-bc1e-53e70dcfc67e
+    position: {x: 9096, y: 25}
+    dialogueText: Maybe if you hear alt-jazz playing it means he's nearby.
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: You might be onto something...
+      nextNodeGuid: 55914e1a-9bb6-45f6-9324-26fda249a54d
+    - text: That's dumb.
+      nextNodeGuid: d8493120-4e81-4efb-8cef-3bca5dfa7157
+  - nodeName: 
+    guid: 5c64c2fb-5af2-4a52-96c4-e7b6b20be7b5
+    position: {x: 8684, y: 167}
+    dialogueText: Not really, he's the only one that buys that genre.
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: f1ef2b65-f7c2-4098-bc1e-53e70dcfc67e
+  - nodeName: 
+    guid: 4fd0eb1f-5f61-4c20-9798-27f1ff48af32
+    position: {x: 10152, y: 198}
+    dialogueText: It's going well! I'm still getting used to this SSI stuff though.
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: ea20097f-94f8-423f-97dc-c77c1c422c46
+  - nodeName: 
+    guid: 9cfb0ca5-7e3b-471e-98ea-7b0c8e2095cd
+    position: {x: 10978, y: 21}
+    dialogueText: (you leave)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: ea20097f-94f8-423f-97dc-c77c1c422c46
+    position: {x: 10543, y: 198}
+    dialogueText: People can just come in and share their taste profile with me.
+      Then they ask me to give recommendations based on that. Weird but also cool.
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: I'd rather just have a conversation.
+      nextNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
+    - text: Sounds really convenient.
+      nextNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
+  - nodeName: 
+    guid: a12919c6-1dee-43e8-adf9-69642e81e851
+    position: {x: 9778, y: 25}
+    dialogueText: Anything else I can help you with?
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: Nope, thanks for answering my questions.
+      nextNodeGuid: 9cfb0ca5-7e3b-471e-98ea-7b0c8e2095cd
+    - text: How's business?
+      nextNodeGuid: 4fd0eb1f-5f61-4c20-9798-27f1ff48af32
+  - nodeName: 
+    guid: 55914e1a-9bb6-45f6-9324-26fda249a54d
+    position: {x: 9459, y: -144}
+    dialogueText: (people play their music very loud in this town. You should listen
+      for houses playing alt jazz)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
+  - nodeName: 
+    guid: d8493120-4e81-4efb-8cef-3bca5dfa7157
+    position: {x: 9447, y: 178}
+    dialogueText: It was just an idea. People leave music playing in their houses
+      all the time. Surely you've heard some while walking around?
+    speaker: {fileID: 11400000, guid: ead89c1898e7e18478762f305959116c, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a12919c6-1dee-43e8-adf9-69642e81e851
   exposedProperties: []
   commentBlockData: []
