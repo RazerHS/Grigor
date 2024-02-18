@@ -29,6 +29,10 @@ namespace Grigor.Gameplay.Interacting.Components
         [Tooltip("Does this component have an effect when the time of day changes to day and night?")]
         [SerializeField, ColoredBoxGroup("Time", false, true)] protected bool hasTimeEffect;
 
+        [Tooltip("Should this interaction be locked before a certain day?")]
+        [SerializeField, ColoredBoxGroup("Time")] protected bool lockedBeforeCertainDay;
+        [SerializeField, ColoredBoxGroup("Time"), Range(1, 3), ShowIf(nameof(lockedBeforeCertainDay))] protected int unlockedOnDay = 1;
+
         [Tooltip("Should time pass after this interaction triggers?")]
         [SerializeField, ColoredBoxGroup("Time")] protected bool timePassesOnInteract;
 
@@ -109,6 +113,11 @@ namespace Grigor.Gameplay.Interacting.Components
                 Log.Write($"Registering to time manager: {name}");
             }
 
+            if (lockedBeforeCertainDay)
+            {
+                DisableInteraction();
+            }
+
             if (playAudio && playAmbienceAudio)
             {
                 audioController.PlaySound3D(ambienceAudio, transform);
@@ -165,6 +174,11 @@ namespace Grigor.Gameplay.Interacting.Components
         protected virtual void InRangeEffect() { }
 
         protected virtual void OutOfRangeEffect() { }
+
+        public bool StopChainIfLockedOnCurrentDay()
+        {
+            return lockedBeforeCertainDay && timeManager.Days < unlockedOnDay;
+        }
 
         private void OnInteract()
         {

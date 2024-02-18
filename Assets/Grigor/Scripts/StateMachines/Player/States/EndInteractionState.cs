@@ -35,6 +35,13 @@ namespace Grigor.StateMachines.Player.States
                     return;
                 }
 
+                if (nextInChain.StopChainIfLockedOnCurrentDay())
+                {
+                    owningStateMachine.ToState<FreeRoamState>();
+
+                    return;
+                }
+
                 if (nextInChain.StopChainIfRequiredTaskNotStarted())
                 {
                     owningStateMachine.ToState<FreeRoamState>();
@@ -56,6 +63,13 @@ namespace Grigor.StateMachines.Player.States
             bool chainEnded = !chain.TryGetNextInChain(out nextInChain);
 
             if (chainEnded)
+            {
+                owningStateMachine.ToState<FreeRoamState>();
+
+                return;
+            }
+
+            if (nextInChain.StopChainIfLockedOnCurrentDay())
             {
                 owningStateMachine.ToState<FreeRoamState>();
 

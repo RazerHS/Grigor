@@ -105,10 +105,6 @@ namespace Grigor.Gameplay.Time
                     return;
                 }
 
-                days++;
-
-                NewDayEvent?.Invoke();
-
                 hours -= 24;
 
                 if (hours >= 24)
@@ -167,6 +163,10 @@ namespace Grigor.Gameplay.Time
             canEndDay = true;
 
             ChangedToDayEvent?.Invoke();
+
+            days++;
+
+            NewDayEvent?.Invoke();
         }
 
         private void OnChangedToNight()
@@ -199,8 +199,6 @@ namespace Grigor.Gameplay.Time
 
         public void StartTime()
         {
-            days++;
-
             CheckStartTimeOfDay();
 
             OnTimeChanged();
