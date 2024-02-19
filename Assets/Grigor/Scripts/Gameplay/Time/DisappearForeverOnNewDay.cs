@@ -1,4 +1,5 @@
-﻿using CardboardCore.DI;
+﻿using System;
+using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting;
 using RazerCore.Utils.Attributes;
@@ -12,6 +13,8 @@ namespace Grigor.Gameplay.Time
         [SerializeField, ColoredBoxGroup("Disapearrrrrrr", false, true)] private Interactable interactableToPause;
 
         [Inject] private TimeManager timeManager;
+
+        private bool firstDaySkipped;
 
         protected override void OnInjected()
         {
@@ -30,6 +33,13 @@ namespace Grigor.Gameplay.Time
 
         private void OnNewDay()
         {
+            if (!firstDaySkipped)
+            {
+                firstDaySkipped = true;
+
+                return;
+            }
+
             objectToDisappear.SetActive(false);
 
             if (interactableToPause == null)
