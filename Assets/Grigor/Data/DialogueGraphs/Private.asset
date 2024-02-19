@@ -101,28 +101,8 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 15f2266d-f459-4bcc-aab9-64b7a1f67437
-    InputNodeGuid: 9d334ecd-10a2-4302-8c11-a4b3e6e22bcd
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
     OutputNodeGuid: 9d334ecd-10a2-4302-8c11-a4b3e6e22bcd
     InputNodeGuid: f3f2f34d-f7b7-45d0-9f65-376ce15d8ef9
-  - OutportPortChoiceIndex: 0
-    OutputPortName: There has been a murder.
-    InputPortName: 
-    OutputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
-    InputNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
-  - OutportPortChoiceIndex: 0
-    OutputPortName: I heard you have security footage?
-    InputPortName: 
-    OutputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
-    InputNodeGuid: 46c22fa7-a368-4e0a-88be-b4905b1bf014
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
-    InputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
   - OutportPortChoiceIndex: 0
     OutputPortName: Can I please just ask you some questions?
     InputPortName: 
@@ -209,35 +189,10 @@ MonoBehaviour:
     OutputNodeGuid: 77f3323d-19b1-45ac-a47a-90d134abc3e9
     InputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
   - OutportPortChoiceIndex: 0
-    OutputPortName: My boss told me to come to you.
-    InputPortName: 
-    OutputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
-    InputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
-  - OutportPortChoiceIndex: 0
-    OutputPortName: I lost it on the way here.
-    InputPortName: 
-    OutputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
-    InputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
-    OutputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
-    InputNodeGuid: aa68e2a1-0c16-4a67-9d5c-b983548a9839
-  - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
     OutputNodeGuid: a4b12460-7096-40be-a735-e3a681795acf
     InputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
-  - OutportPortChoiceIndex: 0
-    OutputPortName: Why don't you just do it yourself?
-    InputPortName: 
-    OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
-    InputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
-  - OutportPortChoiceIndex: 0
-    OutputPortName: If you're dyslexic, how are you writing a wiki?
-    InputPortName: 
-    OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
-    InputNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -309,30 +264,65 @@ MonoBehaviour:
     OutputNodeGuid: 09475b96-709d-480a-b708-950ea825249d
     InputNodeGuid: 39f584aa-bec2-4d50-a740-827878b948b6
   - OutportPortChoiceIndex: 0
-    OutputPortName: What?
+    OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 638a443f-c9da-4a3b-966f-c3bdae6b9a3b
-    InputNodeGuid: 15f2266d-f459-4bcc-aab9-64b7a1f67437
+    OutputNodeGuid: 15f2266d-f459-4bcc-aab9-64b7a1f67437
+    InputNodeGuid: 9d334ecd-10a2-4302-8c11-a4b3e6e22bcd
   - OutportPortChoiceIndex: 0
-    OutputPortName: 'If you knew about it, then why didn''t you contact the police? '
+    OutputPortName: There has been a murder.
     InputPortName: 
-    OutputNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
-    InputNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
+    OutputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
+    InputNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I heard you have security footage?
+    InputPortName: 
+    OutputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
+    InputNodeGuid: 46c22fa7-a368-4e0a-88be-b4905b1bf014
   - OutportPortChoiceIndex: 0
     OutputPortName: Can I see?
     InputPortName: 
     OutputNodeGuid: 46c22fa7-a368-4e0a-88be-b4905b1bf014
     InputNodeGuid: 77f3323d-19b1-45ac-a47a-90d134abc3e9
   - OutportPortChoiceIndex: 0
+    OutputPortName: 'If you knew about it, then why didn''t you contact the police? '
+    InputPortName: 
+    OutputNodeGuid: 9b0cf981-02b3-410d-ac18-e014d47ab27b
+    InputNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: a77ea54e-3ee5-46c0-80e9-17caf759e897
+    InputNodeGuid: 4bb1ae17-4835-41f3-abb3-708ea0b18a0a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: My boss told me to come to you.
+    InputPortName: 
+    OutputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
+    InputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I lost it on the way here.
+    InputPortName: 
+    OutputNodeGuid: a25a18cb-bb57-4578-b92e-933505ea9201
+    InputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 8cce2c83-8d76-43af-b438-25c1cf09bac3
+    InputNodeGuid: aa68e2a1-0c16-4a67-9d5c-b983548a9839
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Sure, ok
+    InputPortName: 
+    OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+    InputNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
+  - OutportPortChoiceIndex: 0
+    OutputPortName: What?
+    InputPortName: 
+    OutputNodeGuid: 638a443f-c9da-4a3b-966f-c3bdae6b9a3b
+    InputNodeGuid: 15f2266d-f459-4bcc-aab9-64b7a1f67437
+  - OutportPortChoiceIndex: 0
     OutputPortName: Ok, what do you want me to do?
     InputPortName: 
     OutputNodeGuid: aa68e2a1-0c16-4a67-9d5c-b983548a9839
     InputNodeGuid: 04c6f16b-e09a-468d-9cfc-be60ef874f18
-  - OutportPortChoiceIndex: 0
-    OutputPortName: Sure, AI Cola, green vending machines. Easy.
-    InputPortName: 
-    OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
-    InputNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -343,6 +333,21 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: 17234f3c-6abc-40d9-92eb-a4371b7f181d
     InputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Why don't you just do it yourself?
+    InputPortName: 
+    OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
+    InputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Sure, AI Cola, green vending machines. Easy.
+    InputPortName: 
+    OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
+    InputNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
+  - OutportPortChoiceIndex: 0
+    OutputPortName: If you're dyslexic, how are you writing a wiki?
+    InputPortName: 
+    OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+    InputNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
   dialogueNodeData:
   - nodeName: 
     guid: d07249cc-6fe0-4eff-8cf4-c0e6b04d850e
@@ -650,9 +655,7 @@ MonoBehaviour:
     dialogueText: Pleasure doing business.
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+    choices: []
   - nodeName: 
     guid: b38d7b31-a82d-4327-b380-11a822ac8c12
     position: {x: 804, y: -106}
@@ -869,7 +872,7 @@ MonoBehaviour:
     nodeType: 0
     choices:
     - text: Sure, ok
-      nextNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+      nextNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
     - text: If you're dyslexic, how are you writing a wiki?
       nextNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
   - nodeName: 
@@ -878,9 +881,7 @@ MonoBehaviour:
     dialogueText: Voice-to-text.
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
     nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 06d5c400-b006-4ac6-9885-94fd8d7403e4
+    choices: []
   - nodeName: 
     guid: 638a443f-c9da-4a3b-966f-c3bdae6b9a3b
     position: {x: 70, y: 274}
