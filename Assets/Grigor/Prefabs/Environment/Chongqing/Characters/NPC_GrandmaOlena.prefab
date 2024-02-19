@@ -16,6 +16,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
+      propertyPath: label
+      value: Dialogue 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
       propertyPath: characterData
       value: 
       objectReference: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f,
@@ -197,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  label: new
+  label: Grandma Clue
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 2
@@ -228,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  label: new
+  label: Help Grandma
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 3
@@ -259,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  label: new
+  label: Find Shop Clerk
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 4
@@ -294,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  label: new
+  label: Find Shop Clerk
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 5
@@ -325,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  label: new
+  label: Find Grandma
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 1

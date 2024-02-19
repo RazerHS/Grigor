@@ -105,6 +105,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
+      propertyPath: label
+      value: Dialogue 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
       propertyPath: characterData
       value: 
       objectReference: {fileID: 11400000, guid: 18b1310bb162ec54e922b5e60bb2d535,
@@ -273,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  label: new
+  label: Find Privacy Guy
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 2
@@ -309,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  label: new
+  label: Find Privacy Guy
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 3
@@ -340,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  label: new
+  label: Find Shop Clerk
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 1

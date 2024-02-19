@@ -105,6 +105,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
+      propertyPath: label
+      value: Dialogue 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
       propertyPath: stopsChain
       value: 0
       objectReference: {fileID: 0}
@@ -291,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
+  label: PrivacyGuy Clue
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 2
@@ -321,6 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
+  label: Return to Station
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 3
@@ -355,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
+  label: Find Privacy Guy
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 1
@@ -385,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
+  label: Find AI Cola
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 4
@@ -415,6 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
+  label: Return to Station
   removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 5
