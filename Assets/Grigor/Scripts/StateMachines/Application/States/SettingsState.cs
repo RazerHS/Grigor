@@ -17,8 +17,7 @@ namespace Grigor.StateMachines.Application.States
         {
             settingsScreen = uiManager.ShowScreen<SettingsScreen>();
 
-            settingsScreen.SetResolutionDropdownValues(settingsManager.GetResolutionDropdownOptions());
-            settingsScreen.SetQualityDropdownValues(settingsManager.GetQualityDropdownOptions());
+            settingsScreen.InitializeDropdownOptions(settingsManager.GetResolutionDropdownOptions(), settingsManager.GetQualityDropdownOptions());
 
             settingsScreen.BackButtonPressedEvent += OnBackButtonPressed;
             settingsScreen.MasterVolumeChangedEvent += OnMasterVolumeChanged;

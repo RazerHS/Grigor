@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Grigor.UI.Screens
+namespace Grigor.UI.Widgets
 {
-    public class SettingsScreen : UIScreen
+    public class PauseMenuWidget : UIWidget
     {
         [SerializeField] private Button backButton;
         [SerializeField] private Slider masterVolume;
@@ -90,6 +90,16 @@ namespace Grigor.UI.Screens
             SetQualityDropdownValues(qualityOptions);
 
             dropdownsInitialized = true;
+        }
+
+        public void ForceSetResolutionValueInDropdown(int index)
+        {
+            resolutionDropdown.value = index;
+        }
+
+        public void ForceSetQualityValueInDropdown(int index)
+        {
+            qualityDropdown.value = index;
         }
     }
 }

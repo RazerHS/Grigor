@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3939e86a43854dae9fc8d868e7f5817e, type: 3}
   m_Name: SceneConfig
   m_EditorClassIdentifier: 
-  rainEnabled: 1
-  volumetricsEnabled: 1
+  rainEnabled: 0
+  volumetricsEnabled: 0
   resolutionOptions:
   - {x: 1920, y: 1080}
   - {x: 1280, y: 720}
@@ -89,7 +89,7 @@ MonoBehaviour:
   nightStartHour: 20
   startHour: 11
   changeTimeAutomatically: 1
-  timeMultiplier: 100
+  timeMultiplier: 4542
   weatherDataList:
   - windStrength:
       serializedVersion: 2

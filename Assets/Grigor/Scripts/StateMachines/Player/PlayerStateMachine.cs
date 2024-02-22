@@ -14,6 +14,10 @@ namespace Grigor.StateMachines.Player
             SetInitialState<IdleState>();
 
             AddStaticTransition<IdleState, FreeRoamState>();
+
+            AddFreeFlowTransition<FreeRoamState, PauseState>();
+            AddFreeFlowTransition<PauseState, FreeRoamState>();
+
             AddStaticTransition<FreeRoamState, BeginInteractionState>();
             AddStaticTransition<BeginInteractionState, EndInteractionState>();
 

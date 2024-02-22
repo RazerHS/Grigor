@@ -31,6 +31,7 @@ namespace Grigor.StateMachines.Player.States
 
             playerInput.PhoneInputStartedEvent += OnPhoneInputStarted;
             playerInput.CatnipInputStartedEvent += OnCatnipInputStarted;
+            playerInput.PauseInputStartedEvent += OnPauseInputStarted;
         }
 
         protected override void OnExit()
@@ -43,6 +44,7 @@ namespace Grigor.StateMachines.Player.States
 
             playerInput.PhoneInputStartedEvent -= OnPhoneInputStarted;
             playerInput.CatnipInputStartedEvent -= OnCatnipInputStarted;
+            playerInput.PauseInputStartedEvent -= OnPauseInputStarted;
         }
 
         private void OnInteract()
@@ -69,6 +71,11 @@ namespace Grigor.StateMachines.Player.States
             Vector3 catnipPosition = owningStateMachine.Owner.Movement.GroundCheckTransform.position;
 
             catManager.OnCatnipPlaced(catnipPosition, owningStateMachine.Owner.Look.LookTransform.forward);
+        }
+
+        private void OnPauseInputStarted()
+        {
+            owningStateMachine.ToState<PauseState>();
         }
     }
 }

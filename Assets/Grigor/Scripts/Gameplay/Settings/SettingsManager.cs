@@ -17,10 +17,18 @@ namespace Grigor.Gameplay.Settings
         [Inject] private CharacterRegistry characterRegistry;
 
         private SceneConfig sceneConfig;
+        private int currentResolutionIndex;
+        private int currentQualityIndex;
+
+        public int CurrentResolutionIndex => currentResolutionIndex;
+        public int CurrentQualityIndex => currentQualityIndex;
 
         protected override void OnInjected()
         {
             sceneConfig = SceneConfig.Instance;
+
+            // NOTE: the settings from the previous session remain because the volume profile asset has changed, so the quality has to be reset
+            OnQualityChanged(0);
         }
 
         protected override void OnReleased()
@@ -40,14 +48,18 @@ namespace Grigor.Gameplay.Settings
 
         public void OnResolutionToggled(int index)
         {
-            Vector2 resolution = sceneConfig.ResolutionOptions[index];
+            currentResolutionIndex = index;
+
+            Vector2 resolution = sceneConfig.ResolutionOptions[currentResolutionIndex];
 
             Screen.SetResolution((int)resolution.x, (int)resolution.y, FullScreenMode.MaximizedWindow);
         }
 
         public void OnQualityChanged(int index)
         {
-            QualityOptions quality = sceneConfig.QualityOptions[index];
+             currentQualityIndex = index;
+
+            QualityOptions quality = sceneConfig.QualityOptions[currentQualityIndex];
 
             if (quality == QualityOptions.High)
             {

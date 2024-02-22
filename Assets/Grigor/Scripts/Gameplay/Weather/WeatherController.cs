@@ -69,12 +69,29 @@ namespace Grigor.Gameplay.Weather
 
             sceneConfig = SceneConfig.Instance;
 
+            sceneConfig.RainToggledEvent += OnRainToggled;
+            sceneConfig.VolumetricsToggledEvent += OnVolumetricsToggled;
+
             timeManager.TimeChangedEvent += OnTimeChanged;
+        }
+
+        private void OnVolumetricsToggled(bool value)
+        {
+            volumetricClouds.enable.value = value;
+            visualEnvironment.cloudType.value = value ? 0 : 1;
+        }
+
+        private void OnRainToggled(bool value)
+        {
+
         }
 
         public void Dispose()
         {
             LoadInitialPermanentData();
+
+            sceneConfig.RainToggledEvent -= OnRainToggled;
+            sceneConfig.VolumetricsToggledEvent -= OnVolumetricsToggled;
 
             timeManager.TimeChangedEvent -= OnTimeChanged;
 
@@ -188,31 +205,73 @@ namespace Grigor.Gameplay.Weather
 
         private void SetRainStrength(float value)
         {
+            if (!sceneConfig.RainEnabled)
+            {
+                sharedRainMaterial.SetFloat(RainStrength, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(RainStrength, value);
         }
 
         private void SetGroundRainDropSpeed(float value)
         {
+            if (!sceneConfig.RainEnabled)
+            {
+                sharedRainMaterial.SetFloat(DropSpeed, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(DropSpeed, value);
         }
 
         private void SetWetness(float value)
         {
+            if (!sceneConfig.RainEnabled)
+            {
+                sharedRainMaterial.SetFloat(Wetness, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(Wetness, value);
         }
 
         private void SetPuddleWindStrength(float value)
         {
+            if (!sceneConfig.RainEnabled)
+            {
+                sharedRainMaterial.SetFloat(WindStrength, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(WindStrength, value);
         }
 
         private void SetPuddleWindSpeed(float value)
         {
+            if (!sceneConfig.RainEnabled)
+            {
+                sharedRainMaterial.SetFloat(WindSpeed, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(WindSpeed, value);
         }
 
         private void SetGroundSmoothness(float value)
         {
+            if (!sceneConfig.RainEnabled)
+            {
+                sharedRainMaterial.SetFloat(Smoothness, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(Smoothness, value);
         }
 
@@ -254,6 +313,18 @@ namespace Grigor.Gameplay.Weather
         private void SetGlobalWindDirection(float value)
         {
             visualEnvironment.windOrientation.value = value;
+        }
+
+        private void SetRainParticleEmission(float rainStrength)
+        {
+            if (!sceneConfig.RainEnabled)
+            {
+                rainZoneManager.SetRainParticleEmission(Mathf.Lerp(sceneConfig.RainParticleEmissionBounds.x, sceneConfig.RainParticleEmissionBounds.y, 0));
+
+                return;
+            }
+
+            rainZoneManager.SetRainParticleEmission(Mathf.Lerp(sceneConfig.RainParticleEmissionBounds.x, sceneConfig.RainParticleEmissionBounds.y, rainStrength));
         }
 
         private void SetCurrentEvaluatedWeatherDataByDay(int day, float percentage)
@@ -301,7 +372,7 @@ namespace Grigor.Gameplay.Weather
             SetCloudShapeScale(Mathf.Lerp(sceneConfig.CloudShapeScaleBounds.x, sceneConfig.CloudShapeScaleBounds.y, windStrength));
             SetCloudErosionScale(Mathf.Lerp(sceneConfig.CloudErosionScaleBounds.x, sceneConfig.CloudErosionScaleBounds.y, windStrength));
 
-            rainZoneManager.SetRainParticleEmission(Mathf.Lerp(sceneConfig.RainParticleEmissionBounds.x, sceneConfig.RainParticleEmissionBounds.y, rainStrength));
+            SetRainParticleEmission(rainStrength);
 
             ChangeWeatherForRandomParameters(percentage, windStrength);
         }

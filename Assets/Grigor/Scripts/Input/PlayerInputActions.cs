@@ -109,6 +109,15 @@ namespace Grigor.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""568d6b6d-8659-41f1-a909-3cd727a72ef9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -340,6 +349,17 @@ namespace Grigor.Input
                     ""processors"": ""Invert"",
                     ""groups"": """",
                     ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c581a882-9120-4db9-882d-b124c6c098d5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -936,6 +956,7 @@ namespace Grigor.Input
             m_Player_EndDay = m_Player.FindAction("EndDay", throwIfNotFound: true);
             m_Player_Catnip = m_Player.FindAction("Catnip", throwIfNotFound: true);
             m_Player_Scroll = m_Player.FindAction("Scroll", throwIfNotFound: true);
+            m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1018,6 +1039,7 @@ namespace Grigor.Input
         private readonly InputAction m_Player_EndDay;
         private readonly InputAction m_Player_Catnip;
         private readonly InputAction m_Player_Scroll;
+        private readonly InputAction m_Player_Pause;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -1031,6 +1053,7 @@ namespace Grigor.Input
             public InputAction @EndDay => m_Wrapper.m_Player_EndDay;
             public InputAction @Catnip => m_Wrapper.m_Player_Catnip;
             public InputAction @Scroll => m_Wrapper.m_Player_Scroll;
+            public InputAction @Pause => m_Wrapper.m_Player_Pause;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1067,6 +1090,9 @@ namespace Grigor.Input
                 @Scroll.started += instance.OnScroll;
                 @Scroll.performed += instance.OnScroll;
                 @Scroll.canceled += instance.OnScroll;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1098,6 +1124,9 @@ namespace Grigor.Input
                 @Scroll.started -= instance.OnScroll;
                 @Scroll.performed -= instance.OnScroll;
                 @Scroll.canceled -= instance.OnScroll;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1289,6 +1318,7 @@ namespace Grigor.Input
             void OnEndDay(InputAction.CallbackContext context);
             void OnCatnip(InputAction.CallbackContext context);
             void OnScroll(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

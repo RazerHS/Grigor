@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Grigor.Gameplay.Settings;
 using Grigor.Gameplay.Weather;
 using RazerCore.Utils.Attributes;
@@ -132,24 +133,35 @@ namespace Grigor.Data
         public float CloudErosionScaleChangeChance => cloudErosionScaleChangeChance;
         public float WindDirectionChangeChance => windDirectionChangeChance;
 
+        public event Action<bool> RainToggledEvent;
+        public event Action<bool> VolumetricsToggledEvent;
+
         public void EnableRain()
         {
             rainEnabled = true;
+
+            RainToggledEvent?.Invoke(true);
         }
 
         public void DisableRain()
         {
             rainEnabled = false;
+
+            RainToggledEvent?.Invoke(false);
         }
 
         public void EnableVolumetrics()
         {
             volumetricsEnabled = true;
+
+            VolumetricsToggledEvent?.Invoke(true);
         }
 
         public void DisableVolumetrics()
         {
             volumetricsEnabled = false;
+
+            VolumetricsToggledEvent?.Invoke(false);
         }
     }
 }
