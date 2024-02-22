@@ -4,6 +4,7 @@ using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Grigor.Data
 {
@@ -16,6 +17,7 @@ namespace Grigor.Data
         [SerializeField, ColoredBoxGroup("Lighting"), Range(0, 14f)] private float nighttimeExposure;
         [SerializeField, ColoredBoxGroup("Lighting")] private bool smoothSunTransition;
         [SerializeField, ColoredBoxGroup("Lighting"), ShowIf(nameof(smoothSunTransition))] private float smoothSunTransitionTime;
+        [FormerlySerializedAs("neonSignDisappearChance"),SerializeField, ColoredBoxGroup("Lighting"), Range(0f, 1f)] private float neonSignDisappearingChance;
 
         [Tooltip("An angle smaller than 90 degrees and greater than 0 that represents the first angle of the sun's rotation in the sky when the exposure is the brightest. Also works vice-versa for nighttime.")]
         [SerializeField, ColoredBoxGroup("Lighting"), Range(1, 89)] private int exposureMinimumSunRotationAngle;
@@ -90,6 +92,7 @@ namespace Grigor.Data
         public float NighttimeExposure => nighttimeExposure;
         public int ExposureMinimumSunRotationAngle => exposureMinimumSunRotationAngle;
         public int ExposureMaximumSunRotationAngle => exposureMaximumSunRotationAngle;
+        public float NeonSignDisappearingChance => neonSignDisappearingChance;
 
         public int DayStartHour => dayStartHour;
         public int NightStartHour => nightStartHour;
