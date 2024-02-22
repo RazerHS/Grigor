@@ -26,9 +26,9 @@ namespace Grigor.Characters.Components.Player
 
         protected override void OnDisposed()
         {
-            playerStateMachine.Stop();
-
             characterRegistry.UnregisterCharacter(CharacterGuid);
+
+            playerStateMachine?.Stop();
         }
 
         public void StartStateMachine()

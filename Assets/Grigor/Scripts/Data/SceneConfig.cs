@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Grigor.Gameplay.Settings;
 using Grigor.Gameplay.Weather;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -10,6 +11,11 @@ namespace Grigor.Data
     [GlobalConfig("Assets/Resources/Config/"), CreateAssetMenu(fileName = "SceneConfig", menuName = "Grigor/Scene Config")]
     public class SceneConfig : GlobalConfig<SceneConfig>
     {
+        [SerializeField, ColoredBoxGroup("Settings", false, true)] private bool rainEnabled = true;
+        [SerializeField, ColoredBoxGroup("Settings", false, true)] private bool volumetricsEnabled = true;
+        [SerializeField, ColoredBoxGroup("Settings")] private List<Vector2> resolutionOptions;
+        [SerializeField, ColoredBoxGroup("Settings")] private List<QualityOptions> qualityOptions;
+
         [SerializeField, ColoredBoxGroup("Lighting", true, 0.2f, 0.5f, 0.5f)] private Gradient ambientColor;
         [SerializeField, ColoredBoxGroup("Lighting")] private Gradient directionalColor;
         [SerializeField, ColoredBoxGroup("Lighting") ,Range(0, 14f)] private float daytimeExposure;
@@ -84,6 +90,11 @@ namespace Grigor.Data
         [Tooltip("The chance that the wind speed will change when the weather changes.")]
         [SerializeField, ColoredBoxGroup("Random Weather Changes"), Range(0f, 1f)] private float windDirectionChangeChance;
 
+        public bool RainEnabled => rainEnabled;
+        public bool VolumetricsEnabled => volumetricsEnabled;
+        public List<Vector2> ResolutionOptions => resolutionOptions;
+        public List<QualityOptions> QualityOptions => qualityOptions;
+
         public Gradient AmbientColor => ambientColor;
         public Gradient DirectionalColor => directionalColor;
         public float DaytimeExposure => daytimeExposure;
@@ -120,5 +131,25 @@ namespace Grigor.Data
         public float CloudShapeScaleChangeChance => cloudShapeScaleChangeChance;
         public float CloudErosionScaleChangeChance => cloudErosionScaleChangeChance;
         public float WindDirectionChangeChance => windDirectionChangeChance;
+
+        public void EnableRain()
+        {
+            rainEnabled = true;
+        }
+
+        public void DisableRain()
+        {
+            rainEnabled = false;
+        }
+
+        public void EnableVolumetrics()
+        {
+            volumetricsEnabled = true;
+        }
+
+        public void DisableVolumetrics()
+        {
+            volumetricsEnabled = false;
+        }
     }
 }

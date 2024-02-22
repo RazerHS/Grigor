@@ -18,11 +18,13 @@ namespace Grigor.StateMachines.Application.States
             mainMenuScreen = uiManager.ShowScreen<MainMenuScreen>();
 
             mainMenuScreen.PlayButtonPressedEvent += OnPlayButtonPressed;
+            mainMenuScreen.SettingsButtonPressedEvent += OnSettingsButtonPressed;
         }
 
         protected override void OnExit()
         {
             mainMenuScreen.PlayButtonPressedEvent -= OnPlayButtonPressed;
+            mainMenuScreen.SettingsButtonPressedEvent -= OnSettingsButtonPressed;
 
             mainMenuScreen.Hide();
         }
@@ -30,6 +32,11 @@ namespace Grigor.StateMachines.Application.States
         private void OnPlayButtonPressed()
         {
             owningStateMachine.ToState<GameplayState>();
+        }
+
+        private void OnSettingsButtonPressed()
+        {
+            owningStateMachine.ToState<SettingsState>();
         }
     }
 }
