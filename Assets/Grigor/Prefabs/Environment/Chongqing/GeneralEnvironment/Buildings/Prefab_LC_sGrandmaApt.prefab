@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3249553482198031092}
+  - component: {fileID: -7711541647541902185}
   m_Layer: 3
   m_Name: Prefab_LC_sGrandmaApt
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 1146375438495791075}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &-7711541647541902185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2543666197555722509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7db6306ba17440f8762f468fc81d11f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neonLightGroups: []
 --- !u!1001 &604053126667522056
 PrefabInstance:
   m_ObjectHideFlags: 0

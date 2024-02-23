@@ -1229,6 +1229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2091743094135093560}
+  - component: {fileID: 5223839489662156905}
   m_Layer: 3
   m_Name: Prefab_LC_mHouse2
   m_TagString: Untagged
@@ -1253,6 +1254,19 @@ Transform:
   - {fileID: 7864756963179300647}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &5223839489662156905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841254903515032029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7db6306ba17440f8762f468fc81d11f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neonLightGroups: []
 --- !u!1001 &907279243776468757
 PrefabInstance:
   m_ObjectHideFlags: 0
