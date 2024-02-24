@@ -15,6 +15,9 @@ namespace Grigor.UI.Widgets
         private DataPodWidget dataPodWidget;
         private TasksWidget tasksWidget;
         private MessagesWidget messagesWidget;
+        private bool active;
+
+        public bool Active => active;
 
         protected override void OnShow()
         {
@@ -25,6 +28,8 @@ namespace Grigor.UI.Widgets
             dataPodWidget = uiManager.GetWidget<DataPodWidget>();
             tasksWidget = uiManager.GetWidget<TasksWidget>();
             messagesWidget = uiManager.GetWidget<MessagesWidget>();
+
+            active = true;
         }
 
         protected override void OnHide()
@@ -32,6 +37,8 @@ namespace Grigor.UI.Widgets
             messagesButton.onClick.RemoveListener(OnMessagesButtonClicked);
             tasksButton.onClick.RemoveListener(OnTasksButtonClicked);
             dataPodButton.onClick.RemoveListener(OnDataPodButtonClicked);
+
+            active = false;
         }
 
         private void OnDataPodButtonClicked()

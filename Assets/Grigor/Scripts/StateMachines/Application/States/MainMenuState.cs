@@ -3,6 +3,8 @@ using CardboardCore.StateMachines;
 using RazerCore.Utils.Addressables;
 using Grigor.UI;
 using Grigor.UI.Screens;
+using Grigor.Utils;
+using UnityEngine;
 
 namespace Grigor.StateMachines.Application.States
 {
@@ -19,6 +21,8 @@ namespace Grigor.StateMachines.Application.States
 
             mainMenuScreen.PlayButtonPressedEvent += OnPlayButtonPressed;
             mainMenuScreen.SettingsButtonPressedEvent += OnSettingsButtonPressed;
+
+            Helper.EnableCursor();
         }
 
         protected override void OnExit()

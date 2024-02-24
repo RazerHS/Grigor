@@ -1,3 +1,4 @@
+using System.Net;
 using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Cats;
@@ -5,6 +6,7 @@ using Grigor.Gameplay.Time;
 using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Widgets;
+using Grigor.Utils;
 using UnityEngine;
 
 namespace Grigor.StateMachines.Player.States
@@ -32,6 +34,8 @@ namespace Grigor.StateMachines.Player.States
             playerInput.PhoneInputStartedEvent += OnPhoneInputStarted;
             playerInput.CatnipInputStartedEvent += OnCatnipInputStarted;
             playerInput.PauseInputStartedEvent += OnPauseInputStarted;
+
+            Helper.DisableCursor();
         }
 
         protected override void OnExit()
@@ -45,6 +49,8 @@ namespace Grigor.StateMachines.Player.States
             playerInput.PhoneInputStartedEvent -= OnPhoneInputStarted;
             playerInput.CatnipInputStartedEvent -= OnCatnipInputStarted;
             playerInput.PauseInputStartedEvent -= OnPauseInputStarted;
+
+            DisablePhone();
         }
 
         private void OnInteract()
@@ -54,9 +60,28 @@ namespace Grigor.StateMachines.Player.States
 
         private void OnPhoneInputStarted()
         {
-            phoneWidget.TogglePhone();
+            if (phoneWidget.Active)
+            {
+                DisablePhone();
+            }
+            else
+            {
+                EnablePhone();
+            }
+        }
 
-            Cursor.visible = !Cursor.visible;
+        private void EnablePhone()
+        {
+            phoneWidget.Show();
+
+            Helper.EnableCursor();
+        }
+
+        private void DisablePhone()
+        {
+            phoneWidget.Hide();
+
+            Helper.DisableCursor();
         }
 
         private void OnCatnipInputStarted()

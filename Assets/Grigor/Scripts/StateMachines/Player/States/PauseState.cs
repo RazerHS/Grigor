@@ -3,6 +3,8 @@ using CardboardCore.StateMachines;
 using Grigor.Gameplay.Settings;
 using Grigor.UI;
 using Grigor.UI.Widgets;
+using Grigor.Utils;
+using UnityEngine;
 
 namespace Grigor.StateMachines.Player.States
 {
@@ -27,6 +29,8 @@ namespace Grigor.StateMachines.Player.States
             pauseMenuWidget.MouseSensitivityChangedEvent += OnMouseSensitivityChanged;
             pauseMenuWidget.ResolutionChangedEvent += OnResolutionChanged;
             pauseMenuWidget.QualityChangedEvent += OnQualityChanged;
+
+            Helper.EnableCursor();
         }
 
         protected override void OnExit()

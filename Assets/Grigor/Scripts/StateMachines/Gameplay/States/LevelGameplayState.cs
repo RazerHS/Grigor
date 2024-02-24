@@ -4,6 +4,7 @@ using Grigor.Gameplay.Time;
 using Grigor.UI;
 using Grigor.UI.Screens;
 using Grigor.UI.Widgets;
+using Grigor.Utils;
 using Cursor = UnityEngine.Cursor;
 
 namespace Grigor.StateMachines.Gameplay.States
@@ -26,7 +27,7 @@ namespace Grigor.StateMachines.Gameplay.States
 
             levelRegistry.CurrentLevel.LevelLighting.WeatherController.Initialize(levelRegistry.CurrentLevel.LevelLighting);
 
-            Cursor.visible = false;
+            Helper.DisableCursor();
         }
 
         protected override void OnExit()
