@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using CardboardCore.DI;
+using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Data;
 using Grigor.Gameplay.Audio;
+using Grigor.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 using Screen = UnityEngine.Device.Screen;
 using Vector2 = UnityEngine.Vector2;
 
@@ -57,7 +61,11 @@ namespace Grigor.Gameplay.Settings
 
         public void OnQualityChanged(int index)
         {
-             currentQualityIndex = index;
+            currentQualityIndex = index;
+
+            QualitySettings.SetQualityLevel(index);
+
+            Log.Write($"Changed quality to {QualitySettings.names[index]}!");
 
             QualityOptions quality = sceneConfig.QualityOptions[currentQualityIndex];
 

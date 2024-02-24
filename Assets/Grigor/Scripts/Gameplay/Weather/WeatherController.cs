@@ -77,6 +77,7 @@ namespace Grigor.Gameplay.Weather
 
         private void OnVolumetricsToggled(bool value)
         {
+            fog.enableVolumetricFog.value = value;
             volumetricClouds.enable.value = value;
             visualEnvironment.cloudType.value = value ? 0 : 1;
         }
