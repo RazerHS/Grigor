@@ -2,6 +2,7 @@
 using CardboardCore.Utilities;
 using Grigor.Data;
 using Grigor.Gameplay.Lighting;
+using Grigor.Gameplay.Settings;
 using Grigor.Gameplay.Time;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -18,6 +19,7 @@ namespace Grigor.Gameplay.Weather
         [SerializeField, ColoredBoxGroup("Sky and Fog Components"), ReadOnly] private VolumetricClouds volumetricClouds;
         [SerializeField, ColoredBoxGroup("Sky and Fog Components"), ReadOnly] private VisualEnvironment visualEnvironment;
         [SerializeField, ColoredBoxGroup("Post-Processing Components", false, true), ReadOnly] private Exposure exposure;
+        [SerializeField, ColoredBoxGroup("Post-Processing Components", false, true), ReadOnly] private MotionBlur motionBlur;
 
         [Inject] private TimeManager timeManager;
         [Inject] private RainZoneManager rainZoneManager;
@@ -36,6 +38,7 @@ namespace Grigor.Gameplay.Weather
         [ShowInInspector, ReadOnly] private bool isWet;
         [ShowInInspector, ReadOnly] private float wetness;
         private bool hasRainEnded;
+        private bool rainEnabled;
 
         private float timePercentageUntilFullyDry;
         private float timePercentageUntilFullyWet;
@@ -69,12 +72,26 @@ namespace Grigor.Gameplay.Weather
 
             sceneConfig = SceneConfig.Instance;
 
+            sceneConfig.QualityChangedEvent += OnQualityChanged;
+
             timeManager.TimeChangedEvent += OnTimeChanged;
+        }
+
+        private void OnQualityChanged(QualityOptions quality)
+        {
+            bool value = quality == QualityOptions.High;
+
+            // fog.enableVolumetricFog.value = value;
+            volumetricClouds.enable.value = value;
+            visualEnvironment.cloudType.value = value ? 0 : 1;
+            motionBlur.active = value;
         }
 
         public void Dispose()
         {
             LoadInitialPermanentData();
+
+            sceneConfig.QualityChangedEvent -= OnQualityChanged;
 
             timeManager.TimeChangedEvent -= OnTimeChanged;
 
@@ -153,6 +170,11 @@ namespace Grigor.Gameplay.Weather
             {
                 throw Log.Exception("Visual Environment component not found in volume!");
             }
+
+            if (!postProcessingVolume.sharedProfile.TryGet(out motionBlur))
+            {
+                throw Log.Exception("Motion blur component not found in volume!");
+            }
         }
 
         private void OnTimeChanged(int minutes, int hours)
@@ -188,31 +210,73 @@ namespace Grigor.Gameplay.Weather
 
         private void SetRainStrength(float value)
         {
+            if (!rainEnabled)
+            {
+                sharedRainMaterial.SetFloat(RainStrength, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(RainStrength, value);
         }
 
         private void SetGroundRainDropSpeed(float value)
         {
+            if (!rainEnabled)
+            {
+                sharedRainMaterial.SetFloat(DropSpeed, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(DropSpeed, value);
         }
 
         private void SetWetness(float value)
         {
+            if (!rainEnabled)
+            {
+                sharedRainMaterial.SetFloat(Wetness, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(Wetness, value);
         }
 
         private void SetPuddleWindStrength(float value)
         {
+            if (!rainEnabled)
+            {
+                sharedRainMaterial.SetFloat(WindStrength, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(WindStrength, value);
         }
 
         private void SetPuddleWindSpeed(float value)
         {
+            if (!rainEnabled)
+            {
+                sharedRainMaterial.SetFloat(WindSpeed, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(WindSpeed, value);
         }
 
         private void SetGroundSmoothness(float value)
         {
+            if (!rainEnabled)
+            {
+                sharedRainMaterial.SetFloat(Smoothness, 0);
+
+                return;
+            }
+
             sharedRainMaterial.SetFloat(Smoothness, value);
         }
 
@@ -254,6 +318,18 @@ namespace Grigor.Gameplay.Weather
         private void SetGlobalWindDirection(float value)
         {
             visualEnvironment.windOrientation.value = value;
+        }
+
+        private void SetRainParticleEmission(float rainStrength)
+        {
+            if (!rainEnabled)
+            {
+                rainZoneManager.SetRainParticleEmission(Mathf.Lerp(sceneConfig.RainParticleEmissionBounds.x, sceneConfig.RainParticleEmissionBounds.y, 0));
+
+                return;
+            }
+
+            rainZoneManager.SetRainParticleEmission(Mathf.Lerp(sceneConfig.RainParticleEmissionBounds.x, sceneConfig.RainParticleEmissionBounds.y, rainStrength));
         }
 
         private void SetCurrentEvaluatedWeatherDataByDay(int day, float percentage)
@@ -301,7 +377,7 @@ namespace Grigor.Gameplay.Weather
             SetCloudShapeScale(Mathf.Lerp(sceneConfig.CloudShapeScaleBounds.x, sceneConfig.CloudShapeScaleBounds.y, windStrength));
             SetCloudErosionScale(Mathf.Lerp(sceneConfig.CloudErosionScaleBounds.x, sceneConfig.CloudErosionScaleBounds.y, windStrength));
 
-            rainZoneManager.SetRainParticleEmission(Mathf.Lerp(sceneConfig.RainParticleEmissionBounds.x, sceneConfig.RainParticleEmissionBounds.y, rainStrength));
+            SetRainParticleEmission(rainStrength);
 
             ChangeWeatherForRandomParameters(percentage, windStrength);
         }

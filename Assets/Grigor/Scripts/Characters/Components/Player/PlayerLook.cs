@@ -88,5 +88,14 @@ namespace Grigor.Characters.Components.Player
         {
             lookEnabled = false;
         }
+
+        public void SetLookSensitivity(float value)
+        {
+            mouseSensitivityX = value * 100;
+            mouseSensitivityY = value;
+
+            mouseSensitivityX = Mathf.Clamp(mouseSensitivityX, 10f, 90f);
+            mouseSensitivityY = Mathf.Clamp(mouseSensitivityY, 0.1f, 1);
+        }
     }
 }

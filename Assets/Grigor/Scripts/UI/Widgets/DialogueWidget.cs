@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Grigor.UI.Data;
+using Grigor.Utils;
 using Grigor.Utils.StoryGraph.Runtime;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -21,12 +22,12 @@ namespace Grigor.UI.Widgets
 
         protected override void OnShow()
         {
-            Cursor.visible = true;
+            Helper.EnableCursor();
         }
 
         protected override void OnHide()
         {
-            Cursor.visible = false;
+            Helper.DisableCursor();
         }
 
         public void SetDialogueText(string text)
