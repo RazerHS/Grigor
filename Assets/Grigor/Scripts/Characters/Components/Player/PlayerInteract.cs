@@ -119,6 +119,13 @@ namespace Grigor.Characters.Components.Player
                 return;
             }
 
+            if (interactableComponent.StopChainIfLockedOnCurrentDay())
+            {
+                currentNearestParentInteractable.DisableProximityEffect(Owner);
+
+                return;
+            }
+
             if (interactableComponent.StopChainIfRequiredTaskNotStarted())
             {
                 currentNearestParentInteractable.DisableProximityEffect(Owner);
@@ -150,6 +157,11 @@ namespace Grigor.Characters.Components.Player
             }
 
             if (!currentNearestParentInteractable.InteractablesChain.TryGetNextInChain(out previousInteraction))
+            {
+                return;
+            }
+
+            if (previousInteraction.StopChainIfLockedOnCurrentDay())
             {
                 return;
             }

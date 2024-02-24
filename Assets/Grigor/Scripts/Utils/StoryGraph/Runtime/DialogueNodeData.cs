@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Grigor.Characters;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Grigor.Utils.StoryGraph.Runtime
@@ -129,7 +130,17 @@ namespace Grigor.Utils.StoryGraph.Runtime
         {
             newChoices = choices;
 
-            return choices.Count > 1;
+            if (choices.Count > 1)
+            {
+                return true;
+            }
+
+            if (choices.IsNullOrEmpty())
+            {
+                return false;
+            }
+
+            return choices[0].Text != "1";
         }
 
         public DialogueChoiceData GetChoiceByIndex(int index)
@@ -152,7 +163,5 @@ namespace Grigor.Utils.StoryGraph.Runtime
         {
             return speaker == null ? "None" : speaker.name;
         }
-
-
     }
 }

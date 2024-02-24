@@ -16,6 +16,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
+      propertyPath: label
+      value: Dialogue 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
       propertyPath: characterData
       value: 
       objectReference: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319,
@@ -23,12 +28,12 @@ PrefabInstance:
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: startNodeName
-      value: Hi hi! How can I help you today?~
+      value: Hi hi! How can I help you today? ~~~~~~
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: interactInRange
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -95,6 +100,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: interactDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: interactablesChain.interactableComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3037959173025414781}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2052818764607979077}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5013664492449861485, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
@@ -103,14 +128,137 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9037731285431601430}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2052818764607979077}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1803241817334280723}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8668085039173863295}
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
+--- !u!114 &3037959173025414781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+    type: 3}
+  m_PrefabInstance: {fileID: 6884255806786864598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3156751709346735482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8378598401646502060, guid: 60e37feb7525f4f4fb949c0685fd2958,
     type: 3}
   m_PrefabInstance: {fileID: 6884255806786864598}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8983358424966616776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+    type: 3}
+  m_PrefabInstance: {fileID: 6884255806786864598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2052818764607979077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Pet Colour
+  removeFromChainAfterEffect: 0
+  stopsChain: 0
+  indexInChain: 1
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  clueToFind: {fileID: 11400000, guid: 0b49229b775168a45a9d94c4e597dcc1, type: 2}
+--- !u!114 &1803241817334280723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22417bd54084b7fafe88c91ae3fe63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Find Cat Lady
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 0
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskData: {fileID: 11400000, guid: 84bdf86683aaf74408e5c283e8de0464, type: 2}
+--- !u!114 &8668085039173863295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69fd1dfe51448539e40a2dad67f0373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: findSuspect_Cat
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 0
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskToBegin: {fileID: 11400000, guid: 87421e7ea1b834a49ba2363e4838f106, type: 2}
 --- !u!1001 &8855978769746800381
 PrefabInstance:
   m_ObjectHideFlags: 0

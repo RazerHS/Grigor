@@ -24,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Refresh",
+                    "type": "Button",
+                    "id": "6526e8c5-03a0-4bc0-a0f0-6ae58715ce3e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Look",
                     "type": "Value",
                     "id": "4cbeb1c2-a00d-4b7e-8dda-f1f5710c4de5",
@@ -325,6 +334,17 @@
                     "processors": "Invert",
                     "groups": "",
                     "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18fb4d95-2f9a-4fb2-852c-2cb940406d81",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Refresh",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

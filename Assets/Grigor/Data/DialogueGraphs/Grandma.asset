@@ -1,0 +1,474 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Grandma
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Uhhh... I think we got off the wrong foot here.
+    InputPortName: 
+    OutputNodeGuid: 5d864169-e8a1-4448-b58d-307cc75b0e82
+    InputNodeGuid: 30dd326f-9ef3-4a52-890d-fbafaf481d42
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Oh, thanks.
+    InputPortName: 
+    OutputNodeGuid: 5d864169-e8a1-4448-b58d-307cc75b0e82
+    InputNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+    InputNodeGuid: 64ab28f4-a233-4ffd-9d3e-0baa2a0331cc
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 64ab28f4-a233-4ffd-9d3e-0baa2a0331cc
+    InputNodeGuid: bd821570-aa0a-4cb6-8f70-6b0a653b9763
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Ok, I don't care, lady. Did you see a murder or not?
+    InputPortName: 
+    OutputNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+    InputNodeGuid: 044fbd3a-9982-488a-aac5-115b1981cc36
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Did you see anyone suspicious in the area?
+    InputPortName: 
+    OutputNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+    InputNodeGuid: 8d396cef-6ebd-4c9b-9b4a-bc56e53ba960
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Did you hear anything out of the ordinary?
+    InputPortName: 
+    OutputNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+    InputNodeGuid: c1108348-32db-43aa-97c5-4a6560be8ac8
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Police questions. Jeez.
+    InputPortName: 
+    OutputNodeGuid: ca69ea82-93ad-460e-ab55-6c997a94b4e9
+    InputNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - OutportPortChoiceIndex: 0
+    OutputPortName: ':0 '
+    InputPortName: 
+    OutputNodeGuid: ca69ea82-93ad-460e-ab55-6c997a94b4e9
+    InputNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Um, I have some questions for you.
+    InputPortName: 
+    OutputNodeGuid: 30dd326f-9ef3-4a52-890d-fbafaf481d42
+    InputNodeGuid: ca69ea82-93ad-460e-ab55-6c997a94b4e9
+  - OutportPortChoiceIndex: 0
+    OutputPortName: You're so pretty you could die. Anyway.
+    InputPortName: 
+    OutputNodeGuid: 30dd326f-9ef3-4a52-890d-fbafaf481d42
+    InputNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Anyway...
+    InputPortName: 
+    OutputNodeGuid: e6a6025e-29da-45ac-a934-e831695addf8
+    InputNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Amen, granny.
+    InputPortName: 
+    OutputNodeGuid: e6a6025e-29da-45ac-a934-e831695addf8
+    InputNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Good day, ma'am. I have some questions for you.
+    InputPortName: 
+    OutputNodeGuid: 2481ca52-a47b-4a98-b8be-d86d33452958
+    InputNodeGuid: e6a6025e-29da-45ac-a934-e831695addf8
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Hey, how's it goin?
+    InputPortName: 
+    OutputNodeGuid: 2481ca52-a47b-4a98-b8be-d86d33452958
+    InputNodeGuid: 5d864169-e8a1-4448-b58d-307cc75b0e82
+  - OutportPortChoiceIndex: 0
+    OutputPortName: With the new self-sovereign identity developments, you don't
+      need passwords anymore.
+    InputPortName: 
+    OutputNodeGuid: 34dc6b7a-1e77-4152-bae2-832dad72e182
+    InputNodeGuid: af8882e2-cca9-49a2-b147-d354dddc8722
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Did you verify your credentials?
+    InputPortName: 
+    OutputNodeGuid: 34dc6b7a-1e77-4152-bae2-832dad72e182
+    InputNodeGuid: af8882e2-cca9-49a2-b147-d354dddc8722
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: af8882e2-cca9-49a2-b147-d354dddc8722
+    InputNodeGuid: b40ecf6b-1d6a-48f2-aacb-dde3fd812017
+  - OutportPortChoiceIndex: 0
+    OutputPortName: After you have been issued a credential, you have to verify it
+      with the correct parties.
+    InputPortName: 
+    OutputNodeGuid: b40ecf6b-1d6a-48f2-aacb-dde3fd812017
+    InputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Just having a credential like your date of birth isn't enough.
+    InputPortName: 
+    OutputNodeGuid: b40ecf6b-1d6a-48f2-aacb-dde3fd812017
+    InputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Tell you what - I saw a data vault across the street. I can check
+      it for you.
+    InputPortName: 
+    OutputNodeGuid: e0cc0dff-0275-4196-aa94-1337e1013db4
+    InputNodeGuid: 2edb4a33-e278-4194-bab8-dac7a88794ea
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+    InputNodeGuid: e0cc0dff-0275-4196-aa94-1337e1013db4
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 1a4faec1-af6c-405e-a43a-362cdff7de68
+    InputNodeGuid: f47de58d-9125-44bc-89a5-a325fd17ac4d
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Interesting...
+    InputPortName: 
+    OutputNodeGuid: c1108348-32db-43aa-97c5-4a6560be8ac8
+    InputNodeGuid: 9477d90b-ce09-4ccc-83dc-5e9047d76759
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 044fbd3a-9982-488a-aac5-115b1981cc36
+    InputNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 8d396cef-6ebd-4c9b-9b4a-bc56e53ba960
+    InputNodeGuid: 9477d90b-ce09-4ccc-83dc-5e9047d76759
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Alright, thank you for your time.
+    InputPortName: 
+    OutputNodeGuid: 9477d90b-ce09-4ccc-83dc-5e9047d76759
+    InputNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I will, but I must get back to work.
+    InputPortName: 
+    OutputNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
+    InputNodeGuid: b566f403-0cb0-41a9-aa50-099e145568df
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: a674a851-1aea-402d-a588-b65acbec02fc
+    InputNodeGuid: 34dc6b7a-1e77-4152-bae2-832dad72e182
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Maybe I could help you.
+    InputPortName: 
+    OutputNodeGuid: bd821570-aa0a-4cb6-8f70-6b0a653b9763
+    InputNodeGuid: a674a851-1aea-402d-a588-b65acbec02fc
+  - OutportPortChoiceIndex: 0
+    OutputPortName: It actually makes things easier for you...
+    InputPortName: 
+    OutputNodeGuid: bd821570-aa0a-4cb6-8f70-6b0a653b9763
+    InputNodeGuid: a674a851-1aea-402d-a588-b65acbec02fc
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 'Have you ever heard of the triangle of trust? '
+    InputPortName: 
+    OutputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+    InputNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Do you know what issuers and verifiers are?
+    InputPortName: 
+    OutputNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+    InputNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 2edb4a33-e278-4194-bab8-dac7a88794ea
+    InputNodeGuid: 1a4faec1-af6c-405e-a43a-362cdff7de68
+  - OutportPortChoiceIndex: 0
+    OutputPortName: A construction worker was killed last morning at around 6 AM.
+      Were you nearby?
+    InputPortName: 
+    OutputNodeGuid: f47de58d-9125-44bc-89a5-a325fd17ac4d
+    InputNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+  - OutportPortChoiceIndex: 0
+    OutputPortName: It's self-sovereign identities.
+    InputPortName: 
+    OutputNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
+    InputNodeGuid: b35f9518-5ecc-47a9-b5d7-725288e1e9db
+  dialogueNodeData:
+  - nodeName: 
+    guid: 5d864169-e8a1-4448-b58d-307cc75b0e82
+    position: {x: 6393, y: 235}
+    dialogueText: Not too bad, handsome ;)
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: Uhhh... I think we got off the wrong foot here.
+      nextNodeGuid: 30dd326f-9ef3-4a52-890d-fbafaf481d42
+    - text: Oh, thanks.
+      nextNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - nodeName: 
+    guid: 883cfced-c997-4ad4-b5aa-35387103f331
+    position: {x: 8331, y: 11}
+    dialogueText: 'There was a murder yesterday morning and I wanted to know if you
+      saw anything out of the ordinary at all. '
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 64ab28f4-a233-4ffd-9d3e-0baa2a0331cc
+  - nodeName: 
+    guid: 64ab28f4-a233-4ffd-9d3e-0baa2a0331cc
+    position: {x: 8672, y: 12}
+    dialogueText: 'Dear, I''m too old to worry about others dying when I have my
+      own death and taxes to deal with right now. '
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: bd821570-aa0a-4cb6-8f70-6b0a653b9763
+  - nodeName: 
+    guid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+    position: {x: 14172, y: -20}
+    dialogueText: Oh, yes. I was getting some morning groceries and I walked past
+      it.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: Ok, I don't care, lady. Did you see a murder or not?
+      nextNodeGuid: 044fbd3a-9982-488a-aac5-115b1981cc36
+    - text: Did you see anyone suspicious in the area?
+      nextNodeGuid: 8d396cef-6ebd-4c9b-9b4a-bc56e53ba960
+    - text: Did you hear anything out of the ordinary?
+      nextNodeGuid: c1108348-32db-43aa-97c5-4a6560be8ac8
+  - nodeName: 
+    guid: ca69ea82-93ad-460e-ab55-6c997a94b4e9
+    position: {x: 7703, y: 243}
+    dialogueText: I'm available for coffee anytime ;)
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: Police questions. Jeez.
+      nextNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+    - text: ':0 '
+      nextNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - nodeName: 
+    guid: 30dd326f-9ef3-4a52-890d-fbafaf481d42
+    position: {x: 7012, y: 243}
+    dialogueText: Stumped by my beauty I see. It's not an uncommon occurence.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: Um, I have some questions for you.
+      nextNodeGuid: ca69ea82-93ad-460e-ab55-6c997a94b4e9
+    - text: You're so pretty you could die. Anyway.
+      nextNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - nodeName: 
+    guid: e6a6025e-29da-45ac-a934-e831695addf8
+    position: {x: 6501, y: -40}
+    dialogueText: Honey, I question my existence every day.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: Anyway...
+      nextNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+    - text: Amen, granny.
+      nextNodeGuid: 883cfced-c997-4ad4-b5aa-35387103f331
+  - nodeName: 
+    guid: 2481ca52-a47b-4a98-b8be-d86d33452958
+    position: {x: 6027, y: -53}
+    dialogueText: (You're pretty sure this is the grandma you're looking for.)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 1
+    choices:
+    - text: Good day, ma'am. I have some questions for you.
+      nextNodeGuid: e6a6025e-29da-45ac-a934-e831695addf8
+    - text: Hey, how's it goin?
+      nextNodeGuid: 5d864169-e8a1-4448-b58d-307cc75b0e82
+  - nodeName: 
+    guid: 34dc6b7a-1e77-4152-bae2-832dad72e182
+    position: {x: 10252, y: 3}
+    dialogueText: Now I need passwords for everything and I can't remember a single
+      one for the life of me.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: With the new self-sovereign identity developments, you don't need passwords
+        anymore.
+      nextNodeGuid: af8882e2-cca9-49a2-b147-d354dddc8722
+    - text: Did you verify your credentials?
+      nextNodeGuid: af8882e2-cca9-49a2-b147-d354dddc8722
+  - nodeName: 
+    guid: af8882e2-cca9-49a2-b147-d354dddc8722
+    position: {x: 10864, y: 3}
+    dialogueText: Could you help me do it?
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: b40ecf6b-1d6a-48f2-aacb-dde3fd812017
+  - nodeName: 
+    guid: b40ecf6b-1d6a-48f2-aacb-dde3fd812017
+    position: {x: 11359, y: 2}
+    dialogueText: (You sift through her messily crumpled-up papers and cross-check
+      with her personal datapod).
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: After you have been issued a credential, you have to verify it with the
+        correct parties.
+      nextNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+    - text: Just having a credential like your date of birth isn't enough.
+      nextNodeGuid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+  - nodeName: 
+    guid: e0cc0dff-0275-4196-aa94-1337e1013db4
+    position: {x: 12426, y: 2}
+    dialogueText: (You should help poor grandma out.)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: Tell you what - I saw a data vault across the street. I can check it
+        for you.
+      nextNodeGuid: 2edb4a33-e278-4194-bab8-dac7a88794ea
+  - nodeName: 
+    guid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+    position: {x: 12042, y: 4}
+    dialogueText: This is stressing me out.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: e0cc0dff-0275-4196-aa94-1337e1013db4
+  - nodeName: 
+    guid: 1a4faec1-af6c-405e-a43a-362cdff7de68
+    position: {x: 13132, y: -149}
+    dialogueText: You know my grandkids once-
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: f47de58d-9125-44bc-89a5-a325fd17ac4d
+  - nodeName: 
+    guid: c1108348-32db-43aa-97c5-4a6560be8ac8
+    position: {x: 14606, y: 186}
+    dialogueText: No, it was awful quiet. Part of what I like about that time of
+      day.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: Interesting...
+      nextNodeGuid: 9477d90b-ce09-4ccc-83dc-5e9047d76759
+  - nodeName: 
+    guid: 044fbd3a-9982-488a-aac5-115b1981cc36
+    position: {x: 14606, y: -151}
+    dialogueText: No. And I do not take kindly to rudeness, young man.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+  - nodeName: 
+    guid: 8d396cef-6ebd-4c9b-9b4a-bc56e53ba960
+    position: {x: 14599, y: 14}
+    dialogueText: Now that you mention it...
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 9477d90b-ce09-4ccc-83dc-5e9047d76759
+  - nodeName: 
+    guid: 9477d90b-ce09-4ccc-83dc-5e9047d76759
+    position: {x: 15170, y: -4}
+    dialogueText: There was a man with some <b>strange hat</b> and a <b>green jacket</b>.
+      I didn't pay mind to it at the time but he looked rather distressed.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: Alright, thank you for your time.
+      nextNodeGuid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
+  - nodeName: 
+    guid: 5b37bd9d-a7da-4206-82ea-8ec726b1b676
+    position: {x: 15689, y: -4}
+    dialogueText: Please do come by to help me with those Self Soviet Identities!
+      I can show you all my passwords - they're here somewhere.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: It's self-sovereign identities.
+      nextNodeGuid: b35f9518-5ecc-47a9-b5d7-725288e1e9db
+    - text: I will, but I must get back to work.
+      nextNodeGuid: b566f403-0cb0-41a9-aa50-099e145568df
+  - nodeName: 
+    guid: a674a851-1aea-402d-a588-b65acbec02fc
+    position: {x: 9675, y: 23}
+    dialogueText: <b>(She ignores you.)</b> Bureaucracy on paper was hard enough.
+      But at least it was reliable.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 34dc6b7a-1e77-4152-bae2-832dad72e182
+  - nodeName: 
+    guid: bd821570-aa0a-4cb6-8f70-6b0a653b9763
+    position: {x: 9142, y: 11}
+    dialogueText: 'With all this digital mumbo jumbo I can''t even pay my rent on
+      time anymore and I stand to risk my good-for-nothing pension. '
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: Maybe I could help you.
+      nextNodeGuid: a674a851-1aea-402d-a588-b65acbec02fc
+    - text: It actually makes things easier for you...
+      nextNodeGuid: a674a851-1aea-402d-a588-b65acbec02fc
+  - nodeName: 
+    guid: 04c7ac9f-b380-49b2-b0ab-03df12e1cfef
+    position: {x: 11714, y: 2}
+    dialogueText: (You remember that there is an issuer you get your credentials
+      from, a verifier who checks it to be authentic, and a holder which is you.
+      How on earth do you explain this?).
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 'Have you ever heard of the triangle of trust? '
+      nextNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+    - text: Do you know what issuers and verifiers are?
+      nextNodeGuid: 0c9c1de2-a827-456f-aabd-6f2f29068ac1
+  - nodeName: 
+    guid: 2edb4a33-e278-4194-bab8-dac7a88794ea
+    position: {x: 12757, y: 2}
+    dialogueText: Thank you. Please don't forget.
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 1a4faec1-af6c-405e-a43a-362cdff7de68
+  - nodeName: 
+    guid: f47de58d-9125-44bc-89a5-a325fd17ac4d
+    position: {x: 13526, y: -5}
+    dialogueText: (You're done with her shenanigans.)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: A construction worker was killed last morning at around 6 AM. Were you
+        nearby?
+      nextNodeGuid: 95ab7b59-8d4c-4996-b3f6-198ebca05220
+  - nodeName: 
+    guid: b566f403-0cb0-41a9-aa50-099e145568df
+    position: {x: 16167, y: 56}
+    dialogueText: Working hard or hardly working, you know what they say!
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 2
+    choices: []
+  - nodeName: 
+    guid: b35f9518-5ecc-47a9-b5d7-725288e1e9db
+    position: {x: 16167, y: -96}
+    dialogueText: Whatever...
+    speaker: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
+  exposedProperties: []
+  commentBlockData: []

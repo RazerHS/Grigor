@@ -12,8 +12,13 @@ PrefabInstance:
         type: 3}
       propertyPath: characterData
       value: 
-      objectReference: {fileID: 11400000, guid: 3bb09286f7f62f041bfacdf12a476533,
+      objectReference: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f,
         type: 2}
+    - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: label
+      value: Dialogue 1
+      objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: characterData
@@ -23,7 +28,7 @@ PrefabInstance:
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: startNodeName
-      value: (You're pretty sure this is the grandma you're looking for)
+      value: (You're pretty sure this is the grandma you're looking for.)
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -33,7 +38,7 @@ PrefabInstance:
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: minutesToPassPerNode
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -95,6 +100,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: interactDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: interactablesChain.interactableComponents.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3037959173025414781}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5496705938527350462}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5065687075375089945}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
+      value: 
+      objectReference: {fileID: 4080035390202980187}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[4]'
+      value: 
+      objectReference: {fileID: 869501180841210607}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[5]'
+      value: 
+      objectReference: {fileID: 4779868595053616919}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5013664492449861485, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
@@ -108,7 +153,35 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5065687075375089945}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4080035390202980187}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 869501180841210607}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4779868595053616919}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5496705938527350462}
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
+--- !u!114 &3037959173025414781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -747256778858546261, guid: 60e37feb7525f4f4fb949c0685fd2958,
+    type: 3}
+  m_PrefabInstance: {fileID: 6884255806786864598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3156751709346735482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8378598401646502060, guid: 60e37feb7525f4f4fb949c0685fd2958,
@@ -134,10 +207,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  removeFromChainAfterEffect: 0
+  label: Grandma Clue
+  removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 0
+  indexInChain: 2
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
@@ -149,6 +225,134 @@ MonoBehaviour:
   ambienceAudio: 
   interactionEnabled: 0
   clueToFind: {fileID: 11400000, guid: b550a5de6af2c4d439987ef8b6e35524, type: 2}
+--- !u!114 &4080035390202980187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69fd1dfe51448539e40a2dad67f0373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Help Grandma
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 3
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskToBegin: {fileID: 11400000, guid: 9c4d680a3dd53974bb0a2f9693f01566, type: 2}
+--- !u!114 &869501180841210607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa9a028af1e74ba0833526faba54e707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Find Shop Clerk
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 4
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  message:
+    sender: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
+    title: Next Job
+    message: Go find a shop clerk who works at a liquor store in the Shopping District
+  delay: 4
+--- !u!114 &4779868595053616919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69fd1dfe51448539e40a2dad67f0373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Find Shop Clerk
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 5
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskToBegin: {fileID: 11400000, guid: ac2aa5e851d843f4d92e6efc0d8053d9, type: 2}
+--- !u!114 &5496705938527350462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22417bd54084b7fafe88c91ae3fe63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Find Grandma
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 1
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskData: {fileID: 11400000, guid: 34410987a9e591044a9b39e8824aec02, type: 2}
 --- !u!1001 &9050013210496466153
 PrefabInstance:
   m_ObjectHideFlags: 0

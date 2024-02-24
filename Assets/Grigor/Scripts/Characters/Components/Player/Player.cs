@@ -12,6 +12,7 @@ namespace Grigor.Characters.Components.Player
         public PlayerMovement Movement { get; private set; }
         public PlayerLook Look { get; private set; }
         public PlayerInteract Interact { get; private set; }
+        public PlayerEffects Effects { get; private set; }
 
         protected override void OnInitialized()
         {
@@ -20,6 +21,7 @@ namespace Grigor.Characters.Components.Player
             Movement = GetCharacterComponent<PlayerMovement>();
             Look = GetCharacterComponent<PlayerLook>();
             Interact = GetCharacterComponent<PlayerInteract>();
+            Effects = GetCharacterComponent<PlayerEffects>();
 
             characterRegistry.RegisterCharacter(CharacterGuid, this);
         }

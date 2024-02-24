@@ -1,0 +1,410 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Petshop
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I'm with the police.
+    InputPortName: 
+    OutputNodeGuid: d4157954-fa3c-4359-b2a9-155b6541c800
+    InputNodeGuid: ea20ad71-22dc-45dd-9452-8047886dd9f1
+  - OutportPortChoiceIndex: 0
+    OutputPortName: There has been a murder and I need to question you.
+    InputPortName: 
+    OutputNodeGuid: d4157954-fa3c-4359-b2a9-155b6541c800
+    InputNodeGuid: 1c6dd609-069d-44ba-b7dd-a90afbb5b953
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Are you a cat person or a dog person?
+    InputPortName: 
+    OutputNodeGuid: d4157954-fa3c-4359-b2a9-155b6541c800
+    InputNodeGuid: 53d8f29d-fe4d-4cc2-a8a3-523201e2f712
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: ea20ad71-22dc-45dd-9452-8047886dd9f1
+    InputNodeGuid: 2223b1dc-1590-48f7-b074-dfb21304882a
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 1c6dd609-069d-44ba-b7dd-a90afbb5b953
+    InputNodeGuid: fdcd6890-8f73-4f0a-93ba-9505fe52b99f
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Oh yeah cats rock
+    InputPortName: 
+    OutputNodeGuid: 2223b1dc-1590-48f7-b074-dfb21304882a
+    InputNodeGuid: b4d3166e-844c-4d88-97b0-bfd432edbb76
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Dogs. I don't get the hype around cats
+    InputPortName: 
+    OutputNodeGuid: 2223b1dc-1590-48f7-b074-dfb21304882a
+    InputNodeGuid: b4d3166e-844c-4d88-97b0-bfd432edbb76
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Both are a vibe
+    InputPortName: 
+    OutputNodeGuid: 2223b1dc-1590-48f7-b074-dfb21304882a
+    InputNodeGuid: b4d3166e-844c-4d88-97b0-bfd432edbb76
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: b4d3166e-844c-4d88-97b0-bfd432edbb76
+    InputNodeGuid: fdcd6890-8f73-4f0a-93ba-9505fe52b99f
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I wanted to ask you if you've seen any unusual customers lately.
+    InputPortName: 
+    OutputNodeGuid: fdcd6890-8f73-4f0a-93ba-9505fe52b99f
+    InputNodeGuid: aa49b3ba-4088-4805-a40c-28cb2b5f38bf
+  - OutportPortChoiceIndex: 0
+    OutputPortName: No. You're in the clear.
+    InputPortName: 
+    OutputNodeGuid: 53d8f29d-fe4d-4cc2-a8a3-523201e2f712
+    InputNodeGuid: fdcd6890-8f73-4f0a-93ba-9505fe52b99f
+  - OutportPortChoiceIndex: 0
+    OutputPortName: He wears a green jacket and a strange hat.
+    InputPortName: 
+    OutputNodeGuid: aa49b3ba-4088-4805-a40c-28cb2b5f38bf
+    InputNodeGuid: 8859c235-accb-42e0-a7ab-05697e8666dc
+  - OutportPortChoiceIndex: 0
+    OutputPortName: He wears large headphones and had loud music.
+    InputPortName: 
+    OutputNodeGuid: aa49b3ba-4088-4805-a40c-28cb2b5f38bf
+    InputNodeGuid: 8859c235-accb-42e0-a7ab-05697e8666dc
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 8859c235-accb-42e0-a7ab-05697e8666dc
+    InputNodeGuid: 4cac07c9-c684-4c40-8250-d26f78b7c362
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 4cac07c9-c684-4c40-8250-d26f78b7c362
+    InputNodeGuid: a8f58558-cb1c-41e1-b387-08b9199d247e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Why???
+    InputPortName: 
+    OutputNodeGuid: a8f58558-cb1c-41e1-b387-08b9199d247e
+    InputNodeGuid: eaebff15-a44f-4e5e-81f8-93e81f330e1e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Does he have like 12 cats or something?
+    InputPortName: 
+    OutputNodeGuid: a8f58558-cb1c-41e1-b387-08b9199d247e
+    InputNodeGuid: eaebff15-a44f-4e5e-81f8-93e81f330e1e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: eaebff15-a44f-4e5e-81f8-93e81f330e1e
+    InputNodeGuid: 3b9533aa-1ebc-47b3-804c-d41c18903cd9
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Thank you.  I hope you have a nice day.
+    InputPortName: 
+    OutputNodeGuid: 3b9533aa-1ebc-47b3-804c-d41c18903cd9
+    InputNodeGuid: 07c61b1f-34dc-47d7-ba33-ea6615eb032d
+  - OutportPortChoiceIndex: 0
+    OutputPortName: What about it?
+    InputPortName: 
+    OutputNodeGuid: 07c61b1f-34dc-47d7-ba33-ea6615eb032d
+    InputNodeGuid: 32a7c916-c307-4d13-9a55-882fba26843f
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 64d31fba-eea9-41be-a940-b7d5ca1628f6
+    InputNodeGuid: 478b3d3d-d6fe-4c1d-aaaa-d772e0e5713b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 32a7c916-c307-4d13-9a55-882fba26843f
+    InputNodeGuid: 64d31fba-eea9-41be-a940-b7d5ca1628f6
+  - OutportPortChoiceIndex: 0
+    OutputPortName: You raise some points indeed...
+    InputPortName: 
+    OutputNodeGuid: 478b3d3d-d6fe-4c1d-aaaa-d772e0e5713b
+    InputNodeGuid: cd3f8db6-d50c-4ff1-b830-df45e1c86b3e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I'm sorry, but they really aren't.
+    InputPortName: 
+    OutputNodeGuid: 478b3d3d-d6fe-4c1d-aaaa-d772e0e5713b
+    InputNodeGuid: cd3f8db6-d50c-4ff1-b830-df45e1c86b3e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: That's deep...
+    InputPortName: 
+    OutputNodeGuid: cd3f8db6-d50c-4ff1-b830-df45e1c86b3e
+    InputNodeGuid: f12d9b54-b9fc-4b08-9a40-3bfe85e1f33e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Ah yes, I've used it plenty.
+    InputPortName: 
+    OutputNodeGuid: f12d9b54-b9fc-4b08-9a40-3bfe85e1f33e
+    InputNodeGuid: 882aba7f-d6f6-4cd3-aba8-0017b0657f29
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Catnip?
+    InputPortName: 
+    OutputNodeGuid: f12d9b54-b9fc-4b08-9a40-3bfe85e1f33e
+    InputNodeGuid: 989933aa-6f66-4cfc-987d-b284099a7be2
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 989933aa-6f66-4cfc-987d-b284099a7be2
+    InputNodeGuid: 882aba7f-d6f6-4cd3-aba8-0017b0657f29
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 75d2f64e-ee32-4444-9f9d-e45957797879
+    InputNodeGuid: cd3f8db6-d50c-4ff1-b830-df45e1c86b3e
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Animals RULE!
+    InputPortName: 
+    OutputNodeGuid: 478b3d3d-d6fe-4c1d-aaaa-d772e0e5713b
+    InputNodeGuid: 75d2f64e-ee32-4444-9f9d-e45957797879
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Cool, thanks. I should definitely use catnip more.
+    InputPortName: 
+    OutputNodeGuid: 882aba7f-d6f6-4cd3-aba8-0017b0657f29
+    InputNodeGuid: da2daae1-4718-4f1f-a3b6-6af9ebf158f0
+  dialogueNodeData:
+  - nodeName: 
+    guid: d4157954-fa3c-4359-b2a9-155b6541c800
+    position: {x: 72, y: 485}
+    dialogueText: Hi hi! How can I help you today? ~~~~~~
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 1
+    choices:
+    - text: I'm with the police.
+      nextNodeGuid: ea20ad71-22dc-45dd-9452-8047886dd9f1
+    - text: There has been a murder and I need to question you.
+      nextNodeGuid: 1c6dd609-069d-44ba-b7dd-a90afbb5b953
+    - text: Are you a cat person or a dog person?
+      nextNodeGuid: 53d8f29d-fe4d-4cc2-a8a3-523201e2f712
+  - nodeName: 
+    guid: ea20ad71-22dc-45dd-9452-8047886dd9f1
+    position: {x: 476, y: 587}
+    dialogueText: OHMYGOSH CATS ALL THE WAY NYA~
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 2223b1dc-1590-48f7-b074-dfb21304882a
+  - nodeName: 
+    guid: 53d8f29d-fe4d-4cc2-a8a3-523201e2f712
+    position: {x: 477, y: 459}
+    dialogueText: Oh gosh. Am I a suspect?
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: No. You're in the clear.
+      nextNodeGuid: fdcd6890-8f73-4f0a-93ba-9505fe52b99f
+  - nodeName: 
+    guid: 1c6dd609-069d-44ba-b7dd-a90afbb5b953
+    position: {x: 478, y: 333}
+    dialogueText: 'Ooooh how serious :0 '
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: fdcd6890-8f73-4f0a-93ba-9505fe52b99f
+  - nodeName: 
+    guid: 2223b1dc-1590-48f7-b074-dfb21304882a
+    position: {x: 878, y: 629}
+    dialogueText: You?
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: Oh yeah cats rock
+      nextNodeGuid: b4d3166e-844c-4d88-97b0-bfd432edbb76
+    - text: Dogs. I don't get the hype around cats
+      nextNodeGuid: b4d3166e-844c-4d88-97b0-bfd432edbb76
+    - text: Both are a vibe
+      nextNodeGuid: b4d3166e-844c-4d88-97b0-bfd432edbb76
+  - nodeName: 
+    guid: b4d3166e-844c-4d88-97b0-bfd432edbb76
+    position: {x: 1268, y: 655}
+    dialogueText: Yaaaas slay! All animals are great though, honestly.
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: fdcd6890-8f73-4f0a-93ba-9505fe52b99f
+  - nodeName: 
+    guid: aa49b3ba-4088-4805-a40c-28cb2b5f38bf
+    position: {x: 2060, y: 519}
+    dialogueText: Hmmmm... Unusual how?
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: He wears a green jacket and a strange hat.
+      nextNodeGuid: 8859c235-accb-42e0-a7ab-05697e8666dc
+    - text: He wears large headphones and had loud music.
+      nextNodeGuid: 8859c235-accb-42e0-a7ab-05697e8666dc
+  - nodeName: 
+    guid: 4cac07c9-c684-4c40-8250-d26f78b7c362
+    position: {x: 2906, y: 526}
+    dialogueText: His music is like super annoying and loud and his fashion style
+      is worse. Horrible taste overall if you ask me.
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: a8f58558-cb1c-41e1-b387-08b9199d247e
+  - nodeName: 
+    guid: a8f58558-cb1c-41e1-b387-08b9199d247e
+    position: {x: 3299, y: 526}
+    dialogueText: But he comes here like every day and buys like huge amounts of
+      cat food.
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: Why???
+      nextNodeGuid: eaebff15-a44f-4e5e-81f8-93e81f330e1e
+    - text: Does he have like 12 cats or something?
+      nextNodeGuid: eaebff15-a44f-4e5e-81f8-93e81f330e1e
+  - nodeName: 
+    guid: eaebff15-a44f-4e5e-81f8-93e81f330e1e
+    position: {x: 3689, y: 535}
+    dialogueText: RIGHT, so he's either like a crazy cat lady or just has one massive
+      chonker who eats A LOT.
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 3b9533aa-1ebc-47b3-804c-d41c18903cd9
+  - nodeName: 
+    guid: fdcd6890-8f73-4f0a-93ba-9505fe52b99f
+    position: {x: 1696, y: 513}
+    dialogueText: (You try to think of a few questions to ask this interesting individual
+      but you blank.)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: I wanted to ask you if you've seen any unusual customers lately.
+      nextNodeGuid: aa49b3ba-4088-4805-a40c-28cb2b5f38bf
+  - nodeName: 
+    guid: 8859c235-accb-42e0-a7ab-05697e8666dc
+    position: {x: 2485, y: 526}
+    dialogueText: Oh yes! He's a regular here!
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 4cac07c9-c684-4c40-8250-d26f78b7c362
+  - nodeName: 
+    guid: 3b9533aa-1ebc-47b3-804c-d41c18903cd9
+    position: {x: 4150, y: 536}
+    dialogueText: But that's about everything I know ~~~~~
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: Thank you.  I hope you have a nice day.
+      nextNodeGuid: 07c61b1f-34dc-47d7-ba33-ea6615eb032d
+  - nodeName: 
+    guid: 07c61b1f-34dc-47d7-ba33-ea6615eb032d
+    position: {x: 4596, y: 536}
+    dialogueText: Yeah, right, so it would be if life wasn't so stressful with this
+      SSI shizzle.
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: What about it?
+      nextNodeGuid: 32a7c916-c307-4d13-9a55-882fba26843f
+  - nodeName: 
+    guid: 32a7c916-c307-4d13-9a55-882fba26843f
+    position: {x: 5001, y: 536}
+    dialogueText: 'No one cares about privacy and it''s like actually so important. '
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 64d31fba-eea9-41be-a940-b7d5ca1628f6
+  - nodeName: 
+    guid: 64d31fba-eea9-41be-a940-b7d5ca1628f6
+    position: {x: 5398, y: 536}
+    dialogueText: 'I tried to setup a data pod for my cat so his information would
+      be secure but NO ONE took me seriously. '
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 478b3d3d-d6fe-4c1d-aaaa-d772e0e5713b
+  - nodeName: 
+    guid: 478b3d3d-d6fe-4c1d-aaaa-d772e0e5713b
+    position: {x: 5793, y: 519}
+    dialogueText: Like what the hell! Animals are just as important as human beings.
+      AND it would help at the vet.
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: You raise some points indeed...
+      nextNodeGuid: cd3f8db6-d50c-4ff1-b830-df45e1c86b3e
+    - text: I'm sorry, but they really aren't.
+      nextNodeGuid: cd3f8db6-d50c-4ff1-b830-df45e1c86b3e
+    - text: Animals RULE!
+      nextNodeGuid: 75d2f64e-ee32-4444-9f9d-e45957797879
+  - nodeName: 
+    guid: cd3f8db6-d50c-4ff1-b830-df45e1c86b3e
+    position: {x: 6205, y: 512}
+    dialogueText: 'Whatever, I just want people to think more critically about their
+      lives and what they share. God. '
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: That's deep...
+      nextNodeGuid: f12d9b54-b9fc-4b08-9a40-3bfe85e1f33e
+  - nodeName: 
+    guid: f12d9b54-b9fc-4b08-9a40-3bfe85e1f33e
+    position: {x: 6611, y: 496}
+    dialogueText: 'OH and cats are so fun with catnip, you can make them do anything. '
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: Catnip?
+      nextNodeGuid: 989933aa-6f66-4cfc-987d-b284099a7be2
+    - text: Ah yes, I've used it plenty.
+      nextNodeGuid: 882aba7f-d6f6-4cd3-aba8-0017b0657f29
+  - nodeName: 
+    guid: 882aba7f-d6f6-4cd3-aba8-0017b0657f29
+    position: {x: 7427, y: 468}
+    dialogueText: I've done tricks with my cat to open doors. My boi so smart ~~~~
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 
+    - text: Cool, thanks. I should definitely use catnip more.
+      nextNodeGuid: da2daae1-4718-4f1f-a3b6-6af9ebf158f0
+  - nodeName: 
+    guid: 989933aa-6f66-4cfc-987d-b284099a7be2
+    position: {x: 7019, y: 383}
+    dialogueText: '(Press <b>[Q]</b> to use catnip. Idiot, the sergeant told you
+      that already.) '
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 882aba7f-d6f6-4cd3-aba8-0017b0657f29
+  - nodeName: 
+    guid: 75d2f64e-ee32-4444-9f9d-e45957797879
+    position: {x: 6182, y: 731}
+    dialogueText: YASSSS ~~~~~~~~~~~~~~~~~~~
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: cd3f8db6-d50c-4ff1-b830-df45e1c86b3e
+  - nodeName: 
+    guid: da2daae1-4718-4f1f-a3b6-6af9ebf158f0
+    position: {x: 7847, y: 468}
+    dialogueText: You never know, maybe catnip is VITALLY important to solving your
+      case!!!!! ~~~
+    speaker: {fileID: 11400000, guid: 928eb0165bcd3ed4482e7331650fd319, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
+  exposedProperties: []
+  commentBlockData: []

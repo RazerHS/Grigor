@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2958f9a1224344b87e25d17b79057f, type: 3}
+  m_Name: findSuspect_Cat
+  m_EditorClassIdentifier: 
+  assetName: findSuspect_Cat
+  taskName: Use Catnip to find the Suspect
+  taskDescription: 'The suspect is a cat owner. The pet shop lady said that you should
+    use catnip with the [Q] button to lure cats. '

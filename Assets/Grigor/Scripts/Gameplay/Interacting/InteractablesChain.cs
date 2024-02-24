@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.Utilities;
+using Codice.CM.Common;
 using Grigor.Gameplay.Interacting.Components;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Grigor.Gameplay.Interacting
 {
     [Serializable]
     public class InteractablesChain
     {
-        [SerializeField, LabelText("Chain"), ListElementInlineButton(nameof(IncrementElementIndex), "", SdfIconType.CaretDownFill), ListElementInlineButton(nameof(DecrementElementIndex), "", SdfIconType.CaretUpFill)] private List<InteractableComponent> interactableComponents = new();
+        [SerializeField, LabelText("Chain"), ListElementInlineButton(nameof(IncrementElementIndex), "", SdfIconType.CaretDownFill), ListElementInlineButton(nameof(DecrementElementIndex), "", SdfIconType.CaretUpFill), ListElementInlineButton("Useless", "@GetElementLabel($index, $element)")] private List<InteractableComponent> interactableComponents = new();
 
         public int InteractablesInChainCount => interactableComponents.Count;
+
+        private void Useless() { }
 
         public void OrderChain()
         {
@@ -188,6 +192,11 @@ namespace Grigor.Gameplay.Interacting
             nextInChain = interactableComponents[0];
 
             return ContinueCurrentChain(nextInChain);
+        }
+
+        private string GetElementLabel(int index, InteractableComponent element)
+        {
+            return element.Label;
         }
     }
 }

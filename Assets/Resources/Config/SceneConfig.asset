@@ -83,11 +83,12 @@ MonoBehaviour:
   nighttimeExposure: 11.5
   smoothSunTransition: 0
   smoothSunTransitionTime: 0.1
+  neonSignDisappearingChance: 0.5
   exposureMinimumSunRotationAngle: 60
   exposureMaximumSunRotationAngle: 135
   dayStartHour: 9
   nightStartHour: 20
-  startHour: 11
+  startHour: 10
   changeTimeAutomatically: 1
   timeMultiplier: 200
   weatherDataList:

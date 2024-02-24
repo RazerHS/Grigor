@@ -17,8 +17,10 @@ namespace Grigor.Gameplay.Interacting.Components
         [Tooltip("Should this component be triggered when the player is in range?")]
         [SerializeField, ColoredBoxGroup("Config", false, true)] protected bool interactInRange;
 
+        [SerializeField, ColoredBoxGroup("Chain", false, true), HideIf(nameof(IsOnlyInteractableInChain))] protected string label = "new";
+
         [Tooltip("Will this component remove itself from the chain so that it cannot be interacted with again after the first interaction?")]
-        [SerializeField, ColoredBoxGroup("Chain", false, true), InfoBox("Stays in chain and also stops the chain!", InfoMessageType.Warning, nameof(CheckConfig))] protected bool removeFromChainAfterEffect;
+        [SerializeField, ColoredBoxGroup("Chain"), InfoBox("Stays in chain and also stops the chain!", InfoMessageType.Warning, nameof(CheckConfig))] protected bool removeFromChainAfterEffect;
 
         [Tooltip("Should this interaction stop the interaction chain and let the player roam?")]
         [SerializeField, ColoredBoxGroup("Chain"), HideIf(nameof(IsOnlyInteractableInChain))] protected bool stopsChain;
@@ -28,6 +30,10 @@ namespace Grigor.Gameplay.Interacting.Components
 
         [Tooltip("Does this component have an effect when the time of day changes to day and night?")]
         [SerializeField, ColoredBoxGroup("Time", false, true)] protected bool hasTimeEffect;
+
+        [Tooltip("Should this interaction be locked before a certain day?")]
+        [SerializeField, ColoredBoxGroup("Time")] protected bool lockedBeforeCertainDay;
+        [SerializeField, ColoredBoxGroup("Time"), Range(1, 3), ShowIf(nameof(lockedBeforeCertainDay))] protected int unlockedOnDay = 1;
 
         [Tooltip("Should time pass after this interaction triggers?")]
         [SerializeField, ColoredBoxGroup("Time")] protected bool timePassesOnInteract;
@@ -66,9 +72,12 @@ namespace Grigor.Gameplay.Interacting.Components
         public TaskData TaskToListenTo => taskToListenTo;
         public bool StopChainIfTaskNotStarted => stopChainIfTaskNotStarted;
 
+        public string Label => label;
+
         // NOTE: necessary because DI does not support inheritance, so this is a workaround to not inject the same object twice into children
         public TimeManager TimeManager => timeManager;
         public AudioController AudioController => audioController;
+        public PlayerInput PlayerInput => playerInput;
 
         public event Action BeginInteractionEvent;
         public event Action EndInteractionEvent;
@@ -107,6 +116,11 @@ namespace Grigor.Gameplay.Interacting.Components
                 timeManager.ChangedToNightEvent += OnChangedToNight;
 
                 Log.Write($"Registering to time manager: {name}");
+            }
+
+            if (lockedBeforeCertainDay)
+            {
+                DisableInteraction();
             }
 
             if (playAudio && playAmbienceAudio)
@@ -165,6 +179,11 @@ namespace Grigor.Gameplay.Interacting.Components
         protected virtual void InRangeEffect() { }
 
         protected virtual void OutOfRangeEffect() { }
+
+        public bool StopChainIfLockedOnCurrentDay()
+        {
+            return lockedBeforeCertainDay && timeManager.Days < unlockedOnDay;
+        }
 
         private void OnInteract()
         {

@@ -41,6 +41,8 @@ namespace Grigor.Input
         public event Action CatnipInputStartedEvent;
         public event Action CatnipInputCanceledEvent;
 
+        public event Action OnRefreshInputStartedEvent;
+
         public event Action<float> ScrollInputStartedEvent;
 
         public event Action PauseInputStartedEvent;
@@ -78,6 +80,8 @@ namespace Grigor.Input
             playerInputActions.Player.Scroll.started += OnScrollInputStarted;
 
             playerInputActions.Player.Pause.started += OnPauseInputStarted;
+
+            playerInputActions.Player.Refresh.started += OnRefreshInputStarted;
         }
 
         private void OnDisable()
@@ -104,6 +108,10 @@ namespace Grigor.Input
             playerInputActions.Player.Catnip.started -= OnCatnipInputStarted;
 
             playerInputActions.Player.Scroll.started -= OnScrollInputStarted;
+
+            playerInputActions.Player.Pause.started -= OnPauseInputStarted;
+
+            playerInputActions.Player.Refresh.started -= OnRefreshInputStarted;
         }
 
         private void Update()
@@ -207,6 +215,11 @@ namespace Grigor.Input
         private void OnPauseInputStarted(InputAction.CallbackContext context)
         {
             PauseInputStartedEvent?.Invoke();
+        }
+
+        private void OnRefreshInputStarted(InputAction.CallbackContext context)
+        {
+            OnRefreshInputStartedEvent?.Invoke();
         }
     }
 }
