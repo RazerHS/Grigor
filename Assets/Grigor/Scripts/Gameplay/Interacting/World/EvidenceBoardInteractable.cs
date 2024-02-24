@@ -28,7 +28,7 @@ namespace Grigor.Gameplay.World.Components
         {
             playerVirtualCamera = cameraManager.ActiveVirtualCamera;
 
-            Cursor.visible = true;
+            Helper.EnableCursor();
 
             cameraManager.SetBlendTime(cameraBlendTime);
 

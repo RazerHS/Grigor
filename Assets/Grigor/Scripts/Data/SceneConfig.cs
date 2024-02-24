@@ -1,23 +1,29 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using Grigor.Gameplay.Settings;
 using Grigor.Gameplay.Weather;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Rendering.HighDefinition;
 
 namespace Grigor.Data
 {
     [GlobalConfig("Assets/Resources/Config/"), CreateAssetMenu(fileName = "SceneConfig", menuName = "Grigor/Scene Config")]
     public class SceneConfig : GlobalConfig<SceneConfig>
     {
+        [SerializeField, ColoredBoxGroup("Settings")] private List<Vector2> resolutionOptions;
+        [SerializeField, ColoredBoxGroup("Settings")] private List<QualityOptions> qualityOptions;
+        [SerializeField, ColoredBoxGroup("Settings")] private HDRenderPipelineAsset renderPipelineAsset;
+
         [SerializeField, ColoredBoxGroup("Lighting", true, 0.2f, 0.5f, 0.5f)] private Gradient ambientColor;
         [SerializeField, ColoredBoxGroup("Lighting")] private Gradient directionalColor;
         [SerializeField, ColoredBoxGroup("Lighting") ,Range(0, 14f)] private float daytimeExposure;
         [SerializeField, ColoredBoxGroup("Lighting"), Range(0, 14f)] private float nighttimeExposure;
         [SerializeField, ColoredBoxGroup("Lighting")] private bool smoothSunTransition;
         [SerializeField, ColoredBoxGroup("Lighting"), ShowIf(nameof(smoothSunTransition))] private float smoothSunTransitionTime;
-        [FormerlySerializedAs("neonSignDisappearChance"),SerializeField, ColoredBoxGroup("Lighting"), Range(0f, 1f)] private float neonSignDisappearingChance;
+        [SerializeField, ColoredBoxGroup("Lighting"), Range(0f, 1f)] private float neonSignDisappearingChance;
 
         [Tooltip("An angle smaller than 90 degrees and greater than 0 that represents the first angle of the sun's rotation in the sky when the exposure is the brightest. Also works vice-versa for nighttime.")]
         [SerializeField, ColoredBoxGroup("Lighting"), Range(1, 89)] private int exposureMinimumSunRotationAngle;
@@ -86,6 +92,10 @@ namespace Grigor.Data
         [Tooltip("The chance that the wind speed will change when the weather changes.")]
         [SerializeField, ColoredBoxGroup("Random Weather Changes"), Range(0f, 1f)] private float windDirectionChangeChance;
 
+        public List<Vector2> ResolutionOptions => resolutionOptions;
+        public List<QualityOptions> QualityOptions => qualityOptions;
+        public HDRenderPipelineAsset RenderPipelineAsset => renderPipelineAsset;
+
         public Gradient AmbientColor => ambientColor;
         public Gradient DirectionalColor => directionalColor;
         public float DaytimeExposure => daytimeExposure;
@@ -123,5 +133,12 @@ namespace Grigor.Data
         public float CloudShapeScaleChangeChance => cloudShapeScaleChangeChance;
         public float CloudErosionScaleChangeChance => cloudErosionScaleChangeChance;
         public float WindDirectionChangeChance => windDirectionChangeChance;
+
+        public event Action<QualityOptions> QualityChangedEvent;
+
+        public void OnQualityChanged(QualityOptions quality)
+        {
+            QualityChangedEvent?.Invoke(quality);
+        }
     }
 }

@@ -28,7 +28,14 @@ namespace Grigor.StateMachines.EvidenceBoard.States
         {
             evidenceBoardManager.InteractWithBoardEvent -= OnInteractWithBoard;
 
-            evidenceBoardWidget.Show();
+            try
+            {
+                evidenceBoardWidget.Show();
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         private void OnInteractWithBoard()

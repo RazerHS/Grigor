@@ -3,6 +3,7 @@ using CardboardCore.StateMachines;
 using RazerCore.Utils.Addressables;
 using Grigor.UI;
 using Grigor.UI.Screens;
+using Grigor.Utils;
 
 namespace Grigor.StateMachines.Application.States
 {
@@ -18,11 +19,15 @@ namespace Grigor.StateMachines.Application.States
             mainMenuScreen = uiManager.ShowScreen<MainMenuScreen>();
 
             mainMenuScreen.PlayButtonPressedEvent += OnPlayButtonPressed;
+            mainMenuScreen.SettingsButtonPressedEvent += OnSettingsButtonPressed;
+
+            Helper.EnableCursor();
         }
 
         protected override void OnExit()
         {
             mainMenuScreen.PlayButtonPressedEvent -= OnPlayButtonPressed;
+            mainMenuScreen.SettingsButtonPressedEvent -= OnSettingsButtonPressed;
 
             mainMenuScreen.Hide();
         }
@@ -30,6 +35,11 @@ namespace Grigor.StateMachines.Application.States
         private void OnPlayButtonPressed()
         {
             owningStateMachine.ToState<GameplayState>();
+        }
+
+        private void OnSettingsButtonPressed()
+        {
+            owningStateMachine.ToState<SettingsState>();
         }
     }
 }
