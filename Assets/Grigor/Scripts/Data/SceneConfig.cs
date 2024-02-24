@@ -6,16 +6,16 @@ using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 namespace Grigor.Data
 {
     [GlobalConfig("Assets/Resources/Config/"), CreateAssetMenu(fileName = "SceneConfig", menuName = "Grigor/Scene Config")]
     public class SceneConfig : GlobalConfig<SceneConfig>
     {
-        [SerializeField, ColoredBoxGroup("Settings", false, true)] private bool rainEnabled = true;
-        [SerializeField, ColoredBoxGroup("Settings", false, true)] private bool volumetricsEnabled = true;
         [SerializeField, ColoredBoxGroup("Settings")] private List<Vector2> resolutionOptions;
         [SerializeField, ColoredBoxGroup("Settings")] private List<QualityOptions> qualityOptions;
+        [SerializeField, ColoredBoxGroup("Settings")] private HDRenderPipelineAsset renderPipelineAsset;
 
         [SerializeField, ColoredBoxGroup("Lighting", true, 0.2f, 0.5f, 0.5f)] private Gradient ambientColor;
         [SerializeField, ColoredBoxGroup("Lighting")] private Gradient directionalColor;
@@ -91,10 +91,9 @@ namespace Grigor.Data
         [Tooltip("The chance that the wind speed will change when the weather changes.")]
         [SerializeField, ColoredBoxGroup("Random Weather Changes"), Range(0f, 1f)] private float windDirectionChangeChance;
 
-        public bool RainEnabled => rainEnabled;
-        public bool VolumetricsEnabled => volumetricsEnabled;
         public List<Vector2> ResolutionOptions => resolutionOptions;
         public List<QualityOptions> QualityOptions => qualityOptions;
+        public HDRenderPipelineAsset RenderPipelineAsset => renderPipelineAsset;
 
         public Gradient AmbientColor => ambientColor;
         public Gradient DirectionalColor => directionalColor;
@@ -133,35 +132,11 @@ namespace Grigor.Data
         public float CloudErosionScaleChangeChance => cloudErosionScaleChangeChance;
         public float WindDirectionChangeChance => windDirectionChangeChance;
 
-        public event Action<bool> RainToggledEvent;
-        public event Action<bool> VolumetricsToggledEvent;
+        public event Action<QualityOptions> QualityChangedEvent;
 
-        public void EnableRain()
+        public void OnQualityChanged(QualityOptions quality)
         {
-            rainEnabled = true;
-
-            RainToggledEvent?.Invoke(true);
-        }
-
-        public void DisableRain()
-        {
-            rainEnabled = false;
-
-            RainToggledEvent?.Invoke(false);
-        }
-
-        public void EnableVolumetrics()
-        {
-            volumetricsEnabled = true;
-
-            VolumetricsToggledEvent?.Invoke(true);
-        }
-
-        public void DisableVolumetrics()
-        {
-            volumetricsEnabled = false;
-
-            VolumetricsToggledEvent?.Invoke(false);
+            QualityChangedEvent?.Invoke(quality);
         }
     }
 }

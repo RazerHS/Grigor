@@ -4,12 +4,10 @@ using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Data;
 using Grigor.Gameplay.Audio;
-using Grigor.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Serialization;
-using Screen = UnityEngine.Device.Screen;
+using UnityEngine.Rendering.HighDefinition;
 using Vector2 = UnityEngine.Vector2;
 
 namespace Grigor.Gameplay.Settings
@@ -56,7 +54,14 @@ namespace Grigor.Gameplay.Settings
 
             Vector2 resolution = sceneConfig.ResolutionOptions[currentResolutionIndex];
 
-            Screen.SetResolution((int)resolution.x, (int)resolution.y, FullScreenMode.MaximizedWindow);
+            // HDRenderPipelineAsset hdAsset = GraphicsSettings.defaultRenderPipeline as HDRenderPipelineAsset;
+            //
+            // var dynamicResSettings = hdAsset.currentPlatformRenderPipelineSettings.dynamicResolutionSettings;
+            //
+            // dynamicResSettings.enabled = true;
+            //
+            // dynamicResSettings.forceResolution = true;
+            // dynamicResSettings.forcedPercentage = 10f;
         }
 
         public void OnQualityChanged(int index)
@@ -69,16 +74,7 @@ namespace Grigor.Gameplay.Settings
 
             QualityOptions quality = sceneConfig.QualityOptions[currentQualityIndex];
 
-            if (quality == QualityOptions.High)
-            {
-                sceneConfig.EnableRain();
-                sceneConfig.EnableVolumetrics();
-            }
-            else
-            {
-                sceneConfig.DisableRain();
-                sceneConfig.DisableVolumetrics();
-            }
+            sceneConfig.OnQualityChanged(quality);
         }
 
         public List<TMP_Dropdown.OptionData> GetResolutionDropdownOptions()
