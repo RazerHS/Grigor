@@ -8,22 +8,30 @@ namespace Grigor.Gameplay.Lighting
         [SerializeField] private List<Renderer> renderers;
         [SerializeField] private bool permanentlyVisible;
 
-        private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
+        private static readonly int EmissionColor = Shader.PropertyToID("_EmissiveColor");
+        private static readonly int EmissiveIntensity = Shader.PropertyToID("_EmissiveIntensity");
 
         public void Initialize(Color color, bool willDisappear)
         {
-            if (willDisappear || !permanentlyVisible)
+            if (!permanentlyVisible)
             {
-                gameObject.SetActive(false);
+                if (willDisappear)
+                {
+                    gameObject.SetActive(false);
 
-                return;
+                    return;
+                }
             }
 
             renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
 
             foreach (Renderer renderer in renderers)
             {
-                renderer.material.SetColor(EmissionColor, color);
+                Material material = renderer.material;
+
+                float intensity = material.GetFloat(EmissiveIntensity);
+
+                material.SetColor(EmissionColor, color * intensity);
             }
         }
     }
