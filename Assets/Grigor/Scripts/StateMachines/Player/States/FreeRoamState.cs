@@ -1,4 +1,3 @@
-using System.Net;
 using CardboardCore.DI;
 using CardboardCore.StateMachines;
 using Grigor.Gameplay.Cats;

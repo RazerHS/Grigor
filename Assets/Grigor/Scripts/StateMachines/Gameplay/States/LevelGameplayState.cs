@@ -5,7 +5,6 @@ using Grigor.UI;
 using Grigor.UI.Screens;
 using Grigor.UI.Widgets;
 using Grigor.Utils;
-using Cursor = UnityEngine.Cursor;
 
 namespace Grigor.StateMachines.Gameplay.States
 {

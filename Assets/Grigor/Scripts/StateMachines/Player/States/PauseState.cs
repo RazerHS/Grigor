@@ -4,7 +4,6 @@ using Grigor.Gameplay.Settings;
 using Grigor.UI;
 using Grigor.UI.Widgets;
 using Grigor.Utils;
-using UnityEngine;
 
 namespace Grigor.StateMachines.Player.States
 {

@@ -6,8 +6,6 @@ using Grigor.Data;
 using Grigor.Gameplay.Audio;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.HighDefinition;
 using Vector2 = UnityEngine.Vector2;
 
 namespace Grigor.Gameplay.Settings
