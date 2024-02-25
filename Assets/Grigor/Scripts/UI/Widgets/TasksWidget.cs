@@ -2,6 +2,7 @@
 using Grigor.Data.Tasks;
 using Grigor.UI.Data;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 namespace Grigor.UI.Widgets
@@ -10,17 +11,25 @@ namespace Grigor.UI.Widgets
     {
         [SerializeField] private TaskUIDisplay taskUIDisplayPrefab;
         [SerializeField] private Transform taskUIDisplayParent;
+        [SerializeField] private TextMeshProUGUI selectedTaskName;
+        [SerializeField] private TextMeshProUGUI selectedTaskDescription;
 
         [ShowInInspector] private List<TaskUIDisplay> displayedTasks = new();
 
         protected override void OnShow()
         {
-
+            foreach (TaskUIDisplay taskUIDisplay in displayedTasks)
+            {
+                taskUIDisplay.OnSelectedTask += OnTaskSelected;
+            }
         }
 
         protected override void OnHide()
         {
-
+            foreach (TaskUIDisplay taskUIDisplay in displayedTasks)
+            {
+                taskUIDisplay.OnSelectedTask -= OnTaskSelected;
+            }
         }
 
         public void OnTaskCompleted(TaskData taskData)
@@ -51,6 +60,12 @@ namespace Grigor.UI.Widgets
             }
 
             displayedTasks.Add(taskUIDisplay);
+        }
+
+        private void OnTaskSelected(TaskData taskData)
+        {
+            selectedTaskName.text = taskData.TaskName;
+            selectedTaskDescription.text = taskData.TaskDescription;
         }
     }
 }

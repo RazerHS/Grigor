@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Grigor.Gameplay.Messages;
 using Grigor.UI.Data;
+using TMPro;
 using UnityEngine;
 
 namespace Grigor.UI.Widgets
@@ -9,12 +10,18 @@ namespace Grigor.UI.Widgets
     {
         [SerializeField] private Transform messageDisplayParent;
         [SerializeField] private MessageUIDisplay messageUIDisplayPrefab;
+        [SerializeField] private TextMeshProUGUI selectedMessageTitle;
+        [SerializeField] private TextMeshProUGUI selectedMessageSender;
+        [SerializeField] private TextMeshProUGUI selectedMessageText;
 
         private readonly List<MessageUIDisplay> displayedMessages = new();
 
         protected override void OnShow()
         {
-
+            foreach (MessageUIDisplay messageUIDisplay in displayedMessages)
+            {
+                messageUIDisplay.OnSelectedMessage += OnMessageSelected;
+            }
         }
 
         protected override void OnHide()
@@ -28,7 +35,7 @@ namespace Grigor.UI.Widgets
 
             messageUIDisplay.transform.SetParent(messageDisplayParent);
 
-            messageUIDisplay.Initialize(message.Sender.name, message.Title, message.MessageText);
+            messageUIDisplay.Initialize(message);
 
             if (displayedMessages.Contains(messageUIDisplay))
             {
@@ -36,6 +43,13 @@ namespace Grigor.UI.Widgets
             }
 
             displayedMessages.Add(messageUIDisplay);
+        }
+
+        private void OnMessageSelected(Message message)
+        {
+            selectedMessageTitle.text = message.Title;
+            selectedMessageSender.text = $"From: {message.Sender.name}";
+            selectedMessageText.text = message.MessageText;
         }
     }
 }
