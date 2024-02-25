@@ -7,7 +7,7 @@ namespace Grigor.Gameplay.Clues
     {
         public void OnClueFound(ClueData clueData);
 
-        public void OnMatchedClues(List<ClueData> matchedClues);
+        public void OnMatchedClue(ClueData clueMatched);
 
         public void RegisterClueListener();
     }

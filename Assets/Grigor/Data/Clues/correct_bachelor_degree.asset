@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: age_correct
+  m_Name: correct_bachelor_degree
   m_EditorClassIdentifier: 
-  assetName: age_correct
-  credentialType: 0
+  assetName: correct_bachelor_degree
+  credentialType: 2
   appearsInDataPod: 1
   typed: 1
   evidenceBoardNoteType: 0
-  clueHeading: Age
-  evidenceText: 37
+  clueHeading: Bachelor Degree
+  evidenceText: Electrical Engineering
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}

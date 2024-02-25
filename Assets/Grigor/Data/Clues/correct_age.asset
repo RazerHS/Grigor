@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: pet_color_correct
+  m_Name: correct_age
   m_EditorClassIdentifier: 
-  assetName: pet_color_correct
-  credentialType: 3
+  assetName: correct_age
+  credentialType: 0
   appearsInDataPod: 1
-  typed: 0
+  typed: 1
   evidenceBoardNoteType: 0
-  clueHeading: Pet Colour
-  evidenceText: Orange
+  clueHeading: Age
+  evidenceText: 37
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}

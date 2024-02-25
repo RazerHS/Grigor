@@ -1,9 +1,9 @@
 ﻿using System;
+using DG.Tweening;
+using Grigor.Data.Clues;
 using Grigor.Data.Credentials;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Grigor.UI.Data
@@ -12,92 +12,39 @@ namespace Grigor.UI.Data
     public class CredentialUIDisplay : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI credentialText;
-        [SerializeField] private Droppable clueDroppable;
-        [SerializeField] private RectTransform clueHolderTransform;
         [SerializeField] private TMP_InputField inputField;
+        [SerializeField] private Image inputFieldImage;
         [SerializeField] private GameObject inputPlaceholderTextObject;
-
-        [ShowInInspector] private ClueUIDisplay attachedClueUIDisplay;
+        [SerializeField] private float colorTransitionDuration = 0.5f;
 
         private CredentialType credentialType;
-        private bool ignoreFirstEndDrag = true;
         private Color defaultColor;
         private CredentialWallet criminalCredentialWallet;
-        private bool typed;
+        private ClueData heldClue;
 
         public CredentialType CredentialType => credentialType;
-        public ClueUIDisplay AttachedClueUIDisplay => attachedClueUIDisplay;
-        public RectTransform ClueHolderTransform => clueHolderTransform;
-        public bool Typed => typed;
         public string ClueInput => inputField.text;
+        public ClueData HeldClue => heldClue;
 
-        public event Action<CredentialUIDisplay, ClueUIDisplay> CheckDroppedClueEvent;
-        public event Action<CredentialUIDisplay, string> CheckInputClueStringEvent;
+        public event Action<CredentialUIDisplay, string> CheckInputStringEvent;
 
-        public void Initialize(CredentialWallet credentialWallet)
+        public void Initialize(CredentialWallet credentialWallet, CredentialType credentialType, ClueData heldClue)
         {
-            clueDroppable.OnDropEvent += OnDrop;
-
-            defaultColor = clueDroppable.GetComponent<Image>().color;
-
-            DisableInputField();
-
+            this.credentialType = credentialType;
+            this.heldClue = heldClue;
             criminalCredentialWallet = credentialWallet;
+
+            EnableInputField();
         }
 
         public void Dispose()
         {
-            clueDroppable.OnDropEvent -= OnDrop;
-        }
 
-        private void OnDrop(PointerEventData eventData)
-        {
-            ClueUIDisplay clueUIDisplay = eventData.pointerDrag.GetComponentInParent<ClueUIDisplay>();
-
-            if (clueUIDisplay == null)
-            {
-                return;
-            }
-
-            attachedClueUIDisplay = clueUIDisplay;
-
-            CheckDroppedClueEvent?.Invoke(this, clueUIDisplay);
-        }
-
-        public void StoreCredentialType(CredentialType credentialType)
-        {
-            this.credentialType = credentialType;
-
-            typed = criminalCredentialWallet.GetMatchingClue(credentialType).Typed;
-
-            if (!typed)
-            {
-                return;
-            }
-
-            EnableInputField();
-            DisableDrop();
         }
 
         public void SetCredentialDisplay(string name, bool revealValue)
         {
             credentialText.text = $"{name}:";
-        }
-
-        public void DisableDrop()
-        {
-            clueDroppable.enabled = false;
-        }
-
-        public void SnapClueToHolder()
-        {
-            attachedClueUIDisplay.MoveParentRectTransformTo(clueHolderTransform.position);
-            attachedClueUIDisplay.ResetPosition();
-        }
-
-        public void DetachClue()
-        {
-            attachedClueUIDisplay = null;
         }
 
         public void EnableInputField()
@@ -116,24 +63,23 @@ namespace Grigor.UI.Data
             inputField.interactable = false;
 
             inputField.onSubmit.RemoveListener(OnSubmitTypedClue);
-
-            inputField.gameObject.SetActive(false);
-        }
-
-        public void SoftDisableInputField()
-        {
-            inputField.interactable = false;
-
-            inputField.onSubmit.RemoveListener(OnSubmitTypedClue);
-
-            inputPlaceholderTextObject.SetActive(false);
-
-            inputField.gameObject.SetActive(true);
         }
 
         private void OnSubmitTypedClue(string input)
         {
-            CheckInputClueStringEvent?.Invoke(this, input);
+            CheckInputStringEvent?.Invoke(this, input);
+        }
+
+        public void MarkAsCorrect()
+        {
+            Hoverable[] inputFieldImageHoverable = GetComponentsInChildren<Hoverable>();
+
+            foreach (Hoverable hoverable in inputFieldImageHoverable)
+            {
+                hoverable.Disable();
+            }
+
+            inputFieldImage.DOColor(Color.white, 0.5f).SetEase(Ease.InOutSine);
         }
     }
 }

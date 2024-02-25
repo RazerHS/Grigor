@@ -1,5 +1,6 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
+using Grigor.UI;
 using RazerCore.Utils.Addressables;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Grigor.StateMachines.Application.States
     public class SetupGameState : State
     {
         [Inject] private AddressablesLoader addressablesLoader;
+        [Inject] private UIManager uiManager;
 
         private const int ObjectsToLoad = 2;
         private int objectsLoaded;
@@ -35,6 +37,8 @@ namespace Grigor.StateMachines.Application.States
         {
             GameObject mainCamera = Object.Instantiate(gameObject);
             mainCamera.name = "MainCamera";
+
+            uiManager.SetCanvasCamera(mainCamera.GetComponent<Camera>());
 
             CheckObjectsLoadedCount();
         }

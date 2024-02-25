@@ -121,7 +121,7 @@ namespace Grigor.Gameplay.EvidenceBoard
             notes.FirstOrDefault(note => note.ClueData == clueData)?.RevealNote();
         }
 
-        public void OnMatchedClues(List<ClueData> matchedClues)
+        public void OnMatchedClue(ClueData matchedClue)
         {
             foreach (EvidenceBoardNote note in notes)
             {
@@ -130,7 +130,8 @@ namespace Grigor.Gameplay.EvidenceBoard
                     continue;
                 }
 
-                List<ClueData> cluesToConnect = note.ClueData.CluesToConnectTo.Intersect(matchedClues).ToList();
+                // NOTE: not changing this in order to not break it
+                List<ClueData> cluesToConnect = note.ClueData.CluesToConnectTo.Intersect(new List<ClueData> { matchedClue } ).ToList();
 
                 if (!cluesToConnect.Any())
                 {

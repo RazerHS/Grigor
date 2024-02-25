@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: favorite_drink_correct
+  m_Name: correct_medical_condition
   m_EditorClassIdentifier: 
-  assetName: favorite_drink_correct
-  credentialType: 6
+  assetName: correct_medical_condition
+  credentialType: 5
   appearsInDataPod: 1
-  typed: 0
+  typed: 1
   evidenceBoardNoteType: 0
-  clueHeading: Favourite Drink
-  evidenceText: AI Cola
+  clueHeading: Medical Condition
+  evidenceText: Cyber-Alzheimers
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}

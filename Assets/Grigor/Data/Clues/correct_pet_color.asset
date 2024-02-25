@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: medical_condition_correct
+  m_Name: correct_pet_color
   m_EditorClassIdentifier: 
-  assetName: medical_condition_correct
-  credentialType: 5
+  assetName: correct_pet_color
+  credentialType: 3
   appearsInDataPod: 1
   typed: 1
   evidenceBoardNoteType: 0
-  clueHeading: Medical Condition
-  evidenceText: Cyber-Alzheimers
+  clueHeading: Pet Colour
+  evidenceText: Orange
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}

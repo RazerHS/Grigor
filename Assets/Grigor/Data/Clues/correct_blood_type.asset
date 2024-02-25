@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: music_taste_correct
+  m_Name: correct_blood_type
   m_EditorClassIdentifier: 
-  assetName: music_taste_correct
-  credentialType: 7
+  assetName: correct_blood_type
+  credentialType: 4
   appearsInDataPod: 1
-  typed: 0
+  typed: 1
   evidenceBoardNoteType: 0
-  clueHeading: Music Taste
-  evidenceText: Alt Jazz
+  clueHeading: Blood Type
+  evidenceText: A
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: name_correct
+  m_Name: correct_music_taste
   m_EditorClassIdentifier: 
-  assetName: name_correct
-  credentialType: 1
+  assetName: correct_music_taste
+  credentialType: 7
   appearsInDataPod: 1
   typed: 1
   evidenceBoardNoteType: 0
-  clueHeading: Name
-  evidenceText: Sergey
+  clueHeading: Music Taste
+  evidenceText: Alt Jazz
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}

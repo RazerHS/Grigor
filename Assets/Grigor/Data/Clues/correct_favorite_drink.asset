@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
-  m_Name: blood_type_correct
+  m_Name: correct_favorite_drink
   m_EditorClassIdentifier: 
-  assetName: blood_type_correct
-  credentialType: 4
+  assetName: correct_favorite_drink
+  credentialType: 6
   appearsInDataPod: 1
-  typed: 1
+  typed: 0
   evidenceBoardNoteType: 0
-  clueHeading: Blood Type
-  evidenceText: A
+  clueHeading: Favourite Drink
+  evidenceText: AI Cola
   cluesToConnectTo: []
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}

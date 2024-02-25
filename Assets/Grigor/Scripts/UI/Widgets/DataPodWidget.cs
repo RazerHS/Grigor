@@ -11,28 +11,22 @@ using Grigor.UI.Widgets;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class DataPodWidget : UIWidget, IClueListener
+public class DataPodWidget : UIWidget
 {
     [SerializeField] private CredentialUIDisplay credentialDisplayPrefab;
-    [SerializeField] private ClueUIDisplay clueDisplayPrefab;
     [SerializeField] private GameObject dataPodView;
     [SerializeField] private Transform credentialDisplayParent;
-    [SerializeField] private Transform clueDisplayParent;
 
     [Inject] private ClueRegistry clueRegistry;
     [Inject] private UIManager uiManager;
 
     [ShowInInspector] private readonly Dictionary<CredentialType, CredentialUIDisplay> displayedCredentials = new();
-    [ShowInInspector] private List<ClueUIDisplay> displayedClues = new();
-    [ShowInInspector] private Dictionary<CredentialUIDisplay, ClueUIDisplay> correctMatches = new();
 
     private CredentialWallet criminalCredentialWallet;
     private MessagePopupWidget messagePopupWidget;
 
     protected override void OnShow()
     {
-        RegisterClueListener();
-
         InsertCredentials();
 
         HideDataPod();
@@ -45,11 +39,6 @@ public class DataPodWidget : UIWidget, IClueListener
         foreach (CredentialUIDisplay credentialUIDisplay in displayedCredentials.Values)
         {
             credentialUIDisplay.Dispose();
-        }
-
-        foreach (ClueUIDisplay clueUIDisplay in displayedClues)
-        {
-            clueUIDisplay.Dispose();
         }
     }
 
@@ -82,162 +71,32 @@ public class DataPodWidget : UIWidget, IClueListener
         }
 
         CredentialUIDisplay credentialUIDisplay = Instantiate(credentialDisplayPrefab, credentialDisplayParent);
-        credentialUIDisplay.Initialize(criminalCredentialWallet);
-        credentialUIDisplay.StoreCredentialType(credentialType);
+        credentialUIDisplay.Initialize(criminalCredentialWallet, credentialType, criminalCredentialWallet.GetMatchingClue(credentialType));
         credentialUIDisplay.SetCredentialDisplay(credentialType.ToString(), false);
 
         displayedCredentials.Add(credentialType, credentialUIDisplay);
 
-        credentialUIDisplay.CheckDroppedClueEvent += OnClueAttached;
-        credentialUIDisplay.CheckInputClueStringEvent += OnClueTyped;
+        credentialUIDisplay.CheckInputStringEvent += OnTypedClue;
     }
 
-    private void OnClueTyped(CredentialUIDisplay credentialUIDisplay, string clueString)
+    private void OnTypedClue(CredentialUIDisplay credentialUIDisplay, string inputString)
     {
-        CheckCurrentClueMatches();
-    }
-
-    private void OnClueAttached(CredentialUIDisplay credentialUIDisplay, ClueUIDisplay clueUIDisplay)
-    {
-        clueUIDisplay.FlagAsAttached(credentialUIDisplay);
-        clueUIDisplay.transform.SetParent(credentialUIDisplay.ClueHolderTransform);
-
-        clueUIDisplay.ClueDragStartedEvent += OnClueDetached;
-
-        credentialUIDisplay.SnapClueToHolder();
-
-        CheckCurrentClueMatches();
-    }
-
-    private void OnClueDetached(ClueUIDisplay clueUIDisplay)
-    {
-        clueUIDisplay.ClueDragStartedEvent -= OnClueDetached;
-
-        clueUIDisplay.AttachedToCredentialUIDisplay.DetachClue();
-
-        clueUIDisplay.FlagAsDetached();
-        clueUIDisplay.ResetPosition();
-        clueUIDisplay.transform.SetParent(clueDisplayParent);
-    }
-
-    private void CheckCurrentClueMatches()
-    {
-        Dictionary<CredentialUIDisplay, ClueUIDisplay> currentCorrectMatches = new();
-
-        foreach (CredentialUIDisplay credentialUIDisplay in displayedCredentials.Values)
+        if (inputString != credentialUIDisplay.HeldClue.EvidenceText)
         {
-            if (credentialUIDisplay.Typed)
-            {
-                string clueString = criminalCredentialWallet.GetMatchingClue(credentialUIDisplay.CredentialType).ClueHeading;
+            Log.Write($"Typed clue <b>{inputString}</b> does not match clue <b>{credentialUIDisplay.HeldClue.EvidenceText}</b>!");
 
-                if (credentialUIDisplay.ClueInput != clueString)
-                {
-                    continue;
-                }
-
-                if (correctMatches.ContainsKey(credentialUIDisplay))
-                {
-                    continue;
-                }
-
-                currentCorrectMatches.Add(credentialUIDisplay, null);
-
-                continue;
-            }
-
-            ClueUIDisplay clueUIDisplay = credentialUIDisplay.AttachedClueUIDisplay;
-
-            if (clueUIDisplay == null)
-            {
-                continue;
-            }
-
-            if (credentialUIDisplay.CredentialType != clueUIDisplay.ClueData.CredentialType)
-            {
-                continue;
-            }
-
-            if (clueUIDisplay.ClueData != criminalCredentialWallet.GetMatchingClue(clueUIDisplay.ClueData.CredentialType))
-            {
-                continue;
-            }
-
-            if (correctMatches.ContainsKey(credentialUIDisplay))
-            {
-                return;
-            }
-
-            currentCorrectMatches.Add(credentialUIDisplay, clueUIDisplay);
-        }
-
-        if (currentCorrectMatches.Count < GameConfig.Instance.CorrectCluesBeforeLock)
-        {
             return;
         }
 
-        FoundNewCorrectMatches(currentCorrectMatches);
-    }
+        Log.Write($"Typed clue <b>{inputString}</b> matches clue <b>{credentialUIDisplay.HeldClue.EvidenceText}</b>!");
 
-    private void FoundNewCorrectMatches(Dictionary<CredentialUIDisplay, ClueUIDisplay> currentCorrectMatches)
-    {
-        List<ClueData> matchedClues = new();
+        ClueData matchedClue = criminalCredentialWallet.GetMatchingClue(credentialUIDisplay.CredentialType);
 
-        foreach (KeyValuePair<CredentialUIDisplay, ClueUIDisplay> keyValuePair in currentCorrectMatches)
-        {
-            CredentialUIDisplay credentialUIDisplay = keyValuePair.Key;
-            ClueUIDisplay clueUIDisplay = keyValuePair.Value;
+        clueRegistry.RegisterMatchedClue(matchedClue);
 
-            if (credentialUIDisplay.Typed)
-            {
-                matchedClues.Add(criminalCredentialWallet.GetMatchingClue(credentialUIDisplay.CredentialType));
+        credentialUIDisplay.DisableInputField();
+        credentialUIDisplay.MarkAsCorrect();
 
-                correctMatches.Add(credentialUIDisplay, null);
-
-                credentialUIDisplay.SoftDisableInputField();
-
-                continue;
-            }
-
-            matchedClues.Add(clueUIDisplay.ClueData);
-
-            credentialUIDisplay.DisableDrop();
-            clueUIDisplay.DisableDrag();
-
-            Log.Write($"Clue {clueUIDisplay.ClueData.CredentialType.ToString()} locked in as correct!");
-
-            correctMatches.Add(credentialUIDisplay, clueUIDisplay);
-        }
-
-        clueRegistry.RegisterMatchedClues(matchedClues);
-    }
-
-    public void OnClueFound(ClueData clueData)
-    {
-        if (!clueData.AppearsInDataPod)
-        {
-            return;
-        }
-
-        if (clueData.Typed)
-        {
-            return;
-        }
-
-        ClueUIDisplay clueUIDisplay = Instantiate(clueDisplayPrefab, clueDisplayParent);
-        clueUIDisplay.Initialize();
-        clueUIDisplay.SetClueData(clueData);
-        clueUIDisplay.SetClueText(clueData.ClueHeading);
-
-        displayedClues.Add(clueUIDisplay);
-    }
-
-    public void OnMatchedClues(List<ClueData> matchedClues)
-    {
-        messagePopupWidget.DisplayMessage("You matched 3 clues!");
-    }
-
-    public void RegisterClueListener()
-    {
-        clueRegistry.RegisterListener(this);
+        messagePopupWidget.DisplayMessage($"You have matched a clue! <b>{matchedClue.EvidenceText}</b> has been added to your evidence board!");
     }
 }
