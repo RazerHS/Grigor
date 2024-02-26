@@ -76,6 +76,11 @@ namespace Grigor.Gameplay.Interacting
             interactablesChain.OrderChain();
 
             interactWidget = uiManager.GetWidget<InteractWidget>();
+
+            if (interactPoint == null)
+            {
+                throw Log.Exception($"No interact point set for interactable <b>{name}</b>!");
+            }
         }
 
         protected override void OnReleased()
