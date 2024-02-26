@@ -18,5 +18,10 @@ namespace Grigor.Data.Credentials
             this.credentialType = credentialType;
             this.value = value;
         }
+
+        public void SetValue(string value)
+        {
+            this.value = value;
+        }
     }
 }

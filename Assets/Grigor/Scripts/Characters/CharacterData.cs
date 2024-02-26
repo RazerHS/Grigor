@@ -26,6 +26,7 @@ namespace Grigor.Characters
         public DialogueGraphData CharacterDialogue => characterDialogue;
         public Color SpeakerColor => speakerColor;
         public List<PlayerCredential> PlayerCredentialValues => playerCredentialValues;
+        public List<PlayerCredential> PlayerCredentials => playerCredentials;
 
         public void SetPlayerCredentials(List<PlayerCredential> playerCredentials)
         {
@@ -37,6 +38,26 @@ namespace Grigor.Characters
             }
 
             this.playerCredentials = playerCredentials;
+        }
+
+        public void ReplacePlayerCredential(CredentialType credentialType, string value)
+        {
+            if (characterType != CharacterType.Player)
+            {
+                Log.Error($"Trying to replace player credentials on {name}, a non-player character!");
+
+                return;
+            }
+
+            foreach (PlayerCredential playerCredential in playerCredentials)
+            {
+                if (playerCredential.CredentialType != credentialType)
+                {
+                    continue;
+                }
+
+                playerCredential.SetValue(value);
+            }
         }
     }
 }

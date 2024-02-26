@@ -54,6 +54,8 @@ namespace Grigor.Gameplay.Interacting.Components
             dialogueController.DialogueEndedEvent -= OnDialogueEnded;
             dialogueController.NodeEnteredEvent -= OnNodeEntered;
 
+            PlayerInput.OnRefreshInputStartedEvent -= OnRefreshCurrentDialogue;
+
             EndInteract();
         }
 

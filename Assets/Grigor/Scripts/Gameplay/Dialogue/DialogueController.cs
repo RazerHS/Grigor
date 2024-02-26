@@ -13,7 +13,6 @@ namespace Grigor.Gameplay.Dialogue
     public class DialogueController : CardboardCoreBehaviour
     {
         [Inject] private UIManager uiManager;
-        [Inject] private PlayerInput playerInput;
         [Inject] private TimeManager timeManager;
 
         private DialogueWidget dialogueWidget;
