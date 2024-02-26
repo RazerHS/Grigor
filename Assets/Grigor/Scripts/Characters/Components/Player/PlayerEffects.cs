@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Grigor.Characters.Components.Player
+﻿namespace Grigor.Characters.Components.Player
 {
     public class PlayerEffects : CharacterComponent
     {

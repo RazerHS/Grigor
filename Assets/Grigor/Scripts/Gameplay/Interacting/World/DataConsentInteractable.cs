@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CardboardCore.DI;
-using Codice.Client.GameUI.Status;
 using DG.Tweening;
 using Grigor.Characters;
 using Grigor.Data.Credentials;
 using Grigor.Gameplay.Interacting.Components;
 using Grigor.Utils;
-using NUnit.Framework.Internal;
 using TinyGiantStudio.Text;
 using TinyGiantStudio.Text.Example;
 using UnityEngine;

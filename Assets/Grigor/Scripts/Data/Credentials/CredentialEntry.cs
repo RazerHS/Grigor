@@ -1,5 +1,4 @@
 ﻿using System;
-using Grigor.Characters;
 using Grigor.Data.Clues;
 using Sirenix.OdinInspector;
 using UnityEngine;

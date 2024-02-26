@@ -1,5 +1,4 @@
-﻿using System;
-using CardboardCore.DI;
+﻿using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Gameplay.Interacting;
 using RazerCore.Utils.Attributes;
