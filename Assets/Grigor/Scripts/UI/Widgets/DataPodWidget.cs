@@ -12,6 +12,7 @@ using Grigor.UI.Widgets;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class DataPodWidget : UIWidget
 {
@@ -28,6 +29,7 @@ public class DataPodWidget : UIWidget
     private CredentialWallet criminalCredentialWallet;
     private MessagePopupWidget messagePopupWidget;
 
+    // NOTE: this only happens once at the start of the game, use ShowDataPod() to hide the view
     protected override void OnShow()
     {
         InsertCredentials();

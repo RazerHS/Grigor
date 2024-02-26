@@ -22,6 +22,9 @@ namespace Grigor.UI.Widgets
             {
                 taskUIDisplay.OnSelectedTask += OnTaskSelected;
             }
+
+            selectedTaskName.text = "Select a task!";
+            selectedTaskDescription.text = "";
         }
 
         protected override void OnHide()

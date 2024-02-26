@@ -1,4 +1,5 @@
-﻿using CardboardCore.DI;
+﻿using System;
+using CardboardCore.DI;
 using Grigor.Characters;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,15 +22,20 @@ namespace Grigor.UI.Widgets
 
         public bool Active => active;
 
+        private void Awake()
+        {
+            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
+            tasksWidget = uiManager.GetWidget<TasksWidget>();
+            messagesWidget = uiManager.GetWidget<MessagesWidget>();
+        }
+
         protected override void OnShow()
         {
             messagesButton.onClick.AddListener(OnMessagesButtonClicked);
             tasksButton.onClick.AddListener(OnTasksButtonClicked);
             dataPodButton.onClick.AddListener(OnDataPodButtonClicked);
 
-            dataPodWidget = uiManager.GetWidget<DataPodWidget>();
-            tasksWidget = uiManager.GetWidget<TasksWidget>();
-            messagesWidget = uiManager.GetWidget<MessagesWidget>();
+            dataPodWidget.ShowDataPod();
 
             active = true;
 
@@ -38,11 +44,18 @@ namespace Grigor.UI.Widgets
 
         protected override void OnHide()
         {
+            if (dataPodWidget == null)
+            {
+                return;
+            }
+
             messagesButton.onClick.RemoveListener(OnMessagesButtonClicked);
             tasksButton.onClick.RemoveListener(OnTasksButtonClicked);
             dataPodButton.onClick.RemoveListener(OnDataPodButtonClicked);
 
             active = false;
+
+            HideAll();
 
             EnablePlayerControls();
         }
@@ -58,7 +71,6 @@ namespace Grigor.UI.Widgets
             {
                 return;
             }
-
 
             characterRegistry.Player.Movement.EnableMovement();
             characterRegistry.Player.Look.EnableLook();

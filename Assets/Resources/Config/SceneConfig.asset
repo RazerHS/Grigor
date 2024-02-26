@@ -348,8 +348,35 @@ MonoBehaviour:
         inWeight: 1
         outWeight: 0.19476597
       - serializedVersion: 3
-        time: 0.2634054
-        value: 0.3322053
+        time: 0.16849507
+        value: 0.14671545
+        inSlope: 0.96203715
+        outSlope: 0.96203715
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.2854494
+        value: 0.08441919
+        inSlope: 1.0503217
+        outSlope: 1.0503217
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.3356072
+        value: -0.0051102266
+        inSlope: -0.28936806
+        outSlope: -0.28936806
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.47410023
+        value: 0.012814969
         inSlope: -0.017286817
         outSlope: -0.017286817
         tangentMode: 0
@@ -595,7 +622,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   repeatFirstDayWeather: 1
   cloudShapeFactorMinimum: 0.342
-  windSpeedBounds: {x: 100, y: 1000}
+  windSpeedBounds: {x: 100, y: 300}
   rainParticleEmissionBounds: {x: 0, y: 3000}
   cloudShapeScaleBounds: {x: 10, y: 100}
   cloudErosionScaleBounds: {x: 10, y: 100}

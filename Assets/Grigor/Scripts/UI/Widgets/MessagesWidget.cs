@@ -22,6 +22,10 @@ namespace Grigor.UI.Widgets
             {
                 messageUIDisplay.OnSelectedMessage += OnMessageSelected;
             }
+
+            selectedMessageTitle.text = "Select a message!";
+            selectedMessageSender.text = "From: Dearest developers.";
+            selectedMessageText.text = "";
         }
 
         protected override void OnHide()
