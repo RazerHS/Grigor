@@ -3,7 +3,6 @@ using CardboardCore.DI;
 using CardboardCore.Utilities;
 using Grigor.Characters;
 using Grigor.Gameplay.Dialogue;
-using Grigor.Input;
 using Grigor.Utils.StoryGraph.Runtime;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
@@ -53,6 +52,8 @@ namespace Grigor.Gameplay.Interacting.Components
         {
             dialogueController.DialogueEndedEvent -= OnDialogueEnded;
             dialogueController.NodeEnteredEvent -= OnNodeEntered;
+
+            PlayerInput.OnRefreshInputStartedEvent -= OnRefreshCurrentDialogue;
 
             EndInteract();
         }

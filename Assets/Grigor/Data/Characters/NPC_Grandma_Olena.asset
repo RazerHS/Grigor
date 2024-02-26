@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetName: NPC_Grandma_Olena
   characterType: 2
+  displayName: Olena
   credentialWallet:
     credentialEntries: []
+  playerCredentialValues: []
   characterDialogue: {fileID: 11400000, guid: a36a633a1ad2599458afc03066a06f48, type: 2}
   speakerColor: {r: 0.47958246, g: 0.1647059, b: 0.9254902, a: 0.92156863}

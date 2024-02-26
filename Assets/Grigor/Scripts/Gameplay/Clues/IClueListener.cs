@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Grigor.Data.Clues;
+﻿using Grigor.Data.Clues;
 
 namespace Grigor.Gameplay.Clues
 {
@@ -7,7 +6,7 @@ namespace Grigor.Gameplay.Clues
     {
         public void OnClueFound(ClueData clueData);
 
-        public void OnMatchedClues(List<ClueData> matchedClues);
+        public void OnMatchedClue(ClueData clueMatched);
 
         public void RegisterClueListener();
     }

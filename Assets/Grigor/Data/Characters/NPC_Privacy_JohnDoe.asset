@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetName: NPC_Privacy_JohnDoe
   characterType: 2
+  displayName: John Doe
   credentialWallet:
     credentialEntries: []
+  playerCredentialValues: []
   characterDialogue: {fileID: 11400000, guid: a8fac42061e4da34abd5d4a017f02c3d, type: 2}
   speakerColor: {r: 0.8392157, g: 0.48920545, b: 0.14509802, a: 0.92156863}

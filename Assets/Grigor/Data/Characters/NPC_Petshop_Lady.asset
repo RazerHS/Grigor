@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetName: NPC_Petshop_Lady
   characterType: 2
+  displayName: Pet Shop Lady
   credentialWallet:
     credentialEntries: []
+  playerCredentialValues: []
   characterDialogue: {fileID: 11400000, guid: 8cb92c3aea64f4740819a32f36d9e4ea, type: 2}
   speakerColor: {r: 1, g: 0.6556604, b: 1, a: 0.8}

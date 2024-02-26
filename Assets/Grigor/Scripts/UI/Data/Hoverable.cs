@@ -15,6 +15,7 @@ namespace Grigor.UI.Data
 
         private Color defaultColor;
         private Sprite defaultSprite;
+        private bool enabled = true;
 
         private void Awake()
         {
@@ -24,6 +25,11 @@ namespace Grigor.UI.Data
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!enabled)
+            {
+                return;
+            }
+
             if (changeColor)
             {
                 image.color = hoverColor;
@@ -37,6 +43,11 @@ namespace Grigor.UI.Data
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!enabled)
+            {
+                return;
+            }
+
             if (changeColor)
             {
                 image.color = defaultColor;
@@ -46,6 +57,11 @@ namespace Grigor.UI.Data
             {
                 image.sprite = defaultSprite;
             }
+        }
+
+        public void Disable()
+        {
+            enabled = false;
         }
     }
 }

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetName: NPC_Music_Man
   characterType: 2
+  displayName: Music Man
   credentialWallet:
     credentialEntries: []
+  playerCredentialValues: []
   characterDialogue: {fileID: 11400000, guid: a0ce6a51c58934e41a0f03bcef0f164e, type: 2}
   speakerColor: {r: 0.21226418, g: 1, b: 0.69906634, a: 0.7647059}

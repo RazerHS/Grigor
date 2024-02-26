@@ -12,6 +12,7 @@ namespace Grigor.UI
     {
         [SerializeField] private List<UIScreen> screens;
         [SerializeField] private List<UIWidget> widgets;
+        [SerializeField] private Canvas canvas;
 
         private UIScreen currentScreen;
 
@@ -97,6 +98,11 @@ namespace Grigor.UI
             }
 
             return widget;
+        }
+
+        public void SetCanvasCamera(Camera camera)
+        {
+            canvas.worldCamera = camera;
         }
     }
 }

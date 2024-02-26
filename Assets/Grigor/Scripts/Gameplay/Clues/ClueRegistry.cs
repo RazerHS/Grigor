@@ -76,11 +76,11 @@ namespace Grigor.Gameplay.Clues
             clueListeners.Remove(listener);
         }
 
-        public void RegisterMatchedClues(List<ClueData> matchedClues)
+        public void RegisterMatchedClue(ClueData matchedClue)
         {
             foreach (IClueListener listener in clueListeners)
             {
-                listener.OnMatchedClues(matchedClues);
+                listener.OnMatchedClue(matchedClue);
             }
         }
 
