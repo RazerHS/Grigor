@@ -59,6 +59,7 @@ namespace Grigor.UI.Widgets
                 return;
             }
 
+
             characterRegistry.Player.Movement.EnableMovement();
             characterRegistry.Player.Look.EnableLook();
             characterRegistry.Player.Interact.EnableInteract();

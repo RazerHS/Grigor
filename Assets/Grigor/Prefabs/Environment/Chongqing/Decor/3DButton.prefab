@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 4114566
+  GUIID: 202350
 --- !u!114 &3538460476617938451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   _allCharacterObjectList: []
   generatedMeshes: []
   autoSaveMesh: 0
-  _font: {fileID: 11400000, guid: db77b938927bd344182b9b966d4e7172, type: 2}
+  _font: {fileID: 11400000, guid: a3829b95fe542634ab30c08f9c59d12d, type: 2}
   _material: {fileID: 2100000, guid: 702770f9f4d75f54faf5b0c2478a92e4, type: 2}
   _fontSize: {x: 8, y: 8, z: 8}
   _capitalize: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   extraLinesCreatedBecauseOfTooManyVerticies: []
   meshPostProcess: 0
   useIncreasedVertexCountForCombinedMesh: 1
-  updatedAfterStyleUpdateOnPrefabInstances: 1
+  updatedAfterStyleUpdateOnPrefabInstances: 0
   hideOverwrittenVariablesFromInspector: 1
   debugLogs: 0
   runTimeLogging: 0
@@ -263,45 +263,45 @@ MonoBehaviour:
   lines:
   - gameObjects: []
     meshLayouts:
-    - mesh: {fileID: -1742418140652924380, guid: f5592d90bcd719b4fb9bcc19ee1df827,
+    - mesh: {fileID: -2216055370971189181, guid: 8413c4934a63076428afb809f7bc03f1,
         type: 3}
-      position: {x: -0.58199996, y: -0.000000024214387, z: 0}
+      position: {x: -0.50361323, y: -0.000000024214387, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       xOffset: 0
       yOffset: 0
       zOffset: 0
-      width: 0.632
+      width: 0.421875
       height: 0.8
       depth: 0
       lineBreak: 0
       space: 0
-    - mesh: {fileID: -4459822572179617490, guid: f5592d90bcd719b4fb9bcc19ee1df827,
+    - mesh: {fileID: -8683826513693385668, guid: 8413c4934a63076428afb809f7bc03f1,
         type: 3}
-      position: {x: 0.05700007, y: -0.000000024214387, z: 0}
+      position: {x: -0.009277284, y: -0.000000024214387, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       xOffset: 0
       yOffset: 0
       zOffset: 0
-      width: 0.546
+      width: 0.46679688
       height: 0.8
       depth: 0
       lineBreak: 0
       space: 0
-    - mesh: {fileID: 4508392356220968532, guid: f5592d90bcd719b4fb9bcc19ee1df827,
+    - mesh: {fileID: 8901861132478137713, guid: 8413c4934a63076428afb809f7bc03f1,
         type: 3}
-      position: {x: 0.63900006, y: -0.000000024214387, z: 0}
+      position: {x: 0.494336, y: -0.000000024214387, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       xOffset: 0
       yOffset: 0
       zOffset: 0
-      width: 0.518
+      width: 0.4404297
       height: 0.8
       depth: 0
       lineBreak: 0
       space: 0
-    width: 1.846
+    width: 1.4791015
     individualYSpace: 0
-    widthIfNextObjectWasHere: 1.846
+    widthIfNextObjectWasHere: 1.4791015
     editorNote: 
 --- !u!33 &5454212766444401718
 MeshFilter:

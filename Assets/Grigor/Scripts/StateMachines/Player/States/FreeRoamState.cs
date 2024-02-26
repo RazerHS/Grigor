@@ -39,6 +39,8 @@ namespace Grigor.StateMachines.Player.States
 
         protected override void OnExit()
         {
+            DisablePhone();
+
             owningStateMachine.Owner.Movement.DisableMovement();
             owningStateMachine.Owner.Look.DisableLook();
             owningStateMachine.Owner.Interact.DisableInteract();
@@ -48,8 +50,6 @@ namespace Grigor.StateMachines.Player.States
             playerInput.PhoneInputStartedEvent -= OnPhoneInputStarted;
             playerInput.CatnipInputStartedEvent -= OnCatnipInputStarted;
             playerInput.PauseInputStartedEvent -= OnPauseInputStarted;
-
-            DisablePhone();
         }
 
         private void OnInteract()

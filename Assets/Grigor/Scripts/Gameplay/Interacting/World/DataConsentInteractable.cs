@@ -5,6 +5,7 @@ using Grigor.Characters;
 using Grigor.Data.Credentials;
 using Grigor.Gameplay.Interacting.Components;
 using Grigor.Utils;
+using Sirenix.Utilities;
 using TinyGiantStudio.Text;
 using TinyGiantStudio.Text.Example;
 using UnityEngine;
@@ -97,7 +98,7 @@ namespace Grigor.Gameplay.World.Components
 
             void DisplayNextCredential()
             {
-                string credentialText = $"{playerCredentials[index].CredentialType}: {playerCredentials[index].Value}";
+                string credentialText = $"{playerCredentials[index].CredentialType.ToString().SplitPascalCase()}: {playerCredentials[index].Value}";
 
                 credentialsTypewriter.ResetCurrentLetter();
 
