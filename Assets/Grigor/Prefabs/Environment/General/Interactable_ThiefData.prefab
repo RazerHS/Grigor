@@ -879,7 +879,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 864
+  m_VersionIndex: 101
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -995,17 +995,17 @@ PrefabInstance:
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -33.04727
       objectReference: {fileID: 0}
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -9.730735
       objectReference: {fileID: 0}
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 37.276615
       objectReference: {fileID: 0}
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
@@ -1015,17 +1015,17 @@ PrefabInstance:
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
         type: 3}
@@ -1075,6 +1075,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2255247408546508945}
+    - targetCorrespondingSourceObject: {fileID: 5600683542662060887, guid: 319deb50eb1690b4cb691d018ac7acdc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 409961693175310795}
+    - targetCorrespondingSourceObject: {fileID: 5600683542662060887, guid: 319deb50eb1690b4cb691d018ac7acdc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8726979319265273677}
   m_SourcePrefab: {fileID: 100100000, guid: 319deb50eb1690b4cb691d018ac7acdc, type: 3}
 --- !u!4 &2733888954941448264 stripped
 Transform:
@@ -1105,7 +1113,10 @@ MonoBehaviour:
   isBox: 0
   interactingEnabled: 0
   interactablesChain:
-    interactableComponents: []
+    interactableComponents:
+    - {fileID: 1056301149717923013}
+    - {fileID: 6542531255438517128}
+    - {fileID: 2255247408546508945}
 --- !u!114 &1056301149717923013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,10 +1130,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  removeFromChainAfterEffect: 0
+  label: degree
+  removeFromChainAfterEffect: 1
   stopsChain: 0
   indexInChain: 0
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
@@ -1147,10 +1161,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  removeFromChainAfterEffect: 0
+  label: medical condition
+  removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 0
+  indexInChain: 1
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
@@ -1175,10 +1192,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactInRange: 0
-  removeFromChainAfterEffect: 0
+  label: blood type
+  removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 0
+  indexInChain: 2
   hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
   timePassesOnInteract: 0
   minutesToPass: 1
   hoursToPass: 1
@@ -1190,6 +1210,68 @@ MonoBehaviour:
   ambienceAudio: 
   interactionEnabled: 0
   clueToFind: {fileID: 11400000, guid: 06beb2adb55840946b3d742cfb8fbd0d, type: 2}
+--- !u!114 &409961693175310795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256502833725821946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: age
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 0
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  clueToFind: {fileID: 11400000, guid: 69990c11972080443ac583da55c7cc4a, type: 2}
+--- !u!114 &8726979319265273677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256502833725821946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: name
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 0
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  clueToFind: {fileID: 11400000, guid: c9f45a8e856dc5e4f828b110432f97ca, type: 2}
 --- !u!4 &8475032777802215821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
