@@ -19,7 +19,8 @@ MonoBehaviour:
   evidenceBoardNoteType: 0
   clueHeading: Favourite Drink
   evidenceText: AI Cola
-  cluesToConnectTo: []
+  cluesToConnectTo:
+  - {fileID: 11400000, guid: b076bd2ab33c2494f82b31a3169e1769, type: 2}
   evidenceSprite: {fileID: 0}
   textureSize: {x: 0, y: 0}
   upscaleFactor: 1

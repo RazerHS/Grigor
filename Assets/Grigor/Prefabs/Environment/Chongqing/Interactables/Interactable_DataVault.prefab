@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 1136304
+  GUIID: 372166
 --- !u!114 &5531256263028672455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2065,8 +2065,13 @@ PrefabInstance:
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4128122505523962468}
     - target: {fileID: 4803595186606342632, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2149,7 +2154,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2077465746095966551}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4128122505523962468}
   m_SourcePrefab: {fileID: 100100000, guid: 074fe82d7e4a3014996892cf2abd72fc, type: 3}
 --- !u!4 &3230151950690035812 stripped
 Transform:
@@ -2157,3 +2166,40 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 658501434270812204}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8914745745022114774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8256502833725821946, guid: 074fe82d7e4a3014996892cf2abd72fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 658501434270812204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4128122505523962468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914745745022114774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22417bd54084b7fafe88c91ae3fe63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: new
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 0
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskData: {fileID: 11400000, guid: 9c4d680a3dd53974bb0a2f9693f01566, type: 2}
