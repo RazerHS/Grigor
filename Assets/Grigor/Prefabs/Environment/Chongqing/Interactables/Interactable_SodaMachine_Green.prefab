@@ -11,13 +11,33 @@ PrefabInstance:
     - target: {fileID: 601848566499180481, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: GUIID
-      value: -894110
+      value: -3765174
       objectReference: {fileID: 0}
     - target: {fileID: 738016875588017939, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2067febf299023e499eafbe61284695a, type: 2}
+    - target: {fileID: 843342095134700084, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: interactablesChain.interactableComponents.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 843342095134700084, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6550637680240409777}
+    - target: {fileID: 843342095134700084, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2121225549341039317}
+    - target: {fileID: 843342095134700084, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
+      value: 
+      objectReference: {fileID: 7084353093625406549}
     - target: {fileID: 2493993570289759567, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -31,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 3626458550745362195, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: GUIID
-      value: -894124
+      value: -3765188
       objectReference: {fileID: 0}
     - target: {fileID: 3920887770274072412, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
@@ -962,5 +982,121 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8914745745022114774, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6550637680240409777}
+    - targetCorrespondingSourceObject: {fileID: 8914745745022114774, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2121225549341039317}
+    - targetCorrespondingSourceObject: {fileID: 8914745745022114774, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7084353093625406549}
   m_SourcePrefab: {fileID: 100100000, guid: 590bbbd977eee6d46b9a7b94b4e0001c, type: 3}
+--- !u!1 &4898619155058765518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8914745745022114774, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4056879250819806488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6550637680240409777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898619155058765518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22417bd54084b7fafe88c91ae3fe63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Complete Task Find Cola
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 1
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: 25a3abe52facec145acfe58e6e658bcf, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskData: {fileID: 11400000, guid: 25a3abe52facec145acfe58e6e658bcf, type: 2}
+--- !u!114 &2121225549341039317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898619155058765518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69fd1dfe51448539e40a2dad67f0373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Begin Task Deliver Cola
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 2
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: 25a3abe52facec145acfe58e6e658bcf, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskToBegin: {fileID: 11400000, guid: e9c01bdfc30983843ad3261e13d279a1, type: 2}
+--- !u!114 &7084353093625406549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898619155058765518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa9a028af1e74ba0833526faba54e707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Receive msg Deliver Cola
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 3
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: e9c01bdfc30983843ad3261e13d279a1, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  message:
+    sender: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+    title: AI Cola
+    message: You found some AI Cola (don't ask how I know). Return it to me and I'll
+      give you what you want.
+  delay: 2

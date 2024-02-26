@@ -314,6 +314,11 @@ MonoBehaviour:
     OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
     InputNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
   - OutportPortChoiceIndex: 0
+    OutputPortName: If you're dyslexic, how are you writing a wiki?
+    InputPortName: 
+    OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
+    InputNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
+  - OutportPortChoiceIndex: 0
     OutputPortName: What?
     InputPortName: 
     OutputNodeGuid: 638a443f-c9da-4a3b-966f-c3bdae6b9a3b
@@ -344,10 +349,45 @@ MonoBehaviour:
     OutputNodeGuid: 9c689b45-d4f1-4fa9-a927-fc1c2db04916
     InputNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
   - OutportPortChoiceIndex: 0
-    OutputPortName: If you're dyslexic, how are you writing a wiki?
+    OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
-    InputNodeGuid: 4518feac-39f9-4b0a-8ecc-636d7be2602c
+    OutputNodeGuid: 39f584aa-bec2-4d50-a740-827878b948b6
+    InputNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: I have no idea!
+    InputPortName: 
+    OutputNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+    InputNodeGuid: 34511d68-5aab-41ca-8279-cfce38e5a38f
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Whatever, time to keep working.
+    InputPortName: 
+    OutputNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+    InputNodeGuid: a62918f2-dc9e-44c0-b154-bcdba5a24395
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Big headphones... Maybe the criminal likes music?
+    InputPortName: 
+    OutputNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+    InputNodeGuid: d6575e9b-ab13-4d5e-9a9b-26ef4e756638
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: d6575e9b-ab13-4d5e-9a9b-26ef4e756638
+    InputNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: Cat food... The criminal has a cat?
+    InputPortName: 
+    OutputNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+    InputNodeGuid: 5c2d8340-ec52-47e7-9c5f-a1579d8c60cc
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 5c2d8340-ec52-47e7-9c5f-a1579d8c60cc
+    InputNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: 34511d68-5aab-41ca-8279-cfce38e5a38f
+    InputNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
   dialogueNodeData:
   - nodeName: 
     guid: d07249cc-6fe0-4eff-8cf4-c0e6b04d850e
@@ -763,16 +803,6 @@ MonoBehaviour:
     - text: 1
       nextNodeGuid: c439fca4-4fad-4ee6-b53e-a5795b888bfb
   - nodeName: 
-    guid: c439fca4-4fad-4ee6-b53e-a5795b888bfb
-    position: {x: 1900, y: 690}
-    dialogueText: (The surveillance cameras show the criminal in big <b>HEADPHONES</b>
-      carrying a bag of <b>CAT FOOD</b>)
-    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
-    nodeType: 0
-    choices:
-    - text: 1
-      nextNodeGuid: 4bd171ea-7e87-4a1b-815c-d32e5f5a42b5
-  - nodeName: 
     guid: 4bd171ea-7e87-4a1b-815c-d32e5f5a42b5
     position: {x: 2227, y: 690}
     dialogueText: Satisfied?
@@ -795,8 +825,10 @@ MonoBehaviour:
     position: {x: 2967, y: 693}
     dialogueText: Likewise.
     speaker: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
-    nodeType: 2
-    choices: []
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
   - nodeName: 
     guid: 15f2266d-f459-4bcc-aab9-64b7a1f67437
     position: {x: 688, y: 274}
@@ -931,6 +963,69 @@ MonoBehaviour:
       nextNodeGuid: 08c5c12a-8e57-45ff-8fef-7ef5a2e8a44b
     - text: Sure, AI Cola, green vending machines. Easy.
       nextNodeGuid: e8e8335d-b84c-4c40-bf4c-a86b3383bbe3
+  - nodeName: 
+    guid: c439fca4-4fad-4ee6-b53e-a5795b888bfb
+    position: {x: 1900, y: 690}
+    dialogueText: (The surveillance cameras show the criminal in big <b>HEADPHONES</b>
+      carrying a bag of <b>CAT FOOD</b>)
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: 4bd171ea-7e87-4a1b-815c-d32e5f5a42b5
+  - nodeName: 
+    guid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+    position: {x: 3540, y: 693}
+    dialogueText: You consider what this footage might mean...
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: I have no idea!
+      nextNodeGuid: 34511d68-5aab-41ca-8279-cfce38e5a38f
+    - text: Big headphones... Maybe the criminal likes music?
+      nextNodeGuid: d6575e9b-ab13-4d5e-9a9b-26ef4e756638
+    - text: Cat food... The criminal has a cat?
+      nextNodeGuid: 5c2d8340-ec52-47e7-9c5f-a1579d8c60cc
+    - text: Whatever, time to keep working.
+      nextNodeGuid: a62918f2-dc9e-44c0-b154-bcdba5a24395
+  - nodeName: 
+    guid: a62918f2-dc9e-44c0-b154-bcdba5a24395
+    position: {x: 4019, y: 1097}
+    dialogueText: You carry on.
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 2
+    choices:
+    - text: 1
+      nextNodeGuid: 
+  - nodeName: 
+    guid: 34511d68-5aab-41ca-8279-cfce38e5a38f
+    position: {x: 4036, y: 628}
+    dialogueText: Time to panic!
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+  - nodeName: 
+    guid: d6575e9b-ab13-4d5e-9a9b-26ef4e756638
+    position: {x: 4047, y: 765}
+    dialogueText: There might be a music shop nearby. Perhaps you could interview
+      the owner?
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
+  - nodeName: 
+    guid: 5c2d8340-ec52-47e7-9c5f-a1579d8c60cc
+    position: {x: 4047, y: 933}
+    dialogueText: There may be a pet store nearby. Perhaps you could interview the
+      owner? There are many cats around the city, maybe one might belong to the criminal?
+    speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
+    nodeType: 0
+    choices:
+    - text: 1
+      nextNodeGuid: dc87ab56-ab5b-4b50-9dd9-a5fe509f767b
   exposedProperties: []
   commentBlockData:
   - ChildNodes: []

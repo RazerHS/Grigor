@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -113.59596
+      value: -111.14
       objectReference: {fileID: 0}
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -152,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -63.440212
+      value: -65.26
       objectReference: {fileID: 0}
     - target: {fileID: 2606218828905771369, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -202,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -213,15 +213,25 @@ PrefabInstance:
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
       value: 
-      objectReference: {fileID: 5360961101336967315}
+      objectReference: {fileID: 2594391281468379174}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[2]'
       value: 
-      objectReference: {fileID: 4920288259450122738}
+      objectReference: {fileID: 6373238404133365979}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
+      value: 
+      objectReference: {fileID: 5360961101336967315}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[4]'
+      value: 
+      objectReference: {fileID: 4920288259450122738}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[5]'
       value: 
       objectReference: {fileID: 269393913668439317}
     m_RemovedComponents: []
@@ -245,6 +255,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5360961101336967315}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6373238404133365979}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2594391281468379174}
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
 --- !u!114 &3037959173025414781 stripped
 MonoBehaviour:
@@ -286,7 +304,7 @@ MonoBehaviour:
   label: Find Privacy Guy
   removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 2
+  indexInChain: 4
   hasTimeEffect: 0
   lockedBeforeCertainDay: 0
   unlockedOnDay: 1
@@ -322,7 +340,7 @@ MonoBehaviour:
   label: Find Privacy Guy
   removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 3
+  indexInChain: 5
   hasTimeEffect: 0
   lockedBeforeCertainDay: 0
   unlockedOnDay: 1
@@ -353,7 +371,7 @@ MonoBehaviour:
   label: Find Shop Clerk
   removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 1
+  indexInChain: 3
   hasTimeEffect: 0
   lockedBeforeCertainDay: 0
   unlockedOnDay: 1
@@ -368,3 +386,65 @@ MonoBehaviour:
   ambienceAudio: 
   interactionEnabled: 0
   taskData: {fileID: 11400000, guid: ac2aa5e851d843f4d92e6efc0d8053d9, type: 2}
+--- !u!114 &6373238404133365979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Find clue
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 2
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  clueToFind: {fileID: 11400000, guid: 9f374fe43d46a39469d316dacee6a788, type: 2}
+--- !u!114 &2594391281468379174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: fave drink clue
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 1
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  clueToFind: {fileID: 11400000, guid: b0a367bc233600846b52258dbcb1cd8c, type: 2}

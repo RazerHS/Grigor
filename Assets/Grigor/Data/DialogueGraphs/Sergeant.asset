@@ -116,11 +116,6 @@ MonoBehaviour:
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
-    OutputNodeGuid: eadd9141-020e-490f-a2a6-f19cbb000586
-    InputNodeGuid: ee2c78a4-6711-4573-85b8-7efe45865668
-  - OutportPortChoiceIndex: 0
-    OutputPortName: 1
-    InputPortName: 
     OutputNodeGuid: ee2c78a4-6711-4573-85b8-7efe45865668
     InputNodeGuid: e2c1ea59-ed4e-4a7c-8b38-9aabcb662776
   - OutportPortChoiceIndex: 0
@@ -208,6 +203,11 @@ MonoBehaviour:
     InputPortName: 
     OutputNodeGuid: bb669c8e-0580-42b0-8422-040a165c508d
     InputNodeGuid: 43e367c1-eb99-464d-bbec-fe37ba4d22be
+  - OutportPortChoiceIndex: 0
+    OutputPortName: 1
+    InputPortName: 
+    OutputNodeGuid: eadd9141-020e-490f-a2a6-f19cbb000586
+    InputNodeGuid: ee2c78a4-6711-4573-85b8-7efe45865668
   - OutportPortChoiceIndex: 0
     OutputPortName: 1
     InputPortName: 
@@ -510,7 +510,7 @@ MonoBehaviour:
     guid: 1b9e198c-ef76-4da4-a2cd-174db7d5cba6
     position: {x: 2157, y: 963}
     dialogueText: So you'll receive some complementary catnip to attract the little
-      fluffballs.
+      fluffballs. PRESS [Q] TO USE CATNIP
     speaker: {fileID: 11400000, guid: cdb7bc01bf90be74fa90e3cd729d21b2, type: 2}
     nodeType: 0
     choices:
@@ -670,9 +670,7 @@ MonoBehaviour:
     dialogueText: (Sleeping will end the current day and continue to the next).
     speaker: {fileID: 11400000, guid: 21b3a7450516b834d859e35a20603f75, type: 2}
     nodeType: 2
-    choices:
-    - text: 1
-      nextNodeGuid: 
+    choices: []
   exposedProperties: []
   commentBlockData:
   - ChildNodes: []

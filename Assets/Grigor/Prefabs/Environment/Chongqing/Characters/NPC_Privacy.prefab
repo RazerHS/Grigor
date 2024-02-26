@@ -202,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -234,6 +234,16 @@ PrefabInstance:
       propertyPath: 'interactablesChain.interactableComponents.Array.data[5]'
       value: 
       objectReference: {fileID: 1013629763276065851}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[6]'
+      value: 
+      objectReference: {fileID: 5069081364298014145}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[7]'
+      value: 
+      objectReference: {fileID: 2823401701333206283}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5013664492449861485, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
@@ -263,6 +273,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1013629763276065851}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5069081364298014145}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2823401701333206283}
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
 --- !u!114 &3037959173025414781 stripped
 MonoBehaviour:
@@ -447,3 +465,71 @@ MonoBehaviour:
   ambienceAudio: 
   interactionEnabled: 0
   taskToBegin: {fileID: 11400000, guid: 557ceb4ab9ddfa64ba552e6f0ee64b92, type: 2}
+--- !u!114 &5069081364298014145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Day 2 dialogue
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 6
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 1
+  unlockedOnDay: 2
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  characterData: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+  startNodeName: Did you get the <b>AI COLA</b>?
+  minutesToPassPerNode: 0
+  hoursToPassPerNode: 0
+--- !u!114 &2823401701333206283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: Day 2 found cola
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 7
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 1
+  unlockedOnDay: 2
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 0
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: e9c01bdfc30983843ad3261e13d279a1, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  characterData: {fileID: 11400000, guid: 9a42fe5b81172f04b832a50d7983f5e5, type: 2}
+  startNodeName: Do you have what I asked for?
+  minutesToPassPerNode: 1
+  hoursToPassPerNode: 0

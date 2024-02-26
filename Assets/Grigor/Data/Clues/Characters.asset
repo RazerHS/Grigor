@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48b484bb40141e78372a401332dada5, type: 3}
+  m_Name: Characters
+  m_EditorClassIdentifier: 
+  assetName: Characters
+  credentialType: 0
+  appearsInDataPod: 0
+  typed: 0
+  evidenceBoardNoteType: 0
+  clueHeading: Characters
+  evidenceText: All of the different people you have met.
+  cluesToConnectTo:
+  - {fileID: 11400000, guid: b550a5de6af2c4d439987ef8b6e35524, type: 2}
+  - {fileID: 11400000, guid: 32da8f19d9b40dc469911ef0cc93a742, type: 2}
+  - {fileID: 11400000, guid: 15faa096186ea9f439062760735a587a, type: 2}
+  - {fileID: 11400000, guid: 0fac35746fe942644b33daa2f8f548a0, type: 2}
+  - {fileID: 11400000, guid: 9f374fe43d46a39469d316dacee6a788, type: 2}
+  evidenceSprite: {fileID: 0}
+  textureSize: {x: 0, y: 0}
+  upscaleFactor: 1

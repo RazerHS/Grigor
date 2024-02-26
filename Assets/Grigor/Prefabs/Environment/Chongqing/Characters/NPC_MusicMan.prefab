@@ -108,7 +108,7 @@ PrefabInstance:
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: interactablesChain.interactableComponents.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
@@ -119,10 +119,20 @@ PrefabInstance:
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[1]'
       value: 
-      objectReference: {fileID: 3643190115519006273}
+      objectReference: {fileID: 7904412315275679226}
     - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
         type: 3}
       propertyPath: 'interactablesChain.interactableComponents.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2625323602841442862}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
+      value: 
+      objectReference: {fileID: 3643190115519006273}
+    - target: {fileID: 5990117245517478652, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      propertyPath: 'interactablesChain.interactableComponents.Array.data[4]'
       value: 
       objectReference: {fileID: 4914180008677717081}
     m_RemovedComponents: []
@@ -146,6 +156,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7904412315275679226}
+    - targetCorrespondingSourceObject: {fileID: 2531734146172474142, guid: 60e37feb7525f4f4fb949c0685fd2958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2625323602841442862}
   m_SourcePrefab: {fileID: 100100000, guid: 60e37feb7525f4f4fb949c0685fd2958, type: 3}
 --- !u!114 &3037959173025414781 stripped
 MonoBehaviour:
@@ -187,7 +201,7 @@ MonoBehaviour:
   label: Music Taste
   removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 1
+  indexInChain: 3
   hasTimeEffect: 0
   lockedBeforeCertainDay: 0
   unlockedOnDay: 1
@@ -218,7 +232,7 @@ MonoBehaviour:
   label: Find Music Man
   removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 2
+  indexInChain: 4
   hasTimeEffect: 0
   lockedBeforeCertainDay: 1
   unlockedOnDay: 2
@@ -249,7 +263,7 @@ MonoBehaviour:
   label: findSuspect_Jazz
   removeFromChainAfterEffect: 1
   stopsChain: 0
-  indexInChain: 0
+  indexInChain: 1
   hasTimeEffect: 0
   lockedBeforeCertainDay: 0
   unlockedOnDay: 1
@@ -264,6 +278,37 @@ MonoBehaviour:
   ambienceAudio: 
   interactionEnabled: 0
   taskToBegin: {fileID: 11400000, guid: 160bbd2e28a882f4696cba15b89e38d5, type: 2}
+--- !u!114 &2625323602841442862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983358424966616776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777480573cab424bac7dd91b502b993e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: music man clue
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 2
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 0
+  taskToListenTo: {fileID: 0}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  clueToFind: {fileID: 11400000, guid: 32da8f19d9b40dc469911ef0cc93a742, type: 2}
 --- !u!1001 &8855978769746800381
 PrefabInstance:
   m_ObjectHideFlags: 0
