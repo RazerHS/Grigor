@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Grigor.Data.Credentials;
+using Grigor.Utils;
 using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace Grigor.UI.Widgets
             inputField.onEndEdit.AddListener(OnEndEdit);
             backButton.onClick.AddListener(OnBackButtonClicked);
 
-            EnableCursor();
+            Helper.EnableCursor();
         }
 
         private void OnBackButtonClicked()
@@ -58,7 +59,7 @@ namespace Grigor.UI.Widgets
 
             currentCredentialIndex = 0;
 
-            DisableCursor();
+            Helper.DisableCursor();
         }
 
         private void OnConfirmButtonClicked()
@@ -86,19 +87,7 @@ namespace Grigor.UI.Widgets
 
         private void UpdateCredentialText()
         {
-            credentialText.text = credentialList[currentCredentialIndex].ToString();
-        }
-
-        private void EnableCursor()
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-
-        private void DisableCursor()
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            credentialText.text = credentialList[currentCredentialIndex].ToString().SplitPascalCase();
         }
 
         public void InitializeCredentialList(List<CredentialType> credentialList)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Grigor.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +21,7 @@ namespace Grigor.UI.Widgets
             optionOneButton.onClick.AddListener(OnOptionOneButtonClicked);
             optionTwoButton.onClick.AddListener(OnOptionTwoButtonClicked);
 
-            EnableCursor();
+            Helper.EnableCursor();
         }
 
         protected override void OnHide()
@@ -28,7 +29,7 @@ namespace Grigor.UI.Widgets
             optionOneButton.onClick.RemoveListener(OnOptionOneButtonClicked);
             optionTwoButton.onClick.RemoveListener(OnOptionTwoButtonClicked);
 
-            DisableCursor();
+            Helper.DisableCursor();
         }
 
         private void OnOptionTwoButtonClicked()
@@ -39,18 +40,6 @@ namespace Grigor.UI.Widgets
         private void OnOptionOneButtonClicked()
         {
             OptionSelectedEvent?.Invoke(optionOneText.text);
-        }
-
-        private void EnableCursor()
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-
-        private void DisableCursor()
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
         }
 
         public void SetCurrentCredential(string credentialName, string optionOne, string optionTwo)

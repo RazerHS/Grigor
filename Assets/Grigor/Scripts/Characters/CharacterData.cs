@@ -14,6 +14,7 @@ namespace Grigor.Characters
     public class CharacterData : ScriptableObjectData
     {
         [SerializeField, HorizontalGroup("info", PaddingLeft = 3), ColoredBoxGroup("info/Info", false, 0.5f, 0.7f, 0.1f), EnumPaging, DisableIn(PrefabKind.All)] private CharacterType characterType;
+        [SerializeField, HorizontalGroup("info", PaddingLeft = 3), ColoredBoxGroup("info/Info"), DisableIn(PrefabKind.All)] private string displayName;
         [SerializeField, HorizontalGroup("credentials", PaddingLeft = 3), ColoredBoxGroup("credentials/Credential Wallet", false, 0.2f, 0.3f, 0.9f), HideLabel, ShowIf("characterType", CharacterType.Criminal)] private CredentialWallet credentialWallet;
         [SerializeField, HorizontalGroup("credentials", PaddingLeft = 3), ColoredBoxGroup("credentials/Credential Wallet", false, 0.2f, 0.3f, 0.9f), ShowIf("characterType", CharacterType.Player)] private List<PlayerCredential> playerCredentialValues = new();
         [SerializeField] private DialogueGraphData characterDialogue;
@@ -27,6 +28,7 @@ namespace Grigor.Characters
         public Color SpeakerColor => speakerColor;
         public List<PlayerCredential> PlayerCredentialValues => playerCredentialValues;
         public List<PlayerCredential> PlayerCredentials => playerCredentials;
+        public string DisplayName => displayName;
 
         public void SetPlayerCredentials(List<PlayerCredential> playerCredentials)
         {

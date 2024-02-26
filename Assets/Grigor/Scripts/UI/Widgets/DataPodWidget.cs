@@ -10,6 +10,7 @@ using Grigor.UI;
 using Grigor.UI.Data;
 using Grigor.UI.Widgets;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 public class DataPodWidget : UIWidget
@@ -74,7 +75,7 @@ public class DataPodWidget : UIWidget
 
         CredentialUIDisplay credentialUIDisplay = Instantiate(credentialDisplayPrefab, credentialDisplayParent);
         credentialUIDisplay.Initialize(criminalCredentialWallet, credentialType, criminalCredentialWallet.GetMatchingClue(credentialType));
-        credentialUIDisplay.SetCredentialDisplay(credentialType.ToString(), false);
+        credentialUIDisplay.SetCredentialDisplay(credentialType.ToString().SplitPascalCase(), false);
 
         displayedCredentials.Add(credentialType, credentialUIDisplay);
 

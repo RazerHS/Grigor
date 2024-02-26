@@ -8,6 +8,7 @@ namespace Grigor.UI.Widgets
     {
         [SerializeField] private TextMeshProUGUI messageText;
         [SerializeField] private float messageDuration;
+        [SerializeField] private float moveBy;
 
         private Sequence sequence;
 

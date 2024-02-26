@@ -50,7 +50,7 @@ namespace Grigor.Gameplay.World.Components
 
             playerCredentials = characterRegistry.Player.Data.PlayerCredentials;
 
-            EnableCursor();
+            Helper.EnableCursor();
         }
 
         private void OnNoButtonPressed()
@@ -132,21 +132,9 @@ namespace Grigor.Gameplay.World.Components
             yesButton.pressCompleteEvent.RemoveListener(OnYesButtonPressed);
             noButton.pressCompleteEvent.RemoveListener(OnNoButtonPressed);
 
-            DisableCursor();
+            Helper.DisableCursor();
 
             EndInteract();
-        }
-
-        private void EnableCursor()
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-
-        private void DisableCursor()
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
 
         private void SetDeniedTexture()

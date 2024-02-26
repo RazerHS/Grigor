@@ -7,6 +7,7 @@ using Grigor.Data.Credentials;
 using Grigor.Gameplay.Interacting.Components;
 using Grigor.UI;
 using Grigor.UI.Widgets;
+using Sirenix.Utilities;
 
 namespace Grigor.Gameplay.World.Components
 {
@@ -54,7 +55,7 @@ namespace Grigor.Gameplay.World.Components
             string optionOne = options[0];
             string optionTwo = options[1];
 
-            credentialSelectWidget.SetCurrentCredential(credentialsToSelect[currentCredentialIndex].ToString(), optionOne, optionTwo);
+            credentialSelectWidget.SetCurrentCredential(credentialsToSelect[currentCredentialIndex].ToString().SplitPascalCase(), optionOne, optionTwo);
 
             credentialSelectWidget.OptionSelectedEvent += OnOptionSelected;
         }
