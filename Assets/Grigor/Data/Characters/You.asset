@@ -16,5 +16,18 @@ MonoBehaviour:
   characterType: 0
   credentialWallet:
     credentialEntries: []
+  playerCredentialValues:
+  - credentialType: 6
+    value: Dr. Cola
+  - credentialType: 6
+    value: Water
+  - credentialType: 4
+    value: B--
+  - credentialType: 4
+    value: A+
+  - credentialType: 2
+    value: Neon Studies
+  - credentialType: 2
+    value: Medicinal Archtiecture
   characterDialogue: {fileID: 0}
   speakerColor: {r: 0.12459949, g: 0.58638144, b: 0.754717, a: 0.8156863}

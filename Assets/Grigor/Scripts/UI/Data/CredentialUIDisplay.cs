@@ -37,6 +37,17 @@ namespace Grigor.UI.Data
             EnableInputField();
         }
 
+        public void InitializePlayerCredential(CredentialType credentialType, string value)
+        {
+            this.credentialType = credentialType;
+
+            credentialText.text = $"{credentialType}";
+            inputField.text = value;
+
+            MarkAsCorrect();
+            DisableInputField();
+        }
+
         public void Dispose()
         {
 

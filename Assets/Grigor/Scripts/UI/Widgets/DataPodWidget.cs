@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using CardboardCore.DI;
 using CardboardCore.Utilities;
+using DG.Tweening;
 using Grigor.Data;
 using Grigor.Data.Clues;
 using Grigor.Data.Credentials;
@@ -16,6 +18,7 @@ public class DataPodWidget : UIWidget
     [SerializeField] private CredentialUIDisplay credentialDisplayPrefab;
     [SerializeField] private GameObject dataPodView;
     [SerializeField] private Transform credentialDisplayParent;
+    [SerializeField] private Transform playerCredentialDisplayParent;
 
     [Inject] private ClueRegistry clueRegistry;
     [Inject] private UIManager uiManager;
@@ -79,6 +82,12 @@ public class DataPodWidget : UIWidget
         credentialUIDisplay.CheckInputStringEvent += OnTypedClue;
     }
 
+    private void AddNewPlayerCredential(CredentialType credentialType, string value)
+    {
+        CredentialUIDisplay credentialUIDisplay = Instantiate(credentialDisplayPrefab, playerCredentialDisplayParent);
+        credentialUIDisplay.InitializePlayerCredential(credentialType, value);
+    }
+
     private void OnTypedClue(CredentialUIDisplay credentialUIDisplay, string inputString)
     {
         if (inputString != credentialUIDisplay.HeldClue.EvidenceText)
@@ -98,5 +107,15 @@ public class DataPodWidget : UIWidget
         credentialUIDisplay.MarkAsCorrect();
 
         messagePopupWidget.DisplayMessage($"You have matched a clue! <b>{matchedClue.EvidenceText}</b> has been added to your evidence board!");
+    }
+
+    public void AddPlayerCredentials(List<PlayerCredential> playerCredentials)
+    {
+        playerCredentialDisplayParent.GetComponentsInChildren<CredentialUIDisplay>().ToList().ForEach(credentialUIDisplay => Destroy(credentialUIDisplay.gameObject));
+
+        foreach (PlayerCredential playerCredential in playerCredentials)
+        {
+            AddNewPlayerCredential(playerCredential.CredentialType, playerCredential.Value);
+        }
     }
 }
