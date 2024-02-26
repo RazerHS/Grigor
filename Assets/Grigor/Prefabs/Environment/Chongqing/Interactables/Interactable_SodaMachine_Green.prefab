@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 601848566499180481, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: GUIID
-      value: -2074102
+      value: -6270598
       objectReference: {fileID: 0}
     - target: {fileID: 738016875588017939, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
@@ -38,6 +38,11 @@ PrefabInstance:
       propertyPath: 'interactablesChain.interactableComponents.Array.data[3]'
       value: 
       objectReference: {fileID: 7084353093625406549}
+    - target: {fileID: 2056586249190295901, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 1841
+      objectReference: {fileID: 0}
     - target: {fileID: 2493993570289759567, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -51,7 +56,7 @@ PrefabInstance:
     - target: {fileID: 3626458550745362195, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: GUIID
-      value: -2074116
+      value: -6270612
       objectReference: {fileID: 0}
     - target: {fileID: 3920887770274072412, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
@@ -66,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 3920887770274072412, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: lines.Array.data[0].meshLayouts.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3920887770274072412, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
@@ -234,6 +239,11 @@ PrefabInstance:
       propertyPath: lines.Array.data[1].meshLayouts.Array.data[3].position.y
       value: 0.3202699
       objectReference: {fileID: 0}
+    - target: {fileID: 4302875974148669075, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: sodaCanMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0795e65f1fda58c42aace789b73d30aa, type: 2}
     - target: {fileID: 5531256263028672455, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: _font
@@ -273,6 +283,11 @@ PrefabInstance:
         type: 3}
       propertyPath: 'wordArray.Array.data[2]'
       value: COLA
+      objectReference: {fileID: 0}
+    - target: {fileID: 6689262853318675378, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 2066
       objectReference: {fileID: 0}
     - target: {fileID: 7215454335878303944, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
@@ -356,6 +371,11 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2067febf299023e499eafbe61284695a, type: 2}
+    - target: {fileID: 7556589491927076538, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 503
+      objectReference: {fileID: 0}
     - target: {fileID: 7767893007163314581, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: lines.Array.data[0].width
@@ -369,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 7767893007163314581, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: lines.Array.data[0].meshLayouts.Array.size
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7767893007163314581, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}

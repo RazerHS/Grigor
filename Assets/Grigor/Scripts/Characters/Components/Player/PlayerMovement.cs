@@ -69,7 +69,7 @@ namespace Grigor.Characters.Components.Player
 
         private void GroundCheck()
         {
-            isGrounded = Physics.CheckSphere(groundCheckTransform.position, 0.1f, groundMask);
+            isGrounded = Physics.Raycast(groundCheckTransform.position, Vector3.down, 0.1f);
 
             if (isGrounded)
             {

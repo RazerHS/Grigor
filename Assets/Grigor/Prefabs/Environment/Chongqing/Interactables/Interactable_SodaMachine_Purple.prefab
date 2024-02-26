@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 7673866
+  GUIID: 2455314
 --- !u!114 &7215454335878303944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +416,17 @@ MonoBehaviour:
       height: 0.2
       depth: 0
       lineBreak: 0
+      space: 0
+    - mesh: {fileID: 0}
+      position: {x: -9.02145, y: 1.8303834, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      xOffset: 0
+      yOffset: 0
+      zOffset: 0
+      width: 0
+      height: 0
+      depth: 0
+      lineBreak: 1
       space: 0
     width: 2.478564
     individualYSpace: 0
@@ -828,7 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 7673904
+  GUIID: 2455352
 --- !u!114 &5531256263028672455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,6 +1001,17 @@ MonoBehaviour:
       height: 0.7
       depth: 0
       lineBreak: 0
+      space: 0
+    - mesh: {fileID: 0}
+      position: {x: -9.470951, y: 1.4063417, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      xOffset: 0
+      yOffset: 0
+      zOffset: 0
+      width: 0
+      height: 0
+      depth: 0
+      lineBreak: 1
       space: 0
     width: 2.0290527
     individualYSpace: 0
@@ -6652,6 +6674,7 @@ MonoBehaviour:
   sodaParent: {fileID: 6338783295131009872}
   sodaCanPrefab: {fileID: 8567625737898562607, guid: 8095934be0d13c04cbafaf596fdddbc5,
     type: 3}
+  sodaCanMaterial: {fileID: 2100000, guid: df358efb4f1a0d44d845eb29c797f08b, type: 2}
   maxSodas: 5
   machineCooldown: 2
   launchForce: 7

@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4149059081151245000}
+  renderer: {fileID: 4341449861579640797}
 --- !u!33 &3599820148368523101
 MeshFilter:
   m_ObjectHideFlags: 0

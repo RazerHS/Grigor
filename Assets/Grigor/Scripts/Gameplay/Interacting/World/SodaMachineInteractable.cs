@@ -14,6 +14,7 @@ namespace Grigor.Gameplay.World.Components
         [SerializeField, ColoredBoxGroup("References")] private Transform sodaLaunchTargetTransform;
         [SerializeField, ColoredBoxGroup("References")] private Transform sodaParent;
         [SerializeField, ColoredBoxGroup("References")] private SodaCan sodaCanPrefab;
+        [SerializeField, ColoredBoxGroup("References")] private Material sodaCanMaterial;
 
         [SerializeField, ColoredBoxGroup("Soda Launching", false, true), Range(0, 20)] private int maxSodas;
         [SerializeField, ColoredBoxGroup("Soda Launching"), Range(0f, 10f)] private float machineCooldown;
@@ -51,6 +52,8 @@ namespace Grigor.Gameplay.World.Components
             sodaCan.transform.SetParent(sodaParent);
 
             sodaCan.Rigidbody.isKinematic = false;
+
+            sodaCan.Renderer.material = sodaCanMaterial;
 
             Vector3 launchDirection = (sodaLaunchTargetTransform.position - sodaSpawnPointTransform.position).normalized;
 

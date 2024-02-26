@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 601848566499180481, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: GUIID
-      value: -8317034
+      value: -6632330
       objectReference: {fileID: 0}
     - target: {fileID: 738016875588017939, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 3626458550745362195, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: GUIID
-      value: -8317048
+      value: -6632344
       objectReference: {fileID: 0}
     - target: {fileID: 3920887770274072412, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
@@ -175,6 +175,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3920887770274072412, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
+      propertyPath: lines.Array.data[0].meshLayouts.Array.data[5].lineBreak
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920887770274072412, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
       propertyPath: lines.Array.data[0].meshLayouts.Array.data[0].position.x
       value: -11.218249
       objectReference: {fileID: 0}
@@ -278,6 +283,11 @@ PrefabInstance:
       propertyPath: lines.Array.data[1].meshLayouts.Array.data[3].position.y
       value: 0.31068763
       objectReference: {fileID: 0}
+    - target: {fileID: 4302875974148669075, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: sodaCanMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fcd198b82f50da4790dd5cdd7147f6b, type: 2}
     - target: {fileID: 5531256263028672455, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
       propertyPath: _font
@@ -886,6 +896,11 @@ PrefabInstance:
         type: 3}
       propertyPath: lines.Array.data[0].meshLayouts.Array.data[0].position.y
       value: 1.843875
+      objectReference: {fileID: 0}
+    - target: {fileID: 7767893007163314581, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
+        type: 3}
+      propertyPath: lines.Array.data[0].meshLayouts.Array.data[19].lineBreak
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7767893007163314581, guid: 590bbbd977eee6d46b9a7b94b4e0001c,
         type: 3}
