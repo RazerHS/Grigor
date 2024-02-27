@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1221961419304631526}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.982, y: 0.814, z: -0.731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 732528
+  GUIID: 941484
 --- !u!114 &2563578038427392632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,6 +2163,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3889876769670604709}
+    - targetCorrespondingSourceObject: {fileID: 5600683542662060887, guid: 319deb50eb1690b4cb691d018ac7acdc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6892618983865554302}
+    - targetCorrespondingSourceObject: {fileID: 5600683542662060887, guid: 319deb50eb1690b4cb691d018ac7acdc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4175512484943729786}
   m_SourcePrefab: {fileID: 100100000, guid: 319deb50eb1690b4cb691d018ac7acdc, type: 3}
 --- !u!1 &1895337543228718965 stripped
 GameObject:
@@ -2187,7 +2195,10 @@ MonoBehaviour:
   isBox: 0
   interactingEnabled: 0
   interactablesChain:
-    interactableComponents: []
+    interactableComponents:
+    - {fileID: 3889876769670604709}
+    - {fileID: 4175512484943729786}
+    - {fileID: 6892618983865554302}
 --- !u!114 &3889876769670604709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,6 +2229,73 @@ MonoBehaviour:
   interactAudio: 
   ambienceAudio: 
   interactionEnabled: 0
+--- !u!114 &6892618983865554302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895337543228718965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22417bd54084b7fafe88c91ae3fe63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: new
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 2
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: 9c4d680a3dd53974bb0a2f9693f01566, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  taskData: {fileID: 11400000, guid: 9c4d680a3dd53974bb0a2f9693f01566, type: 2}
+--- !u!114 &4175512484943729786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895337543228718965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa9a028af1e74ba0833526faba54e707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactInRange: 0
+  label: new
+  removeFromChainAfterEffect: 1
+  stopsChain: 0
+  indexInChain: 1
+  hasTimeEffect: 0
+  lockedBeforeCertainDay: 0
+  unlockedOnDay: 1
+  timePassesOnInteract: 0
+  minutesToPass: 1
+  hoursToPass: 1
+  stopChainIfTaskNotStarted: 1
+  taskToListenTo: {fileID: 11400000, guid: 9c4d680a3dd53974bb0a2f9693f01566, type: 2}
+  playAudio: 0
+  playAmbienceAudio: 0
+  interactAudio: 
+  ambienceAudio: 
+  interactionEnabled: 0
+  message:
+    sender: {fileID: 11400000, guid: ffb9c6d42c1c45d4885ab79b57c98a6f, type: 2}
+    title: THANK YOU!
+    message: Thank you dearie for helping me update my credentials! I don't know
+      what I would do without  you!
+  delay: 2
 --- !u!4 &2108871589718220034 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5381802652545136928, guid: 319deb50eb1690b4cb691d018ac7acdc,
