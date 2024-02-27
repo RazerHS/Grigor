@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 2455314
+  GUIID: 608816
 --- !u!114 &7215454335878303944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 2455352
+  GUIID: 608854
 --- !u!114 &5531256263028672455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6511,7 +6511,7 @@ PrefabInstance:
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
       propertyPath: interactDistance
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 186706669847132696, guid: 074fe82d7e4a3014996892cf2abd72fc,
         type: 3}
