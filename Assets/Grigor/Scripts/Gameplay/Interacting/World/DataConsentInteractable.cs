@@ -48,8 +48,6 @@ namespace Grigor.Gameplay.World.Components
 
             playerCredentials = characterRegistry.Player.Data.PlayerCredentials;
 
-            characterRegistry.Player.Look.EnableLook();
-
             Helper.EnableCursor();
         }
 
@@ -68,6 +66,8 @@ namespace Grigor.Gameplay.World.Components
             });
 
             OnFinished();
+
+            characterRegistry.Player.Look.EnableLook();
         }
 
         private void OnYesButtonPressed()
@@ -80,6 +80,8 @@ namespace Grigor.Gameplay.World.Components
             credentialsTypewriter.gameObject.SetActive(true);
 
             DisplayCredentials();
+
+            characterRegistry.Player.Look.EnableLook();
         }
 
         private void FinishedTyping()

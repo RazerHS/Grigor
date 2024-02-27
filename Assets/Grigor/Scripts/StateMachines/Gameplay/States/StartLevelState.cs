@@ -21,6 +21,7 @@ namespace Grigor.StateMachines.Gameplay.States
         private DataPodWidget dataPodWidget;
         private TimeOfDayWidget timeOfDayWidget;
         private MessagePopupWidget messagePopupWidget;
+        private ReceiveMessageWidget receiveMessageWidget;
 
         protected override void OnEnter()
         {
@@ -39,6 +40,7 @@ namespace Grigor.StateMachines.Gameplay.States
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
             timeOfDayWidget = uiManager.ShowWidget<TimeOfDayWidget>();
             messagePopupWidget = uiManager.ShowWidget<MessagePopupWidget>();
+            receiveMessageWidget = uiManager.ShowWidget<ReceiveMessageWidget>();
 
             settingsManager.OnQualityChanged(0);
 

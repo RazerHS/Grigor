@@ -17,10 +17,12 @@ namespace Grigor.Gameplay.Interacting.Components
         [Inject] private UIManager uiManager;
 
         private MessagesWidget messagesWidget;
+        private ReceiveMessageWidget receiveMessageWidget;
 
         protected override void OnInitialized()
         {
             messagesWidget = uiManager.GetWidget<MessagesWidget>();
+            receiveMessageWidget = uiManager.GetWidget<ReceiveMessageWidget>();
         }
 
         protected override void OnInteractEffect()
@@ -33,6 +35,7 @@ namespace Grigor.Gameplay.Interacting.Components
         private void ReceiveMessage()
         {
             messagesWidget.OnMessageReceived(message);
+            receiveMessageWidget.DisplayMessage(message.Sender.DisplayName);
         }
     }
 }
