@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetName: NPC_Clerk_Dmitry
   characterType: 2
+  displayName: Dmitry
   credentialWallet:
     credentialEntries: []
+  playerCredentialValues: []
   characterDialogue: {fileID: 11400000, guid: 1c4774c896f0ee144be54a034aa58ad4, type: 2}
   speakerColor: {r: 0.103284724, g: 0.9433962, b: 0.07564971, a: 0.8509804}

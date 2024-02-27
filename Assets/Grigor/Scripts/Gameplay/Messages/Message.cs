@@ -9,7 +9,7 @@ namespace Grigor.Gameplay.Messages
     {
         [SerializeField] private CharacterData sender;
         [SerializeField] private string title;
-        [SerializeField]  private string message;
+        [SerializeField] private string message;
 
         public CharacterData Sender => sender;
         public string Title => title;

@@ -1,19 +1,37 @@
-﻿using TMPro;
+﻿using System;
+using Grigor.Gameplay.Messages;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Grigor.UI.Data
 {
     public class MessageUIDisplay : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI senderText;
         [SerializeField] private TextMeshProUGUI titleText;
-        [SerializeField] private TextMeshProUGUI messageText;
+        [SerializeField] private Button selectMessageButton;
 
-        public void Initialize(string sender, string title, string message)
+        private Message message;
+
+        public event Action<Message> OnSelectedMessage;
+
+        public void Initialize(Message message)
         {
-            senderText.text = sender;
-            titleText.text = title;
-            messageText.text = message;
+            this.message = message;
+
+            titleText.text = message.Title;
+
+            selectMessageButton.onClick.AddListener(OnSelectedMessageButton);
+        }
+
+        ~MessageUIDisplay()
+        {
+            selectMessageButton.onClick.RemoveListener(OnSelectedMessageButton);
+        }
+
+        private void OnSelectedMessageButton()
+        {
+            OnSelectedMessage?.Invoke(message);
         }
     }
 }

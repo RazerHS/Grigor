@@ -1,24 +1,34 @@
-﻿using Grigor.Data.Tasks;
+﻿using System;
+using Grigor.Data.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Grigor.UI.Data
 {
     public class TaskUIDisplay : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI taskNameText;
-        [SerializeField] private TextMeshProUGUI taskDescriptionText;
+        [SerializeField] private Button selectTaskButton;
 
         private TaskData taskData;
 
         public TaskData TaskData => taskData;
+
+        public event Action<TaskData> OnSelectedTask;
 
         public void Initialize(TaskData taskData)
         {
             this.taskData = taskData;
 
             SetTaskName(taskData.TaskName);
-            SetTaskDescription(taskData.TaskDescription);
+
+            selectTaskButton.onClick.AddListener(OnSelectedTaskButton);
+        }
+
+        ~TaskUIDisplay()
+        {
+            selectTaskButton.onClick.RemoveListener(OnSelectedTaskButton);
         }
 
         public void SetTaskName(string taskName)
@@ -26,9 +36,9 @@ namespace Grigor.UI.Data
             taskNameText.text = taskName;
         }
 
-        public void SetTaskDescription(string taskDescription)
+        private void OnSelectedTaskButton()
         {
-            taskDescriptionText.text = taskDescription;
+            OnSelectedTask?.Invoke(taskData);
         }
     }
 }

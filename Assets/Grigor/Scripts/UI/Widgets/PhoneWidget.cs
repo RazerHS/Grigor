@@ -1,4 +1,5 @@
 ﻿using CardboardCore.DI;
+using Grigor.Characters;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ namespace Grigor.UI.Widgets
         [SerializeField] private Button dataPodButton;
 
         [Inject] private UIManager uiManager;
+        [Inject] private CharacterRegistry characterRegistry;
 
         private DataPodWidget dataPodWidget;
         private TasksWidget tasksWidget;
@@ -30,6 +32,8 @@ namespace Grigor.UI.Widgets
             messagesWidget = uiManager.GetWidget<MessagesWidget>();
 
             active = true;
+
+            DisablePlayerControls();
         }
 
         protected override void OnHide()
@@ -39,6 +43,32 @@ namespace Grigor.UI.Widgets
             dataPodButton.onClick.RemoveListener(OnDataPodButtonClicked);
 
             active = false;
+
+            EnablePlayerControls();
+        }
+
+        private void EnablePlayerControls()
+        {
+            if (characterRegistry == null)
+            {
+                return;
+            }
+
+            if (characterRegistry.Player == null)
+            {
+                return;
+            }
+
+            characterRegistry.Player.Movement.EnableMovement();
+            characterRegistry.Player.Look.EnableLook();
+            characterRegistry.Player.Interact.EnableInteract();
+        }
+
+        private void DisablePlayerControls()
+        {
+            characterRegistry.Player.Movement.DisableMovement();
+            characterRegistry.Player.Look.DisableLook();
+            characterRegistry.Player.Interact.DisableInteract();
         }
 
         private void OnDataPodButtonClicked()

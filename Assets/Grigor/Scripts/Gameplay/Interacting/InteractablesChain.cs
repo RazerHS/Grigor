@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using CardboardCore.Utilities;
-using Codice.CM.Common;
 using Grigor.Gameplay.Interacting.Components;
 using RazerCore.Utils.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Grigor.Gameplay.Interacting
 {

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetName: EvidenceBoard
   characterType: 2
+  displayName: Evidence Board
   credentialWallet:
     credentialEntries: []
+  playerCredentialValues: []
   characterDialogue: {fileID: 0}
   speakerColor: {r: 0.2822423, g: 0.9716981, b: 0.022917405, a: 0.36862746}

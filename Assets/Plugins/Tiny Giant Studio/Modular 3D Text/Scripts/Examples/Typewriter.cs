@@ -95,5 +95,10 @@ namespace TinyGiantStudio.Text.Example
                 Debug.Log("<color=red>No text object is selected on typewriter.</color> :" + gameObject.name, gameObject);
             }
         }
+
+        public void ResetCurrentLetter()
+        {
+            currentLetter = 0;
+        }
     }
 }

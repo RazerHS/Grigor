@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using CardboardCore.DI;
 using Grigor.Gameplay.Time;
-using Grigor.Input;
 using Grigor.UI;
 using Grigor.UI.Widgets;
 using Grigor.Utils.StoryGraph.Runtime;
@@ -13,7 +12,6 @@ namespace Grigor.Gameplay.Dialogue
     public class DialogueController : CardboardCoreBehaviour
     {
         [Inject] private UIManager uiManager;
-        [Inject] private PlayerInput playerInput;
         [Inject] private TimeManager timeManager;
 
         private DialogueWidget dialogueWidget;
