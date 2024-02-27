@@ -108,7 +108,7 @@ public class DataPodWidget : UIWidget
         credentialUIDisplay.DisableInputField();
         credentialUIDisplay.MarkAsCorrect();
 
-        messagePopupWidget.DisplayMessage($"You have matched a clue! <b>{matchedClue.EvidenceText}</b> has been added to your evidence board!");
+        messagePopupWidget.DisplayMessage($"You have matched clue <b>{matchedClue.EvidenceText}!");
     }
 
     public void AddPlayerCredentials(List<PlayerCredential> playerCredentials)

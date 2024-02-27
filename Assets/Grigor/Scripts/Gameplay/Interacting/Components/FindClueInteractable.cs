@@ -54,7 +54,7 @@ namespace Grigor.Gameplay.Interacting.Components
 
             clueFound = true;
 
-            messagePopupWidget.DisplayMessage($"Found {clueToFind.name}!");
+            messagePopupWidget.DisplayMessage($"Found {clueToFind.ClueHeading}! It has been added to your evidence board.");
         }
     }
 }
