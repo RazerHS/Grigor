@@ -1,5 +1,6 @@
 ﻿using CardboardCore.DI;
 using CardboardCore.StateMachines;
+using Grigor.Gameplay.Settings;
 using RazerCore.Utils.Addressables;
 using Grigor.UI;
 using Grigor.UI.Screens;

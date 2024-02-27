@@ -116,6 +116,20 @@ namespace Grigor.Gameplay.EvidenceBoard
             }
         }
 
+        private void OnReplaceNote(EvidenceBoardNote note)
+        {
+            Vector3 position = note.transform.localPosition;
+            ClueData clueData = note.ClueData;
+
+            note.ReplaceNoteEvent -= OnReplaceNote;
+            notes.Remove(note);
+            DestroyImmediate(note.gameObject);
+
+            SpawnClue(clueData, true, position);
+
+            ConnectAllClues();
+        }
+
         public void OnClueFound(ClueData clueData)
         {
             notes.FirstOrDefault(note => note.ClueData == clueData)?.RevealNote();
@@ -152,9 +166,14 @@ namespace Grigor.Gameplay.EvidenceBoard
             }
         }
 
-        private void SpawnClue(ClueData clueData)
+        private void SpawnClue(ClueData clueData, bool spawnWithPreviousPosition, Vector3 previousPosition = default)
         {
             Vector3 position = GetNewCluePosition();
+
+            if (spawnWithPreviousPosition)
+            {
+                position = previousPosition;
+            }
 
             EvidenceBoardNote note = SpawnClueOnBoard(clueData.EvidenceBoardNoteType, position);
 
@@ -162,6 +181,8 @@ namespace Grigor.Gameplay.EvidenceBoard
             note.RevealNote();
 
             AddClue(note);
+
+            note.ReplaceNoteEvent += OnReplaceNote;
         }
 
         private Vector3 GetNewCluePosition()
@@ -220,7 +241,7 @@ namespace Grigor.Gameplay.EvidenceBoard
                     continue;
                 }
 
-                SpawnClue(clueData);
+                SpawnClue(clueData, false);
             }
         }
 
@@ -257,6 +278,11 @@ namespace Grigor.Gameplay.EvidenceBoard
         {
             foreach (EvidenceBoardNote note in notes)
             {
+                if (note.ClueData.StartsOnEvidenceBoard)
+                {
+                    continue;
+                }
+
                 note.HideNote();
             }
         }

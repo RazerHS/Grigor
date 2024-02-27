@@ -38,7 +38,7 @@ namespace Grigor.Gameplay.Weather
         [ShowInInspector, ReadOnly] private bool isWet;
         [ShowInInspector, ReadOnly] private float wetness;
         private bool hasRainEnded;
-        private bool rainEnabled;
+        private bool rainEnabled = true;
 
         private float timePercentageUntilFullyDry;
         private float timePercentageUntilFullyWet;
@@ -81,7 +81,7 @@ namespace Grigor.Gameplay.Weather
         {
             bool value = quality == QualityOptions.High;
 
-            // fog.enableVolumetricFog.value = value;
+            rainEnabled = value;
             volumetricClouds.enable.value = value;
             visualEnvironment.cloudType.value = value ? 0 : 1;
             motionBlur.active = value;

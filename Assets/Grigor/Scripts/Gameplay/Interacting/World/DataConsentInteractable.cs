@@ -48,6 +48,8 @@ namespace Grigor.Gameplay.World.Components
 
             playerCredentials = characterRegistry.Player.Data.PlayerCredentials;
 
+            characterRegistry.Player.Look.EnableLook();
+
             Helper.EnableCursor();
         }
 

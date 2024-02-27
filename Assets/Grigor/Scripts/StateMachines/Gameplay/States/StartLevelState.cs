@@ -2,6 +2,7 @@
 using CardboardCore.StateMachines;
 using Grigor.Characters;
 using Grigor.Gameplay.Interacting;
+using Grigor.Gameplay.Settings;
 using Grigor.Gameplay.Time;
 using Grigor.UI;
 using Grigor.UI.Widgets;
@@ -15,6 +16,7 @@ namespace Grigor.StateMachines.Gameplay.States
         [Inject] private InteractablesRegistry interactablesRegistry;
         [Inject] private UIManager uiManager;
         [Inject] private TimeManager timeManager;
+        [Inject] private SettingsManager settingsManager;
 
         private DataPodWidget dataPodWidget;
         private TimeOfDayWidget timeOfDayWidget;
@@ -37,6 +39,8 @@ namespace Grigor.StateMachines.Gameplay.States
             dataPodWidget = uiManager.ShowWidget<DataPodWidget>();
             timeOfDayWidget = uiManager.ShowWidget<TimeOfDayWidget>();
             messagePopupWidget = uiManager.ShowWidget<MessagePopupWidget>();
+
+            settingsManager.OnQualityChanged(0);
 
             owningStateMachine.ToNextState();
         }

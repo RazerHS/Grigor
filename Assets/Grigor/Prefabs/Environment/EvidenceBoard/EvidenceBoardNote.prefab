@@ -559,7 +559,7 @@ MonoBehaviour:
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
-  m_SelectedVertices: 35000000
+  m_SelectedVertices: 
 --- !u!114 &6670759757548257962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,7 +1104,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8286063652068063550}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -0.41}
+  m_LocalPosition: {x: 0, y: 0, z: -0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1112,7 +1112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.1}
+  m_AnchoredPosition: {x: -0, y: 0.1}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5433298729782605619
@@ -1135,7 +1135,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8230533503425778180, guid: 5611f399b6f443148ae3fd59a7d0594b, type: 2}
+  - {fileID: 9123516717601445861, guid: 0a181fddced4bf940ab9d4bd769e70d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1179,8 +1179,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: clue heading
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5611f399b6f443148ae3fd59a7d0594b, type: 2}
-  m_sharedMaterial: {fileID: 8230533503425778180, guid: 5611f399b6f443148ae3fd59a7d0594b,
+  m_fontAsset: {fileID: 11400000, guid: 0a181fddced4bf940ab9d4bd769e70d7, type: 2}
+  m_sharedMaterial: {fileID: 9123516717601445861, guid: 0a181fddced4bf940ab9d4bd769e70d7,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

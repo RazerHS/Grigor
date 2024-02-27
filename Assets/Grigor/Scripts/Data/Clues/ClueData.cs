@@ -14,6 +14,7 @@ namespace Grigor.Data.Clues
         [SerializeField, ColoredBoxGroup("Config", false, true)] private CredentialType credentialType;
         [SerializeField, ColoredBoxGroup("Config")] private bool appearsInDataPod;
         [SerializeField, ColoredBoxGroup("Config"), ShowIf(nameof(appearsInDataPod))] private bool typed;
+        [SerializeField, ColoredBoxGroup("Config")] private bool startsOnEvidenceBoard;
         [SerializeField, ColoredBoxGroup("Evidence Board", false, true)] private EvidenceBoardNoteType evidenceBoardNoteType;
         [SerializeField, ColoredBoxGroup("Evidence Board")] private string clueHeading;
         [SerializeField, ColoredBoxGroup("Evidence Board"), ShowIf("evidenceBoardNoteType", EvidenceBoardNoteType.StickyNote)] private string evidenceText;
@@ -32,6 +33,7 @@ namespace Grigor.Data.Clues
         public Sprite EvidenceSprite => evidenceSprite;
         public Vector2 TextureSize => textureSize;
         public float UpscaleFactor => upscaleFactor;
+        public bool StartsOnEvidenceBoard => startsOnEvidenceBoard;
 
         public event Action<ClueData> ClueFoundEvent;
 
