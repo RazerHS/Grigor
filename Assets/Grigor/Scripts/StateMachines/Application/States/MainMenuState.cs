@@ -4,6 +4,7 @@ using Grigor.Gameplay.Settings;
 using RazerCore.Utils.Addressables;
 using Grigor.UI;
 using Grigor.UI.Screens;
+using Grigor.UI.Widgets;
 using Grigor.Utils;
 
 namespace Grigor.StateMachines.Application.States
@@ -14,6 +15,7 @@ namespace Grigor.StateMachines.Application.States
         [Inject] private AddressablesLoader addressablesLoader;
 
         private MainMenuScreen mainMenuScreen;
+        private TransitionWidget transitionWidget;
 
         protected override void OnEnter()
         {

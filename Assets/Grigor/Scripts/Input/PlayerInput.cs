@@ -47,6 +47,8 @@ namespace Grigor.Input
 
         public event Action PauseInputStartedEvent;
 
+        public event Action TimeskipInputStartedEvent;
+
         private void Awake()
         {
             playerInputActions = new PlayerInputActions();
@@ -82,6 +84,8 @@ namespace Grigor.Input
             playerInputActions.Player.Pause.started += OnPauseInputStarted;
 
             playerInputActions.Player.Refresh.started += OnRefreshInputStarted;
+
+            playerInputActions.Player.Timeskip.started += OnTimeskipInputStarted;
         }
 
         private void OnDisable()
@@ -220,6 +224,11 @@ namespace Grigor.Input
         private void OnRefreshInputStarted(InputAction.CallbackContext context)
         {
             OnRefreshInputStartedEvent?.Invoke();
+        }
+
+        private void OnTimeskipInputStarted(InputAction.CallbackContext context)
+        {
+            TimeskipInputStartedEvent?.Invoke();
         }
     }
 }
