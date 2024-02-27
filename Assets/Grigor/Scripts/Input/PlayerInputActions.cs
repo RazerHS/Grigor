@@ -127,6 +127,15 @@ namespace Grigor.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Timeskip"",
+                    ""type"": ""Button"",
+                    ""id"": ""086dd354-bb15-4a12-8a3e-d945efe3f99f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -380,6 +389,17 @@ namespace Grigor.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""155ea59e-25aa-41a5-bb79-8540d31883ca"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Timeskip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -978,6 +998,7 @@ namespace Grigor.Input
             m_Player_Catnip = m_Player.FindAction("Catnip", throwIfNotFound: true);
             m_Player_Scroll = m_Player.FindAction("Scroll", throwIfNotFound: true);
             m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+            m_Player_Timeskip = m_Player.FindAction("Timeskip", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1062,6 +1083,7 @@ namespace Grigor.Input
         private readonly InputAction m_Player_Catnip;
         private readonly InputAction m_Player_Scroll;
         private readonly InputAction m_Player_Pause;
+        private readonly InputAction m_Player_Timeskip;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -1077,6 +1099,7 @@ namespace Grigor.Input
             public InputAction @Catnip => m_Wrapper.m_Player_Catnip;
             public InputAction @Scroll => m_Wrapper.m_Player_Scroll;
             public InputAction @Pause => m_Wrapper.m_Player_Pause;
+            public InputAction @Timeskip => m_Wrapper.m_Player_Timeskip;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1119,6 +1142,9 @@ namespace Grigor.Input
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Timeskip.started += instance.OnTimeskip;
+                @Timeskip.performed += instance.OnTimeskip;
+                @Timeskip.canceled += instance.OnTimeskip;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1156,6 +1182,9 @@ namespace Grigor.Input
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @Timeskip.started -= instance.OnTimeskip;
+                @Timeskip.performed -= instance.OnTimeskip;
+                @Timeskip.canceled -= instance.OnTimeskip;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1349,6 +1378,7 @@ namespace Grigor.Input
             void OnCatnip(InputAction.CallbackContext context);
             void OnScroll(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
+            void OnTimeskip(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
