@@ -26,9 +26,6 @@ namespace Grigor.Gameplay.Settings
         protected override void OnInjected()
         {
             sceneConfig = SceneConfig.Instance;
-
-            // NOTE: the settings from the previous session remain because the volume profile asset has changed, so the quality has to be reset
-            OnQualityChanged(0);
         }
 
         protected override void OnReleased()
@@ -62,6 +59,7 @@ namespace Grigor.Gameplay.Settings
             // dynamicResSettings.forcedPercentage = 10f;
         }
 
+        // NOTE: the settings from the previous session remain because the volume profile asset has changed, so the quality has to be reset
         public void OnQualityChanged(int index)
         {
             currentQualityIndex = index;

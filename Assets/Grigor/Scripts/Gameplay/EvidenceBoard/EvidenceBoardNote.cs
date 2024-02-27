@@ -32,6 +32,7 @@ namespace Grigor.Gameplay.EvidenceBoard
 
         [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void Highlight() => HighlightNote();
         [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void Unhighlight() => UnhighlightNote();
+        [ColoredBoxGroup("Testing", false, true), Button(ButtonSizes.Large)] private void RemoveNote() => RemoveFromBoard();
 
         public EvidenceBoardNoteType NoteType => noteType;
         public Transform PinTransform => pinTransform;
@@ -42,6 +43,7 @@ namespace Grigor.Gameplay.EvidenceBoard
         public CinemachineVirtualCamera NoteVirtualCamera => noteVirtualCamera;
 
         public event Action<EvidenceBoardNote> NoteSelectedEvent;
+        public event Action<EvidenceBoardNote> ReplaceNoteEvent;
 
         public void Initialize(ClueData clueData, EvidenceBoardManager evidenceBoardManager)
         {
@@ -149,6 +151,11 @@ namespace Grigor.Gameplay.EvidenceBoard
             {
                 return;
             }
+        }
+
+        private void RemoveFromBoard()
+        {
+            ReplaceNoteEvent?.Invoke(this);
         }
 
         private void OnNoteClick()
