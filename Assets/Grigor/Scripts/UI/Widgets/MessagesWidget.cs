@@ -24,7 +24,7 @@ namespace Grigor.UI.Widgets
             }
 
             selectedMessageTitle.text = "Select a message!";
-            selectedMessageSender.text = "From: Dearest developers.";
+            selectedMessageSender.text = "From: Your Dearest Developers.";
             selectedMessageText.text = "";
         }
 
@@ -52,7 +52,7 @@ namespace Grigor.UI.Widgets
         private void OnMessageSelected(Message message)
         {
             selectedMessageTitle.text = message.Title;
-            selectedMessageSender.text = $"From: {message.Sender.name}";
+            selectedMessageSender.text = $"From: {message.Sender.DisplayName}";
             selectedMessageText.text = message.MessageText;
         }
     }

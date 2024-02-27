@@ -20244,7 +20244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 1364038
+  GUIID: 3271590
 --- !u!114 &6430469990195373394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27077,7 +27077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 1364566
+  GUIID: 3272118
 --- !u!114 &2806305862977967648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55596,7 +55596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbc4200474b44a08e6d5a52c3ff64ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactInRange: 1
+  interactInRange: 0
   label: new
   removeFromChainAfterEffect: 1
   stopsChain: 0
